@@ -12,5 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('pages.home');
 });
+
+Route::get('/manage', function () {
+	return view('pages.manage');
+});
+
+
+Route::resource('companies', 'company_controller', ['only' => [
+	'index', 'show'
+]]);
+
+Route::resource('companies', 'company_controller', ['except' => [
+	'create', 'store', 'update', 'destroy'
+]]);

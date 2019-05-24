@@ -5,11 +5,21 @@
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    @foreach ($allCompanies as $company)
-                        <div class="panel-heading">
-                            <a href="{{url('/companies/'.$company->ID)}}">{{title_case($company->Name)}}</a>
-                        </div>
-                    @endforeach
+                    <table style="width:100%">
+                        <tr>
+                            <th>ID</th>
+                            <th>City</th>
+                            <th>Address</th>
+                        </tr>
+                        @foreach ($allMicrolocations as $microlocation)
+                            <tr>
+
+                                <td>{{title_case($microlocation->ID)}}</td>
+                                <td>{{title_case($microlocation->City)}}</td>
+                                <td>{{title_case($microlocation->Street_address)}}</td>
+                            </tr>
+                        @endforeach
+                    </table>
 
                 </div>
             </div>

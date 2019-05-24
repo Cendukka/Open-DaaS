@@ -16,27 +16,28 @@ class company_controller extends Controller {
 	}
 	
 	public function store(Request $request) {
-		if (Location::Create($request->all())) {
+		if (Request::Create($request->all())) {
 			return true;
 		}
 	}
 	
 	public function show(company $company) {
-		return $company;
+		$allMicrolocations = $company->microlocations;
+		return view('pages.microlocations')->with('allMicrolocations', $allMicrolocations);
 	}
 	
-	public function edit(Location $location) {
+	public function edit(company $company) {
 		//
 	}
 	
-	public function update(Request $request, Location $location) {
-		if ($location->fill($request->all())->save()) {
+	public function update(Request $request, company $company) {
+		if ($company->fill($request->all())->save()) {
 			return true;
 		}
 	}
 	
-	public function destroy(Location $location) {
-		if ($location->delete()) {
+	public function destroy(company $company) {
+		if ($company->delete()) {
 			return true;
 		}
 	}

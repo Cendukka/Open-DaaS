@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\users;
+use App\company;
 use Illuminate\Http\Request;
 
-class users_controller extends Controller
+class company_warehouse_controller extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(company $company)
     {
-        //
+		return view('pages.company.warehouse')->with('company', $company);
     }
 
     /**
@@ -41,10 +41,10 @@ class users_controller extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\users  $users
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(users $users)
+    public function show($id)
     {
         //
     }
@@ -52,10 +52,10 @@ class users_controller extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\users  $users
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(users $users)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +64,10 @@ class users_controller extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\users  $users
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, users $users)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +75,10 @@ class users_controller extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\users  $users
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(users $users)
+    public function destroy($id)
     {
         //
     }

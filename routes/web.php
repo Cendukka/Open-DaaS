@@ -24,6 +24,20 @@ Route::resource('companies', 'company_controller', ['only' => [
 	'index', 'show'
 ]]);
 
-Route::resource('companies', 'company_controller', ['except' => [
-	'create', 'store', 'update', 'destroy'
+
+Route::resource('companies.warehouse', 'company_warehouse_controller', ['only' => [
+	'index', 'show'
 ]]);
+
+//Route::get('companies/{company_id}', function ($company_id) {
+//	return view('pages.company.warehouse', ['company_id' => $company_id]);
+//});
+
+
+//Route::resource('companies', 'company_controller', ['only' => [
+//	'index', 'show'
+//]]);
+//
+//Route::resource('companies', 'company_controller', ['except' => [
+//	'create', 'store', 'update', 'destroy'
+//]]);

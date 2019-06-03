@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.macrolocation')
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -15,17 +15,34 @@
                             <th>ID</th>
                             <th>City</th>
                             <th>Address</th>
+                            <th>Weight (KG)</th>
                         </tr>
                         @php
-                            $records = DB::table('microlocations')
-                                        ->where('company_id',$company->company_id)
-                                        ->get();
+                            $microlocations = DB::table('microlocations')
+                                                ->where('company_id',$company->company_id)
+                                                ->get();
+
+                            $inventory      = DB::table('microlocations')
+                                                ->where('company_id',$company->company_id)
+                                                ->join('textile_inventory', 'textile_inventory.microlocation_id', '=', 'microlocations.microlocation_id')
+                                                ->orderBy('textile_inventory.microlocation_id')
+                                                ->get();
+                            #dd($inventory);
                         @endphp
-                        @foreach ($records as $microlocation)
+{{--                        @foreach ($microlocations as $microlocation)--}}
+{{--                            <tr>--}}
+{{--                                <td>{{title_case($microlocation->microlocation_id)}}</td>--}}
+{{--                                <td>{{title_case($microlocation->city)}}</td>--}}
+{{--                                <td>{{title_case($microlocation->street_address)}}</td>--}}
+{{--                            </tr>--}}
+{{--                        @endforeach--}}
+
+                        @foreach ($inventory as $record)
                             <tr>
-                                <td>{{title_case($microlocation->microlocation_id)}}</td>
-                                <td>{{title_case($microlocation->city)}}</td>
-                                <td>{{title_case($microlocation->street_address)}}</td>
+                                <td>{{title_case($record->microlocation_id)}}</td>
+                                <td>{{title_case($record->city)}}</td>
+                                <td>{{title_case($record->fraction)}}</td>
+                                <td>{{title_case($record->weight_KG)}}</td>
                             </tr>
                         @endforeach
                       {{--  @foreach ($company->microlocations as $microlocation)

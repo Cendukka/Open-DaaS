@@ -29,6 +29,20 @@ Route::resource('companies.warehouse', 'company_warehouse_controller', ['only' =
 	'index', 'show'
 ]]);
 
+Route::resource('companies.sorting', 'company_sorting_controller', ['only' => [
+	'index', 'show'
+]]);
+
+Route::resource('companies.sorted', 'company_sorted_controller', ['only' => [
+	'index', 'show'
+]]);
+
+Route::resource('companies.issues', 'company_issues_controller', ['only' => [
+	'index', 'show'
+]]);
+
+
+
 //Route::get('companies/{company_id}', function ($company_id) {
 //	return view('pages.company.warehouse', ['company_id' => $company_id]);
 //});

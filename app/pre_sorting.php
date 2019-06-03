@@ -25,4 +25,8 @@ class pre_sorting extends Model {
 	public function status_types() {
 		return $this->belongsTo(status_types::class,'status_type_id');
 	}
+
+	public function presorted_material() {
+		return $this->belongsTo(presorted_material::class,'presorted_material_id');
+	}
 }

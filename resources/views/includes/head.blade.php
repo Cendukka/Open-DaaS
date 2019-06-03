@@ -21,4 +21,19 @@
         display: table;
         clear: both;
     }
+
+    table, th, td {
+        border: 1px solid black;
+        text-align: right;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        height: 50px;
+    }
+
 </style>

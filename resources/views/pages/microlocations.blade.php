@@ -1,5 +1,4 @@
 @extends('layouts.default')
-@section('title', 'Location')
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -13,7 +12,6 @@
                         </tr>
                         @foreach ($allMicrolocations as $microlocation)
                             <tr>
-
                                 <td>{{title_case($microlocation->ID)}}</td>
                                 <td>{{title_case($microlocation->City)}}</td>
                                 <td>{{title_case($microlocation->Street_address)}}</td>

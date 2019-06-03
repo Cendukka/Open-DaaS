@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class company_controller extends Controller {
 	public function index() {
 		$allCompanies = company::all();
+		#$allCompanies = DB::table('company')->get();
 		return view('pages.companies')->with('allCompanies', $allCompanies);
 	}
 	
@@ -22,8 +24,7 @@ class company_controller extends Controller {
 	}
 	
 	public function show(company $company) {
-		$allMicrolocations = $company->microlocations;
-		return view('pages.microlocations')->with('allMicrolocations', $allMicrolocations);
+		return view('pages.company.warehouse')->with('company', $company);
 	}
 	
 	public function edit(company $company) {

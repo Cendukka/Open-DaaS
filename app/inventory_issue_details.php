@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class inventory_issue_details extends Model {
 	public $incrementing = true;
 	protected $table = "inventory_issue_details";
-	protected $primaryKey = "ID";
-	protected $fillable = ['Weight_KG'];
+	protected $primaryKey = "inventory_issue_details_id";
+	protected $fillable = ['weight_kg'];
 	
 	public function inventory_issue() {
 		return $this->belongsTo(inventory_issue::class);

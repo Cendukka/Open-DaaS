@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class inventory_receipt extends Model {
 	public $incrementing = true;
 	protected $table = "inventory_receipt";
-	protected $primaryKey = "ID";
-	protected $fillable = ['Distance_KM', 'Weight_KG', 'Date'];
+	protected $primaryKey = "inventory_receipt_id";
+	protected $fillable = ['distance_km', 'weight_kg', 'date'];
 	
 	public function ewc_codes() {
 		return $this->belongsTo(ewc_codes::class);

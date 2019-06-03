@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class community extends Model {
 	public $incrementing = true;
 	protected $table = "community";
-	protected $primaryKey = "ID";
-	protected $fillable = ['City'];
+	protected $primaryKey = "community_id";
+	protected $fillable = ['city'];
 	
 	public function company() {
-		return $this->belongsTo(company::class);
+		return $this->belongsTo(company::class,'company_id');
 	}
 	
 	

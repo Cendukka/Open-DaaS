@@ -1,5 +1,4 @@
 @extends('layouts.default')
-@section('title', 'Location')
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -7,7 +6,7 @@
                 <div class="panel-heading">
                     @foreach ($allCompanies as $company)
                         <div class="panel-heading">
-                            <a href="{{url('/companies/'.$company->ID)}}">{{title_case($company->Name)}}</a>
+                            <a href="{{url('/companies/'.$company->company_id)}}">{{title_case($company->name)}}</a>
                         </div>
                     @endforeach
 

@@ -8,50 +8,41 @@
                         #$user = DB::table('microlocations')->join('microlocation_types', 'Microlocation_type_ID', '=', 'microlocation_types.ID')->get();
                         #$user = DB::table('pre_sorting')->get();
                         #dd($user);
+                        $fractions = DB::table('textile_inventory')->distinct()->select('fraction')->get();
                     @endphp
 
                     <table style="width:100%">
                         <tr>
                             <th>ID</th>
-                            <th>City</th>
-                            <th>Address</th>
-                            <th>Weight (KG)</th>
+                            @foreach ($fractions as $fraction)
+                                <th>{{title_case($fraction->fraction)}}</th>
+                            @endforeach
                         </tr>
                         @php
                             $microlocations = DB::table('microlocations')
                                                 ->where('company_id',$company->company_id)
                                                 ->get();
 
-                            $inventory      = DB::table('microlocations')
-                                                ->where('company_id',$company->company_id)
-                                                ->join('textile_inventory', 'textile_inventory.microlocation_id', '=', 'microlocations.microlocation_id')
-                                                ->orderBy('textile_inventory.microlocation_id')
-                                                ->get();
-                            #dd($inventory);
+                            $inventory = [];
+                            foreach($microlocations as $microlocation){
+                                array_push($inventory, $microlocation->microlocation_id =
+                                    DB::table('textile_inventory')
+                                        ->where('textile_inventory.microlocation_id', '=', $microlocation->microlocation_id)
+                                        ->orderBy('textile_inventory.microlocation_id')
+                                        ->orderBy('textile_inventory.fraction')
+                                        ->where('textile_inventory.weight_kg','>','-1')
+                                        ->get());
+                            }
                         @endphp
-{{--                        @foreach ($microlocations as $microlocation)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{title_case($microlocation->microlocation_id)}}</td>--}}
-{{--                                <td>{{title_case($microlocation->city)}}</td>--}}
-{{--                                <td>{{title_case($microlocation->street_address)}}</td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
 
-                        @foreach ($inventory as $record)
+                        @foreach ($inventory as $inv_item)
                             <tr>
-                                <td>{{title_case($record->microlocation_id)}}</td>
-                                <td>{{title_case($record->city)}}</td>
-                                <td>{{title_case($record->fraction)}}</td>
-                                <td>{{title_case($record->weight_KG)}}</td>
+                                <td>{{title_case($inv_item[0]->microlocation_id)}}</td>
+                                @foreach ($inv_item as $inv)
+                                    <td>{{title_case($inv->weight_KG)}}</td>
+                                @endforeach
                             </tr>
                         @endforeach
-                      {{--  @foreach ($company->microlocations as $microlocation)
-                            <tr>
-                                <td>{{title_case($microlocation->microlocation_id)}}</td>
-                                <td>{{title_case($microlocation->city)}}</td>
-                                <td>{{title_case($microlocation->street_address)}}</td>
-                            </tr>
-                        @endforeach--}}
                     </table>
 
                 </div>

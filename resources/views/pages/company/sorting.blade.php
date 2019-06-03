@@ -11,6 +11,7 @@
                             <th>Weight (KG)</th>
                             <th>Material</th>
                             <th>Status</th>
+                            <th>User ID</th>
                         </tr>
                         @php
                             $microlocations = DB::table('microlocations')
@@ -39,6 +40,7 @@
                                 <td>{{title_case($inv_item->pre_sorting_weight)}}</td>
                                 <td>{{title_case($inv_item->presorted_material_name)}}</td>
                                 <td>{{title_case($inv_item->pre_sorting_status_id-1)}}</td>
+                                <td>{{title_case($inv_item->pre_sorting_user_id)}}</td>
                             </tr>
                         @endforeach
                     </table>

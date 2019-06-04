@@ -26,7 +26,7 @@
                         </tr>
                         @php
                             $microlocations = DB::table('microlocations')
-                                                ->where('company_id',$company->company_id)
+                                                ->where('microlocation_company_id',$company->company_id)
                                                 ->get();
 
                             $microlocation_ids = [];
@@ -38,10 +38,10 @@
                             $inventory = DB::table('pre_sorting')
                                         ->join('inventory_receipt','pre_sorting.pre_sorting_inventory_receipt_id','=','inventory_receipt.inventory_receipt_id')
                                         ->join('presorted_material','pre_sorting.presorted_material_id','=','presorted_material.presorted_material_id')
-                                        ->whereIn('inventory_receipt.to_microlocation_id', $microlocation_ids)
+                                        ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
                                         #->where('pre_sorting.status_id','=','2')
                                         ->whereBetween('receipt_date', [$from_date, $to_date])
-                                        ->orderBy('inventory_receipt.to_microlocation_id')
+                                        ->orderBy('inventory_receipt.receipt_to_microlocation_id')
                                         ->orderBy('pre_sorting.pre_sorting_date')
                                         ->get();
 
@@ -51,7 +51,7 @@
                         @endphp
                         @foreach ($inventory as $inv_item)
                             <tr>
-                                <td>{{title_case($inv_item->to_microlocation_id)}}</td>
+                                <td>{{title_case($inv_item->receipt_to_microlocation_id)}}</td>
                                 <td>{{title_case($inv_item->pre_sorting_date)}}</td>
                                 <td>{{title_case($inv_item->pre_sorting_weight)}}</td>
                                 <td>{{title_case($inv_item->presorted_material_name)}}</td>

@@ -25,7 +25,7 @@
                         </tr>
                         @php
                             $microlocations = DB::table('microlocations')
-                                                ->where('company_id',$company->company_id)
+                                                ->where('microlocation_company_id',$company->company_id)
                                                 ->get();
 
                             $microlocation_ids = [];
@@ -34,9 +34,9 @@
                             }
                             $inventory = DB::table('inventory_issue')
                                         ->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
-                                        ->whereIn('inventory_issue.from_microlocation_id', $microlocation_ids)
+                                        ->whereIn('inventory_issue.issue_from_microlocation_id', $microlocation_ids)
                                         ->whereBetween('issue_date', [$from_date, $to_date])
-                                        ->orderBy('from_microlocation_id')
+                                        ->orderBy('issue_from_microlocation_id')
                                         ->orderBy('issue_date')
                                         ->get();
                             #dd($inventory);
@@ -44,8 +44,8 @@
                         @endphp
                         @foreach ($inventory as $inv_item)
                             <tr>
-                                <td>{{title_case($inv_item->from_microlocation_id)}}</td>
-                                <td>{{title_case($inv_item->to_microlocation_id)}}</td>
+                                <td>{{title_case($inv_item->issue_from_microlocation_id)}}</td>
+                                <td>{{title_case($inv_item->issue_to_microlocation_id)}}</td>
                                 <td>{{title_case($inv_item->issue_date)}}</td>
                                 <td>{{title_case($inv_item->issue_user_id)}}</td>
                                 <td>{{title_case($inv_item->issue_typename)}}</td>

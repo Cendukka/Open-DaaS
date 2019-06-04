@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class status_types extends Model {
+class presorted_material extends Model {
 	public $incrementing = true;
 	protected $table = "status_types";
 	protected $primaryKey = "status_type_id";

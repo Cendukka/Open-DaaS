@@ -14,7 +14,7 @@
                         @php
                             # Kaikki mikrolokaaitot tässä yrityksessä
                             $microlocations = DB::table('microlocations')
-                                                ->where('company_id',$company->company_id)
+                                                ->where('microlocation_company_id',$company->company_id)
                                                 ->get();
 
                             # Kaikkien mikrolokaatioiden tekstiili varastot
@@ -22,15 +22,15 @@
                             foreach($microlocations as $microlocation){
                                 array_push($inventory, $microlocation->microlocation_id =
                                     DB::table('textile_inventory')
-                                        ->where('textile_inventory.microlocation_id', '=', $microlocation->microlocation_id)
-                                        ->orderBy('textile_inventory.microlocation_id')
+                                        ->where('textile_inventory.textile_microlocation_id', '=', $microlocation->microlocation_id)
+                                        ->orderBy('textile_inventory.textile_microlocation_id')
                                         ->orderBy('textile_inventory.fraction')
                                         ->get());
                             }
                         @endphp
                         @foreach ($inventory as $inv_item)
                             <tr>
-                                <td>{{title_case($inv_item[0]->microlocation_id)}}</td>
+                                <td>{{title_case($inv_item[0]->textile_microlocation_id)}}</td>
                                 @foreach ($inv_item as $inv)
                                     <td>{{title_case($inv->textile_weight)}}</td>
                                 @endforeach

@@ -15,10 +15,10 @@ class CommunityTable extends Migration
     {
         Schema::create('community', function (Blueprint $table) {
             $table->bigIncrements('community_id')->unsigned();
-			$table->bigInteger('company_id')->unsigned();
+			$table->bigInteger('community_company_id')->unsigned();
 			$table->string('community_city');
 	
-			$table->foreign('company_id')->references('company_id')->on('company');
+			$table->foreign('community_company_id')->references('company_id')->on('company');
         });
     }
 

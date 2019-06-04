@@ -4,6 +4,17 @@
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
+                    @php
+                        $from_date = isset($_GET['from_date']) ? $_GET['from_date'] : date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))));
+                        $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : date('Y-m-d') ;
+                    @endphp
+                    <form action={{"/companies/".$company->company_id."/sorting"}}>
+                        From date:<br>
+                        <input type="text" name="from_date" value={{$from_date}}><br>
+                        To date:<br>
+                        <input type="text" name="to_date" value={{$to_date}}>
+                        <input type="submit" value="Tarkenna Hakua">
+                    </form>
                     <table>
                         <tr>
                             <th>Location ID</th>
@@ -22,14 +33,19 @@
                             foreach ($microlocations as $microlocation){
                                 array_push($microlocation_ids, $microlocation->microlocation_id);
                             }
+
+
                             $inventory = DB::table('pre_sorting')
                                         ->join('inventory_receipt','pre_sorting.pre_sorting_inventory_receipt_id','=','inventory_receipt.inventory_receipt_id')
                                         ->join('presorted_material','pre_sorting.presorted_material_id','=','presorted_material.presorted_material_id')
                                         ->whereIn('inventory_receipt.to_microlocation_id', $microlocation_ids)
                                         #->where('pre_sorting.status_id','=','2')
+                                        ->whereBetween('receipt_date', [$from_date, $to_date])
                                         ->orderBy('inventory_receipt.to_microlocation_id')
                                         ->orderBy('pre_sorting.pre_sorting_date')
                                         ->get();
+
+
                             #dd($inventory);
 
                         @endphp

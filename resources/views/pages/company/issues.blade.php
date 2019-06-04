@@ -4,6 +4,17 @@
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
+                    @php
+                        $from_date = isset($_GET['from_date']) ? $_GET['from_date'] : date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))));
+                        $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : date('Y-m-d') ;
+                    @endphp
+                    <form action={{"/companies/".$company->company_id."/issues"}}>
+                        From date:<br>
+                        <input type="text" name="from_date" value={{$from_date}}><br>
+                        To date:<br>
+                        <input type="text" name="to_date" value={{$to_date}}>
+                        <input type="submit" value="Tarkenna Hakua">
+                    </form>
                     <table>
                         <tr>
                             <th>From Location ID</th>
@@ -24,6 +35,7 @@
                             $inventory = DB::table('inventory_issue')
                                         ->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
                                         ->whereIn('inventory_issue.from_microlocation_id', $microlocation_ids)
+                                        ->whereBetween('issue_date', [$from_date, $to_date])
                                         ->orderBy('from_microlocation_id')
                                         ->orderBy('issue_date')
                                         ->get();

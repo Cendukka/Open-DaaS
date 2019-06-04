@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class InventoryIssueTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('inventory_issue', function (Blueprint $table) {
+            $table->bigIncrements('inventory_issue_id')->unsigned();
+			$table->bigInteger('receipt_from_microlocation_id')->unsigned();
+			$table->bigInteger('receipt_to_microlocation_id')->unsigned()->nullable();
+			$table->bigInteger('issue_type_id')->unsigned();
+			$table->bigInteger('issue_user_id')->unsigned();
+			$table->dateTime('issue_date');
+	
+			$table->foreign('receipt_from_microlocation_id')->references('microlocation_id')->on('microlocations');
+			$table->foreign('receipt_to_microlocation_id')->references('microlocation_id')->on('microlocations');
+			$table->foreign('issue_type_id')->references('issue_type_id')->on('issue_types');
+			$table->foreign('issue_user_id')->references('user_id')->on('users');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('inventory_issue');
+    }
+}

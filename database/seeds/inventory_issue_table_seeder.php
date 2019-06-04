@@ -23,7 +23,7 @@ class inventory_issue_table_seeder extends Seeder
 				'issue_to_microlocation_id' => rand(1,$microlocations_amount),
 				'issue_type_id' => rand(1,$type_amount),
 				'issue_user_id' => rand(1,$users_amount),
-				'issue_date' => $faker->dateTimeBetween($startDate = '-10 years', $endDate = 'now', $timezone = null),
+				'issue_date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now', $timezone = null),
 			]);
 		}
 	}

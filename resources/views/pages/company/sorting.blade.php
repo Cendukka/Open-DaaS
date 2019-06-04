@@ -21,12 +21,11 @@
                             <th>Date</th>
                             <th>Weight (KG)</th>
                             <th>Material</th>
-                            <th>Status</th>
                             <th>User ID</th>
                         </tr>
                         @php
                             $microlocations = DB::table('microlocations')
-                                                ->where('microlocation_company_id',$company->company_id)
+                                                ->where('microlocation_company_id','=',$company->company_id)
                                                 ->get();
 
                             $microlocation_ids = [];
@@ -39,7 +38,7 @@
                                         ->join('inventory_receipt','pre_sorting.pre_sorting_inventory_receipt_id','=','inventory_receipt.inventory_receipt_id')
                                         ->join('presorted_material','pre_sorting.presorted_material_id','=','presorted_material.presorted_material_id')
                                         ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
-                                        #->where('pre_sorting.status_id','=','2')
+                                        ->where('pre_sorting.pre_sorting_status_id','=','2')
                                         ->whereBetween('receipt_date', [$from_date, $to_date])
                                         ->orderBy('inventory_receipt.receipt_to_microlocation_id')
                                         ->orderBy('pre_sorting.pre_sorting_date')
@@ -55,7 +54,6 @@
                                 <td>{{title_case($inv_item->pre_sorting_date)}}</td>
                                 <td>{{title_case($inv_item->pre_sorting_weight)}}</td>
                                 <td>{{title_case($inv_item->presorted_material_name)}}</td>
-                                <td>{{title_case($inv_item->pre_sorting_status_id-1)}}</td>
                                 <td>{{title_case($inv_item->pre_sorting_user_id)}}</td>
                             </tr>
                         @endforeach

@@ -14,7 +14,7 @@
                         @php
                             # Kaikki mikrolokaaitot tässä yrityksessä
                             $microlocations = DB::table('microlocations')
-                                                ->where('microlocation_company_id',$company->company_id)
+                                                ->where('microlocation_company_id','=',$company->company_id)
                                                 ->get();
 
                             # Kaikkien mikrolokaatioiden tekstiili varastot

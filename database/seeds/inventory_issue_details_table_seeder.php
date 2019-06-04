@@ -1,6 +1,5 @@
 <?php
 
-use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 class inventory_issue_details_table_seeder extends Seeder
@@ -12,7 +11,6 @@ class inventory_issue_details_table_seeder extends Seeder
      */
     public function run()
     {
-		$faker = Faker::create('fi_FI');
 		$inventory_amount = DB::table('inventory_issue')->count();
 		$textile_amount = DB::table('textile_inventory')->count();
 		$ewc_codes = DB::table('ewc_codes')->get();

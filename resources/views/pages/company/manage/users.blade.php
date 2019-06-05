@@ -10,6 +10,7 @@
                     <table>
                         <tr>
                             <th>ID</th>
+                            <th>Microlocation ID</th>
                             <th>Type</th>
                             <th>Last Name</th>
                             <th>First Name</th>
@@ -20,12 +21,15 @@
                             $users = DB::table('users')
                                         ->where('user_company_id','=',$company->company_id)
                                         ->join('user_types', 'users.user_type_id', '=','user_types.user_type_id')
+                                        ->orderBy('user_microlocation_id')
+                                        ->orderBy('users.user_type_id')
                                         ->get();
 
                         @endphp
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{title_case($user->user_id)}}</td>
+                                <td>{{title_case($user->user_microlocation_id)}}</td>
                                 <td>{{title_case($user->user_typename)}}</td>
                                 <td>{{title_case($user->last_name)}}</td>
                                 <td>{{title_case($user->first_name)}}</td>

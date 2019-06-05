@@ -20,12 +20,19 @@ Route::get('/manage', function () {
 });
 
 
+Route::resource('ewc', 'ewc_controller', ['only' => [
+	'index', 'show'
+]]);
+
 Route::resource('companies', 'company_controller', ['only' => [
 	'index', 'show'
 ]]);
 
-
 Route::resource('companies.warehouse', 'company_warehouse_controller', ['only' => [
+	'index', 'show'
+]]);
+
+Route::resource('companies.receipts', 'company_receipts_controller', ['only' => [
 	'index', 'show'
 ]]);
 

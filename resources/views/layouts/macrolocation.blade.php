@@ -6,15 +6,10 @@
 <body>
 <div class="container">
    <header class="column">
-      @include('includes.header')
+      @include('includes.macrolocation_header')
    </header>
    <div id="main" class="column">
-      <div id="macrolocation_name" class="row">
-         @include('includes.macrolocation_name')
-      </div>
-      <div id="content" class="row">
-         @yield('content')
-      </div>
+      @yield('content')
    </div>
    <footer class="row">
        @include('includes.footer')

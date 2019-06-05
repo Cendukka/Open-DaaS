@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
 	return view('pages.home');
 });
@@ -18,7 +7,6 @@ Route::get('/', function () {
 Route::get('/manage', function () {
 	return view('pages.manage');
 });
-
 
 Route::resource('ewc', 'ewc_controller', ['only' => [
 	'index', 'show'
@@ -28,37 +16,14 @@ Route::resource('companies', 'company_controller', ['only' => [
 	'index', 'show'
 ]]);
 
-Route::resource('companies.warehouse', 'company_warehouse_controller', ['only' => [
-	'index', 'show'
-]]);
+Route::get('companies/{company}/manage', 	'company_controller@manage_index');
 
-Route::resource('companies.receipts', 'company_receipts_controller', ['only' => [
-	'index', 'show'
-]]);
+Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
 
-Route::resource('companies.sorting', 'company_sorting_controller', ['only' => [
-	'index', 'show'
-]]);
+Route::get('companies/{company}/receipts', 	'company_controller@receipts_index');
 
-Route::resource('companies.sorted', 'company_sorted_controller', ['only' => [
-	'index', 'show'
-]]);
+Route::get('companies/{company}/sorting', 	'company_controller@sorting_index');
 
-Route::resource('companies.issues', 'company_issues_controller', ['only' => [
-	'index', 'show'
-]]);
+Route::get('companies/{company}/sorted', 	'company_controller@sorted_index');
 
-
-
-//Route::get('companies/{company_id}', function ($company_id) {
-//	return view('pages.company.warehouse', ['company_id' => $company_id]);
-//});
-
-
-//Route::resource('companies', 'company_controller', ['only' => [
-//	'index', 'show'
-//]]);
-//
-//Route::resource('companies', 'company_controller', ['except' => [
-//	'create', 'store', 'update', 'destroy'
-//]]);
+Route::get('companies/{company}/issues', 	'company_controller@issues_index');

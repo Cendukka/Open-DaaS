@@ -1,6 +1,9 @@
 @extends('layouts.macrolocation')
 @section('content')
-    <div class="row">
+    <div id="macrolocation_name" class="row">
+        @include('includes.macrolocation_name')
+    </div>
+    <div id="content" class="row">
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -43,9 +46,6 @@
                                         ->orderBy('inventory_receipt.receipt_to_microlocation_id')
                                         ->orderBy('pre_sorting.pre_sorting_date')
                                         ->get();
-
-
-                            #dd($inventory);
 
                         @endphp
                         @foreach ($inventory as $inv_item)

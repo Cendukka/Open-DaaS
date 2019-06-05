@@ -24,7 +24,7 @@ class company_controller extends Controller {
 	
 	public function show(company $company) {
 		$id = $company->company_id;
-		return redirect('companies/'.$id.'/warehouse')->with('company', $company);
+		return redirect('companies/' . $id . '/warehouse')->with('company', $company);
 		#return Redirect::to('/companies/'.$id);
 		#return view('pages.company.warehouse');
 	}
@@ -43,5 +43,29 @@ class company_controller extends Controller {
 		if ($company->delete()) {
 			return true;
 		}
+	}
+	
+	public function manage_index(company $company) {
+		return view('pages.company.manage')->with('company', $company);
+	}
+	
+	public function warehouse_index(company $company) {
+		return view('pages.company.warehouse')->with('company', $company);
+	}
+	
+	public function receipts_index(company $company) {
+		return view('pages.company.receipts')->with('company', $company);
+	}
+	
+	public function sorting_index(company $company) {
+		return view('pages.company.sorting')->with('company', $company);
+	}
+	
+	public function sorted_index(company $company) {
+		return view('pages.company.sorted')->with('company', $company);
+	}
+	
+	public function issues_index(company $company) {
+		return view('pages.company.issues')->with('company', $company);
 	}
 }

@@ -1,6 +1,9 @@
 @extends('layouts.macrolocation')
 @section('content')
-    <div class="row">
+    <div id="macrolocation_name" class="row">
+        @include('includes.macrolocation_name')
+    </div>
+    <div id="content" class="row">
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -12,12 +15,10 @@
                             @endforeach
                         </tr>
                         @php
-                            # Kaikki mikrolokaaitot tässä yrityksessä
                             $microlocations = DB::table('microlocations')
                                                 ->where('microlocation_company_id','=',$company->company_id)
                                                 ->get();
 
-                            # Kaikkien mikrolokaatioiden tekstiili varastot
                             $inventory = [];
                             foreach($microlocations as $microlocation){
                                 array_push($inventory, $microlocation->microlocation_id =

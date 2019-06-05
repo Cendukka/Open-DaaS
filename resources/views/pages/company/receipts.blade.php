@@ -1,6 +1,9 @@
 @extends('layouts.macrolocation')
 @section('content')
-    <div class="row">
+    <div id="macrolocation_name" class="row">
+        @include('includes.macrolocation_name')
+    </div>
+    <div id="content" class="row">
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -48,8 +51,6 @@
                                                ($inv_item->receipt_from_community_id ? 'Community '.$inv_item->receipt_from_community_id :
                                                ($inv_item->receipt_from_supplier_id ? 'Supplier '.$inv_item->receipt_from_supplier_id :
                                                 'Microlocation '.$inv_item->receipt_from_microlocation_id)));
-                                    echo isset($inv_item->receipt_from_company_id);
-                                    #dd($inventory);
                                 @endphp
                                 <td>{{title_case($inv_item->receipt_to_microlocation_id)}}</td>
                                 <td>{{$fromid}}</td>

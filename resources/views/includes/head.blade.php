@@ -24,7 +24,7 @@
 
     table, th, td {
         border: 1px solid black;
-        text-align: right;
+        text-align: left;
     }
 
     table {

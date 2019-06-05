@@ -8,10 +8,10 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <ul class="nav">
-                        <li><a href="/companies/{{$company->company_id}}/users">Users</a></li>
-                        <li><a href="/companies/{{$company->company_id}}/microlocations">Microlocations</a></li>
-                        <li><a href="/companies/{{$company->company_id}}/receipts">Receipts</a></li>
-                        <li><a href="/companies/{{$company->company_id}}/issues">Issues</a></li>
+                        <li><a href="/companies/{{$company->company_id}}/manage/users">Users</a></li>
+                        <li><a href="/companies/{{$company->company_id}}/manage/microlocations">Microlocations</a></li>
+                        <li><a href="/companies/{{$company->company_id}}/manage/receipts">Receipts</a></li>
+                        <li><a href="/companies/{{$company->company_id}}/manage/issues">Issues</a></li>
                     </ul>
                 </div>
             </div>

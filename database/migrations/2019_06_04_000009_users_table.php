@@ -17,6 +17,7 @@ class UsersTable extends Migration
             $table->bigIncrements('user_id')->unsigned();
 			$table->bigInteger('user_type_id')->unsigned();
 			$table->bigInteger('user_company_id')->unsigned();
+			$table->bigInteger('user_microlocation_id')->unsigned()->nullable();
 			$table->string('last_name');
 			$table->string('first_name');
 			$table->string('username');
@@ -24,6 +25,7 @@ class UsersTable extends Migration
 	
 			$table->foreign('user_type_id')->references('user_type_id')->on('user_types');
 			$table->foreign('user_company_id')->references('company_id')->on('company');
+			$table->foreign('user_microlocation_id')->references('microlocation_id')->on('microlocations');
         });
     }
 

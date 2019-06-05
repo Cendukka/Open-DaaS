@@ -18,9 +18,9 @@
                         </tr>
                         @php
                             $users = DB::table('users')
-                                                ->where('user_company_id','=',$company->company_id)
-                                                ->join('user_types', 'users.user_type_id', '=','user_types.user_type_id')
-                                                ->get();
+                                        ->where('user_company_id','=',$company->company_id)
+                                        ->join('user_types', 'users.user_type_id', '=','user_types.user_type_id')
+                                        ->get();
 
                         @endphp
                         @foreach ($users as $user)

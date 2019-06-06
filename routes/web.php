@@ -31,4 +31,5 @@ Route::get('companies/{company}/issues', 	'company_controller@issues_index');
 
 #Company manage pages
 Route::get('companies/{company}/manage/users', 'company_manage_controller@users_index');
+
 Route::get('companies/{company}/manage/microlocations', 'company_manage_controller@microlocations_index');

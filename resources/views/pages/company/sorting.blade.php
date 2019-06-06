@@ -8,8 +8,23 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     @php
-                        $from_date = isset($_GET['from_date']) ? $_GET['from_date'] : date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))));
-                        $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : date('Y-m-d') ;
+                        $from_date = isset($_GET['from_date']) ? date("Y-m-d", strtotime($_GET['from_date'])) : date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))));
+                        $to_date = isset($_GET['to_date']) ? date("Y-m-d", strtotime($_GET['to_date'])) : date('Y-m-d');
+                        $orderBy = (isset($_GET['order']) && $_GET['order'] == 'desc' ? 'DESC' : 'ASC');
+
+                        $sortBy = 'inventory_receipt.receipt_to_microlocation_id';
+                            if(isset($_GET['sortBy'])){
+                                switch ($_GET['sortBy']){
+                                case 'id':
+                                    $sortBy = 'inventory_receipt.receipt_to_microlocation_id';
+                                    break;
+                                case 'date':
+                                    $sortBy = 'pre_sorting.pre_sorting_date';
+                                    break;
+                                case 'weight':
+                                    $sortBy = 'inventory_receipt.receipt_to_microlocation_id';
+                                }
+                            }
                     @endphp
                     <form action={{"/companies/".$company->company_id."/sorting"}}>
                         From date:<br>
@@ -20,8 +35,8 @@
                     </form>
                     <table>
                         <tr>
-                            <th>Location ID</th>
-                            <th>Date</th>
+                            <th><a href="?sortBy=id&order={{$orderBy == 'ASC' && $sortBy == 'inventory_receipt.receipt_to_microlocation_id' ? 'desc' : 'asc'}}">Location ID</a></th>
+                            <th><a href="?sortBy=date&order={{$orderBy == 'ASC' && $sortBy == 'pre_sorting.pre_sorting_date' ? 'desc' : 'asc'}}">Date</a></th>
                             <th>Weight (KG)</th>
                             <th>Material</th>
                             <th>User ID</th>
@@ -37,14 +52,15 @@
                             }
 
 
+
+
                             $inventory = DB::table('pre_sorting')
                                         ->join('inventory_receipt','pre_sorting.pre_sorting_inventory_receipt_id','=','inventory_receipt.inventory_receipt_id')
                                         ->join('presorted_material','pre_sorting.presorted_material_id','=','presorted_material.presorted_material_id')
                                         ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
                                         ->where('pre_sorting.pre_sorting_status_id','=','2')
                                         ->whereBetween('receipt_date', [$from_date, $to_date])
-                                        ->orderBy('inventory_receipt.receipt_to_microlocation_id')
-                                        ->orderBy('pre_sorting.pre_sorting_date')
+                                        ->orderBy($sortBy,$orderBy)
                                         ->get();
 
                         @endphp

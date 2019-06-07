@@ -14,8 +14,8 @@ class StatusTypesTable extends Migration
     public function up()
     {
         Schema::create('status_types', function (Blueprint $table) {
-            $table->bigIncrements('status_type_id')->unsigned();
-            $table->string('status_name');
+            $table->increments('status_type_id')->unsigned();
+            $table->string('status_name',50);
         });
     }
 

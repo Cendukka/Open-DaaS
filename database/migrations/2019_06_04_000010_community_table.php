@@ -14,9 +14,9 @@ class CommunityTable extends Migration
     public function up()
     {
         Schema::create('community', function (Blueprint $table) {
-            $table->bigIncrements('community_id')->unsigned();
-			$table->bigInteger('community_company_id')->unsigned();
-			$table->string('community_city');
+            $table->increments('community_id')->unsigned();
+			$table->integer('community_company_id')->unsigned();
+			$table->string('community_city',50);
 	
 			$table->foreign('community_company_id')->references('company_id')->on('company');
         });

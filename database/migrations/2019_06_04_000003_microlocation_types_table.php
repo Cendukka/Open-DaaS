@@ -14,8 +14,8 @@ class MicrolocationTypesTable extends Migration
     public function up()
     {
         Schema::create('microlocation_types', function (Blueprint $table) {
-            $table->bigIncrements('microlocation_type_id')->unsigned();
-            $table->string('microlocation_typename');
+            $table->increments('microlocation_type_id')->unsigned();
+            $table->string('microlocation_typename',50);
         });
     }
 

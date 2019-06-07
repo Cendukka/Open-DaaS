@@ -14,8 +14,8 @@ class PresortedMaterialTable extends Migration
     public function up()
     {
         Schema::create('presorted_material', function (Blueprint $table) {
-            $table->bigIncrements('presorted_material_id')->unsigned();
-            $table->string('presorted_material_name');
+            $table->increments('presorted_material_id')->unsigned();
+            $table->string('presorted_material_name',50);
         });
     }
 

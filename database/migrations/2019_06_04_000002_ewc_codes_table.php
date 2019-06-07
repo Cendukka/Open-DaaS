@@ -14,7 +14,7 @@ class EwcCodesTable extends Migration
     public function up()
     {
         Schema::create('ewc_codes', function (Blueprint $table) {
-            $table->string('ewc_code',6)->primary();
+            $table->char('ewc_code',6)->primary();
             $table->string('description');
         });
     }

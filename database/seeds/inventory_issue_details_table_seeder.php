@@ -17,9 +17,9 @@ class inventory_issue_details_table_seeder extends Seeder
 	
 		foreach (range(1,$inventory_amount*3) as $index) {
 			DB::table('inventory_issue_details')->insert([
-				'inventory_issue_id' => rand(1,$inventory_amount),
+				'issue_id' => rand(1,$inventory_amount),
 				'textile_id' => rand(1,$textile_amount),
-				'ewc_code' => $ewc_codes[rand(1,count($ewc_codes)-1)]->ewc_code,
+				'issue_ewc_code' => $ewc_codes[rand(1,count($ewc_codes)-1)]->ewc_code,
 				'issue_weight' => rand(100,1000),
 			]);
 		}

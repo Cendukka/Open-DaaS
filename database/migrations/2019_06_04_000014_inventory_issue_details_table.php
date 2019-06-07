@@ -14,15 +14,15 @@ class InventoryIssueDetailsTable extends Migration
     public function up()
     {
         Schema::create('inventory_issue_details', function (Blueprint $table) {
-            $table->bigIncrements('issue_detail_id')->unsigned();
-			$table->bigInteger('inventory_issue_id')->unsigned()->nullable();
-			$table->bigInteger('textile_id')->unsigned();
-			$table->string('ewc_code')->nullable();
+            $table->increments('issue_detail_id')->unsigned();
+			$table->integer('issue_id')->unsigned()->nullable();
+			$table->integer('textile_id')->unsigned();
+			$table->char('issue_ewc_code',6)->nullable();
 			$table->integer('issue_weight');
 	
-			$table->foreign('inventory_issue_id')->references('inventory_issue_id')->on('inventory_issue');
+			$table->foreign('issue_id')->references('issue_id')->on('inventory_issue');
 			$table->foreign('textile_id')->references('textile_id')->on('textile_inventory');
-			$table->foreign('ewc_code')->references('ewc_code')->on('ewc_codes');
+			$table->foreign('issue_ewc_code')->references('ewc_code')->on('ewc_codes');
         });
     }
 

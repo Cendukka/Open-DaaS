@@ -22,7 +22,7 @@ class refined_sorting_table_seeder extends Seeder
 	
 		foreach (range(1,$microlocation_amount * 2 + $receipt_amount * 2 + $pre_sorting_amount) as $index) {
 			DB::table('refined_sorting')->insert([
-				'refined_sorting_inventory_receipt_id' => rand(1,$receipt_amount),
+				'refined_sorting_receipt_id' => rand(1,$receipt_amount),
 				'pre_sorting_id' => rand(1,$pre_sorting_amount),
 				'textile_id' => rand(1,$textile_amount),
 				'refined_sorting_user_id' => rand(1,$users_amount),

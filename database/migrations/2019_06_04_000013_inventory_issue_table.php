@@ -14,11 +14,11 @@ class InventoryIssueTable extends Migration
     public function up()
     {
         Schema::create('inventory_issue', function (Blueprint $table) {
-            $table->bigIncrements('inventory_issue_id')->unsigned();
-			$table->bigInteger('issue_from_microlocation_id')->unsigned();
-			$table->bigInteger('issue_to_microlocation_id')->unsigned()->nullable();
-			$table->bigInteger('issue_type_id')->unsigned();
-			$table->bigInteger('issue_user_id')->unsigned();
+            $table->increments('issue_id')->unsigned();
+			$table->integer('issue_from_microlocation_id')->unsigned();
+			$table->integer('issue_to_microlocation_id')->unsigned()->nullable();
+			$table->integer('issue_type_id')->unsigned();
+			$table->integer('issue_user_id')->unsigned();
 			$table->dateTime('issue_date');
 	
 			$table->foreign('issue_from_microlocation_id')->references('microlocation_id')->on('microlocations');

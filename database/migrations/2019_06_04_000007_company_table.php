@@ -14,11 +14,11 @@ class CompanyTable extends Migration
     public function up()
     {
         Schema::create('company', function (Blueprint $table) {
-            $table->bigIncrements('company_id')->unsigned();
-			$table->string('company_name');
-			$table->string('company_street_address');
-			$table->string('company_postal_code');
-			$table->string('company_city');
+            $table->increments('company_id')->unsigned();
+			$table->string('company_name',191);
+			$table->string('company_street_address',191);
+			$table->char('company_postal_code',5);
+			$table->string('company_city',50);
         });
     }
 

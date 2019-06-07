@@ -14,8 +14,8 @@ class IssueTypesTable extends Migration
     public function up()
     {
         Schema::create('issue_types', function (Blueprint $table) {
-            $table->bigIncrements('issue_type_id')->unsigned();
-            $table->string('issue_typename');
+            $table->increments('issue_type_id')->unsigned();
+            $table->string('issue_typename',50);
         });
     }
 

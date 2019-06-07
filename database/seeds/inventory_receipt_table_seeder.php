@@ -25,16 +25,16 @@ class inventory_receipt_table_seeder extends Seeder
 		foreach (range(1,$sum) as $index) {
 			$select = rand(1,4);
 			DB::table('inventory_receipt')->insert([
-				'receipt_from_company_id' => ($select == 1 ? rand(1,$companies_amount) : NULL),
+				'from_company_id' => ($select == 1 ? rand(1,$companies_amount) : NULL),
 				'receipt_from_microlocation_id' => ($select == 2 ? rand(1,$microlocations_amount) : NULL),
-				'receipt_from_community_id' => ($select == 3 ? rand(1,$communities_amount) : NULL),
-				'receipt_from_supplier_id' => ($select == 4 ? rand(1,$suppliers_amount) : NULL),
+				'from_community_id' => ($select == 3 ? rand(1,$communities_amount) : NULL),
+				'from_supplier_id' => ($select == 4 ? rand(1,$suppliers_amount) : NULL),
 				'receipt_to_microlocation_id' => rand(1,$microlocations_amount),
 				'receipt_user_id' => rand(1,$users_amount),
 				'distance_km' => rand(10,500),
 				'receipt_weight' => rand(100,1000),
 				'receipt_date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now', $timezone = null),
-				'ewc_code' => $ewc_codes[rand(1,count($ewc_codes)-1)]->ewc_code,
+				'receipt_ewc_code' => $ewc_codes[rand(1,count($ewc_codes)-1)]->ewc_code,
 			]);
 		}
     }

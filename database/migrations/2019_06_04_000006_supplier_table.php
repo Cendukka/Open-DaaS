@@ -14,14 +14,14 @@ class SupplierTable extends Migration
     public function up()
     {
         Schema::create('supplier', function (Blueprint $table) {
-            $table->bigIncrements('supplier_id')->unsigned();
-			$table->string('supplier_name');
-			$table->string('supplier_street_address');
-			$table->string('supplier_postal_code');
-			$table->string('supplier_city');
-			$table->string('contact_person');
-			$table->string('email');
-			$table->string('phone_number');
+            $table->increments('supplier_id')->unsigned();
+			$table->string('supplier_name',191);
+			$table->string('supplier_street_address',50);
+			$table->char('supplier_postal_code',5);
+			$table->string('supplier_city',50);
+			$table->string('contact_person',50);
+			$table->string('email',191);
+			$table->string('phone_number',50);
         });
     }
 

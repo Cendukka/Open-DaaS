@@ -47,9 +47,9 @@
                         @foreach ($inventory as $inv_item)
                             <tr>
                                 @php
-                                    $fromid =  ($inv_item->receipt_from_company_id ? 'Company '.$inv_item->receipt_from_company_id :
-                                               ($inv_item->receipt_from_community_id ? 'Community '.$inv_item->receipt_from_community_id :
-                                               ($inv_item->receipt_from_supplier_id ? 'Supplier '.$inv_item->receipt_from_supplier_id :
+                                    $fromid =  ($inv_item->from_company_id ? 'Company '.$inv_item->from_company_id :
+                                               ($inv_item->from_community_id ? 'Community '.$inv_item->from_community_id :
+                                               ($inv_item->from_supplier_id ? 'Supplier '.$inv_item->from_supplier_id :
                                                 'Microlocation '.$inv_item->receipt_from_microlocation_id)));
                                 @endphp
                                 <td>{{title_case($inv_item->receipt_to_microlocation_id)}}</td>
@@ -57,7 +57,7 @@
                                 <td>{{title_case($inv_item->receipt_date)}}</td>
                                 <td>{{title_case($inv_item->receipt_weight)}}</td>
                                 <td>{{title_case($inv_item->distance_km)}}</td>
-                                <td>{{title_case($inv_item->ewc_code)}}</td>
+                                <td>{{title_case($inv_item->receipt_ewc_code)}}</td>
                             </tr>
                         @endforeach
                     </table>

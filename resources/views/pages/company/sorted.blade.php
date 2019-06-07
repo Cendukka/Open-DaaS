@@ -56,7 +56,7 @@
                                         ))));
 
                             $inventory = DB::table('pre_sorting')
-                                        ->join('inventory_receipt','pre_sorting.pre_sorting_inventory_receipt_id','=','inventory_receipt.inventory_receipt_id')
+                                        ->join('inventory_receipt','pre_sorting.pre_sorting_receipt_id','=','inventory_receipt.receipt_id')
                                         ->join('presorted_material','pre_sorting.presorted_material_id','=','presorted_material.presorted_material_id')
                                         ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
                                         ->where('pre_sorting.pre_sorting_status_id','=','1')

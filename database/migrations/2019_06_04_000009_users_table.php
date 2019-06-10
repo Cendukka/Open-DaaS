@@ -20,7 +20,7 @@ class UsersTable extends Migration
 			$table->integer('user_type_id')->unsigned();
 			$table->string('last_name',50);
 			$table->string('first_name',50);
-			$table->string('username',50);
+			$table->string('username',50)->unique();
 			$table->string('password',191);
 	
 			$table->foreign('user_type_id')->references('user_type_id')->on('user_types');

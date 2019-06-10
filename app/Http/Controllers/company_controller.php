@@ -23,10 +23,10 @@ class company_controller extends Controller {
 	}
 	
 	public function show(company $company) {
-		$id = $company->company_id;
-		return redirect('companies/' . $id . '/warehouse')->with('company', $company);
-		#return Redirect::to('/companies/'.$id);
-		#return view('pages.company.warehouse');
+		return view('pages.company.company')->with('company', $company);;
+		
+		#$id = $company->company_id;
+		#return redirect('companies/' . $id . '/warehouse')->with('company', $company);
 	}
 	
 	public function edit(company $company) {

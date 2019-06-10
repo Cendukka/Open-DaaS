@@ -25,6 +25,7 @@
                             <th>Date</th>
                             <th>User</th>
                             <th>Status Type</th>
+                            <th>Materials</th>
                         </tr>
                         @php
                             $microlocations = DB::table('microlocations')
@@ -42,6 +43,7 @@
                                         ->orderBy('issue_from_microlocation_id')
                                         ->orderBy('issue_date')
                                         ->get();
+                            #dd($inventory);
 
                         @endphp
                         @foreach ($inventory as $inv_item)
@@ -51,6 +53,19 @@
                                 <td>{{title_case($inv_item->issue_date)}}</td>
                                 <td>{{title_case($inv_item->issue_user_id)}}</td>
                                 <td>{{title_case($inv_item->issue_typename)}}</td>
+                                @php
+                                    $materials = DB::table('inventory_issue')
+                                                    ->select('inventory_issue_details.detail_weight','material_names.material_name')
+                                                    ->join('inventory_issue_details','inventory_issue.issue_id','=','inventory_issue_details.detail_issue_id')
+                                                    ->join('material_names','material_names.material_id','=','inventory_issue_details.detail_material_id')
+                                                    ->where('inventory_issue.issue_id','=',$inv_item->issue_from_microlocation_id)
+                                                    ->get();
+                                @endphp
+                                <td>
+                                    @foreach ($materials as $material)
+                                        <a>{{title_case($material->material_name)}} {{title_case($material->detail_weight)}} kg</a><br>
+                                    @endforeach
+                                </td>
                             </tr>
                         @endforeach
                     </table>

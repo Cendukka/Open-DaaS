@@ -17,7 +17,7 @@ class RefinedSortingTable extends Migration
             $table->increments('refined_sorting_id')->unsigned();
 			$table->integer('refined_sorting_receipt_id')->unsigned()->nullable();
 			$table->integer('pre_sorting_id')->unsigned()->nullable();
-			$table->integer('textile_id')->unsigned();
+			$table->integer('refined_inventory_id')->unsigned();
 			$table->integer('refined_sorting_user_id')->unsigned();
 			$table->integer('refined_sorting_status_id')->unsigned();
 			$table->integer('refined_sorting_weight');
@@ -25,7 +25,7 @@ class RefinedSortingTable extends Migration
 	
 			$table->foreign('refined_sorting_receipt_id')->references('receipt_id')->on('inventory_receipt');
 			$table->foreign('pre_sorting_id')->references('pre_sorting_id')->on('pre_sorting');
-			$table->foreign('textile_id')->references('textile_id')->on('textile_inventory');
+			$table->foreign('refined_inventory_id')->references('inventory_id')->on('inventory');
 			$table->foreign('refined_sorting_user_id')->references('user_id')->on('users');
 			$table->foreign('refined_sorting_status_id')->references('status_type_id')->on('status_types');
         });

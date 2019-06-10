@@ -16,7 +16,7 @@ class refined_sorting_table_seeder extends Seeder
 		$microlocation_amount = DB::table('microlocations')->count();
 		$receipt_amount = DB::table('inventory_receipt')->count();
 		$pre_sorting_amount = DB::table('pre_sorting')->count();
-		$textile_amount = DB::table('textile_inventory')->count();
+		$inventory_amount = DB::table('inventory')->count();
 		$users_amount = DB::table('users')->count();
 		$status_amount = DB::table('status_types')->count();
 	
@@ -24,7 +24,7 @@ class refined_sorting_table_seeder extends Seeder
 			DB::table('refined_sorting')->insert([
 				'refined_sorting_receipt_id' => rand(1,$receipt_amount),
 				'pre_sorting_id' => rand(1,$pre_sorting_amount),
-				'textile_id' => rand(1,$textile_amount),
+				'refined_inventory_id' => rand(1,$inventory_amount),
 				'refined_sorting_user_id' => rand(1,$users_amount),
 				'refined_sorting_status_id' => rand(1,$status_amount),
 				'refined_sorting_weight' => rand(100,500),

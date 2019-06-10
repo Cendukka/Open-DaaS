@@ -13,6 +13,7 @@ class inventory_receipt_table_seeder extends Seeder
     public function run()
     {
 		$faker = Faker::create('fi_FI');
+		$materials_count = DB::table('material_names')->count();
 		$companies_amount = DB::table('company')->count();
 		$microlocations_amount = DB::table('microlocations')->count();
 		$communities_amount = DB::table('community')->count();
@@ -25,10 +26,11 @@ class inventory_receipt_table_seeder extends Seeder
 		foreach (range(1,$sum) as $index) {
 			$select = rand(1,4);
 			DB::table('inventory_receipt')->insert([
+				'receipt_material_id' => rand(1,$materials_count),
 				'from_company_id' => ($select == 1 ? rand(1,$companies_amount) : NULL),
-				'receipt_from_microlocation_id' => ($select == 2 ? rand(1,$microlocations_amount) : NULL),
 				'from_community_id' => ($select == 3 ? rand(1,$communities_amount) : NULL),
 				'from_supplier_id' => ($select == 4 ? rand(1,$suppliers_amount) : NULL),
+				'receipt_from_microlocation_id' => ($select == 2 ? rand(1,$microlocations_amount) : NULL),
 				'receipt_to_microlocation_id' => rand(1,$microlocations_amount),
 				'receipt_user_id' => rand(1,$users_amount),
 				'distance_km' => rand(10,500),

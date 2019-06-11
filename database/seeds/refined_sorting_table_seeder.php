@@ -29,6 +29,7 @@ class refined_sorting_table_seeder extends Seeder
 				'refined_status_id' => rand(1,$status_amount),
 				'refined_weight' => rand(100,500),
 				'refined_date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now', $timezone = null),
+				'refined_description' => $faker->text(40)
 			]);
 		}
 	}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\user;
 
 class user_controller extends Controller {
 	/**
@@ -33,11 +34,18 @@ class user_controller extends Controller {
 	 */
 	public function store(Request $request) {
 		$request->validate([
-			'first_name'=>'required',
-			'last_name'=> 'required',
+			'user_type' => 'required|integer',
+			'company' => 'required|integer',
+			'microlocation' => 'required_unless:user_type_id,1,2|integer',
+			'first_name'=>'required|max:50',
+			'last_name'=> 'required|max:50',
+			'username'=> 'required|unique:users|max:50',
+			'password'=> 'required',
 		]);
-		DB::table('users')->insert([
-			'user_type_id' => 3,
+		
+		
+		$user = new user([
+			'user_type_id' => $request->get('user_type'),
 			'user_company_id' => $request->get('company'),
 			'user_microlocation_id' => $request->get('microlocation'),
 			'last_name' => $request->get('last_name'),
@@ -45,6 +53,8 @@ class user_controller extends Controller {
 			'username' => $request->get('username'),
 			'password' => $request->get('password'),
 		]);
+		$user->save();
+		
 		return redirect('/')->with('success', 'Stock has been added');
 	}
 	

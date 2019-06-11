@@ -22,6 +22,7 @@ class RefinedSortingTable extends Migration
 			$table->integer('refined_status_id')->unsigned();
 			$table->integer('refined_weight');
 			$table->dateTime('refined_date');
+			$table->string('refined_description',191);
 	
 			$table->foreign('refined_receipt_id')->references('receipt_id')->on('inventory_receipt');
 			$table->foreign('pre_sorting_id')->references('pre_sorting_id')->on('pre_sorting');

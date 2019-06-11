@@ -6,10 +6,28 @@
     <div id="content" class="row">
         <div class="col-md-6">
             <div class="panel panel-primary">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="panel-heading">
                     <h4>Add User</h4>
                     <form method="post" action="users-store">
                         @csrf
+                        <div class="form-group">
+                            <label for="user_type">User Type: </label>
+                            <select name="user_type">
+                                <option value="1">Superadmin</option>
+                                <option value="2">Admin</option>
+                                <option value="3">Manager</option>
+                                <option value="4">User</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="company">Company: </label>
                             <select name="company">
@@ -19,7 +37,7 @@
                         <div class="form-group">
                             <label for="microlocation">Microlocation: </label>
                             <select name="microlocation">
-                                <option selected="selected" hidden value=""></option>
+                                <option selected="selected" value=""></option>
                                 @php
                                     $microlocations = DB::table('microlocations')
                                                 ->where('microlocation_company_id','=',$company->company_id)
@@ -30,6 +48,7 @@
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label for="first_name">First Name: </label>
                             <input type="text" class="form-control" name="first_name"/>

@@ -55,11 +55,10 @@
                                         $sort_by == 'material' ? 'presorted_material.presorted_material_name' : 'pre_sorting.pre_sorting_user_id'
                                         ))));
 
-                            $inventory = DB::table('pre_sorting')
-                                        ->join('inventory_receipt','pre_sorting.pre_sorting_receipt_id','=','inventory_receipt.receipt_id')
-                                        ->join('presorted_material','pre_sorting.presorted_material_id','=','presorted_material.presorted_material_id')
+                            $inventory = DB::table('refined_sorting')
+                                        ->join('inventory_receipt','refined_sorting.refined_receipt_id','=','inventory_receipt.receipt_id')
+                                        ->join('material_names','refined_sorting.refined_material_id','=','material_names.material_id')
                                         ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
-                                        ->where('pre_sorting.pre_sorting_status_id','=','1')
                                         ->whereBetween('receipt_date', [$from_date, $to_date])
                                         ->orderBy($sort_by,$order_by)
                                         ->get();
@@ -67,10 +66,10 @@
                         @foreach ($inventory as $inv_item)
                             <tr>
                                 <td>{{title_case($inv_item->receipt_to_microlocation_id)}}</td>
-                                <td>{{title_case($inv_item->pre_sorting_date)}}</td>
-                                <td>{{title_case($inv_item->pre_sorting_weight)}}</td>
-                                <td>{{title_case($inv_item->presorted_material_name)}}</td>
-                                <td>{{title_case($inv_item->pre_sorting_user_id)}}</td>
+                                <td>{{title_case($inv_item->refined_date)}}</td>
+                                <td>{{title_case($inv_item->refined_weight)}}</td>
+                                <td>{{title_case($inv_item->material_name)}}</td>
+                                <td>{{title_case($inv_item->refined_user_id)}}</td>
                             </tr>
                         @endforeach
                     </table>

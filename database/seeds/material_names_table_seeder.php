@@ -11,7 +11,7 @@ class material_names_table_seeder extends Seeder
      */
     public function run()
     {
-    	$mat_names = ['Villa', 'Trikoo', 'Pellava', 'Puuvilla', 'Farkku', 'Elastiini', 'Polyesteri', 'Refined', 'Raw Waste'];
+    	$mat_names = ['Raw Waste', 'Refined', 'Villa', 'Trikoo', 'Pellava', 'Puuvilla', 'Farkku', 'Elastiini', 'Polyesteri'];
 		foreach ($mat_names as $mat) {
 			DB::table('material_names')->insert(['material_name' => $mat]);
 		}

@@ -68,7 +68,6 @@
                                         ->join('presorted_material','pre_sorting.presorted_material_id','=','presorted_material.presorted_material_id')
                                         ->join('users','pre_sorting.pre_sorting_user_id','=','users.user_id')
                                         ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
-                                        ->where('pre_sorting.pre_sorting_status_id','=','2')
                                         ->when($location, function ($query, $location) {
                                             return $query->where('inventory_receipt.receipt_to_microlocation_id', '=', $location);
                                         })

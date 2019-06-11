@@ -57,12 +57,12 @@ class company_controller extends Controller {
 		return view('pages.company.receipts')->with('company', $company);
 	}
 	
-	public function sorting_index(company $company) {
-		return view('pages.company.sorting')->with('company', $company);
+	public function pre_index(company $company) {
+		return view('pages.company.pre')->with('company', $company);
 	}
 	
-	public function sorted_index(company $company) {
-		return view('pages.company.sorted')->with('company', $company);
+	public function refined_index(company $company) {
+		return view('pages.company.refined')->with('company', $company);
 	}
 	
 	public function issues_index(company $company) {

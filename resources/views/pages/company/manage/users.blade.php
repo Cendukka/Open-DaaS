@@ -39,7 +39,7 @@
                         @endforeach
                     </table>
                     <br>
-                    <a href="adduser">+ Add user</a>
+                    <a href="./users/create">+ Add user</a>
                 </div>
             </div>
         </div>

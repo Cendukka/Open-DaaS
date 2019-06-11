@@ -28,7 +28,7 @@
                         @endphp
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{title_case($user->user_id)}}</td>
+                                <td><a href="users/{{$user->user_id}}/edit">{{title_case($user->user_id)}}</a></td>
                                 <td>{{title_case($user->user_microlocation_id)}}</td>
                                 <td>{{title_case($user->user_typename)}}</td>
                                 <td>{{title_case($user->last_name)}}</td>
@@ -39,7 +39,7 @@
                         @endforeach
                     </table>
                     <br>
-                    <a href="./users/create">+ Add user</a>
+                    <a href="users/create">+ Add user</a>
                 </div>
             </div>
         </div>

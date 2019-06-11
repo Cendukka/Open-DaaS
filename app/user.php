@@ -11,7 +11,7 @@ class user extends Model {
 	protected $primaryKey = "user_id";
 	protected $fillable = ['user_company_id','user_microlocation_id','user_type_id','last_name', 'first_name', 'username', 'password'];
 	
-	public function user_types() {
+	public function user_type() {
 		return $this->belongsTo(user_types::class,'user_type_id');
 	}
 	

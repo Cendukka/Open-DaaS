@@ -27,9 +27,10 @@ Route::get('companies/{company}/issues', 'company_controller@issues_index');
 
 
 #Company manage pages
-Route::resource('companies/{company}/manage/users', 'user_controller', ['only' => ['index', 'show', 'create']]);
+Route::resource('companies/{company}/manage/users', 'user_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 
 Route::post('companies/{company}/manage/users/users-store', 'user_controller@store');
+Route::post('companies/{company}/manage/users/{user}/users-update', 'user_controller@update');
 
 Route::get('companies/{company}/manage/microlocations', 'company_manage_controller@microlocations_index');
 

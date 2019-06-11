@@ -55,7 +55,7 @@ class user_controller extends Controller {
 		]);
 		$user->save();
 		
-		return redirect('/')->with('success', 'Stock has been added');
+		return redirect('/')->with('success', 'User has been added');
 	}
 	
 	/**
@@ -64,8 +64,7 @@ class user_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id) {
-		//
+	public function show(company $company,user $user) {
 	}
 	
 	/**
@@ -74,8 +73,8 @@ class user_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id) {
-		//
+	public function edit(company $company, user $user) {
+		return view('pages.company.manage.user')->with(['company' => $company, 'user' => $user]);
 	}
 	
 	/**
@@ -85,8 +84,30 @@ class user_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id) {
-		//
+	public function update(Request $request, company $company, user $user) {
+		$request->validate([
+			'user_type' => 'required|integer',
+			'company' => 'required|integer',
+			'microlocation' => 'required_unless:user_type_id,1,2|integer',
+			'first_name'=>'required|max:50',
+			'last_name'=> 'required|max:50',
+			'username'=> 'required|unique:users|max:50',
+			'password'=> 'required',
+		]);
+		
+		
+		$userNew = user::find($user->user_id);
+			$user->user_type_id = $request->get('user_type');
+			$user->user_company_id = $request->get('company');
+			$user->user_microlocation_id = $request->get('microlocation');
+			$user->last_name = $request->get('last_name');
+			$user->first_name = $request->get('first_name');
+			$user->username = $request->get('username');
+			$user->password = $request->get('password');
+			dd($userNew);
+		#$user->save();
+		
+		return redirect('/')->with('success', 'User has been updated');
 	}
 	
 	/**

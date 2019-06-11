@@ -23,7 +23,7 @@ class company_controller extends Controller {
 	}
 	
 	public function show(company $company) {
-		return view('pages.company.company')->with('company', $company);;
+		return view('pages.company.company')->with('company', $company);
 		
 		#$id = $company->company_id;
 		#return redirect('companies/' . $id . '/warehouse')->with('company', $company);

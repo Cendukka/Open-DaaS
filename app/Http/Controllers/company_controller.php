@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class company_controller extends Controller {
 	public function index() {
-		$allCompanies = DB::table('company')->get();
-		return view('pages.companies')->with('allCompanies', $allCompanies);
+		return view('pages.companies');
 	}
 	
 	public function create() {

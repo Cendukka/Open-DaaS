@@ -23,7 +23,7 @@ class user_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create(company $company) {
-		return view('pages.company.manage.adduser')->with('company', $company);
+		return view('pages.company.manage.user_add')->with('company', $company);
 	}
 	
 	/**
@@ -80,7 +80,7 @@ class user_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(company $company, user $user) {
-		return view('pages.company.manage.user')->with(['company' => $company, 'user' => $user]);
+		return view('pages.company.manage.user_edit')->with(['company' => $company, 'user' => $user]);
 	}
 	
 	/**

@@ -23,7 +23,7 @@ class microlocation_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create(company $company) {
-		return view('pages.company.manage.addmicrolocation')->with('company', $company);
+		return view('pages.company.manage.microlocation_create')->with('company', $company);
 	}
 	
 	/**
@@ -78,7 +78,7 @@ class microlocation_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(company $company, microlocation $microlocation) {
-		return view('pages.company.manage.microlocation')->with(['company' => $company, 'microlocation' => $microlocation]);
+		return view('pages.company.manage.microlocation_edit')->with(['company' => $company, 'microlocation' => $microlocation]);
 	}
 	
 	/**

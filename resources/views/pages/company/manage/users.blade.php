@@ -7,6 +7,11 @@
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
+                    @if (isset($message))
+                        <div class="alert">
+                            {{title_case($message)}}
+                        </div>
+                    @endif
                     <table>
                         <tr>
                             <th>ID</th>
@@ -21,6 +26,7 @@
                             $users = DB::table('users')
                                         ->where('user_company_id','=',$company->company_id)
                                         ->join('user_types', 'users.user_type_id', '=','user_types.user_type_id')
+                                        ->orderBy('user_id')
                                         ->orderBy('user_microlocation_id')
                                         ->orderBy('users.user_type_id')
                                         ->get();

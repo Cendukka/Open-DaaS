@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\user;
+use App\microlocation;
 
-class user_controller extends Controller {
+class microlocation_controller extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(company $company) {
-		return view('pages.company.manage.users')->with('company', $company);
+		return view('pages.company.manage.microlocations')->with('company', $company);
 	}
 	
 	/**
@@ -23,7 +23,7 @@ class user_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create(company $company) {
-		return view('pages.company.manage.adduser')->with('company', $company);
+		return view('pages.company.manage.addmicrolocation')->with('company', $company);
 	}
 	
 	/**
@@ -38,7 +38,7 @@ class user_controller extends Controller {
 		$request->validate([
 			'user_type' => 'required|integer',
 			'company' => 'required|integer',
-			'microlocation' => 'integer',
+			'microlocation' => 'required_unless:user_type_id,1,2|integer',
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
 			'username'=> 'required|unique:users|max:50',
@@ -57,7 +57,7 @@ class user_controller extends Controller {
 		]);
 		$user->save();
 		return redirect()->action(
-			'user_controller@index', ['company' => $company, 'messages' => 'User has been successfully added.']
+			'microlocation_controller@index', ['company' => $company, 'messages' => 'Microlocation has been successfully added.']
 		);
 	}
 	
@@ -69,7 +69,7 @@ class user_controller extends Controller {
 	 */
 	public function show(company $company,user $user) {
 		return redirect()->action(
-			'user_controller@index', ['company' => $company]
+			'microlocation_controller@index', ['company' => $company]
 		);
 	}
 	
@@ -80,7 +80,7 @@ class user_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(company $company, user $user) {
-		return view('pages.company.manage.user')->with(['company' => $company, 'user' => $user]);
+		return view('pages.company.manage.microlocation')->with(['company' => $company, 'user' => $user]);
 	}
 	
 	/**
@@ -96,7 +96,7 @@ class user_controller extends Controller {
 		$request->validate([
 			'user_type' => 'required|integer',
 			'company' => 'required|integer',
-			'microlocation' => 'integer',
+			'microlocation' => 'required_unless:user_type_id,1,2|integer',
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
 			'password'=> 'required',
@@ -115,7 +115,7 @@ class user_controller extends Controller {
 		
 		
 		
-		return redirect()->action('user_controller@index',['company' => $company])->with('message', 'User has been successfully updated.');
+		return redirect()->action('user_controller@index',['company' => $company])->with('message', 'Microlocation has been successfully updated.');
 	}
 	
 	/**

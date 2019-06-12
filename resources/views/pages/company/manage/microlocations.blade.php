@@ -25,7 +25,7 @@
                         @endphp
                         @foreach ($microlocations as $ml)
                             <tr>
-                                <td>{{title_case($ml->microlocation_id)}}</td>
+                                <td><a href="microlocations/{{$ml->microlocation_id}}/edit">{{title_case($ml->microlocation_id)}}</a></td>
                                 <td>{{title_case($ml->microlocation_typename)}}</td>
                                 <td>{{title_case($ml->microlocation_name)}}</td>
                                 <td>{{title_case($ml->microlocation_street_address)}}</td>
@@ -34,6 +34,8 @@
                             </tr>
                         @endforeach
                     </table>
+                    <br>
+                    <a href="microlocations/create">+ Add microlocation</a>
                 </div>
             </div>
         </div>

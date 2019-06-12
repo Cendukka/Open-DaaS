@@ -34,10 +34,10 @@
                             <div class="form-group">
                                 <label for="user_type">User Type: </label>
                                 <select name="user_type">
-                                    <option value="1">Superadmin</option>
-                                    <option value="2">Admin</option>
-                                    <option value="3">Manager</option>
-                                    <option value="4">User</option>
+                                    <option {{($user->user_type_id == 1 ? 'selected="selected"' : '')}} disabled value="1">Superadmin</option>
+                                    <option {{($user->user_type_id == 2 ? 'selected="selected"' : '')}} value="2">Admin</option>
+                                    <option {{($user->user_type_id == 3 ? 'selected="selected"' : '')}} value="3">Manager</option>
+                                    <option {{($user->user_type_id == 4 ? 'selected="selected"' : '')}} value="4">User</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -71,7 +71,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="username">Username: </label>
-                                <input type="text" class="form-control" name="username" value="{{$user->username}}"/>
+                                <input type="text" class="form-control" name="username" value="{{$user->username}}" readonly style="color:lightgray;"/>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password: </label>

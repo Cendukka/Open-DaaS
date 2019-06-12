@@ -32,7 +32,7 @@
                         <select name="location">
                             <option selected="selected" value=""></option>
                             @foreach ($microlocations as $ml)
-                                <option {{$ml->microlocation_id == $location ? 'selected="selected"' : ""}}value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
+                                <option {{$ml->microlocation_id == $location ? 'selected="selected"' : ""}} value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
                             @endforeach
                         </select><br>
                         From date:<br>
@@ -59,6 +59,9 @@
                             $inventory = DB::table('refined_sorting')
                                         ->join('inventory_receipt','refined_sorting.refined_receipt_id','=','inventory_receipt.receipt_id')
                                         ->join('material_names','refined_sorting.refined_material_id','=','material_names.material_id')
+                                        ->when($location, function ($query, $location) {
+                                            return $query->where('inventory_receipt.receipt_to_microlocation_id', '=', $location);
+                                        })
                                         ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
                                         ->whereBetween('receipt_date', [$from_date, $to_date])
                                         ->orderBy($sort_list[$sort_by],$order_by)

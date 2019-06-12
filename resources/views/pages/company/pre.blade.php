@@ -33,7 +33,7 @@
                         <select name="location">
                             <option selected="selected" value=""></option>
                             @foreach ($microlocations as $ml)
-                                <option {{$ml->microlocation_id == $location ? 'selected="selected"' : ""}}value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
+                                <option {{$ml->microlocation_id == $location ? 'selected="selected"' : ""}} value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
                             @endforeach
                         </select><br>
                         From date:<br>

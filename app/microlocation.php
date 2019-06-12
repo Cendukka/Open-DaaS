@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class microlocation extends Model {
 	public $incrementing = true;
-	protected $table = "microlocation";
+	public $timestamps = false;
+	protected $table = "microlocations";
 	protected $primaryKey = "microlocation_id";
 	protected $fillable = ['microlocation_company_id','microlocation_type_id','microlocation_name', 'microlocation_street_address', 'microlocation_postal_code', 'microlocation_city'];
 	

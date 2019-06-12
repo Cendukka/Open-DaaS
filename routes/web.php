@@ -33,8 +33,6 @@ Route::post('companies/{company}/manage/users/{user}/users-update', 'user_contro
 
 Route::resource('companies/{company}/manage/microlocations', 'microlocation_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/{company}/manage/microlocations/microlocations-store', 'microlocation_controller@store');
-Route::post('companies/{company}/manage/microlocations/{microlocation}/users-update', 'microlocation_controller@update');
-
-Route::get('companies/{company}/manage/microlocations', 'company_manage_controller@microlocations_index');
+Route::post('companies/{company}/manage/microlocations/{microlocation}/microlocations-update', 'microlocation_controller@update');
 
 

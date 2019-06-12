@@ -36,26 +36,24 @@ class microlocation_controller extends Controller {
 		# ADD MORE AUTHENTICATION HERE
 		
 		$request->validate([
-			'user_type' => 'required|integer',
 			'company' => 'required|integer',
-			'microlocation' => 'required_unless:user_type_id,1,2|integer',
-			'first_name'=>'required|max:50',
-			'last_name'=> 'required|max:50',
-			'username'=> 'required|unique:users|max:50',
-			'password'=> 'required',
+			'type' => 'required|integer',
+			'name' => '',
+			'address'=>'required|max:50',
+			'postal_code'=> 'required|min:5|max:5|digits_between:0,9',
+			'city'=> 'required|max:50',
 		]);
 		
 		
-		$user = new user([
-			'user_type_id' => $request->get('user_type'),
-			'user_company_id' => $request->get('company'),
-			'user_microlocation_id' => $request->get('microlocation'),
-			'last_name' => $request->get('last_name'),
-			'first_name' => $request->get('first_name'),
-			'username' => $request->get('username'),
-			'password' => $request->get('password'),
+		$ml = new microlocation([
+			'microlocation_company_id' => $request->get('company'),
+			'microlocation_type_id' => $request->get('type'),
+			'microlocation_name' => $request->get('name'),
+			'microlocation_street_address' => $request->get('address'),
+			'microlocation_postal_code' => $request->get('postal_code'),
+			'microlocation_city' => $request->get('city'),
 		]);
-		$user->save();
+		$ml->save();
 		return redirect()->action(
 			'microlocation_controller@index', ['company' => $company, 'messages' => 'Microlocation has been successfully added.']
 		);
@@ -79,8 +77,8 @@ class microlocation_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(company $company, user $user) {
-		return view('pages.company.manage.microlocation')->with(['company' => $company, 'user' => $user]);
+	public function edit(company $company, microlocation $microlocation) {
+		return view('pages.company.manage.microlocation')->with(['company' => $company, 'microlocation' => $microlocation]);
 	}
 	
 	/**
@@ -90,32 +88,30 @@ class microlocation_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, company $company, user $user) {
+	public function update(Request $request, company $company, microlocation $microlocation) {
 		# ADD MORE AUTHENTICATION HERE
 		
 		$request->validate([
-			'user_type' => 'required|integer',
 			'company' => 'required|integer',
-			'microlocation' => 'required_unless:user_type_id,1,2|integer',
-			'first_name'=>'required|max:50',
-			'last_name'=> 'required|max:50',
-			'password'=> 'required',
+			'type' => 'required|integer',
+			'name' => '',
+			'address'=>'required|max:50',
+			'postal_code'=> 'required|min:5|max:5|digits_between:0,9',
+			'city'=> 'required|max:50',
 		]);
 		
 		
-		$userNew = user::find($user->user_id);
+		$microlocationNew = microlocation::find($microlocation->microlocation_id);
 		
-		$userNew->user_type_id = $request->get('user_type');
-		$userNew->user_company_id = $request->get('company');
-		$userNew->user_microlocation_id = $request->get('microlocation');
-		$userNew->last_name = $request->get('last_name');
-		$userNew->first_name = $request->get('first_name');
-		$userNew->password = $request->get('password');
-		$userNew->save();
+		$microlocationNew->microlocation_company_id = $request->get('company');
+		$microlocationNew->microlocation_type_id = $request->get('type');
+		$microlocationNew->microlocation_name = $request->get('name');
+		$microlocationNew->microlocation_street_address = $request->get('address');
+		$microlocationNew->microlocation_postal_code = $request->get('postal_code');
+		$microlocationNew->microlocation_city = $request->get('city');
+		$microlocationNew->save();
 		
-		
-		
-		return redirect()->action('user_controller@index',['company' => $company])->with('message', 'Microlocation has been successfully updated.');
+		return redirect()->action('microlocation_controller@index',['company' => $company])->with('message', 'Microlocation has been successfully updated.');
 	}
 	
 	/**

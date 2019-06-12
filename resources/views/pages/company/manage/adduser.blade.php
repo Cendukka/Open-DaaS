@@ -65,6 +65,7 @@
                             <label for="password">Password: </label>
                             <input type="text" class="form-control" name="password" value="qwerty" readonly style="color:lightgray;">
                         </div>
+                        <br>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>

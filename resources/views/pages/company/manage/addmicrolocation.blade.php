@@ -16,18 +16,9 @@
                             </ul>
                         </div>
                     @endif
-                    <h4>Add User</h4>
-                    <form method="post" action="users-store">
+                    <h4>Add Microlocation</h4>
+                    <form method="post" action="microlocations-store">
                         @csrf
-                        <div class="form-group">
-                            <label for="user_type">User Type: </label>
-                            <select name="user_type">
-                                <option value="1">Superadmin</option>
-                                <option value="2">Admin</option>
-                                <option value="3">Manager</option>
-                                <option value="4">User</option>
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label for="company">Company: </label>
                             <select name="company">
@@ -35,36 +26,34 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="microlocation">Microlocation: </label>
-                            <select name="microlocation">
-                                <option selected="selected" value=""></option>
+                            <label for="type">Microlocation Type: </label>
+                            <select name="type">
                                 @php
-                                    $microlocations = DB::table('microlocations')
-                                                ->where('microlocation_company_id','=',$company->company_id)
-                                                ->get();
+                                    $types = DB::table('microlocation_types')->get();
                                 @endphp
-                                @foreach ($microlocations as $ml)
-                                    <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_city).', '.title_case($ml->microlocation_name)}}</option>
+                                @foreach ($types as $type)
+                                    <option value="{{$type->microlocation_type_id}}">{{title_case($type->microlocation_typename)}}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="first_name">First Name: </label>
-                            <input type="text" class="form-control" name="first_name"/>
+                            <label for="name">Microlocation Name: </label>
+                            <input type="text" class="form-control" name="name"/>
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Last Name: </label>
-                            <input type="text" class="form-control" name="last_name"/>
+                            <label for="address">Street Address: </label>
+                            <input type="text" class="form-control" name="address"/>
                         </div>
                         <div class="form-group">
-                            <label for="username">Username: </label>
-                            <input type="text" class="form-control" name="username"/>
+                            <label for="postal_code">Postal Code: </label>
+                            <input type="text" class="form-control" name="postal_code"/>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password: </label>
-                            <input type="text" class="form-control" name="password" value="qwerty" readonly style="color:lightgray;">
+                            <label for="password">City: </label>
+                            <input type="text" class="form-control" name="city" value="{{$company->company_city}}">
                         </div>
+                        <br>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>

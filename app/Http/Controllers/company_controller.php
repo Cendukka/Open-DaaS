@@ -29,7 +29,7 @@ class company_controller extends Controller {
 	}
 	
 	public function edit(company $company) {
-		//
+		return view('pages.company.manage.company')->with('company', $company);
 	}
 	
 	public function update(Request $request, company $company) {

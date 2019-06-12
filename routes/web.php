@@ -12,6 +12,8 @@ Route::resource('ewc', 'ewc_controller', ['only' => ['index', 'show']]);
 
 Route::resource('companies', 'company_controller', ['only' => ['index', 'show']]);
 
+
+
 # Company pages
 Route::get('companies/{company}/manage', 'company_controller@manage_index');
 
@@ -26,7 +28,10 @@ Route::get('companies/{company}/refined', 'company_controller@refined_index');
 Route::get('companies/{company}/issues', 'company_controller@issues_index');
 
 
+
 #Company manage pages
+Route::get('companies/{company}/manage/company', 'company_controller@edit');
+
 Route::resource('companies/{company}/manage/users', 'user_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/{company}/manage/users/users-store', 'user_controller@store');
 Route::post('companies/{company}/manage/users/{user}/users-update', 'user_controller@update');

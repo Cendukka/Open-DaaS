@@ -8,7 +8,7 @@ class company extends Model {
 	public $incrementing = true;
 	protected $table = "company";
 	protected $primaryKey = "company_id";
-	protected $fillable = ['name', 'street_address', 'postal_code', 'city'];
+	protected $fillable = ['company_name', 'company_street_address', 'company_postal_code', 'company_city'];
 	
 	public function microlocations() {
 		return $this->hasMany(microlocations::class, 'company_id');

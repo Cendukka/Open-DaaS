@@ -9,6 +9,22 @@ body {
     background: #fafafa;
 }
 
+.container {
+    width: 100% !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.panel-primary > .panel-heading {
+    color: #535353;
+    background-color: #f0f0f0;
+    border-color: #f0f0f0;
+}
+
+.panel-primary {
+    border-color: #f0f0f0;
+}
+
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;

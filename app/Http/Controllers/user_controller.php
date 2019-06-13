@@ -23,7 +23,7 @@ class user_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create(company $company) {
-		return view('pages.company.manage.user_add')->with('company', $company);
+		return view('pages.company.manage.user_create')->with('company', $company);
 	}
 	
 	/**
@@ -38,7 +38,7 @@ class user_controller extends Controller {
 		$request->validate([
 			'user_type' => 'required|integer',
 			'company' => 'required|integer',
-			'microlocation' => 'integer',
+			'microlocation' => 'nullable|integer',
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
 			'username'=> 'required|unique:users|max:50',
@@ -96,7 +96,7 @@ class user_controller extends Controller {
 		$request->validate([
 			'user_type' => 'required|integer',
 			'company' => 'required|integer',
-			'microlocation' => 'integer',
+			'microlocation' => 'nullable|integer',
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
 			'password'=> 'required',

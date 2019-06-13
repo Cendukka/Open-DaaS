@@ -7,31 +7,36 @@ use Illuminate\Database\Eloquent\Model;
 class inventory_receipt extends Model {
 	public $incrementing = true;
 	protected $table = "inventory_receipt";
-	protected $primaryKey = "inventory_receipt_id";
-	protected $fillable = ['distance_km', 'weight_kg', 'date'];
+	protected $primaryKey = "receipt_id";
+	protected $fillable = ['receipt_material_id','from_company_id','from_community_id','from_supplier_id','receipt_from_microlocation_id','receipt_to_microlocation_id',
+		'distance_km','receipt_weight','receipt_date','receipt_ewc_code','receipt_user_id'];
 	
-	public function ewc_codes() {
-		return $this->belongsTo(ewc_codes::class);
+	public function ewc_code() {
+		return $this->belongsTo(ewc_codes::class,'ewc_code','receipt_ewc_code');
 	}
 	
-	public function community() {
-		return $this->belongsTo(community::class);
+	public function from_community() {
+		return $this->belongsTo(community::class,'community_id','from_community_id');
 	}
 	
-	public function company() {
-		return $this->belongsTo(company::class);
+	public function from_company() {
+		return $this->belongsTo(company::class,'company_id','from_company_id');
 	}
 	
-	public function users() {
-		return $this->belongsTo(users::class);
+	public function from_supplier() {
+		return $this->belongsTo(supplier::class,'supplier_id','from_supplier_id');
 	}
 	
-	public function supplier() {
-		return $this->belongsTo(supplier::class);
+	public function from_microlocation() {
+		return $this->belongsTo(microlocations::class,'microlocation_id','from_microlocation_id_id');
 	}
 	
-	public function microlocations() {
-		return $this->belongsTo(microlocations::class);
+	public function to_microlocation() {
+		return $this->belongsTo(microlocations::class,'microlocation_id','to_microlocation_id_id');
+	}
+	
+	public function user() {
+		return $this->belongsTo(users::class,'user_id','receipt_user_id');
 	}
 	
 	public function pre_sorting() {

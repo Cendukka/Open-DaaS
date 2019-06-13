@@ -96,7 +96,10 @@ class materials_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id) {
-		//
+	public function destroy(material $material) {
+		$mat = material::find($material->material_id);
+		$mat->delete();
+		
+		return redirect()->action('materials_controller@index');
 	}
 }

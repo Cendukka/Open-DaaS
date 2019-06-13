@@ -22,4 +22,8 @@ class material extends Model {
 	public function detail() {
 		return $this->hasMany(inventory_issue_details::class,'detail_material_id');
 	}
+	
+	public function refined() {
+		return $this->hasMany(refined_sorting::class,'refined_material_id');
+	}
 }

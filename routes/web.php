@@ -29,6 +29,7 @@ Route::get('companies/{company}/issues', 'company_controller@issues_index');
 Route::resource('materials', 'materials_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('materials/materials-store', 'materials_controller@store');
 Route::post('materials/{material}/materials-update', 'materials_controller@update');
+Route::post('materials/{material}/materials-destroy', 'materials_controller@destroy');
 
 
 Route::resource('companies', 'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);

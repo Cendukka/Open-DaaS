@@ -8,7 +8,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <ul class="nav">
-                        <li><a href="company">Company</a></li>
+                        <li><a href="{{action('company_controller@edit',['company' => $company])}}">Company</a></li>
                         <li><a href="users">Users</a></li>
                         <li><a href="microlocations">Microlocations</a></li>
                         <li><a href="receipts">Receipts</a></li>

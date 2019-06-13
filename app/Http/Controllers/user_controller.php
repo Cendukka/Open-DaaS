@@ -57,7 +57,7 @@ class user_controller extends Controller {
 		]);
 		$user->save();
 		return redirect()->action(
-			'user_controller@index', ['company' => $company, 'messages' => 'User has been successfully added.']
+			'user_controller@index', ['company' => $company]
 		);
 	}
 	
@@ -115,7 +115,7 @@ class user_controller extends Controller {
 		
 		
 		
-		return redirect()->action('user_controller@index',['company' => $company])->with('message', 'User has been successfully updated.');
+		return redirect()->action('user_controller@index',['company' => $company]);
 	}
 	
 	/**

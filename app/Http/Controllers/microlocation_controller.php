@@ -38,8 +38,8 @@ class microlocation_controller extends Controller {
 		$request->validate([
 			'company' => 'required|integer',
 			'type' => 'required|integer',
-			'name' => '',
-			'address'=>'required|max:50',
+			'name' => 'max:191',
+			'address'=>'required|max:191',
 			'postal_code'=> 'required|min:5|max:5|digits_between:0,9',
 			'city'=> 'required|max:50',
 		]);
@@ -55,7 +55,7 @@ class microlocation_controller extends Controller {
 		]);
 		$ml->save();
 		return redirect()->action(
-			'microlocation_controller@index', ['company' => $company, 'messages' => 'Microlocation has been successfully added.']
+			'microlocation_controller@index', ['company' => $company]
 		);
 	}
 	
@@ -94,8 +94,8 @@ class microlocation_controller extends Controller {
 		$request->validate([
 			'company' => 'required|integer',
 			'type' => 'required|integer',
-			'name' => '',
-			'address'=>'required|max:50',
+			'name' => 'max:191',
+			'address'=>'required|max:191',
 			'postal_code'=> 'required|min:5|max:5|digits_between:0,9',
 			'city'=> 'required|max:50',
 		]);
@@ -111,7 +111,7 @@ class microlocation_controller extends Controller {
 		$microlocationNew->microlocation_city = $request->get('city');
 		$microlocationNew->save();
 		
-		return redirect()->action('microlocation_controller@index',['company' => $company])->with('message', 'Microlocation has been successfully updated.');
+		return redirect()->action('microlocation_controller@index',['company' => $company]);
 	}
 	
 	/**

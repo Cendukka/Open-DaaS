@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class company extends Model {
 	public $incrementing = true;
+	public $timestamps = false;
 	protected $table = "company";
 	protected $primaryKey = "company_id";
 	protected $fillable = ['company_name', 'company_street_address', 'company_postal_code', 'company_city'];

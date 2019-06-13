@@ -41,46 +41,49 @@
                         <input type="text" name="to_date" value={{$to_date}}>
                         <input type="submit" value="Tarkenna Hakua">
                     </form>
-                    <table>
-                        <tr>
-                            <th><a href="?{{$get_string}}&sort_by=0&order={{$order_by == 'asc' && $sort_by == 0 ? 'desc' : 'asc'}}">Location ID</a></th>
-                            <th><a href="?{{$get_string}}&sort_by=1&order={{$order_by == 'asc' && $sort_by == 1 ? 'desc' : 'asc'}}">Date</a></th>
-                            <th><a href="?{{$get_string}}&sort_by=2&order={{$order_by == 'asc' && $sort_by == 2 ? 'desc' : 'asc'}}">Weight (KG)</a></th>
-                            <th><a href="?{{$get_string}}&sort_by=3&order={{$order_by == 'asc' && $sort_by == 3 ? 'desc' : 'asc'}}">Material</a></th>
-                            <th><a href="?{{$get_string}}&sort_by=4&order={{$order_by == 'asc' && $sort_by == 4 ? 'desc' : 'asc'}}">User ID</a></th>
-                            <th>Material Origin</th>
-                        </tr>
-                        @php
-
-                            $microlocation_ids = [];
-                            foreach ($microlocations as $microlocation){
-                                array_push($microlocation_ids, $microlocation->microlocation_id);
-                            }
-                            $inventory = DB::table('refined_sorting')
-                                        ->join('inventory_receipt','refined_sorting.refined_receipt_id','=','inventory_receipt.receipt_id')
-                                        ->join('material_names','refined_sorting.refined_material_id','=','material_names.material_id')
-                                        ->when($location, function ($query, $location) {
-                                            return $query->where('inventory_receipt.receipt_to_microlocation_id', '=', $location);
-                                        })
-                                        ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
-                                        ->whereBetween('receipt_date', [$from_date, $to_date])
-                                        ->orderBy($sort_list[$sort_by],$order_by)
-                                        ->orderBy($sort_list[$sort_by == 0],$order_by) # Sort secondary by date if we are sorting by id, else by id.
-                                        ->orderBy($sort_list[1]) # Sort by date lastly.
-                                        ->get();
-                        @endphp
-                        @foreach ($inventory as $inv_item)
+                    @php
+                        $microlocation_ids = [];
+                        foreach ($microlocations as $microlocation){
+                            array_push($microlocation_ids, $microlocation->microlocation_id);
+                        }
+                        $inventory = DB::table('refined_sorting')
+                                    ->join('inventory_receipt','refined_sorting.refined_receipt_id','=','inventory_receipt.receipt_id')
+                                    ->join('material_names','refined_sorting.refined_material_id','=','material_names.material_id')
+                                    ->when($location, function ($query, $location) {
+                                        return $query->where('inventory_receipt.receipt_to_microlocation_id', '=', $location);
+                                    })
+                                    ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
+                                    ->whereBetween('receipt_date', [$from_date, $to_date])
+                                    ->orderBy($sort_list[$sort_by],$order_by)
+                                    ->orderBy($sort_list[$sort_by == 0],$order_by) # Sort secondary by date if we are sorting by id, else by id.
+                                    ->orderBy($sort_list[1]) # Sort by date lastly.
+                                    ->get();
+                    @endphp
+                    @if (count($inventory)>0)
+                        <table>
                             <tr>
-                                <td>{{title_case($inv_item->receipt_to_microlocation_id)}}</td>
-                                <td>{{title_case($inv_item->refined_date)}}</td>
-                                <td>{{title_case($inv_item->refined_weight)}}</td>
-                                <td>{{title_case($inv_item->material_name)}}</td>
-                                <td>{{title_case($inv_item->refined_user_id)}}</td>
-                                <td>{{title_case($inv_item->pre_sorting_id ?: $inv_item->refined_receipt_id)}}</td>
+                                <th><a href="?{{$get_string}}&sort_by=0&order={{$order_by == 'asc' && $sort_by == 0 ? 'desc' : 'asc'}}">Location ID</a></th>
+                                <th><a href="?{{$get_string}}&sort_by=1&order={{$order_by == 'asc' && $sort_by == 1 ? 'desc' : 'asc'}}">Date</a></th>
+                                <th><a href="?{{$get_string}}&sort_by=2&order={{$order_by == 'asc' && $sort_by == 2 ? 'desc' : 'asc'}}">Weight (KG)</a></th>
+                                <th><a href="?{{$get_string}}&sort_by=3&order={{$order_by == 'asc' && $sort_by == 3 ? 'desc' : 'asc'}}">Material</a></th>
+                                <th><a href="?{{$get_string}}&sort_by=4&order={{$order_by == 'asc' && $sort_by == 4 ? 'desc' : 'asc'}}">User ID</a></th>
+                                <th>Material Origin</th>
                             </tr>
-                        @endforeach
-                    </table>
 
+                            @foreach ($inventory as $inv_item)
+                                <tr>
+                                    <td>{{title_case($inv_item->receipt_to_microlocation_id)}}</td>
+                                    <td>{{title_case($inv_item->refined_date)}}</td>
+                                    <td>{{title_case($inv_item->refined_weight)}}</td>
+                                    <td>{{title_case($inv_item->material_name)}}</td>
+                                    <td>{{title_case($inv_item->refined_user_id)}}</td>
+                                    <td>{{title_case($inv_item->pre_sorting_id ?: $inv_item->refined_receipt_id)}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    @else
+                        <h4>Unable to find any records</h4>
+                    @endif
                 </div>
             </div>
         </div>

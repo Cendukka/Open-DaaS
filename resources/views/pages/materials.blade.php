@@ -13,7 +13,7 @@
                         @endphp
                         @foreach ($materials as $material)
                             <tr>
-                                <td><a href="{{$material->material_id}}">{{title_case($material->material_name)}}</a></td>
+                                <td><a href="/materials/{{$material->material_id}}/edit">{{title_case($material->material_name)}}</a></td>
                             </tr>
                         @endforeach
                     </table>

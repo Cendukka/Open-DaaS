@@ -23,7 +23,7 @@ class materials_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create(material $material) {
-		return view('pages.materials.materials_create');
+		return view('pages.company.manage.materials_create');
 	}
 	
 	/**
@@ -32,31 +32,19 @@ class materials_controller extends Controller {
 	 * @param \Illuminate\Http\Request $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request, material $material) {
+	public function store(Request $request) {
 		# ADD MORE AUTHENTICATION HERE
 		
-		#$request->validate([
-		#	'company' => 'required|integer',
-		#	'type' => 'required|integer',
-		#	'name' => 'max:191',
-		#	'address'=>'required|max:191',
-		#	'postal_code'=> 'required|min:5|max:5|digits_between:0,9',
-		#	'city'=> 'required|max:50',
-		#]);
-		#
-		#
-		#$ml = new microlocation([
-		#	'microlocation_company_id' => $request->get('company'),
-		#	'microlocation_type_id' => $request->get('type'),
-		#	'microlocation_name' => $request->get('name'),
-		#	'microlocation_street_address' => $request->get('address'),
-		#	'microlocation_postal_code' => $request->get('postal_code'),
-		#	'microlocation_city' => $request->get('city'),
-		#]);
-		#$ml->save();
-		#return redirect()->action(
-		#	'microlocation_controller@index', ['company' => $company]
-		#);
+		$request->validate([
+			'name' => 'max:50',
+		]);
+		
+		
+		$material = new material([
+			'material_name' => $request->get('name'),
+		]);
+		$material->save();
+		return redirect()->action('materials_controller@index');
 	}
 	
 	/**
@@ -66,7 +54,7 @@ class materials_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show(material $material) {
-		return view('pages.materials_edit')->with('material',$material);
+		return redirect()->action('materials_controller@index');
 	}
 	
 	/**
@@ -75,9 +63,9 @@ class materials_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	#public function edit(company $company, microlocation $microlocation) {
-	#	return view('pages.company.manage.microlocation_edit')->with(['company' => $company, 'microlocation' => $microlocation]);
-	#}
+	public function edit(material $material) {
+		return view('pages.company.manage.materials_edit')->with('material',$material);
+	}
 	
 	/**
 	 * Update the specified resource in storage.
@@ -86,30 +74,20 @@ class materials_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, company $company, microlocation $microlocation) {
+	public function update(Request $request, material $material) {
 		# ADD MORE AUTHENTICATION HERE
 		
-		#$request->validate([
-		#	'company' => 'required|integer',
-		#	'type' => 'required|integer',
-		#	'name' => 'max:191',
-		#	'address'=>'required|max:191',
-		#	'postal_code'=> 'required|min:5|max:5|digits_between:0,9',
-		#	'city'=> 'required|max:50',
-		#]);
-		#
-		#
-		#$microlocationNew = microlocation::find($microlocation->microlocation_id);
-		#
-		#$microlocationNew->microlocation_company_id = $request->get('company');
-		#$microlocationNew->microlocation_type_id = $request->get('type');
-		#$microlocationNew->microlocation_name = $request->get('name');
-		#$microlocationNew->microlocation_street_address = $request->get('address');
-		#$microlocationNew->microlocation_postal_code = $request->get('postal_code');
-		#$microlocationNew->microlocation_city = $request->get('city');
-		#$microlocationNew->save();
-		#
-		#return redirect()->action('microlocation_controller@index',['company' => $company]);
+		$request->validate([
+			'name' => 'max:50',
+		]);
+		
+		
+		$materialNew = material::find($material->material_id);
+		
+		$materialNew->material_name = $request->get('name');
+		$materialNew->save();
+		
+		return redirect()->action('materials_controller@index');
 	}
 	
 	/**

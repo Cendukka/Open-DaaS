@@ -28,8 +28,8 @@
                                 <th>ID</th>
                                 @php
                                     $material_names = DB::table('inventory')->distinct()
-                                                        ->select('material_names.material_id','material_names.material_name')
                                                         ->join('material_names', 'inventory.inventory_material_id','=','material_names.material_id')
+                                                        ->select('material_names.material_id','material_names.material_name')
                                                         ->get();
                                 @endphp
                                 @foreach ($material_names as $material)

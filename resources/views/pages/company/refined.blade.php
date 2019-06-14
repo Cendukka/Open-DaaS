@@ -53,7 +53,7 @@
                                         return $query->where('inventory_receipt.receipt_to_microlocation_id', '=', $location);
                                     })
                                     ->whereIn('inventory_receipt.receipt_to_microlocation_id', $microlocation_ids)
-                                    ->whereBetween('receipt_date', [$from_date, $to_date])
+                                    ->whereBetween('refined_date', [$from_date, $to_date])
                                     ->orderBy($sort_list[$sort_by],$order_by)
                                     ->orderBy($sort_list[$sort_by == 0],$order_by) # Sort secondary by date if we are sorting by id, else by id.
                                     ->orderBy($sort_list[1]) # Sort by date lastly.

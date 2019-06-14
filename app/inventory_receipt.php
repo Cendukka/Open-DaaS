@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class inventory_receipt extends Model {
 	public $incrementing = true;
+	public $timestamps = false;
 	protected $table = "inventory_receipt";
 	protected $primaryKey = "receipt_id";
 	protected $fillable = ['receipt_material_id','from_company_id','from_community_id','from_supplier_id','receipt_from_microlocation_id','receipt_to_microlocation_id',

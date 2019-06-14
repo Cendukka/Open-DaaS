@@ -11,24 +11,20 @@
                         $microlocations = DB::table('microlocations')
                                             ->where('microlocation_company_id','=',$company->company_id)
                                             ->get();
-
-                        $inventory = [];
-                        foreach($microlocations as $microlocation){
-                            array_push($inventory, $microlocation->microlocation_id =
-                                DB::table('inventory')
-                                    ->where('inventory.inventory_microlocation_id', '=', $microlocation->microlocation_id)
-                                    ->orderBy('inventory.inventory_microlocation_id')
-                                    ->orderBy('inventory.inventory_material_id')
-                                    ->get());
+                        $microlocation_ids = [];
+                        foreach ($microlocations as $microlocation){
+                            array_push($microlocation_ids, $microlocation->microlocation_id);
                         }
+
                     @endphp
-                    @if (count($inventory)>0)
+                    @if (count($microlocation_ids)>0)
                         <table>
                             <tr>
                                 <th>ID</th>
                                 @php
                                     $material_names = DB::table('inventory')->distinct()
                                                         ->join('material_names', 'inventory.inventory_material_id','=','material_names.material_id')
+                                                        ->whereIn('inventory.inventory_microlocation_id', $microlocation_ids)
                                                         ->select('material_names.material_id','material_names.material_name')
                                                         ->get();
                                 @endphp
@@ -36,17 +32,27 @@
                                     <th>{{title_case($material->material_name)}}</th>
                                 @endforeach
                             </tr>
-                            @foreach ($inventory as $inv_item)
+                            @foreach ($microlocations as $ml)
                                 <tr>
-                                    <td>{{title_case($inv_item[0]->inventory_microlocation_id)}}</td>
-                                    @foreach ($inv_item as $inv)
-                                        <td>{{title_case($inv->inventory_weight)}}</td>
-                                    @endforeach
+                                    @php
+                                        $inventory = DB::table('inventory')
+                                                    ->where('inventory.inventory_microlocation_id', $ml->microlocation_id)
+                                                    ->orderBy('inventory.inventory_material_id')
+                                                    ->get();
+                                    @endphp
+                                    @if (count($inventory)>0)
+                                        <td>{{title_case($inventory[0]->inventory_microlocation_id)}}</td>
+                                        @foreach ($inventory as $inv)
+                                            <td>{{title_case($inv->inventory_weight)}}</td>
+                                        @endforeach
+                                    @else
+                                        <td>No records found</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </table>
                     @else
-                        <h4>The warehouse is empty</h4>
+                        <h4>No microlocations found</h4>
                     @endif
 
                 </div>

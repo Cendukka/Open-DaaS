@@ -6,9 +6,6 @@
                 </div>
 
                 <ul class="list-unstyled components">
-          
-                  
-
                   
                     <li>
                         <a href="#">Oma toimipiste</a>
@@ -31,6 +28,7 @@
             </nav>
 
             <!-- Page Content Holder -->
+
             <div id="content">
 
                 <nav class="navbar navbar-default">
@@ -51,10 +49,14 @@
                             </ul>
                         </div>
                     </div>
+                
                 </nav>
+                
+                   <div id="main" class="column">
+      				@yield('content')
+   					</div>
 
-                <h2>Collapsible Sidebar Using Bootstrap 3</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>     
+                   
                 
             </div>
         </div>

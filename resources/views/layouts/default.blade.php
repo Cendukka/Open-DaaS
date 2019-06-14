@@ -8,9 +8,7 @@
    <header class="column">
       @include('includes.header')
    </header>
-   <div id="main" class="column">
-      @yield('content')
-   </div>
+
    <footer class="row">
        @include('includes.footer')
    </footer>

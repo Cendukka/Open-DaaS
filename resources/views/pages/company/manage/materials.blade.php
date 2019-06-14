@@ -4,6 +4,15 @@
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <table>
                         <tr>
                             <th>Material Name</th>
@@ -13,12 +22,12 @@
                         @endphp
                         @foreach ($materials as $material)
                             <tr>
-                                <td><a href="/materials/{{$material->material_id}}/edit">{{title_case($material->material_name)}}</a></td>
+                                <td><a href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}</a></td>
                             </tr>
                         @endforeach
                     </table>
                     <br>
-                    <a href="create">+ Add Material</a>
+                    <a href="{{url('/materials/create')}}">+ Add Material</a>
                 </div>
             </div>
         </div>

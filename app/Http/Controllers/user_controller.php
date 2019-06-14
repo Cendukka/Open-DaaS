@@ -56,9 +56,7 @@ class user_controller extends Controller {
 			'password' => $request->get('password'),
 		]);
 		$user->save();
-		return redirect()->action(
-			'user_controller@index', ['company' => $company]
-		);
+		return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['User successfully created.']);
 	}
 	
 	/**
@@ -67,10 +65,8 @@ class user_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(company $company,user $user) {
-		return redirect()->action(
-			'user_controller@index', ['company' => $company]
-		);
+	public function show(company $company, user $user) {
+		return redirect()->action('user_controller@index', ['company' => $company]);
 	}
 	
 	/**
@@ -115,7 +111,7 @@ class user_controller extends Controller {
 		
 		
 		
-		return redirect()->action('user_controller@index',['company' => $company]);
+		return redirect()->action('user_controller@index',['company' => $company])->withErrors(['User successfully updated.']);
 	}
 	
 	/**

@@ -8,11 +8,11 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <ul class="nav">
-                        <li><a href="{{action('company_controller@edit',['company' => $company])}}">Company</a></li>
-                        <li><a href="users">Users</a></li>
-                        <li><a href="microlocations">Microlocations</a></li>
-                        <li><a href="receipts">Receipts</a></li>
-                        <li><a href="issues">Issues</a></li>
+                        <li><a href="{{url(action('company_controller@edit',['company' => $company]))}}">Company</a></li>
+                        <li><a href="{{url(action('user_controller@index',['company' => $company]))}}">Users</a></li>
+                        <li><a href="{{url(action('microlocation_controller@index',['company' => $company]))}}">Microlocations</a></li>
+                        <li><a href="{{url('/companies/'.$company->company_id.'/receipts')}}">Receipts</a></li>
+                        <li><a href="{{url('/companies/'.$company->company_id.'/issues')}}">Issues</a></li>
                     </ul>
                 </div>
             </div>

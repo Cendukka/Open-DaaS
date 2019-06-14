@@ -14,7 +14,7 @@ class materials_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(material $material) {
-		return view('pages.materials');
+		return view('pages.company.manage.materials');
 	}
 	
 	/**
@@ -36,7 +36,7 @@ class materials_controller extends Controller {
 		# ADD MORE AUTHENTICATION HERE
 		
 		$request->validate([
-			'name' => 'max:50',
+			'name' => 'required|max:50',
 		]);
 		
 		
@@ -44,7 +44,7 @@ class materials_controller extends Controller {
 			'material_name' => $request->get('name'),
 		]);
 		$material->save();
-		return redirect()->action('materials_controller@index');
+		return redirect()->action('materials_controller@index')->withErrors(['Material successfully created.']);
 	}
 	
 	/**
@@ -78,7 +78,7 @@ class materials_controller extends Controller {
 		# ADD MORE AUTHENTICATION HERE
 		
 		$request->validate([
-			'name' => 'max:50',
+			'name' => 'required|max:50',
 		]);
 		
 		
@@ -87,7 +87,7 @@ class materials_controller extends Controller {
 		$materialNew->material_name = $request->get('name');
 		$materialNew->save();
 		
-		return redirect()->action('materials_controller@index');
+		return redirect()->action('materials_controller@index')->withErrors(['Material successfully updated.']);
 	}
 	
 	/**
@@ -100,6 +100,6 @@ class materials_controller extends Controller {
 		$mat = material::find($material->material_id);
 		$mat->delete();
 		
-		return redirect()->action('materials_controller@index');
+		return redirect()->action('materials_controller@index')->withErrors(['Material successfully deleted.']);
 	}
 }

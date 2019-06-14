@@ -54,9 +54,7 @@ class microlocation_controller extends Controller {
 			'microlocation_city' => $request->get('city'),
 		]);
 		$ml->save();
-		return redirect()->action(
-			'microlocation_controller@index', ['company' => $company]
-		);
+		return redirect()->action('microlocation_controller@index', ['company' => $company])->withErrors(['Microlocation successfully created.']);
 	}
 	
 	/**
@@ -66,9 +64,7 @@ class microlocation_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show(company $company,user $user) {
-		return redirect()->action(
-			'microlocation_controller@index', ['company' => $company]
-		);
+		return redirect()->action('microlocation_controller@index', ['company' => $company]);
 	}
 	
 	/**
@@ -111,7 +107,7 @@ class microlocation_controller extends Controller {
 		$microlocationNew->microlocation_city = $request->get('city');
 		$microlocationNew->save();
 		
-		return redirect()->action('microlocation_controller@index',['company' => $company]);
+		return redirect()->action('microlocation_controller@index',['company' => $company])->withErrors(['Microlocation successfully updated.']);
 	}
 	
 	/**

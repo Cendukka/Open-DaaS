@@ -7,6 +7,15 @@
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <table>
                         <tr>
                             <th>ID</th>
@@ -25,7 +34,7 @@
                         @endphp
                         @foreach ($microlocations as $ml)
                             <tr>
-                                <td><a href="microlocations/{{$ml->microlocation_id}}/edit">{{title_case($ml->microlocation_id)}}</a></td>
+                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}">{{title_case($ml->microlocation_id)}}</a></td>
                                 <td>{{title_case($ml->microlocation_typename)}}</td>
                                 <td>{{title_case($ml->microlocation_name)}}</td>
                                 <td>{{title_case($ml->microlocation_street_address)}}</td>
@@ -35,7 +44,7 @@
                         @endforeach
                     </table>
                     <br>
-                    <a href="microlocations/create">+ Add microlocation</a>
+                    <a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/create')}}">+ Add microlocation</a>
                 </div>
             </div>
         </div>

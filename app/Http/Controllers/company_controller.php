@@ -33,9 +33,7 @@ class company_controller extends Controller {
 			'company_city' => $request->get('city'),
 		]);
 		$company->save();
-		return redirect()->action(
-			'company_controller@show', ['company' => $company]
-		);
+		return redirect()->action('company_controller@show', ['company' => $company])->withErrors(['Company successfully created.']);
 	}
 	
 	public function show(company $company) {
@@ -66,7 +64,7 @@ class company_controller extends Controller {
 		$companyNew->company_city = $request->get('city');
 		$companyNew->save();
 		
-		return redirect()->action('company_controller@manage_index',['company' => $company]);
+		return redirect()->action('company_controller@manage_index',['company' => $company])->withErrors(['Company successfully updated.']);
 	}
 	
 	public function destroy(company $company) {

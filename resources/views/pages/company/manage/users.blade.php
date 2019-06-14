@@ -7,9 +7,13 @@
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    @if (isset($message))
-                        <div class="alert">
-                            {{title_case($message)}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
                     <table>
@@ -34,7 +38,7 @@
                         @endphp
                         @foreach ($users as $user)
                             <tr>
-                                <td><a href="users/{{$user->user_id}}/edit">{{title_case($user->user_id)}}</a></td>
+                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}">{{title_case($user->user_id)}}</a></td>
                                 <td>{{title_case($user->user_microlocation_id)}}</td>
                                 <td>{{title_case($user->user_typename)}}</td>
                                 <td>{{title_case($user->last_name)}}</td>
@@ -45,7 +49,7 @@
                         @endforeach
                     </table>
                     <br>
-                    <a href="users/create">+ Add user</a>
+                    <a href="{{url('/companies/'.$company->company_id.'/manage/users/create')}}">+ Add user</a>
                 </div>
             </div>
         </div>

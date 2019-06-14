@@ -80,6 +80,20 @@
                                     <td>{{title_case($inv_item->pre_sorting_id ?: $inv_item->refined_receipt_id)}}</td>
                                 </tr>
                             @endforeach
+                            @php
+                                $totalWeight = 0;
+                                foreach ($inventory as $inv_item){
+                                    $totalWeight += $inv_item->refined_weight;
+                                }
+                            @endphp
+                            <tr>
+                                <td></td>
+                                <td>Total:</td>
+                                <td>{{$totalWeight}}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         </table>
                     @else
                         <h4>Unable to find any records</h4>

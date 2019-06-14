@@ -60,7 +60,6 @@
                                     ->orderBy($sort_list[$sort_by == 0],$order_by) # Sort secondary by date if we are sorting by id, else by id.
                                     ->orderBy($sort_list[1]) # Sort by date lastly.
                                     ->get();
-
                     @endphp
                     @if (count($inventory)>0)
                         <table>
@@ -83,6 +82,20 @@
                                     <td>{{title_case($inv_item->receipt_id)}}</td>
                                 </tr>
                             @endforeach
+                            @php
+                                $totalWeight = 0;
+                                foreach ($inventory as $inv_item){
+                                    $totalWeight += $inv_item->pre_sorting_weight;
+                                }
+                            @endphp
+                            <tr>
+                                <td></td>
+                                <td>Total:</td>
+                                <td>{{$totalWeight}}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         </table>
                     @else
                         <h4>Unable to find any records</h4>

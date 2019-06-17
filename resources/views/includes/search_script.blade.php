@@ -4,7 +4,7 @@
         $value=$(this).val();
         $.ajax({
             type : 'get',
-            url : '{{URL::to($_SERVER['REQUEST_URI'].'/search')}}',
+            url : '{{URL::to(trim($_SERVER['REQUEST_URI'],'/').'/search')}}',
             data:{'search':$value},
             success:function(data){
                 $('tbody').html(data);

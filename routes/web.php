@@ -37,6 +37,7 @@ Route::get('ewc/search','ewc_controller@search');
 Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
 
 Route::get('companies/{company}/receipts', 'company_controller@receipts_index');
+Route::get('companies/{company}/receipts/search','receipt_controller@search');
 
 Route::get('companies/{company}/pre', 'company_controller@pre_index');
 

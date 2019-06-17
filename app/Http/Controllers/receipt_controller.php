@@ -124,4 +124,40 @@ class receipt_controller extends Controller {
 	public function destroy($id) {
 		//
 	}
+	
+	public function search(Request $request, company $company){
+		if($request->ajax()){
+			$microlocations = DB::table('microlocations')
+							->where('microlocation_company_id','=',$company->company_id)
+							->get();
+			$microlocation_ids = [];
+			foreach ($microlocations as $microlocation){
+				array_push($microlocation_ids, $microlocation->microlocation_id);
+			}
+			$output="";
+			$result=DB::table('inventory_receipt')
+					->whereIn('receipt_to_microlocation_id', $microlocation_ids)
+					->where('receipt_to_microlocation_id','LIKE','%'.$request->search."%")
+					->join('material_names','receipt_material_id','=','material_id')
+					->get();
+			if($result){
+				foreach ($result as $key => $value){
+					$fromid =  ($value->from_company_id ? 'Company '.$value->from_company_id :
+								($value->from_community_id ? 'Community '.$value->from_community_id :
+								($value->from_supplier_id ? 'Supplier '.$value->from_supplier_id :
+								'Microlocation '.$value->receipt_from_microlocation_id)));
+					$output.='<tr>'.
+						'<td>'.$value->receipt_to_microlocation_id.'</td>'.
+						'<td>'.$fromid.'</td>'.
+						'<td>'.$value->receipt_date.'</td>'.
+						'<td>'.$value->material_name.'</td>'.
+						'<td>'.$value->receipt_weight.'</td>'.
+						'<td>'.$value->distance_km.'</td>'.
+						'<td>'.$value->receipt_ewc_code.'</td>'.
+						'</tr>';
+				}
+				return Response($output);
+			}
+		}
+	}
 }

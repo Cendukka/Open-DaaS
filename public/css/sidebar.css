@@ -205,17 +205,18 @@ a.logout:hover {
 #toTop {
   display: none;
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: 5px;
+  right: 5px;
   z-index: 99;
   border: none;
   outline: none;
   color: #686868;
+  font-size: 18px;
   background-color: #efe111;
   opacity: 0.5;
   cursor: pointer;
-  padding: 10px;
-  border-radius: 4px;
+  padding: 7px;
+  border-radius: 6px;
 }
 
 #toTop:hover {

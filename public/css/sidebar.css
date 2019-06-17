@@ -64,24 +64,20 @@ a, a:hover, a:focus {
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
-.wrapper {
-    display: flex;
-    align-items: stretch;
-    perspective: 1500px;
-}
-
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
     background: #c5c8cc;
     color: #535353;
-    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-    transform-origin: bottom left;
+    transition: all 0.3s;
 }
 
 #sidebar.active {
     margin-left: -250px;
-    transform: rotateY(100deg);
 }
 
 #sidebar .sidebar-header {
@@ -153,7 +149,7 @@ ul.CTAs a {
 }
 
 .list-unstyled:focus {
-	border-right: 10px solid #efe111;
+    border-right: 10px solid #efe111;
 }
 
 a.back, a.back:hover {
@@ -175,57 +171,56 @@ a.logout:hover {
 }
 
 .info-btn:hover {
-	border-bottom: 5px solid #efe111;
+    border-bottom: 5px solid #efe111;
 }
+
+.toggle {
+    background: #686868 !important;
+    color: #fff !important;
+}
+
+.toggle:hover {
+    background: #dee0e2 !important;
+    color: #686868 !important;
+    border-right: 10px solid #efe111 !important;
+}
+
 
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
-    width: 100%;
-    padding: 20px;
+    width: calc(100% - 250px);
+    padding: 40px;
     min-height: 100vh;
     transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#content.active {
+    width: 100%;
 }
 
-#sidebarCollapse {
-    width: 45px;
-    height: 45px;
-    background: #f5f5f5;
+#toTop {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  color: #686868;
+  background-color: #efe111;
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
 }
 
-#sidebarCollapse:hover {
-    background: #dee0e2 ;
-    border-left: 10px solid #efe111;
+#toTop:hover {
+  background-color: #dee0e2;
 }
-
-#sidebarCollapse span {
-    width: 80%;
-    height: 2px;
-    margin: 0 auto;
-    display: block;
-    background: #555;
-    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
-    transition-delay: 0.2s;
-}
-
-#sidebarCollapse span:first-of-type {
-    transform: rotate(45deg) translate(2px, 2px);
-}
-#sidebarCollapse span:nth-of-type(2) {
-    opacity: 0;
-}
-#sidebarCollapse span:last-of-type {
-    transform: rotate(-45deg) translate(1px, -1px);
-}
-
-
-#sidebarCollapse.active span {
-    transform: none;
-    opacity: 1;
-    margin: 5px auto;
-}
-
 
 /* ---------------------------------------------------
     MEDIAQUERIES
@@ -233,30 +228,17 @@ a.logout:hover {
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;
-        transform: rotateY(90deg);
     }
     #sidebar.active {
         margin-left: 0;
-        transform: none;
     }
-    #sidebarCollapse span:first-of-type,
-    #sidebarCollapse span:nth-of-type(2),
-    #sidebarCollapse span:last-of-type {
-        transform: none;
-        opacity: 1;
-        margin: 5px auto;
+    #content {
+        width: 100%;
     }
-    #sidebarCollapse.active span {
-        margin: 0 auto;
+    #content.active {
+        width: calc(100% - 250px);
     }
-    #sidebarCollapse.active span:first-of-type {
-        transform: rotate(45deg) translate(2px, 2px);
+    #sidebarCollapse span {
+        display: none;
     }
-    #sidebarCollapse.active span:nth-of-type(2) {
-        opacity: 0;
-    }
-    #sidebarCollapse.active span:last-of-type {
-        transform: rotate(-45deg) translate(1px, -1px);
-    }
-
 }

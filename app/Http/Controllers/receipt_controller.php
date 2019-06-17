@@ -127,6 +127,7 @@ class receipt_controller extends Controller {
 	
 	public function search(Request $request, company $company){
 		if($request->ajax()){
+			dd($request);
 			$microlocations = DB::table('microlocations')
 							->where('microlocation_company_id','=',$company->company_id)
 							->get();

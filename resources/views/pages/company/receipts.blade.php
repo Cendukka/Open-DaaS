@@ -40,6 +40,13 @@
 {{--                @endphp--}}
 {{--                @if (count($inventory)>0)--}}
                     <div class="form-group">
+                        <label for="from-date">From Date: </label>
+                        <input type="text" class="form-controller" id="from-date" name="from-date">
+                        <label for="to-date">To Date: </label>
+                        <input type="text" class="form-controller" id="to-date" name="to-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="search">Search: </label>
                         <input type="text" class="form-controller" id="search" name="search">
                     </div>
                     <table class="table table-bordered table-hover">

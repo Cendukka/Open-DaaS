@@ -8,8 +8,8 @@ Route::get('/manage', function () {
 	return view('pages.manage');
 });
 
-Route::resource('ewc', 'ewc_controller', ['only' => ['index', 'show']]);
-
+Route::get('ewc','ewc_controller@index');
+Route::get('ewc/search','ewc_controller@search');
 
 
 
@@ -54,3 +54,6 @@ Route::post('companies/{company}/manage/microlocations/{microlocation}/microloca
 Route::resource('companies/{company}/manage/receipts', 'receipt_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/{company}/manage/receipts/receipts-store', 'receipt_controller@store');
 Route::post('companies/{company}/manage/receipts/{receipt}/receipts-update', 'receipt_controller@update');
+
+#Route::get('/','SearchController@index');
+#Route::get('/search','SearchController@search');

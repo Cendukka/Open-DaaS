@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\user;
 
 class user_controller extends Controller {
@@ -53,7 +54,7 @@ class user_controller extends Controller {
 			'last_name' => $request->get('last_name'),
 			'first_name' => $request->get('first_name'),
 			'username' => $request->get('username'),
-			'password' => $request->get('password'),
+			'password' => Hash::make($request->get('password')),
 		]);
 		$user->save();
 		return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['User successfully created.']);
@@ -106,7 +107,7 @@ class user_controller extends Controller {
 		$userNew->user_microlocation_id = $request->get('microlocation');
 		$userNew->last_name = $request->get('last_name');
 		$userNew->first_name = $request->get('first_name');
-		$userNew->password = $request->get('password');
+		$userNew->password = Hash::make($request->get('password'));
 		$userNew->save();
 		
 		

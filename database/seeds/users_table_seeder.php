@@ -1,7 +1,10 @@
 <?php
 
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Database\Seeder;
+
 
 class users_table_seeder extends Seeder
 {
@@ -19,7 +22,7 @@ class users_table_seeder extends Seeder
 			'last_name' => 'ADMIN',
 			'first_name' => 'LSJH',
 			'username' => 'admin',
-			'password' => 'salasana'
+			'password' => Hash::make('password')
 			]);
 	
 		$companies_amount = DB::table('company')->count();
@@ -32,8 +35,8 @@ class users_table_seeder extends Seeder
 				'last_name' => $faker->lastName,
 				'first_name' => $faker->firstName,
 				'username' => $faker->userName,
-				'password' => $faker->password,
-			]);
+				'password' => Hash::make('password')
+				]);
 			
 			# Adds managers to all the microlocations
 			$microlocations = DB::table('microlocations')
@@ -49,8 +52,8 @@ class users_table_seeder extends Seeder
 					'last_name' => $faker->lastName,
 					'first_name' => $faker->firstName,
 					'username' => $faker->userName,
-					'password' => $faker->password,
-				]);
+					'password' => Hash::make('password')
+					]);
 				
 				# Create regular users
 				foreach (range(1,3) as $index) {
@@ -61,8 +64,8 @@ class users_table_seeder extends Seeder
 						'last_name' => $faker->lastName,
 						'first_name' => $faker->firstName,
 						'username' => $faker->userName,
-						'password' => $faker->password,
-					]);
+						'password' => Hash::make('password')
+						]);
 				}
 			}
 			

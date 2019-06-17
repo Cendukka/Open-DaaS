@@ -1,9 +1,12 @@
 /*
-    DEMO STYLE
+    IMPORT FONTS FROM GOOGLE
 */
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
+/* ---------------------------------------------------
+    MAIN STYLE
+----------------------------------------------------- */
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
@@ -61,8 +64,9 @@ a, a:hover, a:focus {
     margin: 40px 0;
 }
 
+
 /* ---------------------------------------------------
-    SIDEBAR STYLE
+    SIDEBAR  AND UPPER MENU STYLE
 ----------------------------------------------------- */
 #sidebar {
     width: 250px;
@@ -112,7 +116,6 @@ a, a:hover, a:focus {
     background: #dee0e2;
 }
 
-
 a[data-toggle="collapse"] {
     position: relative;
 }
@@ -128,7 +131,6 @@ a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
 a[aria-expanded="true"]::before {
     content: '\e260';
 }
-
 
 ul ul a {
     font-size: 0.9em !important;

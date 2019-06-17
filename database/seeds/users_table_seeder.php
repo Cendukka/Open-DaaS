@@ -19,7 +19,7 @@ class users_table_seeder extends Seeder
 			'last_name' => 'ADMIN',
 			'first_name' => 'LSJH',
 			'username' => 'admin',
-			'password' => Hash::make('password')
+			'password' => Hash::make('qwerty')
 			]);
 	
 		$companies_amount = DB::table('company')->count();
@@ -32,7 +32,7 @@ class users_table_seeder extends Seeder
 				'last_name' => $faker->lastName,
 				'first_name' => $faker->firstName,
 				'username' => $faker->userName,
-				'password' => Hash::make('password')
+				'password' => Hash::make('qwerty')
 			]);
 			
 			# Adds managers to all the microlocations
@@ -49,11 +49,11 @@ class users_table_seeder extends Seeder
 					'last_name' => $faker->lastName,
 					'first_name' => $faker->firstName,
 					'username' => $faker->userName,
-					'password' => Hash::make('password')
+					'password' => Hash::make('qwerty')
 				]);
 				
 				# Create regular users
-				foreach (range(1,3) as $index) {
+				foreach (range(1,1) as $index) {
 					DB::table('users')->insert([
 						'user_type_id' => 4,
 						'user_company_id' => $company_index,
@@ -61,7 +61,7 @@ class users_table_seeder extends Seeder
 						'last_name' => $faker->lastName,
 						'first_name' => $faker->firstName,
 						'username' => $faker->userName,
-						'password' => Hash::make('password')
+						'password' => Hash::make('qwerty')
 					]);
 				}
 			}

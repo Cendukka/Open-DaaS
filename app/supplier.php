@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class supplier extends Model {
 	public $incrementing = true;
 	protected $table = "supplier";
-	protected $primaryKey = "ID";
-	protected $fillable = ['Name', 'Street_address', 'Postal_code', 'City', 'Contact_person', 'Email', 'Phone_number'];
+	protected $primaryKey = "supplier_id";
+	protected $fillable = ['name', 'street_address', 'postal_code', 'city', 'contact_person', 'email', 'phone_number'];
 	
 	public function inventory_receipt() {
-		return $this->hasMany(inventory_receipt::class);
+		return $this->hasMany(inventory_receipt::class,'supplier_id');
 	}
 }

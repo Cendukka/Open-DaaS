@@ -1,8 +1,7 @@
 <meta charset="utf-8">
 <meta name="description" content="">
 <!-- load bootstrap from a cdn -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/3.0.3/css/bootstrap-combined.min.css">
-
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <style>
     * {
         box-sizing: border-box;
@@ -21,4 +20,19 @@
         display: table;
         clear: both;
     }
+
+    table, th, td {
+        border: 1px solid black;
+        text-align: left;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        height: 50px;
+    }
+
 </style>

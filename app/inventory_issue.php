@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class inventory_issue extends Model {
 	public $incrementing = true;
 	protected $table = "inventory_issue";
-	protected $primaryKey = "ID";
-	protected $fillable = ['Date'];
+	protected $primaryKey = "inventory_issue_id";
+	protected $fillable = ['date'];
 	
 	public function microlocations() {
 		return $this->hasMany(microlocations::class);

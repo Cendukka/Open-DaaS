@@ -87,12 +87,12 @@ class ewc_controller extends Controller
 	public function search(Request $request){
 		if($request->ajax()){
 			$output="";
-			$products=DB::table('ewc_codes')->where('ewc_code','LIKE','%'.$request->search."%")->get();
-			if($products){
-				foreach ($products as $key => $product){
+			$result=DB::table('ewc_codes')->where('ewc_code','LIKE','%'.$request->search."%")->get();
+			if($result){
+				foreach ($result as $key => $value){
 					$output.='<tr>'.
-						'<td>'.$product->ewc_code.'</td>'.
-						'<td>'.$product->description.'</td>'.
+						'<td>'.$value->ewc_code.'</td>'.
+						'<td>'.$value->description.'</td>'.
 						'</tr>';
 				}
 				return Response($output);

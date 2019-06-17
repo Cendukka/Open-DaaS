@@ -52,7 +52,7 @@
       				@yield('content')
    					</div>
 
-                 <button onclick="topFunction()" id="toTop" title="Go to top">Back to top</button>  
+                 <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span> UP</button> 
                 
             </div>
         </div>

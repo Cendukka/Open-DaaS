@@ -24,6 +24,14 @@ Route::resource('companies', 'company_controller', ['only' => [
 	'index', 'show'
 ]]);
 
+<<<<<<< Updated upstream
 Route::resource('companies', 'company_controller', ['except' => [
 	'create', 'store', 'update', 'destroy'
 ]]);
+
+=======
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+>>>>>>> Stashed changes

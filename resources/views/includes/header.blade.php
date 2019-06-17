@@ -6,7 +6,7 @@
                 </div>
 
                 <ul class="list-unstyled components">
-                  
+
                     <li>
                         <a href="#">Oma toimipiste</a>
                         <a href="/companies/">Toimipisteet</a>
@@ -18,27 +18,24 @@
                             <li><a href="#">Lis‰‰ uusi toimipiste</a></li>
                         </ul>
                     </li>
-                    
+
                 </ul>
 
                 <ul class="list-unstyled CTAs">
-                  
                     <li><a href="/" class="back">Back</a></li>
                 </ul>
             </nav>
 
             <!-- Page Content Holder -->
-
             <div id="content">
 
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
 
                         <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="navbar-btn">
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                                <span>Toggle Sidebar</span>
                             </button>
                         </div>
 
@@ -49,28 +46,53 @@
                             </ul>
                         </div>
                     </div>
-                
                 </nav>
                 
                    <div id="main" class="column">
       				@yield('content')
    					</div>
 
-                   
+                 <button onclick="topFunction()" id="toTop" title="Go to top">Back to top</button>  
                 
             </div>
         </div>
 
-        <!-- jQuery CDN -->
-         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-         <!-- Bootstrap Js CDN -->
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- jQuery CDN -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Bootstrap Js CDN -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- jQuery Custom Scroller CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-         <script type="text/javascript">
-             $(document).ready(function () {
-                 $('#sidebarCollapse').on('click', function () {
-                     $('#sidebar').toggleClass('active');
-                     $(this).toggleClass('active');
-                 });
-             });
-         </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#sidebar").mCustomScrollbar({
+                    theme: "minimal"
+                });
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar, #content').toggleClass('active');
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
+            });
+        </script>
+
+<script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+    document.getElementById("toTop").style.display = "block";
+  } else {
+    document.getElementById("toTop").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>

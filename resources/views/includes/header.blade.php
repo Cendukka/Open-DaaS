@@ -45,7 +45,25 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#" class="info-btn">Yhteystiedot</a></li>
-                                <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+                                <li>
+                                @guest
+                                <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li>
+
+                                <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+                            </li>
+                            
+                        @else 
+                        <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+
+                                <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
+
+                                        @csrf
+                        @endguest
+                                
+
+                                <!-- <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+                                <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li> -->
+
                             </ul>
                         </div>
                     </div>

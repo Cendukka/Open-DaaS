@@ -153,6 +153,7 @@ class receipt_controller extends Controller {
 					->get();
 			#dd($result);
 			if($result){
+				$sumweight = 0;
 				foreach ($result as $key => $value){
 					$fromid =  ($value->from_company_id ? 'Company '.$value->from_company_id :
 								($value->from_community_id ? 'Community '.$value->from_community_id :
@@ -167,7 +168,16 @@ class receipt_controller extends Controller {
 						'<td>'.$value->distance_km.'</td>'.
 						'<td>'.$value->receipt_ewc_code.'</td>'.
 						'</tr>';
+					$sumweight += $value->receipt_weight;
 				}
+				$output.='<tr>'.
+					'<td></td>'.
+					'<td></td>'.
+					'<td></td>'.
+					'<td>'.$sumweight.' Total</td>'.
+					'<td></td>'.
+					'<td></td>'.
+					'</tr>';
 				return Response($output);
 			}
 		}

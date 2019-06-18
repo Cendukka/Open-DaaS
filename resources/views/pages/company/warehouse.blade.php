@@ -20,7 +20,8 @@
 
                 @endphp
                 @if (count($microlocation_ids)>0)
-                    <table>
+                    <table class="table table-bordered table-hover">
+                        <thead>
                         <tr>
                             <th>Microlocation Name</th>
                             @php
@@ -34,6 +35,8 @@
                                 <th>{{title_case($material->material_name)}}</th>
                             @endforeach
                         </tr>
+                        </thead>
+                        <tbody>
                         @foreach ($microlocations as $ml)
                             <tr>
                                 @php
@@ -53,6 +56,7 @@
                                 @endif
                             </tr>
                         @endforeach
+                        </tbody>
                     </table>
                 @else
                     <h4>No microlocations found</h4>

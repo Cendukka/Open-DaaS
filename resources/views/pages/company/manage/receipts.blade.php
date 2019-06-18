@@ -15,7 +15,8 @@
                         </ul>
                     </div>
                 @endif
-                <table>
+                <table class="table table-bordered table-hover">
+                    <thead>
                     <tr>
                         <th>ID</th>
                         <th>Date</th>
@@ -26,6 +27,8 @@
                         <th>EWC Code</th>
                         <th>User ID</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     @php
                         $microlocations = DB::table('microlocations')
                                 ->where('microlocation_company_id','=',$company->company_id)
@@ -62,6 +65,7 @@
                             <td>{{title_case($receipt->receipt_user_id)}}</td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
                 <br>
                 <a href="{{url('/companies/'.$company->company_id.'/manage/receipts/create')}}">+ Add Receipt</a>

@@ -34,30 +34,44 @@
     <!-- Page Content Holder -->
     <div id="content">
 
-		<nav class="navbar navbar-default">
-        	<div class="container-fluid">
-            	
-            	<div class="navbar-header">
-                	
-                	<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
-                    	<i class="glyphicon glyphicon-align-left"></i>
-                        	<span>Toggle Sidebar</span>
-                    </button>
-                        
-                </div>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                	
-                	<ul class="nav navbar-nav navbar-right">
-                    	<li><a href="#" class="info-btn">Yhteystiedot</a></li>
-                        <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
-                    </ul>
-                        
-                </div>
-                    
-			</div>
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
 
-		</nav>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#" class="info-btn">Yhteystiedot</a></li>
+                                <li>
+                                @guest
+                                <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li>
+
+                                <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+                            </li>
+                            
+                        @else 
+                        <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+
+                                <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
+
+                                        @csrf
+                        @endguest
+                                
+
+                                <!-- <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+                                <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li> -->
+
+                            </ul>
+                        </div>
+                    </div>
+                
+                </nav>
                 
 		<!-- Main Page Content Holder -->
 		<div id="main" class="column">

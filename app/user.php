@@ -4,7 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class user extends Model {
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
 	public $incrementing = true;
 	public $timestamps = false;
 	protected $table = "users";

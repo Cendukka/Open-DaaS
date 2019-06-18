@@ -12,7 +12,7 @@
         
         <!-- Scrollbar Custom CSS (for fixed LeftSide Menu) -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-<style>
+<!--<style>
     * {
         box-sizing: border-box;
     }
@@ -49,5 +49,5 @@
         margin:0;
     }
 
-</style>
+</style>-->
        

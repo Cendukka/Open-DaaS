@@ -6,13 +6,16 @@
                 <h3>Companies </h3>
             </div>
             <div class="panel-body">
-                <table>
+                <table class="table table-bordered table-hover">
+                    <thead>
                     <tr>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Postcode</th>
                         <th>City</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     @php
                         $companies = DB::table('company')->get();
                     @endphp
@@ -24,9 +27,10 @@
                             <td>{{title_case($company->company_city)}}</td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
                 <br>
-                <a href="create">+ Add company</a>
+                <a href="companies/create">+ Add company</a>
             </div>
         </div>
     </div>

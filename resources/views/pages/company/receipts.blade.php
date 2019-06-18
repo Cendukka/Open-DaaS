@@ -10,8 +10,8 @@
             </div>
             <div class="panel-body">
 {{--                @php--}}
-{{--                    $from_date = isset($_GET['from_date']) ? $_GET['from_date'] : date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))));--}}
-{{--                    $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : date('Y-m-d') ;--}}
+{{--                    $from_date = isset($_GET['from_date']) ? $_GET['from_date'] : ;--}}
+{{--                    $to_date = isset($_GET['to_date']) ? $_GET['to_date'] :  ;--}}
 {{--                @endphp--}}
 {{--                <form action={{"/companies/".$company->company_id."/receipts"}}>--}}
 {{--                    From date:<br>--}}
@@ -40,12 +40,25 @@
 {{--                @endphp--}}
 {{--                @if (count($inventory)>0)--}}
                     <div class="form-group">
-                        <input type="text" class="form-controller" id="search" name="search">
+                        <div class="col-sm-6">
+                            <label for="from-date">From Date: </label>
+                            <input type="date" class="form-control datepicker-autoclose" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="to-date">To Date: </label>
+                            <input type="date" class="form-control datepicker-autoclose" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <label for="search">Search: </label>
+                            <input type="text" class="form-controller" id="search" name="search" placeholder="Search">
+                        </div>
                     </div>
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>To Location</th>
                             <th>From ID</th>
                             <th>Date</th>
                             <th>Material</th>
@@ -57,8 +70,6 @@
                         <tbody>
                         </tbody>
                     </table>
-
-
 {{--                    <table>--}}
 {{--                        <tr>--}}
 {{--                            <th>ID</th>--}}

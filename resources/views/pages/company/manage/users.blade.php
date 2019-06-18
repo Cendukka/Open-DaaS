@@ -15,7 +15,8 @@
                         </ul>
                     </div>
                 @endif
-                <table>
+                <table class="table table-bordered table-hover">
+                    <thead>
                     <tr>
                         <th>ID</th>
                         <th>Microlocation ID</th>
@@ -25,6 +26,7 @@
                         <th>Username</th>
                         <th>Password</th>
                     </tr>
+                    </thead>
                     @php
                         $users = DB::table('users')
                                     ->where('user_company_id','=',$company->company_id)
@@ -43,7 +45,7 @@
                             <td>{{title_case($user->last_name)}}</td>
                             <td>{{title_case($user->first_name)}}</td>
                             <td>{{title_case($user->username)}}</td>
-                            <td>{{title_case($user->password)}}</td>
+                            <td>{{title_case(strlen($user->password) > 20 ? substr($user->password,0,20).'...' : $user->password)}}</td>
                         </tr>
                     @endforeach
                 </table>

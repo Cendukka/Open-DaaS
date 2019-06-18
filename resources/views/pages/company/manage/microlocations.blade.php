@@ -15,7 +15,8 @@
                         </ul>
                     </div>
                 @endif
-                <table>
+                <table class="table table-bordered table-hover">
+                    <thread>
                     <tr>
                         <th>ID</th>
                         <th>Type</th>
@@ -24,6 +25,8 @@
                         <th>Postcode</th>
                         <th>City</th>
                     </tr>
+                    </thread>
+                    <tbody>
                     @php
                         $microlocations = DB::table('microlocations')
                                             ->where('microlocation_company_id','=',$company->company_id)
@@ -41,6 +44,7 @@
                             <td>{{title_case($ml->microlocation_city)}}</td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
                 <br>
                 <a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/create')}}">+ Add microlocation</a>

@@ -3,7 +3,7 @@
     <div id="content" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>EWC Codes </h3>
+                <h3>Company Home </h3>
             </div>
             <div class="panel-body">
                     <h4>Overview page for company</h4>

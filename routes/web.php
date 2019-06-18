@@ -41,10 +41,13 @@ Route::get('companies/{company}/receipts', 'company_controller@receipts_index');
 Route::get('companies/{company}/receipts/search','receipt_controller@search');
 
 Route::get('companies/{company}/pre', 'company_controller@pre_index');
+Route::get('companies/{company}/pre/search','pre_controller@search');
 
 Route::get('companies/{company}/refined', 'company_controller@refined_index');
+Route::get('companies/{company}/refined/search','refined_controller@search');
 
 Route::get('companies/{company}/issues', 'company_controller@issues_index');
+Route::get('companies/{company}/issues/search','issue_controller@search');
 
 
 #Manage Pages

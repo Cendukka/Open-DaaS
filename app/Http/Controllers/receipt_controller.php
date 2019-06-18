@@ -137,17 +137,30 @@ class receipt_controller extends Controller {
 			$output="";
 			$result=DB::table('inventory_receipt')
 					->whereIn('receipt_to_microlocation_id', $microlocation_ids)
-					->where('receipt_to_microlocation_id','LIKE','%'.$request->search."%")
+					->when(($request->from && $request->to), function($query) use ($request){
+						return $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d",strtotime($request->to))]);
+					})
+					->where(function ($query) use ($request){
+						$query
+						->where('microlocation_name','LIKE','%'.$request->search."%")
+						->orWhere('material_name','LIKE','%'.$request->search."%")
+						->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%");
+					})
 					->join('material_names','receipt_material_id','=','material_id')
+					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
+					->orderBy('receipt_to_microlocation_id')
+					->orderBy('receipt_date')
 					->get();
+			#dd($result);
 			if($result){
+				$sumweight = 0;
 				foreach ($result as $key => $value){
 					$fromid =  ($value->from_company_id ? 'Company '.$value->from_company_id :
 								($value->from_community_id ? 'Community '.$value->from_community_id :
 								($value->from_supplier_id ? 'Supplier '.$value->from_supplier_id :
 								'Microlocation '.$value->receipt_from_microlocation_id)));
 					$output.='<tr>'.
-						'<td>'.$value->receipt_to_microlocation_id.'</td>'.
+						'<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.$fromid.'</td>'.
 						'<td>'.$value->receipt_date.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
@@ -155,7 +168,16 @@ class receipt_controller extends Controller {
 						'<td>'.$value->distance_km.'</td>'.
 						'<td>'.$value->receipt_ewc_code.'</td>'.
 						'</tr>';
+					$sumweight += $value->receipt_weight;
 				}
+				$output.='<tr>'.
+					'<td></td>'.
+					'<td></td>'.
+					'<td></td>'.
+					'<td>'.$sumweight.' Total</td>'.
+					'<td></td>'.
+					'<td></td>'.
+					'</tr>';
 				return Response($output);
 			}
 		}

@@ -3,7 +3,7 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>EWC Codes </h3>
+                <h3>Materials </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())

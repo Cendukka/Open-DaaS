@@ -5,7 +5,7 @@
         <title>BigData Pilot (sidebar)</title>
 
          <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href=" {{ asset ('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css') }}">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="<?php echo asset('css/sidebar.css')?>" type="text/css"> 
+        <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}" type="text/css"> 
         

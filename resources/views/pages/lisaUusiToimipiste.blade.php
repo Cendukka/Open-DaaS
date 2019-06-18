@@ -32,4 +32,4 @@
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
             </form>
 </div>
-@stop
+@endsection

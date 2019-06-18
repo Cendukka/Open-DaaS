@@ -21,18 +21,22 @@
         clear: both;
     }
 
-    table, th, td {
-        border: 1px solid black;
-        text-align: left;
-    }
+    /*table, th, td {*/
+    /*    border: 1px solid black;*/
+    /*    text-align: left;*/
+    /*}*/
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
+    /*table {*/
+    /*    border-collapse: collapse;*/
+    /*    width: 100%;*/
+    /*}*/
 
-    th {
-        height: 50px;
+    /*th {*/
+    /*    height: 50px;*/
+    /*}*/
+
+    .container {
+        margin:0;
     }
 
 </style>

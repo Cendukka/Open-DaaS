@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\inventory_receipt;
+use App\inventory_issue;
+use mysql_xdevapi\Collection;
 
-class receipt_controller extends Controller {
+class issue_controller extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -135,38 +136,48 @@ class receipt_controller extends Controller {
 				array_push($microlocation_ids, $microlocation->microlocation_id);
 			}
 			$output="";
-			$result=DB::table('inventory_receipt')
-					->whereIn('receipt_to_microlocation_id', $microlocation_ids)
+			$result=DB::table('inventory_issue')
+					->whereIn('issue_from_microlocation_id', $microlocation_ids)
 					->when(($request->from && $request->to), function($query) use ($request){
-						return $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d",strtotime($request->to))]);
+						return $query->whereBetween('issue_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d",strtotime($request->to))]);
 					})
 					->where(function ($query) use ($request){
 						$query
 						->where('microlocation_name','LIKE','%'.$request->search."%")
 						->orWhere('material_name','LIKE','%'.$request->search."%")
-						->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%");
+						->orWhere('issue_typename','LIKE','%'.$request->search."%");
 					})
-					->join('material_names','receipt_material_id','=','material_id')
-					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
-					->orderBy('receipt_to_microlocation_id')
-					->orderBy('receipt_date')
+					->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
+					->join('microlocations','issue_to_microlocation_id','=','microlocation_id')
+					->join('inventory_issue_details','detail_issue_id','=','issue_id')
+					->join('material_names','material_names.material_id','=','inventory_issue_details.detail_material_id')
+					->orderBy('issue_from_microlocation_id')
+					->orderBy('issue_date')
 					->get();
-			#dd($result);
 			if($result){
+				$lastId = 0;
 				foreach ($result as $key => $value){
-					$fromid =  ($value->from_company_id ? 'Company '.$value->from_company_id :
-								($value->from_community_id ? 'Community '.$value->from_community_id :
-								($value->from_supplier_id ? 'Supplier '.$value->from_supplier_id :
-								'Microlocation '.$value->receipt_from_microlocation_id)));
+					if($value->issue_id == $lastId){
+						continue;
+					}
+					$materials = DB::table('inventory_issue_details')
+								->select('inventory_issue_details.detail_weight','material_names.material_name')
+								->join('material_names','material_names.material_id','=','inventory_issue_details.detail_material_id')
+								->where('detail_issue_id','=',$value->issue_id)
+								->get();
+					$material_list = '';
+					foreach ($materials as $material){
+						$material_list .= title_case($material->material_name).' '.$material->detail_weight.' kg <br>';
+					}
 					$output.='<tr>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
-						'<td>'.$fromid.'</td>'.
-						'<td>'.$value->receipt_date.'</td>'.
-						'<td>'.$value->material_name.'</td>'.
-						'<td>'.$value->receipt_weight.'</td>'.
-						'<td>'.$value->distance_km.'</td>'.
-						'<td>'.$value->receipt_ewc_code.'</td>'.
+						'<td>'.title_case($value->issue_from_microlocation_id).'</td>'.
+						'<td>'.$value->issue_date.'</td>'.
+						'<td>'.$value->issue_user_id.'</td>'.
+						'<td>'.$value->issue_typename.'</td>'.
+						'<td>'.$material_list.'</td>'.
 						'</tr>';
+					$lastId = $value->issue_id;
 				}
 				return Response($output);
 			}

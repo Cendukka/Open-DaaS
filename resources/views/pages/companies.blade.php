@@ -26,7 +26,7 @@
                     @endforeach
                 </table>
                 <br>
-                <a href="create">+ Add company</a>
+                <a href="companies/create">+ Add company</a>
             </div>
         </div>
     </div>

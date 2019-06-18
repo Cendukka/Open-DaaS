@@ -24,6 +24,7 @@ Route::get('companies/{company}/pre', 'company_controller@pre_index');
 Route::get('companies/{company}/refined', 'company_controller@refined_index');
 
 Route::get('companies/{company}/issues', 'company_controller@issues_index');
+Route::get('companies/{company}/issues/search','issue_controller@search');
 
 
 #Manage Pages

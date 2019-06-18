@@ -1,42 +1,11 @@
 <meta charset="utf-8">
-<meta name="description" content="">
-<!-- load bootstrap from a cdn -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<style>
-    * {
-        box-sizing: border-box;
-    }
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    /* Create two equal columns that floats next to each other */
-    .column {
-        float: left;
-        padding: 10px;
-        height: 300px; /* Should be removed. Only for demonstration */
-    }
+        <title>BigData Pilot (sidebar)</title>
 
-    /* Clear floats after the columns */
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    /*table, th, td {*/
-    /*    border: 1px solid black;*/
-    /*    text-align: left;*/
-    /*}*/
-
-    /*table {*/
-    /*    border-collapse: collapse;*/
-    /*    width: 100%;*/
-    /*}*/
-
-    /*th {*/
-    /*    height: 50px;*/
-    /*}*/
-
-    .container {
-        margin:0;
-    }
-
-</style>
+         <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="<?php echo asset('css/sidebar.css')?>" type="text/css"> 
+        

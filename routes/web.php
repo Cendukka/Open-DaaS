@@ -29,8 +29,13 @@ Route::get('/manage', function () {
 	return view('pages.manage');
 });
 
-Route::get('ewc','ewc_controller@index');
-Route::get('ewc/search','ewc_controller@search');
+Route::get('/hallinnoi/lisauusitoimipiste', function () {
+	return view('pages.lisaUusiToimipiste');
+});
+
+Route::resource('ewc', 'ewc_controller', ['only' => [
+	'index', 'show'
+]]);
 
 
 

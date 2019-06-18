@@ -15,7 +15,7 @@
                         <ul class="collapse list-unstyled" id="pageSubmenu">
                             <li><a href="/manage/">K‰ytt‰j‰oikeudet</a></li>
                             <li><a href="#">Kategoriat</a></li>
-                            <li><a href="#">Lis‰‰ uusi toimipiste</a></li>
+                            <li><a href="/hallinnoi/lisauusitoimipiste">Lis‰‰ uusi toimipiste</a></li>
                         </ul>
                     </li>
                     

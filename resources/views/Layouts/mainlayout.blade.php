@@ -24,7 +24,7 @@
                 
                 <div class="col-sm-9 page">
                 
-                     @include('pages.examplePage')   <!-- this is example page every other pages are added here  -->          
+                     @yield('content')   <!-- this is example page every other pages are added here  -->          
                     
                 </div>
     </div>

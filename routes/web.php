@@ -8,6 +8,10 @@ Route::get('/manage', function () {
 	return view('pages.manage');
 });
 
+Route::get('/hallinnoi/lisauusitoimipiste', function () {
+	return view('pages.lisaUusiToimipiste');
+});
+
 Route::resource('ewc', 'ewc_controller', ['only' => [
 	'index', 'show'
 ]]);

@@ -22,7 +22,7 @@
                 @if (count($microlocation_ids)>0)
                     <table>
                         <tr>
-                            <th>ID</th>
+                            <th>Microlocation Name</th>
                             @php
                                 $material_names = DB::table('inventory')->distinct()
                                                     ->join('material_names', 'inventory.inventory_material_id','=','material_names.material_id')
@@ -38,12 +38,13 @@
                             <tr>
                                 @php
                                     $inventory = DB::table('inventory')
+                                                ->join('microlocations', 'inventory.inventory_microlocation_id', '=', 'microlocations.microlocation_id')
                                                 ->where('inventory.inventory_microlocation_id', $ml->microlocation_id)
                                                 ->orderBy('inventory.inventory_material_id')
                                                 ->get();
                                 @endphp
                                 @if (count($inventory)>0)
-                                    <td>{{title_case($inventory[0]->inventory_microlocation_id)}}</td>
+                                    <td>{{title_case($inventory[0]->microlocation_name)}}</td>
                                     @foreach ($inventory as $inv)
                                         <td>{{title_case($inv->inventory_weight)}}</td>
                                     @endforeach

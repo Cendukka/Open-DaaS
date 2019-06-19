@@ -31,7 +31,6 @@
                     <li><a href="{{'/companies/'.$company->company_id.'/pre'}}">          Esilajiteltu</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/refined'}}">      Hienolajiteltu</a></li>
                 </ul>
-                <a href="/ewc/">EWC Codes</a>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
@@ -39,9 +38,7 @@
                     <li><a href="#">Kategoriat</a></li>
                     <li><a href="#">Lisää uusi toimipiste</a></li>
                 </ul>
-
-
-
+                <a href="/ewc/">EWC Codes</a>
             </li>
 
         </ul>

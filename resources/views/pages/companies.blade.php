@@ -14,3 +14,6 @@
        </div>
     </div>
 @endsection
+@section ('title')
+    Toimipisteet
+@stop

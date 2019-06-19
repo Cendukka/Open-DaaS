@@ -17,7 +17,7 @@
                 
                 	<ul class="collapse list-unstyled" id="pageSubmenu">
                     	<li><a href="/manage/">Käyttäjäoikeudet</a></li>
-                        <li><a href="#">Kategoriat</a></li>
+                        <li><a href="/materials">Materiaalit</a></li>
                         <li><a href="#">Lisää uusi toimipiste</a></li>
 					</ul>
 			
@@ -38,10 +38,9 @@
                     <div class="container-fluid">
 
                         <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="navbar-btn">
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                                <span>Toggle Sidebar</span>
                             </button>
                         </div>
 

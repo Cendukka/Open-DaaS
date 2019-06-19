@@ -1,6 +1,6 @@
 @extends('layouts.macrolocation')
 @section('content')
-    <div id="content" class="row">
+    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Edit user </h3>

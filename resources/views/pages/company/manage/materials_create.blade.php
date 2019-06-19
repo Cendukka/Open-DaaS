@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-    <div id="content" class="row">
+    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Create a new material </h3>

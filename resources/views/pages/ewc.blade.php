@@ -32,5 +32,8 @@
             </div>
         </div>
     </div>
-    @include('includes.search_script')
+    <!--@include('includes.search_script')-->
 @endsection
+@section ('title')
+    EWC-Koodit
+@stop

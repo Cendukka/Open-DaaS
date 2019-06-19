@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title', 'Location')
+@section('title', 'Menu')
 @section('content')
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -19,7 +19,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif-->
-                        @else 
+                                @else
                                  Welcome  {{ Auth::user()->first_name }} 
                                  <br>
                                 <li><a href="{{route('logout') }}">Logout</a></li>
@@ -27,7 +27,7 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
+                                </li>
                         @endguest
                     </ul>
                 </div>

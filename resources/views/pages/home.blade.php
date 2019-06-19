@@ -68,4 +68,5 @@
     </div>
 </div> -->
     <h4>This is the home page</h4>
+    <h5>You are logged in as {{ Auth::user()->user_type->user_typename}}</h5>
 @stop

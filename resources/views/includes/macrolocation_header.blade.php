@@ -34,7 +34,7 @@
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="/manage/">Käyttäjäoikeudet</a></li>
+                    <li><a href="#">Käyttäjäoikeudet</a></li>
                     <li><a href="#">Kategoriat</a></li>
                     <li><a href="#">Lisää uusi toimipiste</a></li>
                 </ul>

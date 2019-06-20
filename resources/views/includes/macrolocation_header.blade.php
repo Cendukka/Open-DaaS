@@ -16,7 +16,7 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/"><h3>JALOSTUSLAITOS</h3>(BigData Pilot)</a>
+            <a href="/"><h3>JALOSTUSLAITOS</h3>{{$company->company_name}}</a>
         </div>
 
         <ul class="list-unstyled components">
@@ -34,7 +34,7 @@
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="#">Käyttäjäoikeudet</a></li>
+                    <li><a href="#">Käyttäjät</a></li>
                     <li><a href="#">Kategoriat</a></li>
                     <li><a href="#">Lisää uusi toimipiste</a></li>
                 </ul>

@@ -9,7 +9,7 @@
             url : '{{URL::to(trim($_SERVER['REQUEST_URI'],'/').'/search')}}',
             data:{'search':$search,'from':$from,'to':$to},
             success:function(data){
-                $('.ajaxContent').html(data);
+                $('.tbody').html(data);
             }
         });
     }

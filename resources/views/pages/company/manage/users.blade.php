@@ -1,4 +1,4 @@
-@extends('layouts.macrolocation')
+@extends('layouts.default')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
@@ -25,6 +25,7 @@
                         <th>First Name</th>
                         <th>Username</th>
                         <th>Password</th>
+
                     </tr>
                     </thead>
                     @php
@@ -37,6 +38,7 @@
                                     ->get();
 
                     @endphp
+
                     @foreach ($users as $user)
                         <tr>
                             <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}">{{title_case($user->user_id)}}</a></td>

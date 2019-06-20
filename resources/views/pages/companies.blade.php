@@ -11,7 +11,7 @@
                         </div>
                     @endforeach
                         <br>
-                        <a href="{{url(action('company_controller@create'))}}" style="color:blue;">+ Add company</a>
+                        <!--<a href="{{url(action('company_controller@create'))}}" style="color:blue;">+ Add company</a>-->
 				</div>
 
        </div>

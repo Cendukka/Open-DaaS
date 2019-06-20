@@ -4,21 +4,21 @@
     <nav id="sidebar">
 		
 		<div class="sidebar-header">
-        	<a href="/"><h3>JALOSTUSLAITOS</h3>(BigData Pilot)</a>
+        	<a href="/"><h3>JALOSTUSLAITOS</h3>SuperAdmin</a>
 		</div>
 
 		<ul class="list-unstyled components">
 
 			<li>
-				<a href="#">Oma toimipiste</a>
+				<a href="/">Oma toimipiste</a>
 				<a href="/companies/">Toimipisteet</a>
                 <a href="/ewc/">EWC Codes</a>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
                 
                 	<ul class="collapse list-unstyled" id="pageSubmenu">
-                    	<li><a href="/manage/">Käyttäjäoikeudet</a></li>
+                    	<li><a href="/companiesUser/">Käyttäjät</a></li>
                         <li><a href="/materials">Materiaalit</a></li>
-                        <li><a href="#">Lisää uusi toimipiste</a></li>
+                        <li><a href="{{url(action('company_controller@create'))}}">Lisää uusi toimipiste</a></li>
 					</ul>
 			
 			</li>
@@ -108,7 +108,7 @@
 <!-- Script for Back To The Top Button -->
 <script>
 
-<!-- When the user scrolls down 30px from the top of the document, show the button -->
+//When the user scrolls down 30px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {

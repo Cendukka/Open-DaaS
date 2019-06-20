@@ -1,4 +1,5 @@
 @extends('layouts.macrolocation')
+
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
@@ -48,6 +49,7 @@
                                     ->get();
                     @endphp
                     @foreach ($receipts as $receipt)
+
                         <tr>
                             @php
                             $fromid =  ($receipt->from_company_id ? 'Company '.$receipt->from_company_id :
@@ -65,7 +67,9 @@
                             <td>{{title_case($receipt->receipt_user_id)}}</td>
                         </tr>
                     @endforeach
+
                     </tbody>
+
                 </table>
                 <br>
                 <a href="{{url('/companies/'.$company->company_id.'/manage/receipts/create')}}">+ Add Receipt</a>

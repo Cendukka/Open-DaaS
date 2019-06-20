@@ -32,6 +32,8 @@ Route::get('/manage', function () {
 Route::get('/hallinnoi/lisauusitoimipiste', function () {
 	return view('pages.lisaUusiToimipiste');
 });
+Route::get('/users', 'user_controller@index')->name('users');
+
 
 Route::resource('ewc', 'ewc_controller', ['only' => [
 	'index', 'show'
@@ -71,6 +73,7 @@ Route::post('companies/company-store', 'company_controller@store');
 Route::post('companies/{company}/company-update', 'company_controller@update');
 
 # Users
+Route::resource('companiesUser', 'companyUser_controller', ['only' => ['index']]);
 Route::resource('companies/{company}/manage/users', 'user_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/{company}/manage/users/users-store', 'user_controller@store');
 Route::post('companies/{company}/manage/users/{user}/users-update', 'user_controller@update');

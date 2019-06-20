@@ -2,6 +2,7 @@
 @section('title', 'Menu')
 @section('content')
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <h4>This is the home page</h4>
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
@@ -26,11 +27,11 @@
 
                                         @csrf
                                     </form>
-                                </div>
+
                                 </li>
                         @endguest
                     </ul>
-                </div>
+</div>
 <!-- <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -67,5 +68,5 @@
         </div>
     </div>
 </div> -->
-    <h4>This is the home page</h4>
+
 @stop

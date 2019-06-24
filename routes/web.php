@@ -1,20 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('pages.home');
@@ -35,9 +19,9 @@ Route::get('/hallinnoi/lisauusitoimipiste', function () {
 Route::get('/users', 'user_controller@index')->name('users');
 
 
-Route::resource('ewc', 'ewc_controller', ['only' => [
-	'index', 'show'
-]]);
+Route::get('ewc','ewc_controller@index');
+Route::get('ewc/search','ewc_controller@search');
+
 
 
 

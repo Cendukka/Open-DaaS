@@ -1,41 +1,55 @@
 @extends('layouts.default')
 @section('content')
-    <div id="content2" class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3>Create a new Company </h3>
-            </div>
-            <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
+<div class="container">
+
+  <div> <h3 class="register-title" >Company registration form</h3> </div>
+
+
+  <div class="form-horizontal" >
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
-                        </ul>
-                    </div>
-                @endif
+                            </ul>
+                      </div>
+                     @endif
                 <form method="post" action="company-store">
                     @csrf
-                    <div class="form-group">
-                        <label for="name">Company Name: </label>
-                        <input type="text" class="form-control" name="name"/>
+                <div class="form-group">
+                    <label for="companyName" class="col-sm-3 control-label">Company Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" placeholder="Company Name" class="form-control" autofocus>
                     </div>
-                    <div class="form-group">
-                        <label for="address">Street Address: </label>
-                        <input type="text" class="form-control" name="address"/>
+                </div>
+              
+                <div class="form-group">
+                    <label for="companyAdd" class="col-sm-3 control-label">Company street address</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="address" placeholder="Company street address" class="form-control" autofocus>
                     </div>
-                    <div class="form-group">
-                        <label for="postal_code">Postal Code: </label>
-                        <input type="text" class="form-control" name="postal_code"/>
+                </div>
+                    
+                <div class="form-group">
+                    <label for="companyPostalCode" class="col-sm-3 control-label">Company postal code</label>
+                    <div class="col-sm-9">
+                        <input  type="text" name="postal_code" placeholder="Company postal code" class="form-control" >
                     </div>
-                    <div class="form-group">
-                        <label for="city">City: </label>
-                        <input type="text" class="form-control" name="city">
+                </div>
+                    
+                <div class="form-group">
+                    <label for="companyCity" class="col-sm-3 control-label">Company city</label>
+                    <div class="col-sm-9">
+                        <input type="password" name="city" placeholder="Company city" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </form>
-            </div>
+                </div>
+              
+                
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    
+            </form>
         </div>
     </div>
+
 @endsection

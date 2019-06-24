@@ -267,15 +267,13 @@ a.logout:hover {
 .register-title{
     background-color: #D0D0D0;
     padding: 1%;
-    padding-left: 27%;
-    
+    text-align: center;   
 }
 
 .form-horizontal {
     background-color: #D0D0D0;
     padding: 3%;
-    padding-top: 7%;
-    padding-bottom: 5%;
+   
 }
 
 .control-label{

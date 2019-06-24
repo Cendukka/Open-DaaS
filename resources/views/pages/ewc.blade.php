@@ -10,7 +10,7 @@
                             <th>Description</th>
                         </tr>
                         @foreach ($allEwc as $ewc)
-                            <tr>
+                            <tr style="text-align: left">
                                 <td>{{title_case($ewc->ewc_code)}}</td>
                                 <td>{{title_case($ewc->description)}}</td>
                             </tr>

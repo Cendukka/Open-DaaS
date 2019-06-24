@@ -29,8 +29,7 @@ Route::get('/manage', function () {
 	return view('pages.manage');
 });
 
-Route::get('/hallinnoi/lisauusitoimipiste', function () {
-	return view('pages.lisaUusiToimipiste');
+
 });
 Route::get('/users', 'user_controller@index')->name('users');
 

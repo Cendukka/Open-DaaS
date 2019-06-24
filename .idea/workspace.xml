@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b6131bd-b1a2-4227-9146-e899aca9abe0" name="Default Changelist" comment="" />
+    <list default="true" id="0b6131bd-b1a2-4227-9146-e899aca9abe0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/companyUser_controller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pages/companiesUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/includes/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/includes/macrolocation_header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/macrolocation_header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/includes/search_script.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/search_script.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/companies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/companies.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/company/manage/receipts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/company/manage/receipts.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/company/manage/user_edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/company/manage/user_edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/company/manage/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/company/manage/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/company/receipts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/company/receipts.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -17,45 +31,94 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/seeds/community_table_seeder.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/pages/companiesUser.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+            <state relative-caret-position="255">
+              <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/pages/home.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/database/seeds/inventory_issue_table_seeder.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/pages/company/manage/users.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="476">
+              <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/user_controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+            <state relative-caret-position="-289">
+              <caret line="26" column="11" lean-forward="true" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/seeds/user_types_table_seeder.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/includes/macrolocation_header.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="459">
+              <caret line="36" column="34" lean-forward="true" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/pages/company/manage/user_edit.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>edit</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/resources/views/pages/company/manage/users.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/companyUsers_controller.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/companyUser_controller.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/header.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/companies.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/includes/macrolocation_header.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/companiesUser.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/company/manage/user_edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/home.blade.php" />
+      </list>
+    </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -139,23 +202,48 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="782" />
-    <option name="y" value="-16" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
               <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Http" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Http" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Controllers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Http" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Controllers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Auth" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -174,16 +262,77 @@
               <item name="database" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="seeds" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="includes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="layouts" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="pages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="pages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="company" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="pages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="company" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="manage" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BigData" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="routes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/learnLaravel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers/Auth" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\samuli.lehtonen\Documents\GitHub\BigData\app\Http\Controllers\Auth" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -214,16 +363,17 @@
       <option name="presentableId" value="Default" />
       <updated>1559820374732</updated>
       <workItem from="1559820379755" duration="759000" />
+      <workItem from="1561029693063" duration="3293000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4256000" />
+    <option name="totallyTimeSpent" value="9882000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1881663" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26012793" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -244,34 +394,36 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26012793" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/community.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/community.php" />
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/default.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/company_controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/company.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -287,27 +439,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/company_warehouse_controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="841">
-          <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/manage.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/home.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/company_warehouse_controller.php" />
     <entry file="file://$PROJECT_DIR$/database/seeds/community_table_seeder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -333,6 +465,166 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/manage.blade.php" />
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="48" column="13" lean-forward="true" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/companyUsers_controller.php" />
+    <entry file="file://$PROJECT_DIR$/app/user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/companyUsers_controller.php" />
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/company/manage/company_create.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/company/company_home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/company/manage.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="86" selection-start-line="9" selection-start-column="86" selection-end-line="9" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/company/issues.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/company/manage/materials.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" selection-start-column="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/companyUsercontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/company_controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="87" column="49" lean-forward="true" selection-start-line="87" selection-start-column="49" selection-end-line="87" selection-end-column="49" />
+          <folding>
+            <element signature="e#40#56#0#PHP" expanded="true" />
+            <element signature="e#322#981#0#PHP" />
+            <element signature="e#985#1216#0#PHP" />
+            <element signature="e#1220#1342#0#PHP" />
+            <element signature="e#1346#2090#0#PHP" />
+            <element signature="e#2094#2188#0#PHP" />
+            <element signature="e#2192#2309#0#PHP" />
+            <element signature="e#2313#2436#0#PHP" />
+            <element signature="e#2440#2561#0#PHP" />
+            <element signature="e#2680#2799#0#PHP" />
+            <element signature="e#2803#2920#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/comapniesUser.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="63" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/companyUser_controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="40" />
+          <folding>
+            <element signature="e#40#56#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/macrolocation_header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="36" column="34" lean-forward="true" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/companiesUser.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="74" column="7" lean-forward="true" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
+          <folding>
+            <element signature="e#7#389#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/user_controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-289">
+          <caret line="26" column="11" lean-forward="true" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/companies.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/company/manage/user_edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/company/manage/users.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
         </state>
       </provider>
     </entry>

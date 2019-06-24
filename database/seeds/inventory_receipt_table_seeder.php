@@ -23,7 +23,7 @@ class inventory_receipt_table_seeder extends Seeder
 		
 		$sum = $companies_amount+$microlocations_amount+$communities_amount+$suppliers_amount;
 		
-		foreach (range(1,$sum) as $index) {
+		foreach (range(1,$sum*3) as $index) {
 			$select = rand(1,4);
 			DB::table('inventory_receipt')->insert([
 				'receipt_material_id' => rand(1,$materials_count),

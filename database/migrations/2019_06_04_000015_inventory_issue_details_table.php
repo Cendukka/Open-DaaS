@@ -16,12 +16,12 @@ class InventoryIssueDetailsTable extends Migration
         Schema::create('inventory_issue_details', function (Blueprint $table) {
             $table->increments('issue_detail_id')->unsigned();
 			$table->integer('detail_issue_id')->unsigned()->nullable();
-			$table->integer('detail_inventory_id')->unsigned();
+			$table->integer('detail_material_id')->unsigned();
 			$table->char('detail_ewc_code',6)->nullable();
 			$table->integer('detail_weight');
 	
 			$table->foreign('detail_issue_id')->references('issue_id')->on('inventory_issue');
-			$table->foreign('detail_inventory_id')->references('inventory_id')->on('inventory');
+			$table->foreign('detail_material_id')->references('material_id')->on('material_names');
 			$table->foreign('detail_ewc_code')->references('ewc_code')->on('ewc_codes');
         });
     }

@@ -1,12 +1,11 @@
 @extends('layouts.macrolocation')
 @section('content')
-    <div id="macrolocation_name" class="row">
-        @include('includes.macrolocation_name',['no_navbar' => true])
-    </div>
-    <div id="content" class="row">
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
+    <div id="content2" class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Home page for Company: {{$company->company_name}}</h3>
+            </div>
+            <div class="panel-body">
                     <h4>Overview page for company</h4>
 {{--                    <table>--}}
 {{--                        <tr>--}}
@@ -45,7 +44,6 @@
 {{--                            </tr>--}}
 {{--                        @endforeach--}}
 {{--                    </table>--}}
-                </div>
             </div>
         </div>
     </div>

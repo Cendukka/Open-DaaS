@@ -29,7 +29,8 @@
                     @endforeach
                 </table>
                 <br>
-                <a href="{{url('/materials/create')}}">+ Add Material</a>
+                <br>
+                <button class="btn btn-primary btn-block"> <a href="{{url('/materials/create')}}">+ Add Material</a>
             </div>
         </div>
     </div>

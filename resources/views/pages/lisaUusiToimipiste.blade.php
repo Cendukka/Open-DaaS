@@ -1,11 +1,11 @@
 @extends('layouts.default')
 @section('content')
-<div id="content2" class="row">
-    <div class="panel panel-default">
-        <div class="panel-heading" > <h3>Company registration form</h3> </div>
+<div class="container">
 
-            <div class="panel-body">
-            
+  <div> <h3 class="title" >Company registration form</h3> </div>
+
+
+  <div class="form-horizontal" >
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -15,9 +15,7 @@
                             </ul>
                       </div>
                      @endif
-
-                <div class="form-horizontal" >
-                    <form method="post" action="company-store">
+                <form method="post" action="company-store">
                     @csrf
                 <div class="form-group">
                     <label for="companyName" class="col-sm-3 control-label">Company Name</label>
@@ -52,8 +50,7 @@
                     
             </form>
         </div>
-        </div>
     </div>
-</div>
+
 
 @endsection

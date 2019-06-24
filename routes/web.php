@@ -30,7 +30,6 @@ Route::get('/manage', function () {
 });
 
 
-});
 Route::get('/users', 'user_controller@index')->name('users');
 
 

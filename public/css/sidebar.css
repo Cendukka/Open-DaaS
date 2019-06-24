@@ -249,22 +249,30 @@ a.logout:hover {
 /* ---------------------------------------------------
     Company ergistration form
 ----------------------------------------------------- */
-.register-title{
-    background-color: #D0D0D0;
+.panel-heading{
+    background-color: #EEEEEE;
     padding: 1%;
     text-align: center;   
 }
 
 .form-horizontal {
-    background-color: #D0D0D0;
+    background-color: #E8E8E8;
     padding: 3%;
    
 }
 
-.control-label{
-    color: #414141  ;
-    
+
+.panel-body{
+    background-color: #E8E8E8;
+    text-align: center;
 }
 
+/* ---------------------------------------------------
+    list decoration
+----------------------------------------------------- */
 
 
+  table {
+    display: inline-table;
+    text-decoration: underline;
+  }

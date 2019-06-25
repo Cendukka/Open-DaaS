@@ -48,7 +48,7 @@
                 </div>
               
                 
-                <button type="submit" class="btn btn-primary btn-block">Register</button>
+               <div class="col-sm-9"> <button type="submit"  class=" btn btn-primary" style="width: 32%" >Register</button> </div>
                     
             </form>
         </div>

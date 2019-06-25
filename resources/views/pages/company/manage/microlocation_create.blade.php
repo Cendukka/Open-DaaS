@@ -18,13 +18,13 @@
                 <form method="post" action="microlocations-store">
                     @csrf
                     <div class="form-group">
-                        <label for="company">Company: </label>
+                        <label for="company">Company:&nbsp</label>
                         <select name="company">
                             <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="type">Microlocation Type: </label>
+                        <label for="type">Microlocation Type:&nbsp</label>
                         <select name="type">
                             @php
                                 $types = DB::table('microlocation_types')->get();
@@ -36,19 +36,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Microlocation Name: </label>
+                        <label for="name">Microlocation Name:&nbsp</label>
                         <input type="text" class="form-control" name="name"/>
                     </div>
                     <div class="form-group">
-                        <label for="address">Street Address: </label>
+                        <label for="address">Street Address:&nbsp</label>
                         <input type="text" class="form-control" name="address"/>
                     </div>
                     <div class="form-group">
-                        <label for="postal_code">Postal Code: </label>
+                        <label for="postal_code">Postal Code:&nbsp</label>
                         <input type="text" class="form-control" name="postal_code"/>
                     </div>
                     <div class="form-group">
-                        <label for="password">City: </label>
+                        <label for="password">City:&nbsp</label>
                         <input type="text" class="form-control" name="city" value="{{$company->company_city}}">
                     </div>
                     <br>

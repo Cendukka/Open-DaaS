@@ -31,7 +31,7 @@
                     <form method="post" action="users-update">
                         @csrf
                         <div class="form-group">
-                            <label for="user_type">User Type: </label>
+                            <label for="user_type">User Type:&nbsp</label>
                             <select name="user_type">
                                 <option {{($user->user_type_id == 1 ? 'selected="selected"' : '')}} disabled value="1">Superadmin</option>
                                 <option {{($user->user_type_id == 2 ? 'selected="selected"' : '')}} value="2">Admin</option>
@@ -40,13 +40,13 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="company">Company: </label>
+                            <label for="company">Company:&nbsp</label>
                             <select name="company">
                                 <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="microlocation">Microlocation: </label>
+                            <label for="microlocation">Microlocation:&nbsp</label>
                             <select name="microlocation">
                                 <option selected="selected" value=""></option>
                                 @php
@@ -61,19 +61,19 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="first_name">First Name: </label>
+                            <label for="first_name">First Name:&nbsp</label>
                             <input type="text" class="form-control" name="first_name" value="{{$user->first_name}}"/>
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Last Name: </label>
+                            <label for="last_name">Last Name:&nbsp</label>
                             <input type="text" class="form-control" name="last_name" value="{{$user->last_name}}"/>
                         </div>
                         <div class="form-group">
-                            <label for="username">Username: </label>
+                            <label for="username">Username:&nbsp</label>
                             <input type="text" class="form-control" name="username" value="{{$user->username}}" readonly style="color:lightgray;"/>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password: </label>
+                            <label for="password">Password:&nbsp</label>
                             <input type="password" class="form-control" name="password" value="{{$user->password}}">
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>

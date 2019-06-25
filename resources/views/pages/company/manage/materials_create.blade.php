@@ -16,6 +16,7 @@
                     </div>
                 @endif
                 <h4>Create a new material:</h4>
+                <div style="justify-content: center;">
                 <form method="post" action="materials-store">
                     @csrf
                     <div class="form-group">
@@ -25,6 +26,7 @@
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>
+         </div>
         </div>
     </div>
 @endsection

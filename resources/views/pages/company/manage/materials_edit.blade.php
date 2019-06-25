@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                <div style="display: flex;">
+                <div style="display: flex; justify-content: center;">
                     <form method="post" action="materials-update">
                         @csrf
                         <div class="form-group">

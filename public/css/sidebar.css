@@ -268,11 +268,22 @@ a.logout:hover {
 }
 
 /* ---------------------------------------------------
-    list decoration
+    table, content2, list decoration
 ----------------------------------------------------- */
 
 
   table {
     display: inline-table;
     text-decoration: underline;
+  }
+
+  a.textMark:hover, a.textMark:active{
+      color: #2373F6;
+      font-size: 140%;
+  }
+
+  .panel {
+    box-shadow: 1px 2px 5px  grey;
+    border-top: 0px;
+    border-left: 0px;
   }

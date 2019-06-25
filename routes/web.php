@@ -16,7 +16,6 @@ Route::get('/manage', function () {
 Route::get('/hallinnoi/lisauusitoimipiste', function () {
 	return view('pages.lisaUusiToimipiste');
 });
-Route::get('/users', 'user_controller@index')->name('users');
 
 
 Route::get('ewc','ewc_controller@index');

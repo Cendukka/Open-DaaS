@@ -56,6 +56,7 @@
 
                             
                         @else 
+
                         <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
 
                                 <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->

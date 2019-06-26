@@ -10,7 +10,7 @@
                         <div class="alert alert-danger">
                             <ul>
                              @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                                <li STYLE="text-align:left;">{{ $error }}</li>
                             @endforeach
                             </ul>
                       </div>
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label for="companyCity" class="col-sm-3 control-label">Company city</label>
                     <div class="col-sm-9">
-                        <input type="password" name="city" placeholder="Company city" class="form-control">
+                        <input type="text" name="city" placeholder="Company city" class="form-control">
                     </div>
                 </div>
               

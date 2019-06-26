@@ -15,13 +15,15 @@
                         </ul>
                     </div>
                 @endif
-                <div style="display: flex; justify-content: center;">
+                <div >
                     <form method="post" action="materials-update">
                         @csrf
                         <div class="form-group">
-                            <label for="name">Material Name: </label>
-                            <input type="text" class="form-control" name="name" value="{{$material->material_name}}"/>
+                            <label for="name">Material Name: </label> </div>
+                            <div>
+                            <input type="text" class="form-control center"  name="name" value="{{$material->material_name}}"/>
                         </div>
+                        <br>
                         <button type="submit" name="update_button" value="Update" class="btn btn-primary">Save</button>
                         <button type="submit" name="delete_button" value="Delete" class="btn btn-primary">Delete</button>
                     </form>

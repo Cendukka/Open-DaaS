@@ -1,51 +1,21 @@
-<!--<div class="navbar">
-    <div class="navbar-inner">
-        <a id="logo" href="/">{{$company->company_name}}</a>
-        <ul class="nav">
-            <li><a href="/companies/{{$company->company_id}}">Oma Toimipiste</a></li>
-            <li><a href="/companies/{{$company->company_id}}/warehouse">Raportit</a></li>
-            <li><a href="/companies/{{$company->company_id}}/manage">Hallinnoi</a></li>
-            <li><a href="/ewc">EWC Codes</a></li>
-        </ul>
-    </div>
-</div>
-<br>-->
 <div class="wrapper">
 
     <!-- Sidebar Holder -->
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/companies/{{$company->company_id}}"><h3>JALOSTUSLAITOS</h3>{{$company->company_name}}</a>
+            <a href="/"><h3>JALOSTUSLAITOS</h3></a>
         </div>
 
-        <ul class="list-unstyled components">
+        <div class="finland-map">
+            <img class="Responsive"
+                 src="https://trello-attachments.s3.amazonaws.com/5cf4b117381b0a775d886f47/1000x2251/97da9a74ec1fd74650c8955ab34c0e1c/fi.png"
+                 width="250" height="563" class="img-fluid" alt="Responsive image">
+        </div>
 
-            <li>
-                <a href="/companies/{{$company->company_id}}">Oma Toimipiste</a>
-                <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">Raportit</a>
-                <ul class="collapse list-unstyled" id="reportsSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/warehouse'}}">    Varasto</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/receipts'}}">     Saapuneet</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/issues'}}">       Lähetetyt</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/pre'}}">          Esilajiteltu</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/refined'}}">      Hienolajiteltu</a></li>
-                </ul>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
-
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="#">Käyttäjät</a></li>
-                    <li><a href="#">Kategoriat</a></li>
-                    <li><a href="#">Lisää uusi toimipiste</a></li>
-                </ul>
-                <a href="/ewc">EWC Codes</a>
-            </li>
-
-        </ul>
-
-        <ul class="list-unstyled CTAs">
-            <li><a href="/" class="back">Back</a></li>
-        </ul>
+                {{--<ul class="list-unstyled CTAs">
+                    <li><a href="/" class="back">Back</a></li>
+                </ul>--}}
 
     </nav>
 
@@ -56,24 +26,39 @@
             <div class="container-fluid">
 
                 <div class="navbar-header">
-
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
                         <i class="glyphicon glyphicon-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="/" class="info-btn">Etusivu</a>
-                        <a href="#" class="info-btn">Yhteystiedot</a>
-                        <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a>
+                        <li><a href="#" class="info-btn">Yhteystiedot</a></li>
+                        <li>
+                        @guest
+                            <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li>
+
+                        <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+                            </li>
+
+                        @else
+                        
+                        <a href="/home" class="btn btn-info btn-lg logout">Hallita</a></li>
+
+                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+
+                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
+
+                        @csrf
+                    @endguest
+
+
+                    <!-- <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+                                <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li> -->
+
                     </ul>
-
                 </div>
-
             </div>
 
         </nav>
@@ -114,7 +99,7 @@
 <!-- Script for Back To The Top Button -->
 <script>
 
-    <!-- When the user scrolls down 30px from the top of the document, show the button -->
+    //When the user scrolls down 30px from the top of the document, show the button
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {

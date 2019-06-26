@@ -16,7 +16,7 @@ class receipt_controller extends Controller {
 	public function index(company $company) {
 		return view('pages.company.manage.receipts')->with('company', $company);
 	}
-	
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -25,7 +25,7 @@ class receipt_controller extends Controller {
 	public function create(company $company) {
 		return view('pages.company.manage.receipt_create')->with('company', $company);
 	}
-	
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -34,33 +34,38 @@ class receipt_controller extends Controller {
 	 */
 	public function store(Request $request, company $company) {
 		# ADD MORE AUTHENTICATION HERE
-		
+        #dd($request);
 		$request->validate([
+			'user' => 'required|integer',
 			'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'material' => 'required|integer',
 			'source' => 'required',
-			'from_microlocation' => 'required|integer',
+			'from_community' => 'integer|required_with:from_company',
+			'from_supplier' => 'integer',
+            'from_microlocation' => 'integer',
 			'to_microlocation' =>'required|integer',
 			'distance' => 'required|integer',
 			'weight' => 'required|integer',
 			'ewc' => 'required|max:6|digits_between:0,9',
-			'material' => 'required|integer',
 		]);
-		
-		
+
+
 		$receipt = new inventory_receipt([
+            'receipt_user_id' => $request->get('user'),
+            'receipt_date' => $request->get('datetime'),
 			'receipt_material_id' => $request->get('material'),
+			'from_community_id' => $request->get('from_community'),
+			'from_supplier_id' => $request->get('from_supplier'),
 			'receipt_from_microlocation_id' => $request->get('from_microlocation'),
 			'receipt_to_microlocation_id' => $request->get('to_microlocation'),
 			'distance_km' => $request->get('distance'),
 			'receipt_weight' => $request->get('weight'),
-			'receipt_date' => $request->get('datetime'),
 			'receipt_ewc_code' => $request->get('ewc'),
-			'receipt_user_id' => $request->get('user'),
 		]);
 		$receipt->save();
 		return redirect()->action('receipt_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
 	}
-	
+
 	/**
 	 * Display the specified resource.
 	 *
@@ -70,7 +75,7 @@ class receipt_controller extends Controller {
 	public function show(company $company, receipt $receipt) {
 		return redirect()->action('receipt_controller@index', ['company' => $company]);
 	}
-	
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -80,7 +85,7 @@ class receipt_controller extends Controller {
 	public function edit(company $company, receipt $receipt) {
 		return view('pages.company.manage.receipt_edit')->with(['company' => $company, 'receipt' => $receipt]);
 	}
-	
+
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -90,7 +95,7 @@ class receipt_controller extends Controller {
 	 */
 	public function update(Request $request, company $company, receipt $receipt) {
 		# ADD MORE AUTHENTICATION HERE
-		
+
 		$request->validate([
 			'user_type' => 'required|integer',
 			'company' => 'required|integer',
@@ -99,7 +104,7 @@ class receipt_controller extends Controller {
 			'last_name'=> 'required|max:50',
 			'password'=> 'required',
 		]);
-		
+
 		#####################
 		$receiptNew = inventory_receipt::find($receipt->receipt_id);
 		$receiptNew->user_type_id = $request->get('user_type');
@@ -109,12 +114,12 @@ class receipt_controller extends Controller {
 		$receiptNew->first_name = $request->get('first_name');
 		$receiptNew->password = $request->get('password');
 		$receiptNew->save();
-		
-		
-		
+
+
+
 		return redirect()->action('receipt_controller@index',['company' => $company])->withErrors(['Receipt successfully updated.']);
 	}
-	
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -155,10 +160,9 @@ class receipt_controller extends Controller {
 			if($result){
 				$sumweight = 0;
 				foreach ($result as $key => $value){
-					$fromid =  ($value->from_company_id ? 'Company '.$value->from_company_id :
-								($value->from_community_id ? 'Community '.$value->from_community_id :
+					$fromid =  ($value->from_community_id ? 'Community '.$value->from_community_id :
 								($value->from_supplier_id ? 'Supplier '.$value->from_supplier_id :
-								'Microlocation '.$value->receipt_from_microlocation_id)));
+								'Microlocation '.$value->receipt_from_microlocation_id));
 					$output.='<tr>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.$fromid.'</td>'.

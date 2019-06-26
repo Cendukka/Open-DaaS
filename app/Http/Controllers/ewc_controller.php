@@ -12,19 +12,17 @@ class ewc_controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-		$allEwc = DB::table('ewc_codes')->get();
-		return view('pages.ewc')->with('allEwc', $allEwc);
+    public function index(){
+		return view('pages.ewc');
     }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         //
     }
 
@@ -34,8 +32,7 @@ class ewc_controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
@@ -45,8 +42,7 @@ class ewc_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
@@ -56,8 +52,7 @@ class ewc_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
@@ -68,8 +63,7 @@ class ewc_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
@@ -79,15 +73,17 @@ class ewc_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         //
     }
 	
 	public function search(Request $request){
 		if($request->ajax()){
 			$output="";
-			$result=DB::table('ewc_codes')->where('ewc_code','LIKE','%'.$request->search."%")->get();
+			$result = DB::table('ewc_codes')
+                ->where('ewc_code','LIKE','%'.$request->search."%")
+                ->orWhere('description','LIKE','%'.$request->search."%")
+                ->get();
 			if($result){
 				foreach ($result as $key => $value){
 					$output.='<tr>'.

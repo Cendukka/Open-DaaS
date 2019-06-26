@@ -1,6 +1,6 @@
 @extends('layouts.macrolocation')
 @section('content')
-    <div id="content" class="row">
+    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Add user </h3>
@@ -19,7 +19,7 @@
                 <form method="post" action="users-store">
                     @csrf
                     <div class="form-group">
-                        <label for="user_type">User Type: </label>
+                        <label for="user_type">User Type:&nbsp</label>
                         <select name="user_type">
                             <option value="1">Superadmin</option>
                             <option value="2">Admin</option>
@@ -28,13 +28,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="company">Company: </label>
+                        <label for="company">Company:&nbsp</label>
                         <select name="company">
                             <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="microlocation">Microlocation: </label>
+                        <label for="microlocation">Microlocation:&nbsp</label>
                         <select name="microlocation">
                             <option selected="selected" value=""></option>
                             @php
@@ -49,19 +49,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="first_name">First Name: </label>
+                        <label for="first_name">First Name:&nbsp</label>
                         <input type="text" class="form-control" name="first_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="last_name">Last Name: </label>
+                        <label for="last_name">Last Name:&nbsp</label>
                         <input type="text" class="form-control" name="last_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="username">Username: </label>
+                        <label for="username">Username:&nbsp</label>
                         <input type="text" class="form-control" name="username"/>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password: </label>
+                        <label for="password">Password:&nbsp</label>
                         <input type="text" class="form-control" name="password" value="qwerty" readonly style="color:lightgray;">
                     </div>
                     <br>

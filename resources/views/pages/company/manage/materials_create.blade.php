@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-    <div id="content" class="row">
+    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Create a new material </h3>
@@ -19,7 +19,7 @@
                 <form method="post" action="materials-store">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Material Name: </label>
+                        <label for="name">Material Name:&nbsp</label>
                         <input type="text" class="form-control" name="name"/>
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>

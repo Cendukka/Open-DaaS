@@ -1,0 +1,101 @@
+
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content {
+    height: 1000px;
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    background-color: #969696;
+    height: 100%;
+    text-align: center;
+    color: black;
+
+}
+
+.finland-map {
+    margin-top: 70px;
+}
+
+.elements {
+    margin-left: 190px;
+    box-shadow: 10px 10px 5px grey;
+    border: .25px lightgrey;
+    border-top-style: hidden;
+    border-left-style: hidden;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    width: 77%;
+    padding: 3%;
+    background-color: darkgrey;
+}
+
+/* This is for login  */
+
+.login a {
+    background-color: #001a48;
+    width: auto;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    float: right;
+    margin-bottom: 20px;
+
+}
+
+.col-sm-9 {
+
+}
+
+.calender {
+
+}
+
+.jumbotron {
+    background-color: #ffff99;
+    color: Black;
+    font-size: 12px;
+    padding: 3% 3% 3% 3%;
+}
+
+.menu {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 16px;
+    background-color: #E3E3E3;
+    width: 114%;
+    margin-left: -7%;
+}
+
+.page {
+    background-color: white;
+    height: 100%;
+    color: black;
+}
+
+.jalos {
+    box-shadow: 10px 10px 5px grey;
+    background-color: white;
+    padding: 10%;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 30px;
+    width: 114%;
+    margin-left: -7%;
+}
+
+.btn {
+    background-color: #485483;
+    color: white;
+    margin-bottom: 5%;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        text-align: center;
+
+    }
+}

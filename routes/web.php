@@ -1,28 +1,13 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('pages.home');
+
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Route::get('/', function () {
-	return view('pages.home');
+	return view('pages.welcomeLogOut');
 });
 
 Route::get('/manage', function () {
@@ -33,9 +18,10 @@ Route::get('/hallinnoi/lisauusitoimipiste', function () {
 	return view('pages.lisaUusiToimipiste');
 });
 
-Route::resource('ewc', 'ewc_controller', ['only' => [
-	'index', 'show'
-]]);
+
+Route::get('ewc','ewc_controller@index');
+Route::get('ewc/search','ewc_controller@search');
+
 
 
 
@@ -71,6 +57,7 @@ Route::post('companies/company-store', 'company_controller@store');
 Route::post('companies/{company}/company-update', 'company_controller@update');
 
 # Users
+Route::resource('companiesUser', 'companyUser_controller', ['only' => ['index']]);
 Route::resource('companies/{company}/manage/users', 'user_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/{company}/manage/users/users-store', 'user_controller@store');
 Route::post('companies/{company}/manage/users/{user}/users-update', 'user_controller@update');
@@ -84,6 +71,8 @@ Route::post('companies/{company}/manage/microlocations/{microlocation}/microloca
 Route::resource('companies/{company}/manage/receipts', 'receipt_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/{company}/manage/receipts/receipts-store', 'receipt_controller@store');
 Route::post('companies/{company}/manage/receipts/{receipt}/receipts-update', 'receipt_controller@update');
+Route::get('companies/{company}/manage/receipts/create/source','receipt_controller@source');
+Route::get('companies/{company}/manage/receipts/create/communities','receipt_controller@communities');
 
 #Route::get('/','SearchController@index');
 #Route::get('/search','SearchController@search');

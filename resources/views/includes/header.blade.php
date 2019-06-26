@@ -4,13 +4,13 @@
     <nav id="sidebar">
 		
 		<div class="sidebar-header">
-        	<a href="/"><h3>JALOSTUSLAITOS</h3>SuperAdmin</a>
+        	<a href="/home"><h3>JALOSTUSLAITOS</h3>SuperAdmin</a>
 		</div>
 
 		<ul class="list-unstyled components">
 
 			<li>
-				<a href="/">Oma toimipiste</a>
+				<a href="/home">Oma toimipiste</a>
 				<a href="/companies/">Toimipisteet</a>
                 <a href="/ewc/">EWC Codes</a>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
@@ -46,13 +46,14 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#" class="info-btn">Yhteystiedot</a></li>
-                                <li>
+                                <a href="/" class="info-btn">Etusivu</a>
+                                <a href="#" class="info-btn">Yhteystiedot</a>
+
                                 @guest
-                                <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li>
+                                <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>
 
                                 <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
-                            </li>
+
                             
                         @else 
                         <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>

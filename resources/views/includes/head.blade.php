@@ -6,12 +6,22 @@
 
          <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{{--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">--}}
         
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="<?php echo asset('css/sidebar.css')?>" type="text/css"> 
+        <link rel="stylesheet" href="<?php echo asset('css/sidebar.css')?>" type="text/css">
+        <link rel="stylesheet" href="<?php echo asset('css/homepage.css')?>" type="text/css">
+
         
         <!-- Scrollbar Custom CSS (for fixed LeftSide Menu) -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+        <!-- Scripts for the homepage -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 <!--<style>

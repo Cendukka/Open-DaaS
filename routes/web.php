@@ -6,7 +6,7 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Route::get('/', function () {
-	return view('pages.home');
+	return view('pages.welcomeLogOut');
 });
 
 Route::get('/manage', function () {

@@ -16,6 +16,7 @@ class ewc_controller extends Controller
 		return view('pages.ewc');
     }
 
+
     /**
      * Show the form for creating a new resource.
      *

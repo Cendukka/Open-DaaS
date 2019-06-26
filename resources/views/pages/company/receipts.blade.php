@@ -1,44 +1,12 @@
 @extends('layouts.macrolocation')
 @section('content')
-    <!--<div id="macrolocation_name" class="row">
-        @include('includes.macrolocation_name')
-        </div>-->
+
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Inventory Receipts </h3>
             </div>
             <div class="panel-body">
-{{--                @php--}}
-{{--                    $from_date = isset($_GET['from_date']) ? $_GET['from_date'] : ;--}}
-{{--                    $to_date = isset($_GET['to_date']) ? $_GET['to_date'] :  ;--}}
-{{--                @endphp--}}
-{{--                <form action={{"/companies/".$company->company_id."/receipts"}}>--}}
-{{--                    From date:<br>--}}
-{{--                    <input type="text" name="from_date" value={{$from_date}}><br>--}}
-{{--                    To date:<br>--}}
-{{--                    <input type="text" name="to_date" value={{$to_date}}>--}}
-{{--                    <input type="submit" value="Tarkenna Hakua">--}}
-{{--                </form>--}}
-{{--                @php--}}
-{{--                    $microlocations = DB::table('microlocations')--}}
-{{--                                        ->where('microlocation_company_id','=',$company->company_id)--}}
-{{--                                        ->get();--}}
-
-{{--                    $microlocation_ids = [];--}}
-{{--                    foreach ($microlocations as $microlocation){--}}
-{{--                        array_push($microlocation_ids, $microlocation->microlocation_id);--}}
-{{--                    }--}}
-
-{{--                    $inventory = DB::table('inventory_receipt')--}}
-{{--                                ->whereIn('receipt_to_microlocation_id', $microlocation_ids)--}}
-{{--                                ->whereBetween('receipt_date', [$from_date, $to_date])--}}
-{{--                                ->join('material_names','receipt_material_id','=','material_id')--}}
-{{--                                ->orderBy('receipt_to_microlocation_id')--}}
-{{--                                ->orderBy('receipt_date')--}}
-{{--                                ->get();--}}
-{{--                @endphp--}}
-{{--                @if (count($inventory)>0)--}}
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label for="from-date">From Date: </label>

@@ -16,7 +16,7 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/"><h3>JALOSTUSLAITOS</h3>{{$company->company_name}}</a>
+            <a href="/companies/{{$company->company_id}}"><h3>JALOSTUSLAITOS</h3>{{$company->company_name}}</a>
         </div>
 
         <ul class="list-unstyled components">
@@ -38,7 +38,7 @@
                     <li><a href="#">Kategoriat</a></li>
                     <li><a href="#">Lisää uusi toimipiste</a></li>
                 </ul>
-                <a href="/ewc/">EWC Codes</a>
+                <a href="/ewc">EWC Codes</a>
             </li>
 
         </ul>
@@ -67,8 +67,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" class="info-btn">Yhteystiedot</a></li>
-                        <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+                        <a href="/" class="info-btn">Etusivu</a>
+                        <a href="#" class="info-btn">Yhteystiedot</a>
+                        <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a>
                     </ul>
 
                 </div>

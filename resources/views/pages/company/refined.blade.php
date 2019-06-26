@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-8">
-                        <label for="search">Search: </label>
+                        $company->company_id     <label for="search">Search: </label>
                         <input type="text" class="form-controller" id="search" name="search" placeholder="Search">
                     </div>
                 </div>

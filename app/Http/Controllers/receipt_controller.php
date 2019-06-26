@@ -155,10 +155,9 @@ class receipt_controller extends Controller {
 			if($result){
 				$sumweight = 0;
 				foreach ($result as $key => $value){
-					$fromid =  ($value->from_company_id ? 'Company '.$value->from_company_id :
-								($value->from_community_id ? 'Community '.$value->from_community_id :
+					$fromid =  ($value->from_community_id ? 'Community '.$value->from_community_id :
 								($value->from_supplier_id ? 'Supplier '.$value->from_supplier_id :
-								'Microlocation '.$value->receipt_from_microlocation_id)));
+								'Microlocation '.$value->receipt_from_microlocation_id));
 					$output.='<tr>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.$fromid.'</td>'.

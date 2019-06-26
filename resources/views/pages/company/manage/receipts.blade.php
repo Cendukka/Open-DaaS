@@ -52,10 +52,9 @@
 
                         <tr>
                             @php
-                            $fromid =  ($receipt->from_company_id ? 'Company '.$receipt->from_company_id :
-                                               ($receipt->from_community_id ? 'Community '.$receipt->from_community_id :
-                                               ($receipt->from_supplier_id ? 'Supplier '.$receipt->from_supplier_id :
-                                                'Microlocation '.$receipt->receipt_from_microlocation_id)));
+                            $fromid =  ($receipt->from_community_id ? 'Community '.$receipt->from_community_id :
+                                       ($receipt->from_supplier_id ? 'Supplier '.$receipt->from_supplier_id :
+                                        'Microlocation '.$receipt->receipt_from_microlocation_id));
                             @endphp
                             <td><a href="{{url('/companies/'.$company->company_id.'/manage/receipts/'.$receipt->receipt_id.'/edit')}}">{{title_case($receipt->receipt_id)}}</a></td>
                             <td>{{title_case($receipt->receipt_date)}}</td>

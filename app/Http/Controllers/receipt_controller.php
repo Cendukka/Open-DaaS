@@ -147,12 +147,15 @@ class receipt_controller extends Controller {
                 })
                 ->where(function ($query) use ($request){
                     $query
-                    ->where('microlocation_name','LIKE','%'.$request->search."%")
+                    ->where('to_microlocations.microlocation_name','LIKE','%'.$request->search."%")
+                    ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$request->search."%")
                     ->orWhere('material_name','LIKE','%'.$request->search."%")
                     ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%");
                 })
                 ->join('material_names','receipt_material_id','=','material_id')
-                ->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
+                ->join('microlocations as from_microlocations','receipt_from_microlocation_id','=','from_microlocations.microlocation_id')
+                ->join('microlocations as to_microlocations','receipt_to_microlocation_id','=','to_microlocations.microlocation_id')
+                ->select('inventory_receipt.*','material_names.*','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name')
                 ->orderBy('receipt_to_microlocation_id')
                 ->orderBy('receipt_date')
                 ->get();
@@ -165,7 +168,7 @@ class receipt_controller extends Controller {
                             'Microlocation:'.(DB::table('microlocations')->where('microlocation_id',$value->receipt_from_microlocation_id)->first()->microlocation_name)));
                     $output.='<tr>'.
                         '<td>'.$value->receipt_date.'</td>'.
-                        '<td>'.title_case($value->microlocation_name).'</td>'.
+                        '<td>'.title_case($value->to_microlocation_name).'</td>'.
                         '<td>'.title_case(explode(':', $from)[0]).'</td>'.
                         '<td>'.title_case(mb_strimwidth(explode(':', $from)[1],0,25,'...')).'</td>'.
                         '<td>'.$value->material_name.'</td>'.
@@ -179,8 +182,9 @@ class receipt_controller extends Controller {
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.
-                    '<td>'.$sumweight.' Total</td>'.
                     '<td></td>'.
+                    '<td></td>'.
+                    '<td>'.$sumweight.' Total</td>'.
                     '<td></td>'.
                     '<td></td>'.
                     '</tr>';

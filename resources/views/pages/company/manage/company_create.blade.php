@@ -18,19 +18,19 @@
                 <form method="post" action="company-store">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Company Name: </label>
+                        <label for="name">Company Name:&nbsp</label>
                         <input type="text" class="form-control" name="name"/>
                     </div>
                     <div class="form-group">
-                        <label for="address">Street Address: </label>
+                        <label for="address">Street Address:&nbsp</label>
                         <input type="text" class="form-control" name="address"/>
                     </div>
                     <div class="form-group">
-                        <label for="postal_code">Postal Code: </label>
+                        <label for="postal_code">Postal Code:&nbsp</label>
                         <input type="text" class="form-control" name="postal_code"/>
                     </div>
                     <div class="form-group">
-                        <label for="city">City: </label>
+                        <label for="city">City:&nbsp</label>
                         <input type="text" class="form-control" name="city">
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>

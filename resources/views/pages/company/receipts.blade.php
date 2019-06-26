@@ -26,9 +26,10 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>To Location</th>
-                            <th>From ID</th>
                             <th>Date</th>
+                            <th>To Location</th>
+                            <th>From Type</th>
+                            <th>From Name</th>
                             <th>Material</th>
                             <th>Weight (kg)</th>
                             <th>Distance (km)</th>

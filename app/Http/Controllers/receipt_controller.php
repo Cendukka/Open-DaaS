@@ -6,6 +6,7 @@ use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\inventory_receipt;
+use Illuminate\Support\Str;
 
 class receipt_controller extends Controller {
 	/**
@@ -72,7 +73,7 @@ class receipt_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(company $company, receipt $receipt) {
+	public function show(company $company) {
 		return redirect()->action('receipt_controller@index', ['company' => $company]);
 	}
 
@@ -82,7 +83,7 @@ class receipt_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(company $company, receipt $receipt) {
+	public function edit(company $company, inventory_receipt $receipt) {
 		return view('pages.company.manage.receipt_edit')->with(['company' => $company, 'receipt' => $receipt]);
 	}
 
@@ -93,7 +94,7 @@ class receipt_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, company $company, receipt $receipt) {
+	public function update(Request $request, company $company, inventory_receipt $receipt) {
 		# ADD MORE AUTHENTICATION HERE
 
 		$request->validate([
@@ -129,41 +130,63 @@ class receipt_controller extends Controller {
 	public function destroy($id) {
 		//
 	}
-	
-	public function search(Request $request, company $company){
-		if($request->ajax()){
-			$microlocations = DB::table('microlocations')
-							->where('microlocation_company_id','=',$company->company_id)
-							->get();
-			$microlocation_ids = [];
-			foreach ($microlocations as $microlocation){
-				array_push($microlocation_ids, $microlocation->microlocation_id);
-			}
-			$output="";
-			$result=DB::table('inventory_receipt')
-					->whereIn('receipt_to_microlocation_id', $microlocation_ids)
-					->when(($request->from && $request->to), function($query) use ($request){
-						return $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d",strtotime($request->to))]);
-					})
-					->where(function ($query) use ($request){
-						$query
-						->where('microlocation_name','LIKE','%'.$request->search."%")
-						->orWhere('material_name','LIKE','%'.$request->search."%")
-						->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%");
-					})
-					->join('material_names','receipt_material_id','=','material_id')
-					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
-					->orderBy('receipt_to_microlocation_id')
-					->orderBy('receipt_date')
-					->get();
-			#dd($result);
-			if($result){
-				$sumweight = 0;
-				foreach ($result as $key => $value){
-					$fromid =  ($value->from_community_id ? 'Community '.$value->from_community_id :
-								($value->from_supplier_id ? 'Supplier '.$value->from_supplier_id :
-								'Microlocation '.$value->receipt_from_microlocation_id));
-					$output.='<tr>'.
+
+    public function search(Request $request, company $company){
+        if($request->ajax()){
+            $microlocations = DB::table('microlocations')
+                ->where('microlocation_company_id','=',$company->company_id)
+                ->get();
+            $microlocation_ids = [];
+            foreach ($microlocations as $microlocation){
+                array_push($microlocation_ids, $microlocation->microlocation_id);
+            }
+            $output="";
+            $result=DB::table('inventory_receipt')
+                ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
+                ->when(($request->from && $request->to), function($query) use ($request){
+                    return $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d",strtotime($request->to))]);
+                })
+                ->where(function ($query) use ($request){
+                    $query
+                    ->where('to_microlocations.microlocation_name','LIKE','%'.$request->search."%")
+                    ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$request->search."%")
+                    ->orwhere('supplier.supplier_name','LIKE','%'.$request->search."%")
+                    ->orwhere('community.communitY_city','LIKE','%'.$request->search."%")
+                    ->orWhere('material_name','LIKE','%'.$request->search."%")
+                    ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%")
+                    ->orWhere(function ($query) use ($request){
+                        if(Str::contains('community',$request->search)){
+                            $query->whereNotNull('from_community_id');
+                        }
+                    })
+                    ->orWhere(function ($query) use ($request){
+                        if(Str::contains('supplier',$request->search)){
+                            $query->orWhereNotNull('from_supplier_id');
+                        }
+                    })
+                    ->orWhere(function ($query) use ($request){
+                        if(Str::contains('microlocation',$request->search)){
+                            $query->orWhereNotNull('receipt_from_microlocation_id');
+                        }
+                    });
+                })
+                ->join('material_names','receipt_material_id','=','material_id')
+                ->leftJoin('supplier','from_supplier_id','=','supplier.supplier_id')
+                ->leftJoin('community','from_community_id','=','community.community_id')
+                ->leftJoin('microlocations as from_microlocations','receipt_from_microlocation_id','=','from_microlocations.microlocation_id')
+                ->leftJoin('microlocations as to_microlocations','receipt_to_microlocation_id','=','to_microlocations.microlocation_id')
+                ->select('inventory_receipt.*','material_names.*','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','supplier.supplier_name','community.community_city')
+                ->orderBy('receipt_to_microlocation_id')
+                ->orderBy('receipt_date')
+                ->get();
+           # dd($result);
+            if($result){
+                $sumweight = 0;
+                foreach ($result as $key => $value){
+                    $from =  ($value->from_community_id ? 'Community:'.(DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city) :
+                        ($value->from_supplier_id ? 'Supplier:'.(DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name) :
+                            'Microlocation:'.$value->from_microlocation_name));
+                    $output.='<tr>'.
                         '<td>'.$value->receipt_date.'</td>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.$fromid.'</td>'.
@@ -180,10 +203,79 @@ class receipt_controller extends Controller {
 					'<td></td>'.
 					'<td></td>'.
                     '<td>'.$sumweight.' Total</td>'.
-					'<td></td>'.
-					'</tr>';
-				return Response($output);
-			}
-		}
-	}
+                    '<td></td>'.
+                    '<td></td>'.
+                    '</tr>';
+                return Response($output);
+            }
+        }
+    }
+    public function source(Request $request, company $company){
+        if($request->ajax()){
+            $ml_id = $request->ml_id ? $request->ml_id : 0;
+            $community_id = $request->community_id ? $request->community_id : 0;
+            $company_id = $community_id ? DB::table('community')->where('community_id','=',$community_id)->first()->community_company_id : 0;
+            $supplier_id = $request->supplier_id ? $request->supplier_id : 0;
+            $output="";
+            $source = $request->input('source');
+            if($source == 'internal'){
+                $result = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
+                if($result) {
+                    $output .= '<div id="from_microlocation" class="form-group">';
+                    $output .= '<label for="from_microlocation">From microlocation:&nbsp</label><select name="from_microlocation">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    foreach ($result as $key => $value) {
+                        $output .= '<option value="'.$value->microlocation_id.'">'.title_case($value->microlocation_name).'</option>';
+                    }
+                    $output .= '</select></div>';
+                }
+            }
+            elseif($source == 'external'){
+                $result = DB::table('company')->where('company_id','!=',$company->company_id)->get();
+                if($result) {
+                    $output .= '<div class="form-group">';
+                    $output .= '<label for="from_company">From company:&nbsp</label><select id="from_company" name="from_company">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    foreach ($result as $key => $value) {
+                        $output .= '<option value="'.$value->company_id.'" '.($company_id == $value->company_id ? 'selected="selected"' : '').'>'.title_case($value->company_name).'</option>';
+                    }
+                    $output .= '</select></div>';
+                    $output .= '<div id="from_community" class="form-group">';
+                    $output .= '</select></div>';
+                }
+            }
+            elseif($source == 'supplier'){
+                $result = DB::table('supplier')->get();
+                if($result) {
+                    $output .= '<div class="form-group">';
+                    $output .= '<label for="from_supplier">From supplier:&nbsp</label><select id="from_supplier" name="from_supplier">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    foreach ($result as $key => $value) {
+                        $output .= '<option value="'.$value->supplier_id.'" '.($supplier_id == $value->supplier_id ? 'selected="selected"' : '').'>'.title_case($value->supplier_name).'</option>';
+                    }
+                    $output .= '</select></div>';
+                }
+            }
+            return Response($output);
+        }
+    }
+    public function communities(Request $request, company $company){
+        if($request->ajax()){
+            $output="";
+            $community_id = $request->input('community_id') ?: 0;
+            $from_company = $request->input('from_company') ?: DB::table('community')->where('community_id','=',$community_id)->first()->community_company_id;
+            $result = DB::table('community')
+                ->where('community_company_id','=',$from_company)
+                ->get();
+            if($result) {
+                $output .= '<label for="from_community">From community:&nbsp</label><select name="from_community">';
+                $output .= '<option selected="selected" disabled hidden value=""></option>';
+                foreach ($result as $key => $value) {
+                    $output .= '<option value="'.$value->community_id.'" '.($value->community_id == $community_id ? 'selected="selected"' : '').'>'.title_case($value->community_city).'</option>';
+                }
+                $output .= '</select>';
+            }
+            return Response($output);
+        }
+    }
 }

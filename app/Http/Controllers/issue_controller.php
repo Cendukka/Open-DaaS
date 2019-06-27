@@ -9,6 +9,10 @@ use App\inventory_issue;
 use mysql_xdevapi\Collection;
 
 class issue_controller extends Controller {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
 	/**
 	 * Display a listing of the resource.
 	 *

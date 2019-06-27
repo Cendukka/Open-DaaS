@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 use App\refined_sorting;
 
 class refined_controller extends Controller {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
 	/**
 	 * Display a listing of the resource.
 	 *

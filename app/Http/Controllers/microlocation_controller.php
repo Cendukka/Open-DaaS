@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 use App\microlocation;
 
 class microlocation_controller extends Controller {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
 	/**
 	 * Display a listing of the resource.
 	 *

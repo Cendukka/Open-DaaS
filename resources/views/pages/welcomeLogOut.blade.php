@@ -90,10 +90,10 @@
                             fractionData.addColumn('string', 'Weight in Kg');
                             fractionData.addColumn('number', 'Slices');
                             fractionData.addRows([
-                                ['Kierrätetty', recycledChart],
-                                ['Lajittelematon', unrecycledChart],
-                                ['Energia', energyChart],
-                                ['Uusiokäyttö', reuseChart]
+                                ['Villa', recycledChart],
+                                ['Puuvilla', unrecycledChart],
+                                ['Nahka', energyChart],
+                                ['Pellava', reuseChart]
                             ]);
                             var fractionOptions = {'title': 'Koko Suomi - Yhteensä:'+totalSumFractions+ ' Kg', 'width': 700, 'height': 500, 'backgroundColor': 'transparent'};
                             var fractionChart = new google.visualization.PieChart(document.getElementById('piechartFraction'));

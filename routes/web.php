@@ -63,5 +63,10 @@ Route::get('companies/{company}/manage/receipts/create/communities',            
 Route::get('companies/{company}/manage/receipts/{receipt}/edit/source',         'receipt_controller@source');
 Route::get('companies/{company}/manage/receipts/{receipt}/edit/communities',    'receipt_controller@communities');
 
+# Issues
+Route::resource('companies/{company}/manage/issues', 'issue_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+Route::post('companies/{company}/manage/issues/issues-store',                   'issue_controller@store');
+Route::post('companies/{company}/manage/issues/{microlocation}/issues-update',  'issue_controller@update');
+
 #Route::get('/','SearchController@index');
 #Route::get('/search','SearchController@search');

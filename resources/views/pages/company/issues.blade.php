@@ -28,7 +28,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>To Locations</th>
+                        <th>To Location</th>
                         <th>From ID</th>
                         <th>Date</th>
                         <th>User</th>

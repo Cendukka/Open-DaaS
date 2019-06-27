@@ -15,8 +15,6 @@
                         </ul>
                     </div>
                 @endif
-                <a href="{{url('/companies/'.$company->company_id.'/manage/receipts/create')}}">+ Add Receipt</a>
-                <br>
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -71,6 +69,8 @@
                     @endforeach
                     </tbody>
                 </table>
+                <br>
+                <a href="{{url('/companies/'.$company->company_id.'/manage/receipts/create')}}">+ Add Receipt</a>
             </div>
         </div>
     </div>

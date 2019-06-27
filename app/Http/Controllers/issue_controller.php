@@ -6,7 +6,6 @@ use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\inventory_issue;
-use mysql_xdevapi\Collection;
 
 class issue_controller extends Controller {
 	/**
@@ -15,6 +14,7 @@ class issue_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(company $company) {
+        return view('pages.company.manage.issues')->with('company', $company);
 	}
 	
 	/**

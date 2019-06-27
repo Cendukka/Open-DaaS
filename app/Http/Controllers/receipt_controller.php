@@ -73,7 +73,7 @@ class receipt_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(company $company, receipt $receipt) {
+	public function show(company $company) {
 		return redirect()->action('receipt_controller@index', ['company' => $company]);
 	}
 
@@ -83,7 +83,7 @@ class receipt_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(company $company, receipt $receipt) {
+	public function edit(company $company, inventory_receipt $receipt) {
 		return view('pages.company.manage.receipt_edit')->with(['company' => $company, 'receipt' => $receipt]);
 	}
 
@@ -94,7 +94,7 @@ class receipt_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, company $company, receipt $receipt) {
+	public function update(Request $request, company $company, inventory_receipt $receipt) {
 		# ADD MORE AUTHENTICATION HERE
 
 		$request->validate([
@@ -214,12 +214,14 @@ class receipt_controller extends Controller {
     }
     public function source(Request $request, company $company){
         if($request->ajax()){
+            $ml_id = $request->ml_id ? $request->ml_id : 0;
+            $community_id = $request->community_id ? $request->community_id : 0;
+            $company_id = $community_id ? DB::table('community')->where('community_id','=',$community_id)->first()->community_company_id : 0;
+            $supplier_id = $request->supplier_id ? $request->supplier_id : 0;
             $output="";
             $source = $request->input('source');
             if($source == 'internal'){
-                $result = DB::table('microlocations')
-                    ->where('microlocation_company_id','=',$company->company_id)
-                    ->get();
+                $result = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
                 if($result) {
                     $output .= '<div id="from_microlocation" class="form-group">';
                     $output .= '<label for="from_microlocation">From microlocation:&nbsp</label><select name="from_microlocation">';
@@ -231,27 +233,39 @@ class receipt_controller extends Controller {
                 }
             }
             elseif($source == 'external'){
-                $result = DB::table('company')
-                    ->get();
+                $result = DB::table('company')->where('company_id','!=',$company->company_id)->get();
                 if($result) {
                     $output .= '<div class="form-group">';
                     $output .= '<label for="from_company">From company:&nbsp</label><select id="from_company" name="from_company">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
-                        $output .= '<option value="'.$value->company_id.'">'.title_case($value->company_name).'</option>';
+                        $output .= '<option value="'.$value->company_id.'" '.($company_id == $value->company_id ? 'selected="selected"' : '').'>'.title_case($value->company_name).'</option>';
                     }
                     $output .= '</select></div>';
                     $output .= '<div id="from_community" class="form-group">';
                     $output .= '</select></div>';
                 }
             }
+            elseif($source == 'supplier'){
+                $result = DB::table('supplier')->get();
+                if($result) {
+                    $output .= '<div class="form-group">';
+                    $output .= '<label for="from_supplier">From supplier:&nbsp</label><select id="from_supplier" name="from_supplier">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    foreach ($result as $key => $value) {
+                        $output .= '<option value="'.$value->supplier_id.'" '.($supplier_id == $value->supplier_id ? 'selected="selected"' : '').'>'.title_case($value->supplier_name).'</option>';
+                    }
+                    $output .= '</select></div>';
+                }
+            }
             return Response($output);
         }
     }
-    public function communities(Request $request){
+    public function communities(Request $request, company $company){
         if($request->ajax()){
             $output="";
-            $from_company = $request->input('from_company');
+            $community_id = $request->input('community_id') ?: 0;
+            $from_company = $request->input('from_company') ?: DB::table('community')->where('community_id','=',$community_id)->first()->community_company_id;
             $result = DB::table('community')
                 ->where('community_company_id','=',$from_company)
                 ->get();
@@ -259,7 +273,7 @@ class receipt_controller extends Controller {
                 $output .= '<label for="from_community">From community:&nbsp</label><select name="from_community">';
                 $output .= '<option selected="selected" disabled hidden value=""></option>';
                 foreach ($result as $key => $value) {
-                    $output .= '<option value="'.$value->community_id.'">'.title_case($value->community_city).'</option>';
+                    $output .= '<option value="'.$value->community_id.'" '.($value->community_id == $community_id ? 'selected="selected"' : '').'>'.title_case($value->community_city).'</option>';
                 }
                 $output .= '</select>';
             }

@@ -34,7 +34,7 @@
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="#">Lisää vastaanotto</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää vastaanotto</a></li>
                     <li><a href="#">Lisää lähetys</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
                 </ul>

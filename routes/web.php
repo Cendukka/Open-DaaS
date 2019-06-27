@@ -71,6 +71,7 @@ Route::post('companies/{company}/manage/microlocations/{microlocation}/microloca
 Route::resource('companies/{company}/manage/receipts', 'receipt_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/{company}/manage/receipts/receipts-store', 'receipt_controller@store');
 Route::post('companies/{company}/manage/receipts/{receipt}/receipts-update', 'receipt_controller@update');
+Route::get('companies/{company}/manage/receipts/create/','receipt_controller@create');
 Route::get('companies/{company}/manage/receipts/create/source','receipt_controller@source');
 Route::get('companies/{company}/manage/receipts/create/communities','receipt_controller@communities');
 

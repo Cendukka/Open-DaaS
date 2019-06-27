@@ -60,8 +60,8 @@
                             @endphp
                             <td><a href="{{url('/companies/'.$company->company_id.'/manage/receipts/'.$receipt->receipt_id.'/edit')}}">{{title_case($receipt->receipt_id)}}</a></td>
                             <td>{{title_case($receipt->receipt_date)}}</td>
-                            <td>{{title_case(explode(':', $from)[0])}}</td>
-                            <td>{{title_case(mb_strimwidth(explode(':', $from)[1],0,25,'...'))}}</td>
+                            <td>{{title_case(explode(':', $fromid)[0])}}</td>
+                            <td>{{title_case(mb_strimwidth(explode(':', $fromid)[1],0,25,'...'))}}</td>
                             <td>{{title_case(mb_strimwidth($receipt->microlocation_name,0,25,'...'))}}</td>
                             <td>{{title_case($receipt->distance_km)}}</td>
                             <td>{{title_case($receipt->receipt_weight)}}</td>

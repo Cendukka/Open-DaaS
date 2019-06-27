@@ -1,4 +1,5 @@
 @extends('layouts.macrolocation')
+@section ('title', 'Raportit: Varasto')
 @section('content')
     <!--<div id="macrolocation_name" class="row">
         @include('includes.macrolocation_name')
@@ -6,7 +7,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Warehouse</h3>
+                <h3>Varasto</h3>
             </div>
             <div class="panel-body">
                 @php
@@ -23,7 +24,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>Microlocation Name</th>
+                            <th>Microlokaation nimi</th>
                             @php
                                 $material_names = DB::table('inventory')->distinct()
                                                     ->join('material_names', 'inventory.inventory_material_id','=','material_names.material_id')
@@ -52,14 +53,14 @@
                                         <td>{{title_case($inv->inventory_weight)}}</td>
                                     @endforeach
                                 @else
-                                    <td>No records found</td>
+                                    <td>Haulla ei löytynyt tallenteita</td>
                                 @endif
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 @else
-                    <h4>No microlocations found</h4>
+                    <h4>Haulla ei löytynyt microlocaatiota</h4>
                 @endif
             </div>
         </div>

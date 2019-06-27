@@ -1,4 +1,5 @@
 @extends('layouts.macrolocation')
+@section ('title', 'Raportit: Hienolajiteltu')
 @section('content')
     <!--<div id="macrolocation_name" class="row">
         @include('includes.macrolocation_name')
@@ -28,11 +29,11 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>Location</th>
-                        <th>Date</th>
-                        <th>Weight</th>
-                        <th>Material</th>
-                        <th>User</th>
+                        <th>Aikaleima</th>
+                        <th>Microlokaatio</th>
+                        <th>Paino (Kg)</th>
+                        <th>Materiaali</th>
+                        <th>Käyttäjä</th>
                     </tr>
                     </thead>
                     <tbody>

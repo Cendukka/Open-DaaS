@@ -1,5 +1,5 @@
 @extends('layouts.welcomepage')
-@section('title', 'Menu')
+@section('title', 'Etusivu')
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -31,8 +31,10 @@
 
                     </div>
                     <br>
-
-                    <div id="piechart"></div>
+                    <div class="row">
+                        <div id="piechartWhole" class="col-md-6"></div>
+                        <div id="piechartFraction" class="col-md-6"></div>
+                    </div>
 
                     <script type="text/javascript">
 
@@ -40,43 +42,68 @@
                         google.charts.setOnLoadCallback(drawChart);
 
                         function drawChart() {
-
+                            /*****Store sum of weights of wanted categories in variables for piechartWhole*****/
                             var recycledChart = parseInt("{{(DB::table('inventory')->select('inventory_weight')->where('inventory_material_id', 'NOT LIKE', 1)->sum('inventory_weight'))}}");
-
-
                             var unrecycledChart = parseInt("{{(DB::table('inventory')->select('inventory_weight')->where('inventory_material_id', 1)->sum('inventory_weight'))}}");
-
-
                             var energyChart = parseInt("{{(DB::table('inventory_issue_details')
                                                 ->select('detail_weight')
                                                 ->join('inventory_issue', 'inventory_issue_details.detail_issue_id', '=', 'inventory_issue.issue_id')
                                                 ->where('issue_type_id', 1)
                                                 ->sum('detail_weight')
                                                 )}}");
-
                             var reuseChart = parseInt("{{(DB::table('inventory_issue_details')
                                                 ->select('detail_weight')
                                                 ->join('inventory_issue', 'inventory_issue_details.detail_issue_id', '=', 'inventory_issue.issue_id')
                                                 ->where('issue_type_id', "=", 2)
                                                 ->orWhere('issue_type_id',"=", 3)
-                                                ->sum('detail_weight'))}}");
+                                                ->sum('detail_weight')
+                                                )}}");
+                            /***************************************************************************/
 
-                            var data = new google.visualization.DataTable();
-                            data.addColumn('string', 'Weight in Kg');
-                            data.addColumn('number', 'Slices');
-                            data.addRows([
+                            /*****Store sum of weights of fractions in variables for piechartFraction*****/
+                            var totalSumFractions = parseInt("{{DB::table('inventory')
+                                            ->select('inventory_weight')
+                                            ->where('inventory_material_id', 'NOT LIKE', 1)
+                                            ->orWhere('inventory_material_id', 'NOT LIKE', 2)
+                                            ->sum('inventory_weight')
+                            }}") ;
+                            /***************************************************************************/
+
+                            console.log(totalSumFractions);
+                            /*****First Chart*****/
+                            var wholeData = new google.visualization.DataTable();
+                            wholeData.addColumn('string', 'Weight in Kg');
+                            wholeData.addColumn('number', 'Slices');
+                            wholeData.addRows([
                                 ['Kierrätetty', recycledChart],
                                 ['Lajittelematon', unrecycledChart],
                                 ['Energia', energyChart],
                                 ['Uusiokäyttö', reuseChart]
                             ]);
-                            var options = {'title': 'Koko Suomi - Yhteensä:'+(recycledChart+unrecycledChart+energyChart+reuseChart)+' Kg', 'width': 750, 'height': 500, 'backgroundColor': 'transparent'};
-                            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                            chart.draw(data, options);
-                        }
+                            var wholeOptions = {'title': 'Koko Suomi - Yhteensä:'+(recycledChart+unrecycledChart+energyChart+reuseChart)+' Kg', 'width': 700, 'height': 500, 'backgroundColor': 'transparent'};
+                            var wholeChart = new google.visualization.PieChart(document.getElementById('piechartWhole'));
+                            wholeChart.draw(wholeData, wholeOptions);
+                            /**********************/
+
+                            /*****Second Chart*****/
+                            var fractionData = new google.visualization.DataTable();
+                            fractionData.addColumn('string', 'Weight in Kg');
+                            fractionData.addColumn('number', 'Slices');
+                            fractionData.addRows([
+                                ['Kierrätetty', recycledChart],
+                                ['Lajittelematon', unrecycledChart],
+                                ['Energia', energyChart],
+                                ['Uusiokäyttö', reuseChart]
+                            ]);
+                            var fractionOptions = {'title': 'Koko Suomi - Yhteensä:'+totalSumFractions+ ' Kg', 'width': 700, 'height': 500, 'backgroundColor': 'transparent'};
+                            var fractionChart = new google.visualization.PieChart(document.getElementById('piechartFraction'));
+                            fractionChart.draw(fractionData, fractionOptions);
+                            /**********************/
+                        }//End of drawChart() function
                     </script>
             </div>
         </div>
+    </div>
 
 @endsection
 

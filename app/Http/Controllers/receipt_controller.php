@@ -164,9 +164,9 @@ class receipt_controller extends Controller {
 								($value->from_supplier_id ? 'Supplier '.$value->from_supplier_id :
 								'Microlocation '.$value->receipt_from_microlocation_id));
 					$output.='<tr>'.
+                        '<td>'.$value->receipt_date.'</td>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.$fromid.'</td>'.
-						'<td>'.$value->receipt_date.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->receipt_weight.'</td>'.
 						'<td>'.$value->distance_km.'</td>'.
@@ -178,8 +178,8 @@ class receipt_controller extends Controller {
 					'<td></td>'.
 					'<td></td>'.
 					'<td></td>'.
-					'<td>'.$sumweight.' Total</td>'.
 					'<td></td>'.
+                    '<td>'.$sumweight.' Total</td>'.
 					'<td></td>'.
 					'</tr>';
 				return Response($output);

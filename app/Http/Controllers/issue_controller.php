@@ -97,6 +97,7 @@ class issue_controller extends Controller {
 					->join('microlocations','issue_to_microlocation_id','=','microlocation_id')
 					->join('inventory_issue_details','detail_issue_id','=','issue_id')
 					->join('material_names','material_names.material_id','=','inventory_issue_details.detail_material_id')
+					->join('users','inventory_issue.issue_user_id','=','users.user_id')
 					->orderBy('issue_from_microlocation_id')
 					->orderBy('issue_date')
 					->get();
@@ -116,12 +117,12 @@ class issue_controller extends Controller {
 						$material_list .= title_case($material->material_name).' '.$material->detail_weight.' kg <br>';
 					}
 					$output.='<tr>'.
+                        '<td>'.$value->issue_date.'</td>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.title_case($value->issue_from_microlocation_id).'</td>'.
-						'<td>'.$value->issue_date.'</td>'.
-						'<td>'.$value->issue_user_id.'</td>'.
+						'<td>'.$value->username.'</td>'.
 						'<td>'.$value->issue_typename.'</td>'.
-						'<td>'.$material_list.'</td>'.
+						/*'<td>'.$material_list.'</td>'.*/
 						'</tr>';
 					$lastId = $value->issue_id;
 				}

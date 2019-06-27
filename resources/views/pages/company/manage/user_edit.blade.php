@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.macrolocation')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">

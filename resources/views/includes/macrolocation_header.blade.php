@@ -27,25 +27,22 @@
                 <ul class="collapse list-unstyled" id="reportsSubmenu">
                     <li><a href="{{'/companies/'.$company->company_id.'/warehouse'}}">    Varasto</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/receipts'}}">     Saapuneet</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/issues'}}">       Lähetetyt</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/issues'}}">       Lähteneet</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/pre'}}">          Esilajiteltu</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/refined'}}">      Hienolajiteltu</a></li>
                 </ul>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="#">Käyttäjät</a></li>
-                    <li><a href="#">Kategoriat</a></li>
-                    <li><a href="#">Lisää uusi toimipiste</a></li>
+                    <li><a href="#">Lisää vastaanotto</a></li>
+                    <li><a href="#">Lisää lähetys</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
                 </ul>
-                <a href="/ewc">EWC Codes</a>
+               {{-- <a href="/ewc">EWC Codes</a>--}}
             </li>
 
         </ul>
 
-        <ul class="list-unstyled CTAs">
-            <li><a href="/" class="back">Back</a></li>
-        </ul>
 
     </nav>
 
@@ -59,7 +56,7 @@
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
                         <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Toggle Sidebar</span>
+                        <span>Piilota ja näytä sivupalkki</span>
                     </button>
 
                 </div>
@@ -67,9 +64,23 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="/" class="info-btn">Etusivu</a>
-                        <a href="#" class="info-btn">Yhteystiedot</a>
-                        <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a>
+
+                        <a href="#" class="btn btn-info btn-lg logout">Yhteystiedot</a>
+                        <a href="/" class="btn btn-info btn-lg logout">Etusivu</a>
+                        @guest
+                            <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>
+
+                        <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+
+
+                        @else
+
+                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+
+                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
+
+                            @csrf
+                        @endguest
                     </ul>
 
                 </div>
@@ -114,7 +125,7 @@
 <!-- Script for Back To The Top Button -->
 <script>
 
-    <!-- When the user scrolls down 30px from the top of the document, show the button -->
+    /*When the user scrolls down 30px from the top of the document, show the button*/
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {

@@ -1,37 +1,22 @@
 @extends('layouts.default')
 @section('title', 'Menu')
 @section('content')
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <h4>This is the home page</h4>
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+    <div id="content2" class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @guest
+                @else
+                    <h2>Welcome  {{ Auth::user()->first_name }}</h2>
+                    <br>
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <!-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif-->
-                                @else
-                                 Welcome  {{ Auth::user()->first_name }} 
-                                 <br>
-                                <li><a href="{{route('logout') }}">Logout</a></li>
-
-                                        @csrf
-                                    </form>
-
-                                </li>
-                        @endguest
-                    </ul>
-</div>
+                @endguest
+            </div>
+            <div class="panel-body">
+                <h4>Tämä on etusivu</h4>
+                <p>Tähän voidaan keksiä mitä vain halutaan näyttää ensimmäisena, kun kirjautunut käyttäjä saapuu järjestelmän hallinta osioon.</p>
+            </div>
+        </div>
+    </div>
 <!-- <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">

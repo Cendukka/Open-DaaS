@@ -57,7 +57,8 @@
                             var reuseChart = parseInt("{{(DB::table('inventory_issue_details')
                                                 ->select('detail_weight')
                                                 ->join('inventory_issue', 'inventory_issue_details.detail_issue_id', '=', 'inventory_issue.issue_id')
-                                                ->where('issue_type_id', 'NOT LIKE', 2)
+                                                ->where('issue_type_id', "=", 2)
+                                                ->orWhere('issue_type_id',"=", 3)
                                                 ->sum('detail_weight'))}}");
 
                             var data = new google.visualization.DataTable();
@@ -69,7 +70,7 @@
                                 ['Energia', energyChart],
                                 ['Uusiokäyttö', reuseChart]
                             ]);
-                            var options = {'title': 'Koko Suomi - Yhteensä:'+(recycledChart+unrecycledChart+energyChart+reuseChart), 'width': 750, 'height': 500, 'backgroundColor': 'transparent'};
+                            var options = {'title': 'Koko Suomi - Yhteensä:'+(recycledChart+unrecycledChart+energyChart+reuseChart)+' Kg', 'width': 750, 'height': 500, 'backgroundColor': 'transparent'};
                             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                             chart.draw(data, options);
                         }

@@ -33,19 +33,43 @@
                     <br>
 
                     <div id="piechart"></div>
+
                     <script type="text/javascript">
+
                         google.charts.load('current', {'packages': ['corechart']});
                         google.charts.setOnLoadCallback(drawChart);
 
                         function drawChart() {
-                            var data = google.visualization.arrayToDataTable([
-                                ['Materials', 'Weight in Kg'],
-                                ['Kierrätysenergia', 10000],
-                                ['Lajittelematon', 20000],
-                                ['Energiahyötykäyttöön', 4000],
-                                ['Uusioläyttö', 20000],
+
+                            var recycledChart = parseInt("{{(DB::table('inventory')->select('inventory_weight')->where('inventory_material_id', 'NOT LIKE', 1)->sum('inventory_weight'))}}");
+
+
+                            var unrecycledChart = parseInt("{{(DB::table('inventory')->select('inventory_weight')->where('inventory_material_id', 1)->sum('inventory_weight'))}}");
+
+
+                            var energyChart = parseInt("{{(DB::table('inventory_issue_details')
+                                                ->select('detail_weight')
+                                                ->join('inventory_issue', 'inventory_issue_details.detail_issue_id', '=', 'inventory_issue.issue_id')
+                                                ->where('issue_type_id', 1)
+                                                ->sum('detail_weight')
+                                                )}}");
+
+                            var reuseChart = parseInt("{{(DB::table('inventory_issue_details')
+                                                ->select('detail_weight')
+                                                ->join('inventory_issue', 'inventory_issue_details.detail_issue_id', '=', 'inventory_issue.issue_id')
+                                                ->where('issue_type_id', 'NOT LIKE', 2)
+                                                ->sum('detail_weight'))}}");
+
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('string', 'Weight in Kg');
+                            data.addColumn('number', 'Slices');
+                            data.addRows([
+                                ['Kierrätetty', recycledChart],
+                                ['Lajittelematon', unrecycledChart],
+                                ['Energia', energyChart],
+                                ['Uusiokäyttö', reuseChart]
                             ]);
-                            var options = {'title': 'Koko Suomi', 'width': 750, 'height': 500, 'backgroundColor': 'transparent'};
+                            var options = {'title': 'Koko Suomi - Yhteensä:'+(recycledChart+unrecycledChart+energyChart+reuseChart), 'width': 750, 'height': 500, 'backgroundColor': 'transparent'};
                             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                             chart.draw(data, options);
                         }

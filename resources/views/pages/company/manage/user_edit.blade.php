@@ -36,7 +36,7 @@
                                 <option {{($user->user_type_id == 1 ? 'selected="selected"' : '')}} disabled value="1">Superadmin</option>
                                 <option {{($user->user_type_id == 2 ? 'selected="selected"' : '')}} value="2">Admin</option>
                                 <option {{($user->user_type_id == 3 ? 'selected="selected"' : '')}} value="3">Manager</option>
-                                <option {{($user->user_type_id == 4 ? 'selected="selected"' : '')}} value="4">User</option>
+
                             </select>
                         </div>
                         <div class="form-group">

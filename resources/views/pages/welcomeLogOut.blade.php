@@ -12,7 +12,7 @@
                     proident,
                     sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
-            <div class="elements">
+
 
                     <div class="calender">
                         @php
@@ -80,7 +80,7 @@
                                 ['Energia', energyChart],
                                 ['Uusiokäyttö', reuseChart]
                             ]);
-                            var wholeOptions = {'title': 'Koko Suomi - Yhteensä:'+(recycledChart+unrecycledChart+energyChart+reuseChart)+' Kg', 'width': 700, 'height': 500, 'backgroundColor': 'transparent'};
+                            var wholeOptions = {'title': 'Koko Suomi - Yhteensä:'+(recycledChart+unrecycledChart+energyChart+reuseChart)+' Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
                             var wholeChart = new google.visualization.PieChart(document.getElementById('piechartWhole'));
                             wholeChart.draw(wholeData, wholeOptions);
                             /**********************/
@@ -95,13 +95,13 @@
                                 ['Nahka', energyChart],
                                 ['Pellava', reuseChart]
                             ]);
-                            var fractionOptions = {'title': 'Koko Suomi - Yhteensä:'+totalSumFractions+ ' Kg', 'width': 700, 'height': 500, 'backgroundColor': 'transparent'};
+                            var fractionOptions = {'title': 'Koko Suomi - Yhteensä:'+totalSumFractions+ ' Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
                             var fractionChart = new google.visualization.PieChart(document.getElementById('piechartFraction'));
                             fractionChart.draw(fractionData, fractionOptions);
                             /**********************/
                         }//End of drawChart() function
                     </script>
-            </div>
+
         </div>
     </div>
 

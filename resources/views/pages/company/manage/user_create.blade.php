@@ -1,4 +1,5 @@
 @extends('layouts.macrolocation')
+@section('title', 'Create user')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
@@ -21,10 +22,10 @@
                     <div class="form-group">
                         <label for="user_type">User Type:&nbsp</label>
                         <select name="user_type">
-                            <option value="1">Superadmin</option>
+                            <option disabled value="1">Superadmin</option>
                             <option value="2">Admin</option>
                             <option value="3">Manager</option>
-                            <option value="4">User</option>
+
                         </select>
                     </div>
                     <div class="form-group">

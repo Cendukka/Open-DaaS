@@ -2,7 +2,7 @@
 @section('content')
 <div id="content2" class="row">
     <div class="panel panel-default">
-        <div class="panel-heading" > <h3>Company registration form</h3> </div>
+        <div class="panel-heading" > <h3>Yhtiön rekisteröinti lomake</h3> </div>
 
             <div class="panel-body">
             
@@ -20,35 +20,35 @@
                     <form method="post" action="company-store">
                     @csrf
                 <div class="form-group">
-                    <label for="companyName" class="col-sm-3 control-label">Company Name</label>
+                    <label for="companyName" class="col-sm-3 control-label">Yhtiön nimi</label>
                     <div class="col-sm-9">
-                        <input type="text" name="name" placeholder="Company Name" class="form-control" autofocus>
+                        <input type="text" name="name" placeholder="Yhtiön nimi" class="form-control" autofocus>
                     </div>
                 </div>
               
                 <div class="form-group">
-                    <label for="companyAdd" class="col-sm-3 control-label">Company street address</label>
+                    <label for="companyAdd" class="col-sm-3 control-label">Katuosoite</label>
                     <div class="col-sm-9">
-                        <input type="text" name="address" placeholder="Company street address" class="form-control" autofocus>
+                        <input type="text" name="address" placeholder="Katuosoite" class="form-control" autofocus>
                     </div>
                 </div>
                     
                 <div class="form-group">
-                    <label for="companyPostalCode" class="col-sm-3 control-label">Company postal code</label>
+                    <label for="companyPostalCode" class="col-sm-3 control-label">Postinumero</label>
                     <div class="col-sm-9">
-                        <input  type="text" name="postal_code" placeholder="Company postal code" class="form-control" >
+                        <input  type="text" name="postal_code" placeholder="Postinumero" class="form-control" >
                     </div>
                 </div>
                     
                 <div class="form-group">
-                    <label for="companyCity" class="col-sm-3 control-label">Company city</label>
+                    <label for="companyCity" class="col-sm-3 control-label">Kaupunki</label>
                     <div class="col-sm-9">
-                        <input type="text" name="city" placeholder="Company city" class="form-control">
+                        <input type="text" name="city" placeholder="Kaupunki" class="form-control">
                     </div>
                 </div>
               
                 
-               <div class="col-sm-9"> <button type="submit"  class=" btn btn-primary" style="width: 32%" >Register</button> </div>
+               <div class="col-sm-9"> <button type="submit"  class=" btn btn-primary" style="width: 32%" >Rekisteröi</button> </div>
                     
             </form>
         </div>

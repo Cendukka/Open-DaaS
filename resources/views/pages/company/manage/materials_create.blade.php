@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Create a new material </h3>
+                <h3>Lisää uusi materiaali </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -20,11 +20,11 @@
                 <form method="post" action="materials-store">
                     @csrf
                     <div class="form-group">
-                         <label for="name">Material Name: </label> </div>
+                         <label for="name">Materiaalin nimi: </label> </div>
                         <div> <input type="text" class="form-control center" name="name"/></div>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Lisää</button>
                 </form>
             </div>
          </div>

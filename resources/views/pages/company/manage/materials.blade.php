@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Materials </h3>
+                <h3>Materiaalit </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -17,7 +17,7 @@
                 @endif
                 <table>
                     <tr>
-                        <th>Material Name</th>
+                        <th>Materiaalin nimi</th>
                     </tr>
                     @php
                         $materials = DB::table('material_names')->get();
@@ -30,7 +30,7 @@
                 </table>
                 <br>
                 <br>
-                <div> <button class="btn btn-primary"> <a href="{{url('/materials/create')}}">+ Add Material</a> </div>
+                <div> <button class="btn btn-primary"> <a href="{{url('/materials/create')}}">+ Lisää materiaali</a> </div>
             </div>
         </div>
     </div>

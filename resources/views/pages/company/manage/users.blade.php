@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Manage Users </h3>
+                <h3>Hallitse käyttäjätilejä </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -18,12 +18,12 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Microlocation</th>
-                        <th>Type</th>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Username</th>
+                        <th>Käyttäjä ID</th>
+                        <th>Microlokaatio</th>
+                        <th>Tyyppi</th>
+                        <th>Sukunimi</th>
+                        <th>Etunimi</th>
+                        <th>Käyttäjätunnus</th>
 
                     </tr>
                     </thead>
@@ -51,7 +51,7 @@
                     @endforeach
                 </table>
                 <br>
-                <a href="{{url('/companies/'.$company->company_id.'/manage/users/create')}}">+ Add user</a>
+                <a href="{{url('/companies/'.$company->company_id.'/manage/users/create')}}">+ Lisää käyttäjä</a>
             </div>
         </div>
     </div>

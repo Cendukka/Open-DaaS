@@ -77,5 +77,9 @@ Route::get('companies/{company}/manage/receipts/create/','receipt_controller@cre
 Route::get('companies/{company}/manage/receipts/create/source','receipt_controller@source');
 Route::get('companies/{company}/manage/receipts/create/communities','receipt_controller@communities');
 
+
+#Issues
+Route::get('companies/{company}/manage/receipts/create/communities','receipt_controller@communities');
+
 #Route::get('/','SearchController@index');
 #Route::get('/search','SearchController@search');

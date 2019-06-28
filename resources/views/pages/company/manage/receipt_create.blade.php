@@ -84,7 +84,7 @@
                         </select>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Lisää</button>
                 </form>
             </div>
         </div>

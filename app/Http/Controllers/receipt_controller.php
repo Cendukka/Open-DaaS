@@ -179,11 +179,11 @@ class receipt_controller extends Controller {
                 ->orderBy('receipt_to_microlocation_id')
                 ->orderBy('receipt_date')
                 ->get();
-           # dd($result);
+            #dd($result);
             if($result){
                 $sumweight = 0;
                 foreach ($result as $key => $value){
-                    $from =  ($value->from_community_id ? 'Community:'.(DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city) :
+                    $fromid =  ($value->from_community_id ? 'Community:'.(DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city) :
                         ($value->from_supplier_id ? 'Supplier:'.(DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name) :
                             'Microlocation:'.$value->from_microlocation_name));
                     $output.='<tr>'.

@@ -146,7 +146,7 @@ class receipt_controller extends Controller {
             $result=DB::table('inventory_receipt')
                 ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
                 ->when(($request->from && $request->to), function($query) use ($request){
-                    return $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d",strtotime($request->to))]);
+                    $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
                 })
                 ->where(function ($query) use ($request){
                     $query
@@ -155,11 +155,15 @@ class receipt_controller extends Controller {
                         ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%");
                 })
                 ->join('material_names','receipt_material_id','=','material_id')
-                ->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
+                ->leftJoin('supplier','from_supplier_id','=','supplier.supplier_id')
+                ->leftJoin('community','from_community_id','=','community.community_id')
+                ->leftJoin('microlocations as from_microlocations','receipt_from_microlocation_id','=','from_microlocations.microlocation_id')
+                ->leftJoin('microlocations as to_microlocations','receipt_to_microlocation_id','=','to_microlocations.microlocation_id')
+                ->select('inventory_receipt.*','material_names.*','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','supplier.supplier_name','community.community_city')
                 ->orderBy('receipt_date')
                 ->orderBy('receipt_to_microlocation_id')
                 ->get();
-            #dd($result);
+           #dd($result);
             if($result){
                 $sumweight = 0;
                 foreach ($result as $key => $value){
@@ -167,9 +171,10 @@ class receipt_controller extends Controller {
                         ($value->from_supplier_id ? 'Supplier '.$value->from_supplier_id :
                             'Microlocation '.$value->receipt_from_microlocation_id));
                     $output.='<tr>'.
-                        '<td>'.$value->receipt_date.'</td>'.
-                        '<td>'.title_case($value->microlocation_name).'</td>'.
-                        '<td>'.$fromid.'</td>'.
+                        '<td>'.date("Y-m-d",strtotime($value->receipt_date)).'</td>'.
+                        '<td>'.title_case($value->to_microlocation_name).'</td>'.
+                        '<td>'.title_case(explode(':', $from)[0]).'</td>'.
+                        '<td>'.title_case(mb_strimwidth(explode(':', $from)[1],0,25,'...')).'</td>'.
                         '<td>'.$value->material_name.'</td>'.
                         '<td>'.$value->receipt_weight.'</td>'.
                         '<td>'.$value->distance_km.'</td>'.

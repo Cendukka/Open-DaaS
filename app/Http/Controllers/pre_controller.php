@@ -89,7 +89,7 @@ class pre_controller extends Controller {
 			$result=DB::table('pre_sorting')
 					->whereIn('receipt_to_microlocation_id', $microlocation_ids)
 					->when(($request->from && $request->to), function($query) use ($request){
-						return $query->whereBetween('pre_sorting_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d",strtotime($request->to))]);
+						$query->whereBetween('pre_sorting_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
 					})
 					->where(function ($query) use ($request){
 						$query
@@ -109,6 +109,7 @@ class pre_controller extends Controller {
 					$output.='<tr>'.
                         '<td>'.$value->pre_sorting_date.'</td>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
+                        '<td>'.date("Y-m-d",strtotime($value->pre_sorting_date)).'</td>'.
 						'<td>'.$value->pre_sorting_weight.'</td>'.
 						'<td>'.$value->presorted_material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.

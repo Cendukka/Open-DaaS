@@ -30,7 +30,7 @@
                             date_default_timezone_set('Europe/Helsinki')
                         @endphp
                         <label for="datetime">Aikaleima:&nbsp</label>
-                        <input type="text" class="form-control" name="datetime" value="{{date('Y-m-d H:i:s')}}"/>
+                        <input type="text" class="form-control center" name="datetime" value="{{date('Y-m-d H:i:s')}}"/>
                     </div>
                     <div class="form-group">
                         <label for="material">Materiaali:&nbsp</label>
@@ -69,11 +69,11 @@
                     </div>
                     <div class="form-group">
                         <label for="distance">Matka (Km):&nbsp</label>
-                        <input type="text" class="form-control" name="distance"/>
+                        <input type="text" class="form-control center" name="distance"/>
                     </div>
                     <div class="form-group">
                         <label for="weight">Paino (Kg):&nbsp</label>
-                        <input type="text" class="form-control" name="weight"/>
+                        <input type="text" class="form-control center" name="weight"/>
                     </div>
                     <div class="form-group">
                         <label for="ewc">EWC-Koodi:&nbsp</label>

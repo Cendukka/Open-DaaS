@@ -77,7 +77,7 @@ class materials_controller extends Controller {
 	public function update(Request $request, material $material) {
 		# ADD MORE AUTHENTICATION HERE
 
-        if (isset($_POST['update_button'])) {
+        /*if (isset($_POST['update_button'])) {
             $request->validate([
                 'name' => 'required|max:50',
             ]);
@@ -93,19 +93,19 @@ class materials_controller extends Controller {
             return $this->destroy($material);
         } else {
             //no button pressed
-        }
+        }*/
 		
 		$request->validate([
 			'name' => 'required|max:50',
 		]);
 		
 		
-		/*$materialNew = material::find($material->material_id);
+		$materialNew = material::find($material->material_id);
 		
 		$materialNew->material_name = $request->get('name');
 		$materialNew->save();
 		
-		return redirect()->action('materials_controller@index')->withErrors(['Material successfully updated.']);*/
+		return redirect()->action('materials_controller@index')->withErrors(['Material successfully updated.']);
 	}
 	
 	/**

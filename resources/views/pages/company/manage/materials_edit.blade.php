@@ -18,8 +18,8 @@
                 <form method="post" action="materials-update">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Material Name:&nbsp</label>
-                        <input type="text" class="form-control" name="name" value="{{$material->material_name}}"/>
+                        <label for="name">Material Name:&nbsp</label><br>
+                        <input type="text" class="form-control center" name="name" value="{{$material->material_name}}"/>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

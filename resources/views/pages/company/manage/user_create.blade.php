@@ -51,19 +51,19 @@
 
                     <div class="form-group">
                         <label for="first_name">First Name:&nbsp</label>
-                        <input type="text" class="form-control" name="first_name"/>
+                        <input type="text" class="form-control center" name="first_name"/>
                     </div>
                     <div class="form-group">
                         <label for="last_name">Last Name:&nbsp</label>
-                        <input type="text" class="form-control" name="last_name"/>
+                        <input type="text" class="form-control center" name="last_name"/>
                     </div>
                     <div class="form-group">
                         <label for="username">Username:&nbsp</label>
-                        <input type="text" class="form-control" name="username"/>
+                        <input type="text" class="form-control center" name="username"/>
                     </div>
                     <div class="form-group">
                         <label for="password">Password:&nbsp</label>
-                        <input type="text" class="form-control" name="password" value="qwerty" readonly style="color:lightgray;">
+                        <input type="text" class="form-control center" name="password" value="qwerty" readonly style="color:lightgray;">
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Add</button>

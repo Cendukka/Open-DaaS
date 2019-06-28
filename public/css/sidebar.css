@@ -68,6 +68,10 @@ a, a:hover, a:focus {
 /* ---------------------------------------------------
     SIDEBAR  AND UPPER MENU STYLE
 ----------------------------------------------------- */
+#mCSB_1 {
+    box-shadow: 1px 2px 5px #424242;
+}
+
 #sidebar {
     width: 250px;
     position: fixed;
@@ -244,29 +248,70 @@ a.logout:hover {
     #sidebarCollapse span {
         display: none;
     }
+    .form-control{
+      
+        display: inline-block;
+    }
+
+   
+
+  
 }
 
 /* ---------------------------------------------------
     Company ergistration form
 ----------------------------------------------------- */
-.register-title{
-    background-color: #D0D0D0;
+.panel-heading{
+    background-color: #EEEEEE;
     padding: 1%;
-    padding-left: 27%;
-    
+    text-align: center;   
 }
 
 .form-horizontal {
-    background-color: #D0D0D0;
+    background-color: #E8E8E8;
     padding: 3%;
-    padding-top: 7%;
-    padding-bottom: 5%;
+   
 }
 
-.control-label{
-    color: #414141  ;
+.form-control{
+    width:60%;
+  
+   
+   
+}
+
+.panel-body{
+    background-color: #E8E8E8;
+    text-align: center;
+}
+
+
+/* ---------------------------------------------------
+    table, content2, list decoration
+----------------------------------------------------- */
+
+
+  table {
+    display: inline-table;
+   
+  }
+
+  a.textMark:hover, a.textMark:active{
+      color: #2373F6;
+      font-size: 140%;
+      text-decoration: underline;
+  }
+
+  .panel {
+    box-shadow: 1px 2px 5px  #424242;
+    border-top: 0px;
+    border-left: 0px;
+    margin: 0 10% 0 10%;
     
-}
+  }
 
-
-
+  .center{
+      display: inline-block;
+      width: 30%;
+  }
+  

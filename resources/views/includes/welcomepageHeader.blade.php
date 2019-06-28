@@ -44,7 +44,7 @@
 
                         @else
                         
-                            <li><a href="/home" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallita</a></li>
+                            <li><a href="/home" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
 
                             <li><a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
 

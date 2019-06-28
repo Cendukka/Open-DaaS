@@ -64,7 +64,9 @@ class receipt_controller extends Controller {
 			'receipt_ewc_code' => $request->get('ewc'),
 		]);
 		$receipt->save();
-		return redirect()->action('receipt_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
+//        return RedirectToAction("receipt_index", "MyController");
+//        return view('pages.company.receipts')->with('company', $company);
+		return redirect()->action('company_controller@receipts_index', ['company' => $company])->withErrors(['Receipt successfully created.']);
 	}
 
 	/**

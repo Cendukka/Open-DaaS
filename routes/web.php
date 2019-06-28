@@ -68,5 +68,9 @@ Route::resource('companies/{company}/manage/issues', 'issue_controller', ['only'
 Route::post('companies/{company}/manage/issues/issues-store',                   'issue_controller@store');
 Route::post('companies/{company}/manage/issues/{microlocation}/issues-update',  'issue_controller@update');
 
+
+#Issues
+Route::get('companies/{company}/manage/receipts/create/communities','receipt_controller@communities');
+
 #Route::get('/','SearchController@index');
 #Route::get('/search','SearchController@search');

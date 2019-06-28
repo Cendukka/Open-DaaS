@@ -7,23 +7,23 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Refined Sorting </h3>
+                <h3>Hienolajittelu </h3>
             </div>
             <div class="panel-body">
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label for="from-date">From Date: </label>
+                        <label for="from-date">From: </label>
                         <input type="date" class="form-control datepicker-autoclose" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
                     </div>
                     <div class="col-sm-6">
-                        <label for="to-date">To Date: </label>
+                        <label for="to-date">To: </label>
                         <input type="date" class="form-control datepicker-autoclose" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-8">
-                        <label for="search">Search: </label>
-                        <input type="text" class="form-controller" id="search" name="search" placeholder="Search">
+                        <label for="search">Haku: </label>
+                        <input type="text" class="form-controller" id="search" name="search" placeholder="Hae...">
                     </div>
                 </div>
                 <table class="table table-bordered table-hover">

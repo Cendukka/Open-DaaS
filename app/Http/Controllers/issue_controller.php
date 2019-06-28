@@ -85,7 +85,7 @@ class issue_controller extends Controller {
 			$result=DB::table('inventory_issue')
 					->whereIn('issue_from_microlocation_id', $microlocation_ids)
 					->when(($request->from && $request->to), function($query) use ($request){
-						return $query->whereBetween('issue_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d",strtotime($request->to))]);
+						$query->whereBetween('issue_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
 					})
 					->where(function ($query) use ($request){
 						$query
@@ -118,7 +118,7 @@ class issue_controller extends Controller {
 					$output.='<tr>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.title_case($value->issue_from_microlocation_id).'</td>'.
-						'<td>'.$value->issue_date.'</td>'.
+                        '<td>'.date("Y-m-d",strtotime($value->issue_date)).'</td>'.
 						'<td>'.$value->issue_user_id.'</td>'.
 						'<td>'.$value->issue_typename.'</td>'.
 						'<td>'.$material_list.'</td>'.

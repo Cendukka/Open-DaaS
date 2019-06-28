@@ -45,11 +45,16 @@
                                     ->join('microlocations', 'issue_to_microlocation_id', '=','microlocations.microlocation_id')
                                     ->join('issue_types', 'inventory_issue.issue_type_id', '=','issue_types.issue_type_id')
                                     ->join('inventory_issue_details', 'inventory_issue.issue_id', '=','inventory_issue_details.issue_detail_id')
+					                ->join('material_names','material_names.material_id','=','inventory_issue_details.detail_material_id')
                                     ->orderBy('issue_id','DESC')
                                     ->get();
                         #dd($issues);
+                        $lastId = 0;
                     @endphp
                     @foreach ($issues as $issue)
+                        @if($issue->issue_id == $lastId)
+                            @continue;
+                        @endif
                         <tr>
                             <td>{{title_case($issue->issue_id)}}</td>
                             <td>{{title_case($issue->issue_date)}}</td>
@@ -59,6 +64,9 @@
                             <td>{{title_case($issue->issue_typename)}}</td>
 {{--                            <td>{{title_case($issue->)}}</td>--}}
                         </tr>
+                        @php
+                            $lastId = $issue->issue_id;
+                        @endphp
                     @endforeach
                     </tbody>
                 </table>

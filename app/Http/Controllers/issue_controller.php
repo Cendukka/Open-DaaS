@@ -6,7 +6,6 @@ use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\inventory_issue;
-use mysql_xdevapi\Collection;
 
 class issue_controller extends Controller {
 	/**
@@ -15,6 +14,7 @@ class issue_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(company $company) {
+        return view('pages.company.manage.issues')->with('company', $company);
 	}
 	
 	/**
@@ -98,8 +98,8 @@ class issue_controller extends Controller {
 					->join('inventory_issue_details','detail_issue_id','=','issue_id')
 					->join('material_names','material_names.material_id','=','inventory_issue_details.detail_material_id')
 					->join('users','inventory_issue.issue_user_id','=','users.user_id')
-					->orderBy('issue_from_microlocation_id')
-					->orderBy('issue_date')
+                    ->orderBy('issue_date')
+                    ->orderBy('issue_from_microlocation_id')
 					->get();
 			if($result){
 				$lastId = 0;

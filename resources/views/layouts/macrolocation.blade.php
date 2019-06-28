@@ -8,7 +8,6 @@
    <header class="column">
       @include('includes.macrolocation_header')
    </header>
-
    <footer class="row">
        @include('includes.footer')
    </footer>

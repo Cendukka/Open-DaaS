@@ -24,12 +24,13 @@
                     @endphp
                     @foreach ($materials as $material)
                         <tr>
-                            <td><a href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}</a></td>
+                            <td><a class="textMark" href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}</a></td>
                         </tr>
                     @endforeach
                 </table>
                 <br>
-                <a href="{{url('/materials/create')}}">+ Add Material</a>
+                <br>
+                <div> <button class="btn btn-primary"> <a href="{{url('/materials/create')}}">+ Add Material</a> </div>
             </div>
         </div>
     </div>

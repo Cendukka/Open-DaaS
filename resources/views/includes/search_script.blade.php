@@ -6,7 +6,7 @@
         $to = $('#to-date').val() ? $('#to-date').val() : '';
         $.ajax({
             type : 'get',
-            url : '{{URL::to(trim($_SERVER['REQUEST_URI'],'/').'/search')}}',
+            url : '{{URL::to(trim(url()->current(),'/').'/search')}}',
             data:{'search':$search,'from':$from,'to':$to},
             success:function(data){
                 $('tbody').html(data);

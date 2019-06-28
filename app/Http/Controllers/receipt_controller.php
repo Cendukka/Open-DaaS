@@ -148,62 +148,39 @@ class receipt_controller extends Controller {
                 })
                 ->where(function ($query) use ($request){
                     $query
-                    ->where('to_microlocations.microlocation_name','LIKE','%'.$request->search."%")
-                    ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$request->search."%")
-                    ->orwhere('supplier.supplier_name','LIKE','%'.$request->search."%")
-                    ->orwhere('community.communitY_city','LIKE','%'.$request->search."%")
-                    ->orWhere('material_name','LIKE','%'.$request->search."%")
-                    ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%")
-                    ->orWhere(function ($query) use ($request){
-                        if(Str::contains('community',$request->search)){
-                            $query->whereNotNull('from_community_id');
-                        }
-                    })
-                    ->orWhere(function ($query) use ($request){
-                        if(Str::contains('supplier',$request->search)){
-                            $query->orWhereNotNull('from_supplier_id');
-                        }
-                    })
-                    ->orWhere(function ($query) use ($request){
-                        if(Str::contains('microlocation',$request->search)){
-                            $query->orWhereNotNull('receipt_from_microlocation_id');
-                        }
-                    });
+                        ->where('microlocation_name','LIKE','%'.$request->search."%")
+                        ->orWhere('material_name','LIKE','%'.$request->search."%")
+                        ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%");
                 })
                 ->join('material_names','receipt_material_id','=','material_id')
-                ->leftJoin('supplier','from_supplier_id','=','supplier.supplier_id')
-                ->leftJoin('community','from_community_id','=','community.community_id')
-                ->leftJoin('microlocations as from_microlocations','receipt_from_microlocation_id','=','from_microlocations.microlocation_id')
-                ->leftJoin('microlocations as to_microlocations','receipt_to_microlocation_id','=','to_microlocations.microlocation_id')
-                ->select('inventory_receipt.*','material_names.*','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','supplier.supplier_name','community.community_city')
-                ->orderBy('receipt_to_microlocation_id')
+                ->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
                 ->orderBy('receipt_date')
+                ->orderBy('receipt_to_microlocation_id')
                 ->get();
             #dd($result);
             if($result){
                 $sumweight = 0;
                 foreach ($result as $key => $value){
-                    $fromid =  ($value->from_community_id ? 'Community:'.(DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city) :
-                        ($value->from_supplier_id ? 'Supplier:'.(DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name) :
-                            'Microlocation:'.$value->from_microlocation_name));
+                    $fromid =  ($value->from_community_id ? 'Community '.$value->from_community_id :
+                        ($value->from_supplier_id ? 'Supplier '.$value->from_supplier_id :
+                            'Microlocation '.$value->receipt_from_microlocation_id));
                     $output.='<tr>'.
                         '<td>'.$value->receipt_date.'</td>'.
-						'<td>'.title_case($value->microlocation_name).'</td>'.
-						'<td>'.$fromid.'</td>'.
-						'<td>'.$value->material_name.'</td>'.
-						'<td>'.$value->receipt_weight.'</td>'.
-						'<td>'.$value->distance_km.'</td>'.
-						'<td>'.$value->receipt_ewc_code.'</td>'.
-						'</tr>';
-					$sumweight += $value->receipt_weight;
-				}
-				$output.='<tr>'.
-					'<td></td>'.
-					'<td></td>'.
-					'<td></td>'.
-					'<td></td>'.
-                    '<td>'.$sumweight.' Total</td>'.
+                        '<td>'.title_case($value->microlocation_name).'</td>'.
+                        '<td>'.$fromid.'</td>'.
+                        '<td>'.$value->material_name.'</td>'.
+                        '<td>'.$value->receipt_weight.'</td>'.
+                        '<td>'.$value->distance_km.'</td>'.
+                        '<td>'.$value->receipt_ewc_code.'</td>'.
+                        '</tr>';
+                    $sumweight += $value->receipt_weight;
+                }
+                $output.='<tr>'.
                     '<td></td>'.
+                    '<td></td>'.
+                    '<td></td>'.
+                    '<td></td>'.
+                    '<td>'.$sumweight.' Total</td>'.
                     '<td></td>'.
                     '</tr>';
                 return Response($output);

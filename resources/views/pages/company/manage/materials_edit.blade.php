@@ -19,8 +19,8 @@
                     @csrf
                     <div class="form-group">
 
-                        <label for="name">Materiaalin nimi:&nbsp</label>
-                        <input type="text" class="form-control" name="name" value="{{$material->material_name}}"/>
+                        <label for="name">Materiaalin nimi:&nbsp</label><br>
+                        <input type="text" class="form-control center" name="name" value="{{$material->material_name}}"/>
 
                     </div>
                     <button type="submit" class="btn btn-primary">Tallenna</button>

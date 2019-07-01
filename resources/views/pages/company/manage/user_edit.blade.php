@@ -41,9 +41,7 @@
                         </div>
                         <div class="form-group">
                             <label for="company">Company:&nbsp</label>
-                            <select name="company">
-                                <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
-                            </select>
+                            {{title_case($company->company_name)}}
                         </div>
                         <div class="form-group">
                             <label for="microlocation">Microlocation:&nbsp</label>
@@ -61,20 +59,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="first_name">First Name:&nbsp</label>
-                            <input type="text" class="form-control" name="first_name" value="{{$user->first_name}}"/>
-                        </div>
-                        <div class="form-group">
                             <label for="last_name">Last Name:&nbsp</label>
                             <input type="text" class="form-control" name="last_name" value="{{$user->last_name}}"/>
                         </div>
                         <div class="form-group">
+                            <label for="first_name">First Name:&nbsp</label>
+                            <input type="text" class="form-control" name="first_name" value="{{$user->first_name}}"/>
+                        </div>
+                        <div class="form-group">
                             <label for="username">Username:&nbsp</label>
-                            <input type="text" class="form-control" name="username" value="{{$user->username}}" readonly style="color:lightgray;"/>
+                            <input type="text" class="form-control" name="username" value="{{$user->username}}" disabled/>
                         </div>
                         <div class="form-group">
                             <label for="password">Password:&nbsp</label>
-                            <input type="password" class="form-control" name="password" value="{{$user->password}}">
+                            <input type="password" class="form-control" name="password" value="{{$user->password}}" disabled>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>

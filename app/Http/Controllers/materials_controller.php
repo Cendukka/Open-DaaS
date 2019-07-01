@@ -81,10 +81,10 @@ class materials_controller extends Controller {
 			'name' => 'required|max:50',
 		]);
 		
-		
 		$materialNew = material::find($material->material_id);
 		
 		$materialNew->material_name = $request->get('name');
+		$materialNew->retired = ($request->get('retired') == 'on' ? 1 : 0);
 		$materialNew->save();
 		
 		return redirect()->action('materials_controller@index')->withErrors(['Material successfully updated.']);

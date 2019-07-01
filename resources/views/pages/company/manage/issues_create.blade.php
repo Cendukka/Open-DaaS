@@ -30,7 +30,9 @@
                             date_default_timezone_set('Europe/Helsinki')
                         @endphp
                         <label for="datetime">Date & Time:&nbsp</label>
-                        <input type="text" class="form-control" name="datetime" value="{{date('Y-m-d H:i:s')}}"/>
+                        <div style="position: relative">
+                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{date('Y-m-d H:i:s')}}">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="type">Issue Type:&nbsp</label>
@@ -96,6 +98,9 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         $('#addMat').on('click',(function(){
             $("#details").append(
@@ -108,5 +113,10 @@
                 $("#details").children("br:last").remove();
             }
         }));
+    </script>
+    <script type="text/javascript">
+        $('.timepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
     </script>
 @endsection

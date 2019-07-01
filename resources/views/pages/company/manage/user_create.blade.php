@@ -29,9 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label for="company">Company:&nbsp</label>
-                        <select name="company">
-                            <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
-                        </select>
+                        {{title_case($company->company_name)}}
                     </div>
                     <div class="form-group">
                         <label for="microlocation">Microlocation:&nbsp</label>
@@ -49,20 +47,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="first_name">First Name:&nbsp</label>
-                        <input type="text" class="form-control" name="first_name"/>
+                        <label for="last_name">Last Name:&nbsp</label>
+                        <input id="last_name" type="text" class="form-control" name="last_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="last_name">Last Name:&nbsp</label>
-                        <input type="text" class="form-control" name="last_name"/>
+                        <label for="first_name">First Name:&nbsp</label>
+                        <input id="first_name" type="text" class="form-control" name="first_name"/>
                     </div>
                     <div class="form-group">
                         <label for="username">Username:&nbsp</label>
-                        <input type="text" class="form-control" name="username"/>
+                        <input id="username" type="text" class="form-control" name="username"/>
                     </div>
                     <div class="form-group">
                         <label for="password">Password:&nbsp</label>
-                        <input type="text" class="form-control" name="password" value="qwerty" readonly style="color:lightgray;">
+                        <input type="text" class="form-control" name="password" value="qwerty" disabled>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Add</button>
@@ -70,4 +68,12 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function source(){
+            $("#username").val($("#last_name").val()+'.'+$("#first_name").val());
+        };
+        $('#first_name').on('change',source);
+        $('#last_name').on('change',source);
+    </script>
 @endsection

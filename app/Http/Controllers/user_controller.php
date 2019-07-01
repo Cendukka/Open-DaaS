@@ -43,18 +43,17 @@ class user_controller extends Controller {
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
 			'username'=> 'required|unique:users|max:50',
-			'password'=> 'required',
 		]);
 		
 		
 		$user = new user([
 			'user_type_id' => $request->get('user_type'),
-			'user_company_id' => $request->get('company'),
+			'user_company_id' => $company->company_id,
 			'user_microlocation_id' => $request->get('microlocation'),
 			'last_name' => $request->get('last_name'),
 			'first_name' => $request->get('first_name'),
 			'username' => $request->get('username'),
-			'password' => Hash::make($request->get('password')),
+			'password' => Hash::make('qwerty'),
 		]);
 		$user->save();
 		return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['User successfully created.']);
@@ -92,16 +91,14 @@ class user_controller extends Controller {
 		
 		$request->validate([
 			'user_type' => 'required|integer',
-			'company' => 'required|integer',
 			'microlocation' => 'nullable|integer',
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
-			'password'=> 'required',
 		]);
 		
 		
 		$userNew = user::find($user->user_id);
-		
+
 		$userNew->user_type_id = $request->get('user_type');
 		$userNew->user_company_id = $request->get('company');
 		$userNew->user_microlocation_id = $request->get('microlocation');

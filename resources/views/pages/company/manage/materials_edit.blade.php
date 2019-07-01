@@ -21,6 +21,10 @@
                         <label for="name">Material Name:&nbsp</label>
                         <input type="text" class="form-control" name="name" value="{{$material->material_name}}"/>
                     </div>
+                    <div class="form-group">
+                        <label for="retired">Material Retired:&nbsp</label>
+                        <input type="checkbox" class="form-check-input" id="retired" name="retired" {{$material->retired ? 'checked' : ''}}>
+                    </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
                 <br>

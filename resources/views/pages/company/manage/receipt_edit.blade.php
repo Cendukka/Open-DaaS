@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="receipts-store">
+                <form method="post" action="receipts-update">
                     @csrf
                     <div class="form-group">
                         <label for="user">User:&nbsp</label>
@@ -30,7 +30,9 @@
                             date_default_timezone_set('Europe/Helsinki')
                         @endphp
                         <label for="datetime">Date & Time:&nbsp</label>
-                        <input type="text" class="form-control" name="datetime" value="{{$receipt->receipt_date}}"/>
+                        <div style="position: relative">
+                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{$receipt->receipt_date}}">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="material">Material:&nbsp</label>
@@ -83,6 +85,9 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         function source(){
             $source = $("#source").val();
@@ -115,5 +120,10 @@
         $('#source').on('change',source);
         $(document).ready(communities);
         $(document).on("change", '#from_company', communities);
+    </script>
+    <script type="text/javascript">
+        $('.timepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
     </script>
 @endsection

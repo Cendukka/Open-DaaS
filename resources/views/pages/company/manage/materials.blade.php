@@ -24,7 +24,7 @@
                     @endphp
                     @foreach ($materials as $material)
                         <tr>
-                            <td><a href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}</a></td>
+                            <td><a href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}{{($material->retired ? ' [retired]' : '')}}</a></td>
                         </tr>
                     @endforeach
                 </table>

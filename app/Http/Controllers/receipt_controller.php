@@ -106,7 +106,6 @@ class receipt_controller extends Controller {
 			'password'=> 'required',
 		]);
 
-		#####################
 		$receiptNew = inventory_receipt::find($receipt->receipt_id);
 		$receiptNew->user_type_id = $request->get('user_type');
 		$receiptNew->user_company_id = $request->get('company');
@@ -115,8 +114,6 @@ class receipt_controller extends Controller {
 		$receiptNew->first_name = $request->get('first_name');
 		$receiptNew->password = $request->get('password');
 		$receiptNew->save();
-
-
 
 		return redirect()->action('receipt_controller@index',['company' => $company])->withErrors(['Receipt successfully updated.']);
 	}

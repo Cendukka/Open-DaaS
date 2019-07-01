@@ -23,6 +23,7 @@ class issue_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create(company $company) {
+        return view('pages.company.manage.issues_create')->with('company', $company);
 	}
 	
 	/**
@@ -31,7 +32,63 @@ class issue_controller extends Controller {
 	 * @param \Illuminate\Http\Request $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request, inventory_issue $issue) {
+	public function store(Request $request, company $company) {
+        # ADD MORE AUTHENTICATION HERE
+        $request->validate([
+            'user' => 'required|integer',
+            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'type' => 'required',
+            'from_microlocation' => 'integer|integer',
+            'to_microlocation' => 'required|integer',
+            'material' => ['required',
+                function ($attribute, $value, $fail) {
+                    foreach($value as $v) {
+                        if(!is_numeric($v)) {
+                            $fail($attribute.' is invalid.');
+                        }
+                    }
+                },
+            ],
+            'ewc_code' => ['required',
+                function ($attribute, $value, $fail) {
+                    foreach($value as $v) {
+                        if(!is_numeric($v)) {
+                            $fail($attribute.' is invalid.');
+                        }
+                    }
+                },
+            ],
+            'weight' => ['required',
+                function ($attribute, $value, $fail) {
+                    foreach($value as $v) {
+                        if(!is_numeric($v)) {
+                            $fail($attribute.' is invalid.');
+                        }
+                    }
+                },
+            ],
+        ]);
+
+
+        $issue = new inventory_issue([
+            'issue_user_id' => $request->get('user'),
+            'issue_date' => $request->get('datetime'),
+            'issue_type_id' => $request->get('type'),
+            'issue_from_microlocation_id' => $request->get('from_microlocation'),
+            'issue_to_microlocation_id' => $request->get('to_microlocation'),
+        ]);
+        $issue->save();
+
+        for ($i = 0; $i <= count($request->ewc_code)-1; $i++) {
+            DB::table('inventory_issue_details')->insert([
+                'detail_issue_id' => $issue->issue_id,
+                'detail_material_id' => $request->material[$i],
+                'detail_ewc_code' => $request->ewc_code[$i],
+                'detail_weight' => $request->weight[$i],
+            ]);
+        }
+
+        return redirect()->action('issue_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
 	}
 	
 	/**
@@ -50,6 +107,7 @@ class issue_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(company $company, inventory_issue $issue) {
+        return view('pages.company.manage.issues_edit')->with(['company' => $company, 'issue' => $issue]);
 	}
 	
 	/**
@@ -60,6 +118,62 @@ class issue_controller extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, company $company, inventory_issue $issue) {
+        # ADD MORE AUTHENTICATION HERE
+
+        $request->validate([
+            'user' => 'required|integer',
+            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'type' => 'required',
+            'from_microlocation' => 'integer|integer',
+            'to_microlocation' => 'required|integer',
+            'material' => ['required',
+                function ($attribute, $value, $fail) {
+                    foreach($value as $v) {
+                        if(!is_numeric($v)) {
+                            $fail($attribute.' is invalid.');
+                        }
+                    }
+                },
+            ],
+            'ewc_code' => ['required',
+                function ($attribute, $value, $fail) {
+                    foreach($value as $v) {
+                        if(!is_numeric($v)) {
+                            $fail($attribute.' is invalid.');
+                        }
+                    }
+                },
+            ],
+            'weight' => ['required',
+                function ($attribute, $value, $fail) {
+                    foreach($value as $v) {
+                        if(!is_numeric($v)) {
+                            $fail($attribute.' is invalid.');
+                        }
+                    }
+                },
+            ],
+        ]);
+
+        $issueNew = inventory_issue::find($issue->issue_id);
+        $issueNew->issue_user_id = $request->get('user');
+        $issueNew->issue_date = $request->get('datetime');
+        $issueNew->issue_type_id = $request->get('type');
+        $issueNew->issue_from_microlocation_id = $request->get('from_microlocation');
+        $issueNew->issue_to_microlocation_id = $request->get('to_microlocation');
+        $issueNew->save();
+
+        DB::table('inventory_issue_details')->where('detail_issue_id','=',$issue->issue_id)->delete();
+        for ($i = 0; $i <= count($request->ewc_code)-1; $i++) {
+            DB::table('inventory_issue_details')->insert([
+                'detail_issue_id' => $issue->issue_id,
+                'detail_material_id' => $request->material[$i],
+                'detail_ewc_code' => $request->ewc_code[$i],
+                'detail_weight' => $request->weight[$i],
+            ]);
+        }
+
+        return redirect()->action('issue_controller@index',['company' => $company])->withErrors(['Issue successfully updated.']);
 	}
 	
 	/**

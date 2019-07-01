@@ -18,15 +18,7 @@ class inventory_issue extends Model {
 	public function inventory_issue_details() {
 		return $this->hasMany(inventory_issue_details::class);
 	}
-	
-	public function company() {
-		return $this->belongsTo(company::class);
-	}
-	
-	public function ewc_code() {
-		return $this->belongsTo(ewc_codes::class);
-	}
-	
+
 	public function issue_type() {
 		return $this->belongsTo(issue_types::class);
 	}

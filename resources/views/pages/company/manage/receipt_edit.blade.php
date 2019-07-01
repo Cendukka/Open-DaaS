@@ -72,7 +72,7 @@
                         <label for="ewc">EWC Code:&nbsp</label>
                         <select name="ewc">
                             @foreach (DB::table('ewc_codes')->get() as $ewc)
-                                <option value="{{$ewc->ewc_code}}">{{title_case($ewc->ewc_code)}}</option>
+                                <option value="{{$ewc->ewc_code}}" {{($ewc->ewc_code== $receipt->receipt_ewc_code ? 'selected="selected"' : '')}}>{{title_case($ewc->ewc_code)}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -48,8 +48,9 @@
                         </tr>
                     @endforeach
                 </table>
-                <br>
-                <a href="{{url('/companies/'.$company->company_id.'/manage/users/create')}}">+ Add user</a>
+                    <form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add user</button>
+                </form>
             </div>
         </div>
     </div>

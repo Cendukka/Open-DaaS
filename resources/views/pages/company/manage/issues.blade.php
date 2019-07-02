@@ -70,8 +70,9 @@
                     @endforeach
                     </tbody>
                 </table>
-                <br>
-                <a href="{{url(url()->current().'/create')}}">+ Add issue</a>
+                <form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add Issue</button>
+                </form>
             </div>
         </div>
     </div>

@@ -70,8 +70,9 @@
                     @endforeach
                     </tbody>
                 </table>
-                <br>
-                <a href="{{url('/companies/'.$company->company_id.'/manage/receipts/create')}}">+ Add Receipt</a>
+                    <form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add Receipt</button>
+                </form>
             </div>
         </div>
     </div>

@@ -16,10 +16,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @php
-                        $companies = DB::table('company')->get();
-                    @endphp
-                    @foreach ($companies as $company)
+                    @foreach (DB::table('company')->get() as $company)
                         <tr>
                             <td><a href="{{url('/companies/'.$company->company_id)}}">{{title_case($company->company_name)}}</a></td>
                             <td>{{title_case($company->company_street_address)}}</td>
@@ -29,8 +26,9 @@
                     @endforeach
                     </tbody>
                 </table>
-                <br>
-                <a href="companies/create">+ Add company</a>
+                <form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add Company</button>
+                </form>
             </div>
         </div>
     </div>

@@ -15,7 +15,6 @@
                         </ul>
                     </div>
                 @endif
-                <h4>Create a new material:</h4>
                 <form method="post" action="materials-store">
                     @csrf
                     <div class="form-group">

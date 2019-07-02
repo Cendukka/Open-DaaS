@@ -28,7 +28,9 @@
                     <tbody>
                     </tbody>
                 </table>
-                <a href="{{url('/ewc/create')}}">+ Add New EWC Code</a>
+                <form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add EWC Code</button>
+                </form>
             </div>
         </div>
     </div>

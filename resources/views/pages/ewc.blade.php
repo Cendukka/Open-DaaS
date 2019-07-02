@@ -6,6 +6,15 @@
                 <h3>EWC Codes </h3>
             </div>
             <div class="panel-body">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-group">
                     <input type="text" class="form-controller" id="search" name="search">
                 </div>
@@ -19,8 +28,7 @@
                     <tbody>
                     </tbody>
                 </table>
-            </div>
-
+                <a href="{{url('/ewc/create')}}">+ Add New EWC Code</a>
             </div>
         </div>
     </div>

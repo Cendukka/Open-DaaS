@@ -32,7 +32,9 @@ Route::get('companies/{company}/issues/search', 'issue_controller@search');
 Route::get('companies/{company}/manage', 'company_controller@manage_index');
 
 # EWC Codes
-Route::resource('ewc', 'materials_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+Route::get('ewc',                           'ewc_controller@index');
+Route::get('ewc/create',                    'ewc_controller@create');
+Route::get('ewc/{ewc_code}/edit',           'ewc_controller@edit');
 Route::post('ewc/ewc-store',                'ewc_controller@store');
 Route::post('ewc/{ewc_code}/ewc-update',    'ewc_controller@update');
 Route::post('ewc/{ewc_code}/ewc-destroy',   'ewc_controller@destroy');

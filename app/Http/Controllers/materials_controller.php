@@ -13,7 +13,7 @@ class materials_controller extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index(material $material) {
+	public function index() {
 		return view('pages.company.manage.materials');
 	}
 	

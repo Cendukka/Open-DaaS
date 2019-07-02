@@ -87,14 +87,4 @@ class company_controller extends Controller {
 	public function warehouse_index(company $company) {
 		return view('pages.company.warehouse')->with('company', $company);
 	}
-
-
-	public function pre_index(company $company) {
-		return view('pages.company.pre')->with('company', $company);
-	}
-
-	
-	public function refined_index(company $company) {
-		return view('pages.company.refined')->with('company', $company);
-	}
 }

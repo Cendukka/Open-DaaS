@@ -11,7 +11,7 @@ class pre_controller extends Controller {
 
 
 	public function index(company $company) {
-	
+        return view('pages.company.pre')->with('company', $company);
 	}
 
 

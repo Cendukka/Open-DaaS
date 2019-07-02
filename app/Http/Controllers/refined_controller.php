@@ -11,7 +11,7 @@ class refined_controller extends Controller {
 
 
 	public function index(company $company) {
-	
+        return view('pages.company.refined')->with('company', $company);
 	}
 
 
@@ -82,6 +82,7 @@ class refined_controller extends Controller {
 						'<td>'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'">Edit</a></td>'.
 						'</tr>';
 					$sumweight += $value->refined_weight;
 				}

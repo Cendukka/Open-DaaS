@@ -8,7 +8,7 @@ class refined_sorting extends Model {
 	public $incrementing = true;
 	public $timestamps = true;
 	protected $table = "refined_sorting";
-	protected $primaryKey = "refined_sorting_id";
+	protected $primaryKey = "refined_id";
 	protected $fillable = ['weight_kg', 'date'];
 	
 	public function textile_inventory() {

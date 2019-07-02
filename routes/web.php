@@ -8,8 +8,7 @@ Route::get('/manage', function () {
 	return view('pages.manage');
 });
 
-Route::get('ewc','ewc_controller@index');
-Route::get('ewc/search','ewc_controller@search');
+
 
 
 
@@ -32,8 +31,14 @@ Route::get('companies/{company}/issues/search', 'issue_controller@search');
 #Manage Pages
 Route::get('companies/{company}/manage', 'company_controller@manage_index');
 
+# EWC Codes
+Route::resource('ewc', 'materials_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+Route::post('ewc/ewc-store',                'ewc_controller@store');
+Route::post('ewc/{ewc_code}/ewc-update',    'ewc_controller@update');
+Route::post('ewc/{ewc_code}/ewc-destroy',   'ewc_controller@destroy');
+Route::get('ewc/search','ewc_controller@search');
 
-
+# Materials
 Route::resource('materials', 'materials_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('materials/materials-store',                'materials_controller@store');
 Route::post('materials/{material}/materials-update',    'materials_controller@update');
@@ -68,9 +73,3 @@ Route::resource('companies/{company}/manage/issues', 'issue_controller', ['only'
 Route::post('companies/{company}/manage/issues/issues-store',                   'issue_controller@store');
 Route::post('companies/{company}/manage/issues/{issue}/issues-update',  'issue_controller@update');
 
-
-#Issues
-Route::get('companies/{company}/manage/receipts/create/communities','receipt_controller@communities');
-
-#Route::get('/','SearchController@index');
-#Route::get('/search','SearchController@search');

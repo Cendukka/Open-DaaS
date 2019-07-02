@@ -28,16 +28,12 @@
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
                 <br>
-
+                @if (!(count($material->inventory)>0 || count($material->receipt)>0 || count($material->detail)>0 || count($material->refined)>0))
                 <form method="post" action="materials-destroy">
                     @csrf
-                    @if (!(count($material->inventory)>0 || count($material->receipt)>0 || count($material->detail)>0 || count($material->refined)>0))
-                        <button type="submit" class="btn btn-primary">Delete</button>
-                        @else
-                        <button type="submit" class="btn btn-secondary" disabled>Delete</button>
-                    @endif
+                    <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
-
+                @endif
             </div>
         </div>
     </div>

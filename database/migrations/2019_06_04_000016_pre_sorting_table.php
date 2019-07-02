@@ -20,7 +20,8 @@ class PreSortingTable extends Migration
 			$table->integer('pre_sorting_user_id')->unsigned();
 			$table->integer('pre_sorting_weight');
 			$table->dateTime('pre_sorting_date');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 
 			$table->foreign('pre_sorting_receipt_id')->references('receipt_id')->on('inventory_receipt');
 			$table->foreign('presorted_material_id')->references('presorted_material_id')->on('presorted_material');

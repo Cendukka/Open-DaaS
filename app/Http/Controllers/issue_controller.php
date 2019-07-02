@@ -154,7 +154,7 @@ class issue_controller extends Controller {
                 },
             ],
         ]);
-
+        date_default_timezone_set('Europe/Helsinki');
         $issueNew = inventory_issue::find($issue->issue_id);
         $issueNew->issue_user_id = $request->get('user');
         $issueNew->issue_date = $request->get('datetime');
@@ -219,11 +219,13 @@ class issue_controller extends Controller {
 			if($result){
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
+                        '<td>'.title_case($value->from_microlocation).'</td>'.
 						'<td>'.title_case($value->to_microlocation).'</td>'.
-						'<td>'.title_case($value->from_microlocation).'</td>'.
                         '<td>'.date("Y-m-d",strtotime($value->issue_date)).'</td>'.
 						'<td>'.$value->username.'</td>'.
 						'<td>'.$value->issue_typename.'</td>'.
+						'<td>'.(DB::table('inventory_issue_details')->where('detail_issue_id',$value->issue_id)->sum('detail_weight')).'</td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'">Edit</a></td>'.
 						'</tr>';
 				}
 				return Response($output);

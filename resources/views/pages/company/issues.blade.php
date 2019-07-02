@@ -28,11 +28,12 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
+                        <th>From Location</th>
                         <th>To Location</th>
-                        <th>From ID</th>
                         <th>Date</th>
                         <th>User</th>
                         <th>Status Type</th>
+                        <th>Weight</th>
                     </tr>
                     </thead>
                     <tbody>

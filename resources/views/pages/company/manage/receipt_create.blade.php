@@ -70,12 +70,12 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="distance">Disance (km):&nbsp</label>
-                        <input type="text" class="form-control" name="distance"/>
-                    </div>
-                    <div class="form-group">
                         <label for="weight">Weight (kg):&nbsp</label>
                         <input type="text" class="form-control" name="weight"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="distance">Disance (km):&nbsp</label>
+                        <input type="text" class="form-control" name="distance"/>
                     </div>
                     <div class="form-group">
                         <label for="ewc">EWC Code:&nbsp</label>

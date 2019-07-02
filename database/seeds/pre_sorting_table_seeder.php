@@ -24,7 +24,7 @@ class pre_sorting_table_seeder extends Seeder
 				'presorted_material_id' => rand(1,$presorted_amount),
 				'pre_sorting_user_id' => rand(1,$users_amount),
 				'pre_sorting_weight' => rand(100,500),
-				'pre_sorting_date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now', $timezone = null),
+				'pre_sorting_date' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = null),
 			]);
 		}
     }

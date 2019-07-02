@@ -17,7 +17,6 @@
                 @endif
                 <form method="post" action="issues-update">
                     @csrf
-
                     <div class="form-group">
                         <label for="user">User:&nbsp</label>
                         <select class="custom-select mr-sm-2" name="user">
@@ -25,6 +24,11 @@
                                 <option value="{{$user->user_id}}" {{($user->user_id == $issue->issue_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Issue created at:&nbsp</label>{{$issue->created_at}}
+                        <p></p>
+                        <label>Issue updated at:&nbsp</label>{{$issue->updated_at}}
                     </div>
                     <div class="form-group">
                         @php

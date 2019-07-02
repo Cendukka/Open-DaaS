@@ -22,7 +22,8 @@ class RefinedSortingTable extends Migration
 			$table->integer('refined_weight');
 			$table->dateTime('refined_date');
 			$table->string('refined_description',191);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 
 			$table->foreign('refined_receipt_id')->references('receipt_id')->on('inventory_receipt');
 			$table->foreign('pre_sorting_id')->references('pre_sorting_id')->on('pre_sorting');

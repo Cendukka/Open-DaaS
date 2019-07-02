@@ -26,6 +26,11 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Receipt created at:&nbsp</label>{{$receipt->created_at}}
+                        <p></p>
+                        <label>Receipt updated at:&nbsp</label>{{$receipt->updated_at}}
+                    </div>
+                    <div class="form-group">
                         @php
                             date_default_timezone_set('Europe/Helsinki')
                         @endphp
@@ -63,12 +68,12 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="distance">Disance (km):&nbsp</label>
-                        <input type="text" class="form-control" name="distance" value="{{$receipt->distance_km}}"/>
-                    </div>
-                    <div class="form-group">
                         <label for="weight">Weight (kg):&nbsp</label>
                         <input type="text" class="form-control" name="weight" value="{{$receipt->receipt_weight}}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="distance">Disance (km):&nbsp</label>
+                        <input type="text" class="form-control" name="distance" value="{{$receipt->distance_km}}"/>
                     </div>
                     <div class="form-group">
                         <label for="ewc">EWC Code:&nbsp</label>
@@ -79,7 +84,7 @@
                         </select>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
         </div>
@@ -106,14 +111,16 @@
         function communities(){
             $from_company = $("#from_company").val();
             $community_id = {{$receipt->from_community_id ?: 0}}
-            $.ajax({
-                type: "get",
-                url: '{{URL::to(trim(url()->current(),'/').'/communities')}}',
-                data: {'from_company':$from_company,'community_id':$community_id},
-                success:function(data){
-                    $("#from_community").empty().html(data);
-                }
-            })
+            if($community_id!=0) {
+                $.ajax({
+                    type: "get",
+                    url: '{{URL::to(trim(url()->current(),'/').'/communities')}}',
+                    data: {'from_company': $from_company, 'community_id': $community_id},
+                    success: function (data) {
+                        $("#from_community").empty().html(data);
+                    }
+                })
+            }
         };
 
         $(document).ready(source);

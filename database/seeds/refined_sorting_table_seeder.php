@@ -26,7 +26,7 @@ class refined_sorting_table_seeder extends Seeder
 				'refined_material_id' => rand(1,$material_amount),
 				'refined_user_id' => rand(1,$users_amount),
 				'refined_weight' => rand(100,500),
-				'refined_date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now', $timezone = null),
+				'refined_date' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = null),
 				'refined_description' => $faker->text(40)
 			]);
 		}

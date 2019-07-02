@@ -14,6 +14,7 @@
         });
     }
     $(document).ready(search);
+    $('#search').on('keyup',search);
     $('#search').on('change',search);
     $('#from-date').on('change',search);
     $('#to-date').on('change',search);

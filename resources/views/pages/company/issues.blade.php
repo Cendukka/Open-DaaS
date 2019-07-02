@@ -39,6 +39,9 @@
                     <tbody>
                     </tbody>
                 </table>
+                <form action="{{url('companies/'.$company->company_id.'/manage/issues/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add Issue</button>
+                </form>
             </div>
         </div>
     </div>

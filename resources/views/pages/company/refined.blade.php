@@ -38,6 +38,9 @@
                     <tbody>
                     </tbody>
                 </table>
+                <form action="{{'companies/'.$company->company_id.'/manage/refined/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add Receipt</button>
+                </form>
             </div>
         </div>
     </div>

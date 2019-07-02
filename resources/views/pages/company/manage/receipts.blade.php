@@ -70,7 +70,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                    <form action="{{url(url()->current().'/create')}}">
+                <form action="{{url(url()->current().'/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Add Receipt</button>
                 </form>
             </div>

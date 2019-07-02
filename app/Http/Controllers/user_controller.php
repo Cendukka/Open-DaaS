@@ -9,30 +9,18 @@ use Illuminate\Support\Facades\Hash;
 use App\user;
 
 class user_controller extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function index(company $company) {
 		return view('pages.company.manage.users')->with('company', $company);
 	}
-	
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function create(company $company) {
 		return view('pages.company.manage.user_create')->with('company', $company);
 	}
-	
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function store(Request $request, company $company) {
 		# ADD MORE AUTHENTICATION HERE
 		
@@ -44,7 +32,6 @@ class user_controller extends Controller {
 			'last_name'=> 'required|max:50',
 			'username'=> 'required|unique:users|max:50',
 		]);
-		
 		
 		$user = new user([
 			'user_type_id' => $request->get('user_type'),
@@ -58,34 +45,18 @@ class user_controller extends Controller {
 		$user->save();
 		return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['User successfully created.']);
 	}
-	
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function show(company $company, user $user) {
 		return redirect()->action('user_controller@index', ['company' => $company]);
 	}
-	
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function edit(company $company, user $user) {
 		return view('pages.company.manage.user_edit')->with(['company' => $company, 'user' => $user]);
 	}
-	
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function update(Request $request, company $company, user $user) {
 		# ADD MORE AUTHENTICATION HERE
 		
@@ -111,13 +82,8 @@ class user_controller extends Controller {
 		
 		return redirect()->action('user_controller@index',['company' => $company])->withErrors(['User successfully updated.']);
 	}
-	
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function destroy($id) {
 		//
 	}

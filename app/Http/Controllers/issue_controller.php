@@ -8,30 +8,18 @@ use Illuminate\Support\Facades\DB;
 use App\inventory_issue;
 
 class issue_controller extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function index(company $company) {
-        return view('pages.company.manage.issues')->with('company', $company);
+        return view('pages.company.issues')->with('company', $company);
 	}
-	
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function create(company $company) {
         return view('pages.company.manage.issues_create')->with('company', $company);
 	}
-	
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function store(Request $request, company $company) {
         # ADD MORE AUTHENTICATION HERE
         $request->validate([
@@ -69,7 +57,6 @@ class issue_controller extends Controller {
             ],
         ]);
 
-
         $issue = new inventory_issue([
             'issue_user_id' => $request->get('user'),
             'issue_date' => $request->get('datetime'),
@@ -90,33 +77,17 @@ class issue_controller extends Controller {
 
         return redirect()->action('issue_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
 	}
-	
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function show(company $company, inventory_issue $issue) {
 	}
-	
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function edit(company $company, inventory_issue $issue) {
         return view('pages.company.manage.issues_edit')->with(['company' => $company, 'issue' => $issue]);
 	}
-	
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function update(Request $request, company $company, inventory_issue $issue) {
         # ADD MORE AUTHENTICATION HERE
 
@@ -175,17 +146,13 @@ class issue_controller extends Controller {
 
         return redirect()->action('issue_controller@index',['company' => $company])->withErrors(['Issue successfully updated.']);
 	}
-	
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function destroy($id) {
 		//
 	}
-	
+
+
 	public function search(Request $request, company $company){
 		if($request->ajax()){
 			$microlocations = DB::table('microlocations')

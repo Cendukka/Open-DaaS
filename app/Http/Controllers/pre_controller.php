@@ -8,74 +8,42 @@ use Illuminate\Support\Facades\DB;
 use App\pre_sorting;
 
 class pre_controller extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function index(company $company) {
 	
 	}
-	
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function create(company $company) {
 	
 	}
-	
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function store(Request $request, pre_sorting $pre) {
 	
 	}
-	
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function show(company $company, pre_sorting $pre) {
 	
 	}
-	
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function edit(company $company, pre_sorting $pre) {
 	
 	}
-	
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function update(Request $request, company $company, pre_sorting $pre) {
 	}
-	
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function destroy($id) {
 		//
 	}
-	
+
+
 	public function search(Request $request, company $company){
 		if($request->ajax()){
 			$microlocations = DB::table('microlocations')
@@ -114,6 +82,7 @@ class pre_controller extends Controller {
 						'<td>'.$value->pre_sorting_weight.'</td>'.
 						'<td>'.$value->presorted_material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'">Edit</a></td>'.
 						'</tr>';
 					$sumweight += $value->pre_sorting_weight;
 				}

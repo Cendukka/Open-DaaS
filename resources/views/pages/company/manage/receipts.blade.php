@@ -26,7 +26,7 @@
                         <th>Distance (km)</th>
                         <th>Weight (kg)</th>
                         <th>EWC Code</th>
-                        <th>User ID</th>
+                        <th>User</th>
                     </tr>
                     </thead>
                     <tbody>

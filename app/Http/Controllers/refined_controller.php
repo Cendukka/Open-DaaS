@@ -8,74 +8,42 @@ use Illuminate\Support\Facades\DB;
 use App\refined_sorting;
 
 class refined_controller extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function index(company $company) {
 	
 	}
-	
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function create(company $company) {
 	
 	}
-	
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function store(Request $request, refined_sorting $refined) {
 	
 	}
-	
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function show(company $company, refined_sorting $refined) {
 	
 	}
-	
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function edit(company $company, refined_sorting $refined) {
 	
 	}
-	
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function update(Request $request, company $company, refined_sorting $refined) {
 	}
-	
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function destroy($id) {
 		//
 	}
-	
+
+
 	public function search(Request $request, company $company){
 		if($request->ajax()){
 			$microlocations = DB::table('microlocations')

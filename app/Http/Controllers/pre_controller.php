@@ -94,12 +94,15 @@ class pre_controller extends Controller {
 					->where(function ($query) use ($request){
 						$query
 						->where('microlocation_name','LIKE','%'.$request->search."%")
-						->orWhere('presorted_material_name','LIKE','%'.$request->search."%");
+						->orWhere('presorted_material_name','LIKE','%'.$request->search."%")
+						->orWhere('pre_sorting_weight','LIKE','%'.$request->search."%")
+						->orWhere('username','LIKE','%'.$request->search."%");
 					})
 					->join('inventory_receipt','receipt_id','=','pre_sorting_receipt_id')
 					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
 					->join('presorted_material','presorted_material.presorted_material_id','=','pre_sorting.presorted_material_id')
-					->orderBy('pre_sorting_date')
+					->join('users','users.user_id','=','pre_sorting.pre_sorting_user_id')
+					->orderBy('pre_sorting_date', 'DESC')
 					->orderBy('receipt_to_microlocation_id')
 					->get();
 			if($result){
@@ -110,7 +113,7 @@ class pre_controller extends Controller {
                         '<td>'.date("Y-m-d",strtotime($value->pre_sorting_date)).'</td>'.
 						'<td>'.$value->pre_sorting_weight.'</td>'.
 						'<td>'.$value->presorted_material_name.'</td>'.
-						'<td>'.$value->pre_sorting_user_id.'</td>'.
+						'<td>'.$value->username.'</td>'.
 						'</tr>';
 					$sumweight += $value->pre_sorting_weight;
 				}

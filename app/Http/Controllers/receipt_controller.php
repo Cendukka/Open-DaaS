@@ -160,6 +160,8 @@ class receipt_controller extends Controller {
                     ->orwhere('community.communitY_city','LIKE','%'.$request->search."%")
                     ->orWhere('material_name','LIKE','%'.$request->search."%")
                     ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%")
+                    ->orWhere('receipt_weight','LIKE','%'.$request->search."%")
+                    ->orWhere('distance_km','LIKE','%'.$request->search."%")
                     ->orWhere(function ($query) use ($request){
                         if(Str::contains('community',$request->search)){
                             $query->whereNotNull('from_community_id');

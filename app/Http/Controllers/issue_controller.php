@@ -203,21 +203,26 @@ class issue_controller extends Controller {
 					})
 					->where(function ($query) use ($request){
 						$query
-						->where('microlocation_name','LIKE','%'.$request->search."%")
+						->where('from_microlocations.microlocation_name','LIKE','%'.$request->search."%")
+						->orWhere('to_microlocations.microlocation_name','LIKE','%'.$request->search."%")
+						->orWhere('username','LIKE','%'.$request->search."%")
 						->orWhere('issue_typename','LIKE','%'.$request->search."%");
 					})
 					->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
-					->join('microlocations','issue_to_microlocation_id','=','microlocation_id')
+                    ->join('microlocations as from_microlocations','issue_from_microlocation_id','=','from_microlocations.microlocation_id')
+                    ->join('microlocations as to_microlocations','issue_to_microlocation_id','=','to_microlocations.microlocation_id')
+                    ->join('users','users.user_id','=','issue_user_id')
 					->orderBy('issue_from_microlocation_id')
 					->orderBy('issue_date')
-					->get();
+                    ->select('issue_id','issue_date','from_microlocations.microlocation_name as from_microlocation','to_microlocations.microlocation_name as to_microlocation','users.username','issue_typename')
+                    ->get();
 			if($result){
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
-						'<td>'.title_case($value->microlocation_name).'</td>'.
-						'<td>'.title_case($value->issue_from_microlocation_id).'</td>'.
+						'<td>'.title_case($value->to_microlocation).'</td>'.
+						'<td>'.title_case($value->from_microlocation).'</td>'.
                         '<td>'.date("Y-m-d",strtotime($value->issue_date)).'</td>'.
-						'<td>'.$value->issue_user_id.'</td>'.
+						'<td>'.$value->username.'</td>'.
 						'<td>'.$value->issue_typename.'</td>'.
 						'</tr>';
 				}

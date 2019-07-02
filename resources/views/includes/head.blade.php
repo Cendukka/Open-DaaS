@@ -11,7 +11,7 @@
     .column {
         float: left;
         padding: 10px;
-        height: 300px; /* Should be removed. Only for demonstration */
+
     }
 
     /* Clear floats after the columns */
@@ -21,22 +21,12 @@
         clear: both;
     }
 
-    /*table, th, td {*/
-    /*    border: 1px solid black;*/
-    /*    text-align: left;*/
-    /*}*/
-
-    /*table {*/
-    /*    border-collapse: collapse;*/
-    /*    width: 100%;*/
-    /*}*/
-
-    /*th {*/
-    /*    height: 50px;*/
-    /*}*/
-
     .container {
         margin:0;
+    }
+
+    #main{
+        min-width: 70%;
     }
 
 </style>

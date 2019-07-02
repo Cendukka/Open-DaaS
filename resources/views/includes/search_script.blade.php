@@ -14,8 +14,8 @@
         });
     }
     $(document).ready(search);
-    $('#search').on('keyup',search);
-    $('#from-date').on('keyup',search);
-    $('#to-date').on('keyup',search);
+    $('#search').on('change',search);
+    $('#from-date').on('change',search);
+    $('#to-date').on('change',search);
     $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 </script>

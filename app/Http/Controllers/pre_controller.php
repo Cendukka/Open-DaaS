@@ -64,7 +64,6 @@ class pre_controller extends Controller {
             'weight' => 'required|integer',
         ]);
 
-        date_default_timezone_set('Europe/Helsinki');
         $preNew = pre_sorting::find($pre->pre_sorting_id);
         $preNew->pre_sorting_user_id = $request->get('user');
         $preNew->pre_sorting_date = $request->get('datetime');

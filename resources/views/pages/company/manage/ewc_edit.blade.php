@@ -25,11 +25,9 @@
                         <label for="description">Description:&nbsp</label>
                         <textarea type="text" class="form-control" rows="8" maxlength="191" name="description">{{$ewc_code->description}}</textarea>
                     </div>
-
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
                 <br>
-
                 <form method="post" action="ewc-destroy">
                     @csrf
                     @if (!(count($ewc_code->inventory_issue_details)>0 || count($ewc_code->inventory_receipt)>0))

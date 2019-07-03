@@ -3,7 +3,7 @@
     <div id="content" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Edit pre sorting </h3>
+                <h3>Edit Pre-Sorting </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())

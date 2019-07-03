@@ -16,12 +16,38 @@ class refined_controller extends Controller {
 
 
 	public function create(company $company) {
-	
+        return view('pages.company.manage.refined_create')->with('company', $company);
 	}
 
 
-	public function store(Request $request, refined_sorting $refined) {
-	
+	public function store(Request $request, company $company) {
+        # ADD MORE AUTHENTICATION HERE
+
+        $request->validate([
+            'user' => 'required|integer',
+            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'pre_receipt' => 'required|integer',
+            'material' => 'required|integer',
+            'weight' => 'required|integer',
+            'description' => 'max:191',
+        ]);
+
+
+
+        #dd($request);
+        $refined = new refined_sorting([
+            'refined_user_id' => $request->get('user'),
+            'refined_date' => $request->get('datetime'),
+            'refined_receipt_id' => ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL),
+            'pre_sorting_id' => ($request->get('presort') == 'presort' ? $request->get('pre_receipt') : NULL),
+            'refined_material_id' => $request->get('material'),
+            'refined_weight' => $request->get('weight'),
+            'description' => ($request->get('description') ?: ''),
+        ]);
+
+        #dd($refined);
+        $refined->save();
+        return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Refined-Sorting successfully created.']);
 	}
 
 
@@ -31,11 +57,33 @@ class refined_controller extends Controller {
 
 
 	public function edit(company $company, refined_sorting $refined) {
-	
+        return view('pages.company.manage.refined_edit')->with(['company' => $company, 'refined' => $refined]);
 	}
 
 
 	public function update(Request $request, company $company, refined_sorting $refined) {
+        # ADD MORE AUTHENTICATION HERE
+
+        $request->validate([
+            'user' => 'required|integer',
+            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'pre_receipt' => 'integer|integer',
+            'material' => 'required|integer',
+            'weight' => 'required|integer',
+            'description' => 'max:191',
+        ]);
+
+        $refinedNew = refined_sorting::find($refined->refined_id);
+        $refinedNew->refined_user_id = $request->get('user');
+        $refinedNew->refined_date = $request->get('datetime');
+        if($request->get('origin') == 'receipt'){$refinedNew->refined_receipt_id = $request->get('pre_receipt');}
+        elseif($request->get('origin') == 'presort'){$refinedNew->pre_sorting_id = $request->get('pre_receipt');}
+        $refinedNew->refined_material_id = $request->get('material');
+        $refinedNew->refined_weight = $request->get('weight');
+        $refinedNew->description = ($request->get('description') ?: '');
+        $refinedNew->save();
+
+        return redirect()->action('refined_controller@index',['company' => $company])->withErrors(['Refined-Sorting successfully updated.']);
 	}
 
 
@@ -97,4 +145,43 @@ class refined_controller extends Controller {
 			}
 		}
 	}
+
+
+    public function origin(Request $request, company $company){
+        if($request->ajax()){
+            $output="";
+            $origin = $request->input('origin') ?: 0;
+            $ml_id = $request->input('ml_id') ?: 0;
+            $pre_receipt_id = $request->input('pre_receipt_id') ?: 0;
+            if($origin == 'receipt') {
+                $result = DB::table('inventory_receipt')
+                    ->join('material_names', 'material_id', 'receipt_material_id')
+                    ->where('receipt_to_microlocation_id', '=', $ml_id)
+                    ->where('material_names.material_name', 'Refined')
+                    ->orderBy('receipt_date', 'DESC')
+                    ->get();
+                #dd($result->count());
+                $output .= '<label for="pre_receipt">Receipt:&nbsp</label>';
+                if($result->count()) {
+                    $output .= '<select name="pre_receipt" id="pre_receipt">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    foreach ($result as $key => $value) {
+                        $output .= '<option value="' . $value->receipt_id . '" ' . ($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '') . '>' . title_case($value->material_name . ', ' . $value->receipt_date . ', ' . $value->receipt_weight . ' kg') . '</option>';
+                    }
+                    $output .= '</select>';
+                    return Response($output);
+                }
+                else{
+                    $output .= 'No receipts found';
+                    return Response($output);
+                }
+            }
+            elseif($origin == 'presort'){
+
+                ## TODO
+            }
+        }
+    }
 }
+
+

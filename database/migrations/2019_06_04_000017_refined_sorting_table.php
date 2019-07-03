@@ -21,7 +21,7 @@ class RefinedSortingTable extends Migration
 			$table->integer('refined_user_id')->unsigned();
 			$table->integer('refined_weight');
 			$table->dateTime('refined_date');
-			$table->string('refined_description',191);
+			$table->string('description',191);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 

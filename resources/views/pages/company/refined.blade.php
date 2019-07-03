@@ -39,7 +39,7 @@
                     </tbody>
                 </table>
                 <form action="{{url('companies/'.$company->company_id.'/manage/refined/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add Receipt</button>
+                    <button type="submit" class="btn btn-secondary">+ Add Refined-Sorting</button>
                 </form>
             </div>
         </div>

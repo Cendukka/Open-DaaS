@@ -3,7 +3,7 @@
     <div id="content" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Create Pre-Sorting </h3>
+                <h3>Edit Refined Sorting </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="pre-store">
+                <form method="post" action="refined-store">
                     @csrf
                     <div class="form-group">
                         <label for="user">User:&nbsp</label>
@@ -35,6 +35,14 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="origin">Refined Waste Origin:&nbsp</label>
+                        <select name="origin" id="origin">
+                            <option selected="selected" disabled hidden value=""></option>
+                                <option value="presort">Pre-Sorting</option>
+                                <option value="receipt">Receipt</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="microlocation">Microlocation:&nbsp</label>
                         <select name="microlocation" id="microlocation">
                             <option selected="selected" disabled hidden value=""></option>
@@ -43,26 +51,27 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="receipt">Receipt:&nbsp</label>
-                        <select name="receipt" id="receipt">
-                        </select>
+                    <div class="form-group" id="originSelect">
+
                     </div>
                     <div class="form-group">
                         <label for="material">Material:&nbsp</label>
                         <select name="material">
                             <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('presorted_material')->get() as $material)
-                                <option value="{{$material->presorted_material_id}}">{{title_case($material->presorted_material_name)}}</option>
+                            @foreach (DB::table('material_names')->get() as $material)
+                                <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
                             @endforeach
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="weight">Weight (kg):&nbsp</label>
                         <input type="text" class="form-control" name="weight" value=""/>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <div class="form-group">
+                        <label for="description">Description:&nbsp</label>
+                        <textarea type="text" class="form-control" rows="8" maxlength="191" name="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>
         </div>
@@ -77,19 +86,23 @@
         });
     </script>
     <script type="text/javascript">
-        function microlocations(){
+        function origin(){
+            var $origin = $("#origin").val();
             var $ml_id = $("#microlocation").val();
-            var $receipt_id = '';
-            $.ajax({
-                type: "get",
-                url: '{{URL::to(trim(url()->current(),'/').'/receipt')}}',
-                data: {'ml_id':$ml_id, 'receipt_id':$receipt_id},
-                success:function(data){
-                    $("#receipt").empty().html(data);
-                }
-            })
+            var $pre_receipt_id = '0';
+            if($origin && $ml_id) {
+                $.ajax({
+                    type: "get",
+                    url: '{{URL::to(trim(url()->current(),'/').'/origin')}}',
+                    data: {'origin': $origin, 'ml_id': $ml_id, 'pre_receipt_id': $pre_receipt_id},
+                    success: function (data) {
+                        $("#originSelect").empty().html(data);
+                    }
+                })
+            }
         };
-        $(document).ready(microlocations);
-        $('#microlocation').on('change',microlocations);
+        $(document).ready(origin);
+        $('#origin').on('change',origin);
+        $('#microlocation').on('change',origin);
     </script>
 @endsection

@@ -80,6 +80,7 @@ class issue_controller extends Controller {
 
 
 	public function show(company $company, inventory_issue $issue) {
+
 	}
 
 

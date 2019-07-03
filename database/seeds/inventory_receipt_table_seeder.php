@@ -20,7 +20,7 @@ class inventory_receipt_table_seeder extends Seeder
 		$users_amount = DB::table('users')->count();
 		$ewc_codes = DB::table('ewc_codes')->select('ewc_code')->get();
 		
-		$sum = $microlocations_amount+$communities_amount+$suppliers_amount;
+		$sum = $microlocations_amount+$communities_amount+$suppliers_amount+$users_amount+count($ewc_codes);
 		
 		foreach (range(1,$sum*3) as $index) {
 			$select = rand(1,3);

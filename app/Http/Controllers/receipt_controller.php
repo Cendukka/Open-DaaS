@@ -24,7 +24,7 @@ class receipt_controller extends Controller {
 
 	public function store(Request $request, company $company) {
 		# ADD MORE AUTHENTICATION HERE
-        #dd($request);
+
 		$request->validate([
 			'user' => 'required|integer',
 			'datetime' => 'required|date_format:Y-m-d H:i:s',

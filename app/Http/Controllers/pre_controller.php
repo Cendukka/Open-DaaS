@@ -16,12 +16,30 @@ class pre_controller extends Controller {
 
 
 	public function create(company $company) {
-	
+        return view('pages.company.manage.pre_create')->with('company', $company);
 	}
 
 
-	public function store(Request $request, pre_sorting $pre) {
-	
+	public function store(Request $request, company $company) {
+        # ADD MORE AUTHENTICATION HERE
+
+        $request->validate([
+            'user' => 'required|integer',
+            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'receipt' => 'integer|integer',
+            'material' => 'required|integer',
+            'weight' => 'required|integer',
+        ]);
+        $pre = new pre_sorting([
+            'pre_sorting_user_id' => $request->get('user'),
+            'pre_sorting_date' => $request->get('datetime'),
+            'pre_sorting_receipt_id' => $request->get('receipt'),
+            'presorted_material_id' => $request->get('material'),
+            'pre_sorting_weight' => $request->get('weight'),
+        ]);
+        #dd($pre);
+        $pre->save();
+        return redirect()->action('pre_controller@index', ['company' => $company])->withErrors(['Pre-sorting successfully created.']);
 	}
 
 
@@ -31,11 +49,31 @@ class pre_controller extends Controller {
 
 
 	public function edit(company $company, pre_sorting $pre) {
-	
+        return view('pages.company.manage.pre_edit')->with(['company' => $company, 'pre' => $pre]);
 	}
 
 
 	public function update(Request $request, company $company, pre_sorting $pre) {
+        # ADD MORE AUTHENTICATION HERE
+
+        $request->validate([
+            'user' => 'required|integer',
+            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'receipt' => 'integer|integer',
+            'material' => 'required|integer',
+            'weight' => 'required|integer',
+        ]);
+
+        date_default_timezone_set('Europe/Helsinki');
+        $preNew = pre_sorting::find($pre->pre_sorting_id);
+        $preNew->pre_sorting_user_id = $request->get('user');
+        $preNew->pre_sorting_date = $request->get('datetime');
+        $preNew->pre_sorting_receipt_id = $request->get('receipt');
+        $preNew->presorted_material_id = $request->get('material');
+        $preNew->pre_sorting_weight = $request->get('weight');
+        $preNew->save();
+
+        return redirect()->action('pre_controller@index',['company' => $company])->withErrors(['Pre-sorting successfully updated.']);
 	}
 
 
@@ -97,4 +135,26 @@ class pre_controller extends Controller {
 			}
 		}
 	}
+
+
+    public function receipt(Request $request, company $company){
+        if($request->ajax()){
+            $output="";
+            $ml_id = $request->input('ml_id') ?: 0;
+            $receipt_id = $request->input('receipt_id') ?: 0;
+            $result = DB::table('inventory_receipt')
+                ->join('material_names','material_id','receipt_material_id')
+                ->where('receipt_to_microlocation_id','=',$ml_id)
+                ->where('material_names.material_name', 'Raw Waste')
+                ->orderBy('receipt_date','DESC')
+                ->get();
+            if($result) {
+                $output .= '<option selected="selected" disabled hidden value=""></option>';
+                foreach ($result as $key => $value) {
+                    $output .= '<option value="'.$value->receipt_id.'" '.($value->receipt_id == $receipt_id ? 'selected="selected"' : '').'>'.title_case($value->receipt_date).'</option>';
+                }
+            }
+            return Response($output);
+        }
+    }
 }

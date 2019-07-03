@@ -16,15 +16,15 @@ class pre_sorting extends Model {
 	}
 	
 	public function users() {
-		return $this->belongsTo(users::class,'user_id');
+		return $this->belongsTo(users::class,'user_id','receipt_user_id');
 	}
 	
-	public function inventory_receipt() {
-		return $this->belongsTo(inventory_receipt::class,'inventory_receipt_id');
+	public function receipt() {
+		return $this->belongsTo(inventory_receipt::class,'receipt_id','pre_sorting_receipt_id');
 	}
 
 	public function presorted_material() {
-		return $this->belongsTo(presorted_material::class,'presorted_material_id');
+		return $this->belongsTo(presorted_material::class,'presorted_material_id','presorted_material_id');
 	}
 }
 

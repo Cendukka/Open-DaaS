@@ -39,12 +39,22 @@
                             <input type="text" class="form-control timepicker form-control" name="datetime" value="{{$pre->pre_sorting_date}}">
                         </div>
                     </div>
+                    @php
+                        $selected_microlocation_id = DB::table('microlocations')
+                            ->where('microlocation_company_id','=',$company->company_id)
+                            ->where('material_name','=','Raw Waste')
+                            ->where('receipt_id',$pre->pre_sorting_receipt_id)
+                            ->join('inventory_receipt','receipt_to_microlocation_id','microlocation_id')
+                            ->join('material_names','receipt_material_id','material_id')
+                            ->select('microlocation_id')
+                            ->first()->microlocation_id;
+                    @endphp
                     <div class="form-group">
                         <label for="microlocation">Microlocation:&nbsp</label>
                         <select name="microlocation" id="microlocation">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $pre->pre_sorting_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
+                                <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $selected_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -185,17 +185,28 @@ class issue_controller extends Controller {
                     ->select('issue_id','issue_date','from_microlocations.microlocation_name as from_microlocation','to_microlocations.microlocation_name as to_microlocation','users.username','issue_typename')
                     ->get();
 			if($result){
+			    $sumweight = 0;
 				foreach ($result as $key => $value){
+				    $weight = (DB::table('inventory_issue_details')->where('detail_issue_id',$value->issue_id)->sum('detail_weight'));
 					$output.='<tr>'.
                         '<td>'.title_case($value->from_microlocation).'</td>'.
 						'<td>'.title_case($value->to_microlocation).'</td>'.
                         '<td>'.date("Y-m-d",strtotime($value->issue_date)).'</td>'.
 						'<td>'.$value->username.'</td>'.
 						'<td>'.$value->issue_typename.'</td>'.
-						'<td>'.(DB::table('inventory_issue_details')->where('detail_issue_id',$value->issue_id)->sum('detail_weight')).'</td>'.
+						'<td>'.$weight.'</td>'.
                         '<td><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'">Edit</a></td>'.
 						'</tr>';
+                    $sumweight += $weight;
 				}
+                $output.='<tr>'.
+                    '<td></td>'.
+                    '<td></td>'.
+                    '<td></td>'.
+                    '<td></td>'.
+                    '<td></td>'.
+                    '<td>'.$sumweight.' Total</td>'.
+                    '</tr>';
 				return Response($output);
 			}
 		}

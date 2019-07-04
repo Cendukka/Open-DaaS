@@ -158,7 +158,6 @@ class receipt_controller extends Controller {
                 ->get();
            #dd($result);
             if($result){
-                $sumweight = 0;
                 foreach ($result as $key => $value){
                     $from =  ($value->from_community_id ? 'Community:'.(DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city) :
                         ($value->from_supplier_id ? 'Supplier:'.(DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name) :
@@ -174,7 +173,6 @@ class receipt_controller extends Controller {
                         '<td>'.$value->receipt_ewc_code.'</td>'.
                         '<td><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'">Edit</a></td>'.
                         '</tr>';
-                    $sumweight += $value->receipt_weight;
                 }
                 $output.='<tr>'.
                     '<td></td>'.
@@ -182,7 +180,7 @@ class receipt_controller extends Controller {
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.
-                    '<td>'.$sumweight.' Total</td>'.
+                    '<td>'.$result->sum('receipt_weight').' Total</td>'.
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.

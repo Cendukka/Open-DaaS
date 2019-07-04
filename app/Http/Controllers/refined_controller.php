@@ -135,9 +135,7 @@ class refined_controller extends Controller {
 					->orderBy('receipt_to_microlocation_id')
                     ->select(['refined_id','username','refined_weight','material_name','refined_date','refined_receipt_id','microlocation_name'])
 					->get();
-
 			if($result){
-				$sumweight = 0;
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
@@ -147,12 +145,11 @@ class refined_controller extends Controller {
 						'<td>'.$value->username.'</td>'.
                         '<td><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'">Edit</a></td>'.
 						'</tr>';
-					$sumweight += $value->refined_weight;
 				}
 				$output.='<tr>'.
 					'<td></td>'.
 					'<td></td>'.
-					'<td>'.$sumweight.' Total</td>'.
+					'<td>'.$result->sum('refined_weight').' Total</td>'.
 					'<td></td>'.
 					'<td></td>'.
 					'</tr>';

@@ -111,7 +111,6 @@ class pre_controller extends Controller {
 					->orderBy('receipt_to_microlocation_id')
 					->get();
 			if($result){
-				$sumweight = 0;
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
@@ -121,12 +120,11 @@ class pre_controller extends Controller {
 						'<td>'.$value->username.'</td>'.
                         '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'">Edit</a></td>'.
 						'</tr>';
-					$sumweight += $value->pre_sorting_weight;
 				}
 				$output.='<tr>'.
 					'<td></td>'.
 					'<td></td>'.
-					'<td>'.$sumweight.' Total</td>'.
+					'<td>'.$result->sum('pre_sorting_weight').' Total</td>'.
 					'<td></td>'.
 					'<td></td>'.
 					'</tr>';

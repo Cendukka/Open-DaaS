@@ -86,7 +86,7 @@ Route::post('companies/{company}/manage/pre/{pre}/pre-update',  'pre_controller@
 Route::get('companies/{company}/refined',                                   'refined_controller@index');
 Route::resource('companies/{company}/manage/refined',                       'refined_controller', ['only' => ['show', 'create', 'edit']]);
 Route::get('companies/{company}/refined/search',                            'refined_controller@search');
-Route::get('companies/{company}/manage/refined/create/origin',             'refined_controller@origin');
-Route::get('companies/{company}/manage/refined/{refined}/edit/origin',     'refined_controller@origin');
+Route::get('companies/{company}/manage/refined/create/origin',              'refined_controller@origin');
+Route::get('companies/{company}/manage/refined/{refined}/edit/origin',      'refined_controller@origin');
 Route::post('companies/{company}/manage/refined/refined-store',             'refined_controller@store');
 Route::post('companies/{company}/manage/refined/{refined}/refined-update',  'refined_controller@update');

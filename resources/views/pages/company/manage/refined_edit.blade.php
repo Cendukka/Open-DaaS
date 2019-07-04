@@ -20,6 +20,7 @@
                     <div class="form-group">
                         <label for="user">User:&nbsp</label>
                         <select class="custom-select mr-sm-2" name="user">
+                            <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
                                 <option value="{{$user->user_id}}" {{($user->user_id == $refined->refined_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
                             @endforeach
@@ -41,7 +42,12 @@
                     </div>
                     @php
                         $origin = ($refined->pre_sorting_id == NULL ? 'receipt' : 'presorted');
-                        $ml_id = ($origin == 'presorted' ?
+
+                        #dd(DB::table('pre_sorting')
+                        #    ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
+                        #    ->where('pre_sorting_id',$refined->pre_sorting_id)
+                        #    ->select('receipt_to_microlocation_id as microlocation_id')->get());
+                        $ml_id = ($origin == 'presort' ?
                             DB::table('pre_sorting')
                             ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
                             ->where('pre_sorting_id',$refined->pre_sorting_id)

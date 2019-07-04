@@ -30,11 +30,14 @@ class refined_controller extends Controller {
             'material' => 'required|integer',
             'weight' => 'required|integer',
             'description' => 'max:191',
+        ],[],[
+            'user' => 'User',
+            'datetime' => 'Date & Time',
+            'pre_receipt' => 'Pre-Sorting or Receipt',
+            'material' => 'Material',
+            'weight' => 'Weight',
         ]);
 
-
-
-        #dd($request);
         $refined = new refined_sorting([
             'refined_user_id' => $request->get('user'),
             'refined_date' => $request->get('datetime'),
@@ -45,14 +48,13 @@ class refined_controller extends Controller {
             'description' => ($request->get('description') ?: ''),
         ]);
 
-        #dd($refined);
         $refined->save();
         return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Refined-Sorting successfully created.']);
 	}
 
 
 	public function show(company $company, refined_sorting $refined) {
-	
+
 	}
 
 
@@ -67,17 +69,23 @@ class refined_controller extends Controller {
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
-            'pre_receipt' => 'integer|integer',
+            'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer',
             'description' => 'max:191',
+        ],[],[
+            'user' => 'User',
+            'datetime' => 'Date & Time',
+            'pre_receipt' => 'Pre-Sorting or Receipt',
+            'material' => 'Material',
+            'weight' => 'Weight',
         ]);
 
         $refinedNew = refined_sorting::find($refined->refined_id);
         $refinedNew->refined_user_id = $request->get('user');
         $refinedNew->refined_date = $request->get('datetime');
-        if($request->get('origin') == 'receipt'){$refinedNew->refined_receipt_id = $request->get('pre_receipt');}
-        elseif($request->get('origin') == 'presort'){$refinedNew->pre_sorting_id = $request->get('pre_receipt');}
+        $refinedNew->refined_receipt_id = ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL);
+        $refinedNew->pre_sorting_id = ($request->get('origin') == 'presort' ? $request->get('pre_receipt') : NULL);
         $refinedNew->refined_material_id = $request->get('material');
         $refinedNew->refined_weight = $request->get('weight');
         $refinedNew->description = ($request->get('description') ?: '');
@@ -102,8 +110,9 @@ class refined_controller extends Controller {
 				array_push($microlocation_ids, $microlocation->microlocation_id);
 			}
 			$output="";
+
 			$result=DB::table('refined_sorting')
-					->whereIn('receipt_to_microlocation_id', $microlocation_ids)
+                    ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
 					->when(($request->from && $request->to), function($query) use ($request){
 						$query->whereBetween('refined_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
 					})
@@ -114,13 +123,19 @@ class refined_controller extends Controller {
 						->orWhere('refined_weight','LIKE','%'.$request->search."%")
 						->orWhere('username','LIKE','%'.$request->search."%");
 					})
-					->join('inventory_receipt','receipt_id','=','refined_receipt_id')
-					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
+                    ->leftJoin('pre_sorting','refined_sorting.pre_sorting_id','pre_sorting.pre_sorting_id')
+                    ->leftJoin('inventory_receipt', function($join){
+                        $join->on('pre_sorting.pre_sorting_receipt_id', '=', 'inventory_receipt.receipt_id')
+                            ->orOn('refined_sorting.refined_receipt_id', '=', 'inventory_receipt.receipt_id');
+                    })
+                    ->join('microlocations','receipt_to_microlocation_id','microlocation_id')
 					->join('material_names','material_id','=','refined_material_id')
                     ->join('users','users.user_id','=','refined_user_id')
 					->orderBy('refined_date','DESC')
 					->orderBy('receipt_to_microlocation_id')
+                    ->select(['refined_id','username','refined_weight','material_name','refined_date','refined_receipt_id','microlocation_name'])
 					->get();
+
 			if($result){
 				$sumweight = 0;
 				foreach ($result as $key => $value){
@@ -177,8 +192,31 @@ class refined_controller extends Controller {
                 }
             }
             elseif($origin == 'presort'){
-
-                ## TODO
+                $result = DB::table('pre_sorting')
+                    ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
+                    ->join('presorted_material', 'pre_sorting.presorted_material_id', 'presorted_material.presorted_material_id')
+                    ->where('receipt_to_microlocation_id', '=', $ml_id)
+                    ->where('presorted_material.presorted_material_name', 'Textile')
+                    ->orderBy('receipt_date', 'DESC')
+                    ->get();
+                #dd($result);
+                $output .= '<label for="pre_receipt">Receipt:&nbsp</label>';
+                if($result->count()) {
+                    $output .= '<select name="pre_receipt" id="pre_receipt">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    foreach ($result as $key => $value) {
+                        $output .= '<option value="' . $value->receipt_id . '" ' . ($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '') . '>' . title_case($value->presorted_material_name . ', ' . $value->receipt_date . ', ' . $value->receipt_weight . ' kg') . '</option>';
+                    }
+                    $output .= '</select>';
+                    return Response($output);
+                }
+                else{
+                    $output .= 'No receipts found';
+                    return Response($output);
+                }
+            }
+            else{
+                return Response('ERROR');
             }
         }
     }

@@ -12,11 +12,15 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label for="from-date">From Date: </label>
-                        <input type="date" class="form-control datepicker-autoclose" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
+                        <div style="position: relative">
+                            <input type="text" class="form-control timepicker form-control" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <label for="to-date">To Date: </label>
-                        <input type="date" class="form-control datepicker-autoclose" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
+                        <div style="position: relative">
+                            <input type="text" class="form-control timepicker form-control" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -36,7 +40,7 @@
                         <th>Weight</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="searchtable">
                     </tbody>
                 </table>
                 <form action="{{url('companies/'.$company->company_id.'/manage/issues/create')}}">
@@ -46,4 +50,12 @@
         </div>
     </div>
     @include('includes.search_script')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $('.timepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    </script>
 @endsection

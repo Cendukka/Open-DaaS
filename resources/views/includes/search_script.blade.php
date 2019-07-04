@@ -9,7 +9,7 @@
             url : '{{URL::to(trim(url()->current(),'/').'/search')}}',
             data:{'search':$search,'from':$from,'to':$to},
             success:function(data){
-                $('tbody').html(data);
+                $('#searchtable').html(data);
             }
         });
     }

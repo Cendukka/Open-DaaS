@@ -9,7 +9,7 @@ class material extends Model {
 	public $timestamps = false;
 	protected $table = "material_names";
 	protected $primaryKey = "material_id";
-	protected $fillable = ['material_name'];
+	protected $fillable = ['material_name','material_type'];
 	
 	public function inventory() {
 		return $this->hasMany(inventory::class, 'inventory_material_id');

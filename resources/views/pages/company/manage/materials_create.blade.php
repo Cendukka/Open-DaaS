@@ -21,6 +21,17 @@
                         <label for="name">Material Name:&nbsp</label>
                         <input type="text" class="form-control" name="name"/>
                     </div>
+                    <div class="form-group">
+                        <label for="type">Material Type:&nbsp</label>
+                        <select name="type">
+                            <option selected="selected" disabled hidden value=""></option>
+                            <option value="raw waste">Raw Waste</option>
+                            <option value="refined">Refined</option>
+                            <option value="presorted">Presorted</option>
+                            <option value="textile">Textile</option>
+                            <option value="retired">Retired</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>

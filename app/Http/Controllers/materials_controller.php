@@ -25,12 +25,14 @@ class materials_controller extends Controller {
 		
 		$request->validate([
 			'name' => 'required|max:50',
+			'type' => 'required','in:["textile","retired","raw waste","refined","presorted"]',
 		]);
-		
-		
+
 		$material = new material([
 			'material_name' => $request->get('name'),
+			'material_type' => $request->get('type'),
 		]);
+
 		$material->save();
 		return redirect()->action('materials_controller@index')->withErrors(['Material successfully created.']);
 	}
@@ -48,15 +50,16 @@ class materials_controller extends Controller {
 
 	public function update(Request $request, material $material) {
 		# ADD MORE AUTHENTICATION HERE
-		
-		$request->validate([
-			'name' => 'required|max:50',
-		]);
+
+        $request->validate([
+            'name' => 'required|max:50',
+            'type' => 'required','in:["textile","retired","raw waste","refined","presorted"]',
+        ]);
 		
 		$materialNew = material::find($material->material_id);
 		
 		$materialNew->material_name = $request->get('name');
-		$materialNew->retired = ($request->get('retired') == 'on' ? 1 : 0);
+		$materialNew->material_type = $request->get('type');
 		$materialNew->save();
 		
 		return redirect()->action('materials_controller@index')->withErrors(['Material successfully updated.']);

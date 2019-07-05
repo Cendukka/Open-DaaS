@@ -34,7 +34,7 @@ class pre_controller extends Controller {
             'pre_sorting_user_id' => $request->get('user'),
             'pre_sorting_date' => $request->get('datetime'),
             'pre_sorting_receipt_id' => $request->get('receipt'),
-            'presorted_material_id' => $request->get('material'),
+            'pre_sorting_material_id' => $request->get('material'),
             'pre_sorting_weight' => $request->get('weight'),
         ]);
         #dd($pre);
@@ -44,7 +44,7 @@ class pre_controller extends Controller {
 
 
 	public function show(company $company, pre_sorting $pre) {
-	
+
 	}
 
 
@@ -68,7 +68,7 @@ class pre_controller extends Controller {
         $preNew->pre_sorting_user_id = $request->get('user');
         $preNew->pre_sorting_date = $request->get('datetime');
         $preNew->pre_sorting_receipt_id = $request->get('receipt');
-        $preNew->presorted_material_id = $request->get('material');
+        $preNew->pre_sorting_material_id = $request->get('material');
         $preNew->pre_sorting_weight = $request->get('weight');
         $preNew->save();
 
@@ -99,13 +99,13 @@ class pre_controller extends Controller {
 					->where(function ($query) use ($request){
 						$query
 						->where('microlocation_name','LIKE','%'.$request->search."%")
-						->orWhere('presorted_material_name','LIKE','%'.$request->search."%")
+						->orWhere('material_name','LIKE','%'.$request->search."%")
 						->orWhere('pre_sorting_weight','LIKE','%'.$request->search."%")
 						->orWhere('username','LIKE','%'.$request->search."%");
 					})
 					->join('inventory_receipt','receipt_id','=','pre_sorting_receipt_id')
 					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
-					->join('presorted_material','presorted_material.presorted_material_id','=','pre_sorting.presorted_material_id')
+					->join('material_names','material_names.material_id','=','pre_sorting.pre_sorting_material_id')
 					->join('users','users.user_id','=','pre_sorting.pre_sorting_user_id')
 					->orderBy('pre_sorting_date', 'DESC')
 					->orderBy('receipt_to_microlocation_id')
@@ -116,7 +116,7 @@ class pre_controller extends Controller {
 						'<td>'.title_case($value->microlocation_name).'</td>'.
                         '<td>'.date("Y-m-d",strtotime($value->pre_sorting_date)).'</td>'.
 						'<td>'.$value->pre_sorting_weight.'</td>'.
-						'<td>'.$value->presorted_material_name.'</td>'.
+						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.
                         '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'">Edit</a></td>'.
 						'</tr>';

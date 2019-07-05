@@ -15,27 +15,21 @@
                         </ul>
                     </div>
                 @endif
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th>Material Name</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (DB::table('material_names')->get() as $material)
-                        <tr>
-                            <td><a href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}{{($material->retired ? ' [retired]' : '')}}</a></td>
-                        </tr>
+                    @foreach (DB::table('material_names')->distinct('material_type')->pluck('material_type') as $type)
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr><th>{{title_case($type)}}</th></tr>
+                        </thead>
+                        <tbody>
+                        @foreach (DB::table('material_names')->where('material_type','=',$type)->get() as $material)
+                            <tr>
+                                <td><a href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}</a></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                     @endforeach
-                    </tbody>
-                </table>
-                <table>
-                    <tr>
-
-                    </tr>
-
-                </table>
-                    <form action="{{url(url()->current().'/create')}}">
+                <form action="{{url(url()->current().'/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Add Material</button>
                 </form>
             </div>

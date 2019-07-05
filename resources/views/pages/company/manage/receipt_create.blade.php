@@ -38,7 +38,7 @@
                         <label for="material">Material:&nbsp</label>
                         <select name="material">
                             <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->where('retired',0)->get() as $material)
+                            @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $material)
                                 <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
                             @endforeach
                         </select>

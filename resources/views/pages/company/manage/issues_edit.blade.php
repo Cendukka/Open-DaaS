@@ -70,7 +70,7 @@
                             <div class="form-group">
                                 <label for="material">Material:&nbsp</label>
                                 <select name="material[]">
-                                    @foreach (DB::table('material_names')->where('retired',0)->get() as $mat)
+                                    @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $mat)
                                         <option value="{{$mat->material_id}}" {{($mat->material_id == $detail->detail_material_id ? 'selected="selected"' : '')}}>{{title_case($mat->material_name)}}</option>
                                     @endforeach
                                 </select>
@@ -109,7 +109,7 @@
     <script type="text/javascript">
         $('#addMat').on('click',(function(){
             $("#details").append(
-            '<br><div class="form-group detail-info"><div class="form-group"><label for="material">Material:&nbsp</label><select name="material[]"><option selected="selected" disabled hidden value=""></option>@foreach (DB::table('material_names')->where('retired',0)->get() as $mat)<option value="{{$mat->material_id}}" >{{title_case($mat->material_name)}}</option>@endforeach</select> </div> <div class="form-group"> <label for="ewc_code">EWC Code:&nbsp</label> <select name="ewc_code[]">@foreach (DB::table('ewc_codes')->get() as $ewc)<option value="{{$ewc->ewc_code}}" >{{title_case($ewc->ewc_code)}}</option>@endforeach</select> </div> <div class="form-group"> <label for="weight">Weight (kg):&nbsp</label> <input type="text" class="form-control form-control-sm" name="weight[]" value="0"/> </div> </div>'
+            '<br><div class="form-group detail-info"><div class="form-group"><label for="material">Material:&nbsp</label><select name="material[]"><option selected="selected" disabled hidden value=""></option>@foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $mat)<option value="{{$mat->material_id}}" >{{title_case($mat->material_name)}}</option>@endforeach</select> </div> <div class="form-group"> <label for="ewc_code">EWC Code:&nbsp</label> <select name="ewc_code[]">@foreach (DB::table('ewc_codes')->get() as $ewc)<option value="{{$ewc->ewc_code}}" >{{title_case($ewc->ewc_code)}}</option>@endforeach</select> </div> <div class="form-group"> <label for="weight">Weight (kg):&nbsp</label> <input type="text" class="form-control form-control-sm" name="weight[]" value="0"/> </div> </div>'
             );
         }));
         $('#removeMat').on('click',(function(){

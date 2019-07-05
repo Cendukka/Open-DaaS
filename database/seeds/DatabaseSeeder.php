@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
 			issue_types_table_seeder::class,
 			ewc_codes_table_seeder::class,
 			microlocation_types_table_seeder::class,
-			presorted_material_table_seeder::class,
 			supplier_table_seeder::class,
 			company_table_seeder::class,
 			microlocations_table_seeder::class,

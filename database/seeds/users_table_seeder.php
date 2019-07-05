@@ -19,6 +19,7 @@ class users_table_seeder extends Seeder
 			'last_name' => 'ADMIN',
 			'first_name' => 'LSJH',
 			'username' => 'admin',
+			'email' => 'admin@test.com',
 			'password' => Hash::make('qwerty')
 			]);
 	
@@ -34,6 +35,7 @@ class users_table_seeder extends Seeder
 				'last_name' => $fn,
 				'first_name' => $ln,
 				'username' => $ln.'.'.$fn,
+				'email' => $ln.'.'.$fn.'@test.com',
 				'password' => Hash::make('qwerty')
 			]);
 			
@@ -53,6 +55,7 @@ class users_table_seeder extends Seeder
                     'last_name' => $fn,
                     'first_name' => $ln,
                     'username' => $ln.'.'.$fn,
+                    'email' => $ln.'.'.$fn.'@test.com',
 					'password' => Hash::make('qwerty')
 				]);
 				

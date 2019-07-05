@@ -153,7 +153,7 @@ class receipt_controller extends Controller {
                 ->leftJoin('microlocations as from_microlocations','receipt_from_microlocation_id','=','from_microlocations.microlocation_id')
                 ->leftJoin('microlocations as to_microlocations','receipt_to_microlocation_id','=','to_microlocations.microlocation_id')
                 ->select('inventory_receipt.*','material_names.*','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','supplier.supplier_name','community.community_city')
-                ->orderBy('receipt_date')
+                ->orderBy('receipt_date','DESC')
                 ->orderBy('receipt_to_microlocation_id')
                 ->get();
            #dd($result);

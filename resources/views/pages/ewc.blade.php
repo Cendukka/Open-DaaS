@@ -25,7 +25,7 @@
                         <th>Description</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="searchtable">
                     </tbody>
                 </table>
                 <form action="{{url(url()->current().'/create')}}">

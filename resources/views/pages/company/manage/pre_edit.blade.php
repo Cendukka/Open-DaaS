@@ -64,11 +64,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="material">Material:&nbsp</label>
+                        <label for="material">Material Output:&nbsp</label>
                         <select name="material">
                             <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('presorted_material')->get() as $material)
-                                <option value="{{$material->presorted_material_id}}" {{($material->presorted_material_id == $pre->presorted_material_id ? 'selected="selected"' : '')}}>{{title_case($material->presorted_material_name)}}</option>
+                            @foreach (DB::table('material_names')->whereIn('material_type',['presorted','refined'])->get() as $material)
+                                <option value="{{$material->material_id}}" {{($material->material_id == $pre->pre_sorting_material_id ? 'selected="selected"' : '')}}>{{title_case($material->material_name)}}</option>
                             @endforeach
                         </select>
                     </div>

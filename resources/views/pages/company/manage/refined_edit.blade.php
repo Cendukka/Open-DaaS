@@ -41,24 +41,21 @@
                         </div>
                     </div>
                     @php
-                        $origin = ($refined->pre_sorting_id == NULL ? 'receipt' : 'presorted');
-
-                        #dd(DB::table('pre_sorting')
-                        #    ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
-                        #    ->where('pre_sorting_id',$refined->pre_sorting_id)
-                        #    ->select('receipt_to_microlocation_id as microlocation_id')->get());
-                        $ml_id = ($origin == 'presort' ?
-                            DB::table('pre_sorting')
+                        $origin = ($refined->pre_sorting_id ? 'presorted' : ($refined->refined_receipt_id ? 'receipt' : 'error'));
+                        if($origin == 'presorted'){
+                            $ml_id = DB::table('pre_sorting')
                             ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
-                            ->where('pre_sorting_id',$refined->pre_sorting_id)
-                            ->select('receipt_to_microlocation_id as microlocation_id')
-                            ->first()->microlocation_id
-                            :
-                            DB::table('inventory_receipt')
-                            ->where('receipt_id',$refined->refined_receipt_id)
-                            ->select('receipt_to_microlocation_id as microlocation_id')
-                            ->first()->microlocation_id
-                        );
+                            ->where('pre_sorting_id','=',$refined->pre_sorting_id)
+                            ->first()->receipt_to_microlocation_id;
+                        }
+                        elseif($origin == 'receipt'){
+                            $ml_id = $query = DB::table('inventory_receipt')
+                            ->where('receipt_id','=',$refined->refined_receipt_id)
+                            ->first()->receipt_to_microlocation_id;
+                        }
+                        else{
+                            $ml_id = 0;
+                        }
                     @endphp
                     <div class="form-group">
                         <label for="origin">Refined Waste Origin:&nbsp</label>

@@ -42,7 +42,7 @@ class refined_controller extends Controller {
             'refined_user_id' => $request->get('user'),
             'refined_date' => $request->get('datetime'),
             'refined_receipt_id' => ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL),
-            'pre_sorting_id' => ($request->get('presort') == 'presort' ? $request->get('pre_receipt') : NULL),
+            'pre_sorting_id' => ($request->get('origin') == 'presort' ? $request->get('pre_receipt') : NULL),
             'refined_material_id' => $request->get('material'),
             'refined_weight' => $request->get('weight'),
             'description' => ($request->get('description') ?: ''),
@@ -138,7 +138,7 @@ class refined_controller extends Controller {
 			if($result){
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
-						'<td>'.title_case($value->microlocation_name).'</td>'.
+						'<td>'.$value->refined_id.title_case($value->microlocation_name).'</td>'.
                         '<td>'.date("Y-m-d",strtotime($value->refined_date)).'</td>'.
 						'<td>'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
@@ -169,7 +169,7 @@ class refined_controller extends Controller {
                 $result = DB::table('inventory_receipt')
                     ->join('material_names', 'material_id', 'receipt_material_id')
                     ->where('receipt_to_microlocation_id', '=', $ml_id)
-                    ->where('material_names.material_name', 'Refined')
+                    ->where('material_type', 'refined')
                     ->orderBy('receipt_date', 'DESC')
                     ->get();
                 #dd($result->count());
@@ -191,9 +191,9 @@ class refined_controller extends Controller {
             elseif($origin == 'presort'){
                 $result = DB::table('pre_sorting')
                     ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
-                    ->join('presorted_material', 'pre_sorting.presorted_material_id', 'presorted_material.presorted_material_id')
+                    ->join('material_names', 'pre_sorting.pre_sorting_material_id', 'material_names.material_id')
                     ->where('receipt_to_microlocation_id', '=', $ml_id)
-                    ->where('presorted_material.presorted_material_name', 'Textile')
+                    ->where('material_type', 'refined')
                     ->orderBy('receipt_date', 'DESC')
                     ->get();
                 #dd($result);
@@ -202,7 +202,7 @@ class refined_controller extends Controller {
                     $output .= '<select name="pre_receipt" id="pre_receipt">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
-                        $output .= '<option value="' . $value->receipt_id . '" ' . ($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '') . '>' . title_case($value->presorted_material_name . ', ' . $value->receipt_date . ', ' . $value->receipt_weight . ' kg') . '</option>';
+                        $output .= '<option value="' . $value->receipt_id . '" ' . ($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '') . '>' . title_case($value->material_name . ', ' . $value->receipt_date . ', ' . $value->receipt_weight . ' kg') . '</option>';
                     }
                     $output .= '</select>';
                     return Response($output);

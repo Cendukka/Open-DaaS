@@ -22,8 +22,14 @@
                         <input type="text" class="form-control" name="name" value="{{$material->material_name}}"/>
                     </div>
                     <div class="form-group">
-                        <label for="retired">Material Retired:&nbsp</label>
-                        <input type="checkbox" class="form-check-input" id="retired" name="retired" {{$material->retired ? 'checked' : ''}}>
+                        <label for="type">Material Type:&nbsp</label>
+                        <select name="type">
+                            <option {{'raw waste' == $material->material_type ? 'selected="selected"' : ''}} value="raw waste">Raw Waste</option>
+                            <option {{'refined' == $material->material_type ? 'selected="selected"' : ''}} value="refined">Refined</option>
+                            <option {{'presorted' == $material->material_type ? 'selected="selected"' : ''}} value="presorted">Presorted</option>
+                            <option {{'textile' == $material->material_type ? 'selected="selected"' : ''}} value="textile">Textile</option>
+                            <option {{'retired' == $material->material_type ? 'selected="selected"' : ''}} value="retired">Retired</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

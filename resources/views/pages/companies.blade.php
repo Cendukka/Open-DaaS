@@ -4,16 +4,16 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Companies </h3>
+                <h3>Yhtiöt </h3>
             </div>
             <div class="panel-body">
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Postcode</th>
-                        <th>City</th>
+                        <th>Nimi</th>
+                        <th>Osoite</th>
+                        <th>Postinumero</th>
+                        <th>Kaupunki</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                     </tbody>
                 </table>
                 <form action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add Company</button>
+                    <button type="submit" class="btn btn-secondary">+ Lisää yhtiö</button>
                 </form>
             </div>
         </div>

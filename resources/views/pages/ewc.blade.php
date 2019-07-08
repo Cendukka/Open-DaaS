@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3>EWC Codes</h3>
+                    <h3>EWC Koodit</h3>
                 </div>
                  <div class="panel-body">
                     @if ($errors->any())
@@ -22,15 +22,15 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>EWC Code</th>
-                            <th>Description</th>
+                            <th>EWC-koodi</th>
+                            <th>Kuvaus</th>
                         </tr>
                         </thead>
                         <tbody id="searchtable">
                         </tbody>
                     </table>
                     <form action="{{url(url()->current().'/create')}}">
-                        <button type="submit" class="btn btn-secondary">+ Add EWC Code</button>
+                        <button type="submit" class="btn btn-secondary">+ Lisää EWC-koodi</button>
                     </form>
                  </div>
             </div>

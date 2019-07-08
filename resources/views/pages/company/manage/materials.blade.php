@@ -15,22 +15,35 @@
                         </ul>
                     </div>
                 @endif
-                    @foreach (DB::table('material_names')->distinct('material_type')->pluck('material_type') as $type)
+                @foreach (DB::table('material_names')->distinct('material_type')->pluck('material_type') as $type)
                     <table class="table table-bordered table-hover">
                         <thead>
-                            <tr><th>{{title_case($type)}}</th></tr>
+                        <tr><th style="text-align: center">{{title_case($type)}}</th></tr>
                         </thead>
                         <tbody>
-                        @foreach (DB::table('material_names')->where('material_type','=',$type)->get() as $material)
-                            <tr>
-                                <td><a href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}</a></td>
-                            </tr>
-                        @endforeach
+                        <div>
+                            <ul>
+                                @foreach (DB::table('material_names')->where('material_type','=',$type)->get() as $material)
+                                    <tr class="">
+                                        <td>
+                                            <a style="color: black;">{{title_case($material->material_name)}}</a>
+                                            &nbsp;
+                                            <a href="{{url('/materials/'.$material->material_id.'/edit')}}">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+                            </ul>
+                        </div>
+
                         </tbody>
                     </table>
-                    @endforeach
+                @endforeach
                 <form action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add Material</button>
+                    <button type="submit" class="btn btn-secondary">+ Lisää materiaali</button>
                 </form>
             </div>
         </div>

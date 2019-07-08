@@ -5,14 +5,24 @@ Route::get('/home', 'HomeController@index')->name('pages.home');
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::group(['middleware'=>['auth']],function(){
+	
+	Route::group(['middleware'=>['admin']],function(){
 
-# Home
-Route::get('/', function () {
-	return view('pages.welcomeLogOut');
+		Route::get('ewc','ewc_controller@index');
+
+			Route::group(['middleware'=>['superadmin']],function(){
+				Route::get('yahoo', function () {
+					return view('yahoo');
+				});
+	
+			});
+
+	});
 });
 
-Route::get('/manage', function () {
-	return view('pages.manage');
+Route::get('/', function () {
+	return view('pages.welcomeLogOut');
 });
 
 Route::get('/hallinnoi/lisauusitoimipiste', function () {
@@ -22,11 +32,13 @@ Route::get('/hallinnoi/lisauusitoimipiste', function () {
 Route::get('/users', 'user_controller@index')->name('users');
 
 
-Route::get('ewc','ewc_controller@index');
+// Route::get('ewc','ewc_controller@index');
 Route::get('ewc/search','ewc_controller@search');
 
 
-
+Route::get('/manage', function () {
+    return view('pages.manage');
+});
 
 # Report Pages
 Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');

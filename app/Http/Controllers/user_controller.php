@@ -9,8 +9,15 @@ use Illuminate\Support\Facades\Hash;
 use App\user;
 
 class user_controller extends Controller {
-
-
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function index(company $company) {
 		return view('pages.company.manage.users')->with('company', $company);
 	}

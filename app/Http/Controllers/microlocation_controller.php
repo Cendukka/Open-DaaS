@@ -8,8 +8,15 @@ use Illuminate\Support\Facades\DB;
 use App\microlocation;
 
 class microlocation_controller extends Controller {
-
-
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function index(company $company) {
 		return view('pages.company.manage.microlocations')->with('company', $company);
 	}

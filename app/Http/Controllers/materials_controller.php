@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\DB;
 use App\material;
 
 class materials_controller extends Controller {
-
-
-	public function index() {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index(material $material) {
 		return view('pages.company.manage.materials');
 	}
 

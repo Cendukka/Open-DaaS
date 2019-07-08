@@ -8,8 +8,15 @@ use Illuminate\Support\Facades\DB;
 use App\pre_sorting;
 
 class pre_controller extends Controller {
-
-
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function index(company $company) {
         return view('pages.company.pre')->with('company', $company);
 	}

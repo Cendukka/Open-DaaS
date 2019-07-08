@@ -8,8 +8,15 @@ use Illuminate\Support\Facades\DB;
 use App\refined_sorting;
 
 class refined_controller extends Controller {
-
-
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function index(company $company) {
         return view('pages.company.refined')->with('company', $company);
 	}

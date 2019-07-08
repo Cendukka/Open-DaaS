@@ -8,8 +8,15 @@ use Illuminate\Support\Facades\DB;
 use App\inventory_issue;
 
 class issue_controller extends Controller {
-
-
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function index(company $company) {
         return view('pages.company.issues')->with('company', $company);
 	}

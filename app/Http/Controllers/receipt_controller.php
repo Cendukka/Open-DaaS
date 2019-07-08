@@ -9,8 +9,15 @@ use App\inventory_receipt;
 use Illuminate\Support\Str;
 
 class receipt_controller extends Controller {
-
-
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function index(company $company) {
 		#return view('pages.company.manage.receipts')->with('company', $company);
         return view('pages.company.receipts')->with('company', $company);

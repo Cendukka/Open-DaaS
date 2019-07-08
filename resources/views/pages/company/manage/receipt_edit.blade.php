@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="receipts-store">
+                <form method="post" action="receipts-update">
                     @csrf
                     <div class="form-group">
                         <label for="user">User:&nbsp</label>
@@ -26,17 +26,24 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Receipt created at:&nbsp</label>{{$receipt->created_at}}
+                        <p></p>
+                        <label>Receipt updated at:&nbsp</label>{{$receipt->updated_at}}
+                    </div>
+                    <div class="form-group">
                         @php
                             date_default_timezone_set('Europe/Helsinki')
                         @endphp
                         <label for="datetime">Date & Time:&nbsp</label>
-                        <input type="text" class="form-control" name="datetime" value="{{$receipt->receipt_date}}"/>
+                        <div style="position: relative">
+                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{$receipt->receipt_date}}">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="material">Material:&nbsp</label>
                         <select name="material">
                             <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->get() as $material)
+                            @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $material)
                                 <option value="{{$material->material_id}}" {{($material->material_id == $receipt->receipt_material_id ? 'selected="selected"' : '')}}>{{title_case($material->material_name)}}</option>
                             @endforeach
                         </select>
@@ -61,28 +68,31 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="distance">Disance (km):&nbsp</label>
-                        <input type="text" class="form-control" name="distance" value="{{$receipt->distance_km}}"/>
-                    </div>
-                    <div class="form-group">
                         <label for="weight">Weight (kg):&nbsp</label>
                         <input type="text" class="form-control" name="weight" value="{{$receipt->receipt_weight}}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="distance">Disance (km):&nbsp</label>
+                        <input type="text" class="form-control" name="distance" value="{{$receipt->distance_km}}"/>
                     </div>
                     <div class="form-group">
                         <label for="ewc">EWC Code:&nbsp</label>
                         <select name="ewc">
                             @foreach (DB::table('ewc_codes')->get() as $ewc)
-                                <option value="{{$ewc->ewc_code}}">{{title_case($ewc->ewc_code)}}</option>
+                                <option value="{{$ewc->ewc_code}}" {{($ewc->ewc_code== $receipt->receipt_ewc_code ? 'selected="selected"' : '')}}>{{title_case($ewc->ewc_code)}}</option>
                             @endforeach
                         </select>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         function source(){
             $source = $("#source").val();
@@ -101,19 +111,26 @@
         function communities(){
             $from_company = $("#from_company").val();
             $community_id = {{$receipt->from_community_id ?: 0}}
-            $.ajax({
-                type: "get",
-                url: '{{URL::to(trim(url()->current(),'/').'/communities')}}',
-                data: {'from_company':$from_company,'community_id':$community_id},
-                success:function(data){
-                    $("#from_community").empty().html(data);
-                }
-            })
+            if($community_id!=0) {
+                $.ajax({
+                    type: "get",
+                    url: '{{URL::to(trim(url()->current(),'/').'/communities')}}',
+                    data: {'from_company': $from_company, 'community_id': $community_id},
+                    success: function (data) {
+                        $("#from_community").empty().html(data);
+                    }
+                })
+            }
         };
 
         $(document).ready(source);
         $('#source').on('change',source);
         $(document).ready(communities);
         $(document).on("change", '#from_company', communities);
+    </script>
+    <script type="text/javascript">
+        $('.timepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
     </script>
 @endsection

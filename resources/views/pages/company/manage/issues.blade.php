@@ -20,11 +20,10 @@
                     <tr>
                         <th>Issue ID</th>
                         <th>Date</th>
-                        <th>To ID</th>
-                        <th>From ID</th>
-                        <th>User</th>
                         <th>Status Type</th>
-                        <th>Materials</th>
+                        <th>From ID</th>
+                        <th>To ID</th>
+                        <th>User</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -42,13 +41,15 @@
 
                         $issues = DB::table('inventory_issue')
                                     ->whereIn('issue_from_microlocation_id',$microlocation_ids)
-                                    ->join('microlocations', 'issue_to_microlocation_id', '=','microlocations.microlocation_id')
+                                    ->join('microlocations as from_microlocations','issue_from_microlocation_id','=','from_microlocations.microlocation_id')
+                                    ->join('microlocations as to_microlocations','issue_to_microlocation_id','=','to_microlocations.microlocation_id')
                                     ->join('issue_types', 'inventory_issue.issue_type_id', '=','issue_types.issue_type_id')
-                                    ->join('inventory_issue_details', 'inventory_issue.issue_id', '=','inventory_issue_details.issue_detail_id')
+                                    ->join('inventory_issue_details', 'inventory_issue.issue_id', '=','inventory_issue_details.detail_issue_id')
 					                ->join('material_names','material_names.material_id','=','inventory_issue_details.detail_material_id')
-                                    ->orderBy('issue_id','DESC')
+					                ->join('users','users.user_id','=','inventory_issue.issue_user_id')
+                                    ->orderBy('issue_date','DESC')
+                                    ->select('issue_id','issue_date','from_microlocations.microlocation_name as from_microlocation','to_microlocations.microlocation_name as to_microlocation','users.username','issue_typename')
                                     ->get();
-                        #dd($issues);
                         $lastId = 0;
                     @endphp
                     @foreach ($issues as $issue)
@@ -56,13 +57,12 @@
                             @continue;
                         @endif
                         <tr>
-                            <td>{{title_case($issue->issue_id)}}</td>
-                            <td>{{title_case($issue->issue_date)}}</td>
-                            <td>{{title_case($issue->issue_from_microlocation_id)}}</td>
-                            <td>{{title_case($issue->issue_to_microlocation_id)}}</td>
-                            <td>{{title_case($issue->issue_user_id)}}</td>
+                            <td><a href="{{url(url()->current().'/'.$issue->issue_id.'/edit')}}">{{title_case($issue->issue_id)}}</a></td>
+                            <td>{{title_case(date("Y-m-d",strtotime($issue->issue_date)))}}</td>
                             <td>{{title_case($issue->issue_typename)}}</td>
-{{--                            <td>{{title_case($issue->)}}</td>--}}
+                            <td>{{title_case($issue->from_microlocation)}}</td>
+                            <td>{{title_case($issue->to_microlocation)}}</td>
+                            <td>{{title_case($issue->username)}}</td>
                         </tr>
                         @php
                             $lastId = $issue->issue_id;
@@ -70,8 +70,9 @@
                     @endforeach
                     </tbody>
                 </table>
-                <br>
-                <a href="{{url('/companies/'.$company->company_id.'/manage/issues/create')}}">+ Add issue</a>
+                <form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add Issue</button>
+                </form>
             </div>
         </div>
     </div>

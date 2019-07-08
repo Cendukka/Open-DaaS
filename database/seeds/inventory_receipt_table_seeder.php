@@ -20,7 +20,7 @@ class inventory_receipt_table_seeder extends Seeder
 		$users_amount = DB::table('users')->count();
 		$ewc_codes = DB::table('ewc_codes')->select('ewc_code')->get();
 		
-		$sum = $microlocations_amount+$communities_amount+$suppliers_amount;
+		$sum = $microlocations_amount+$communities_amount+$suppliers_amount+$users_amount+count($ewc_codes);
 		
 		foreach (range(1,$sum*3) as $index) {
 			$select = rand(1,3);
@@ -33,7 +33,7 @@ class inventory_receipt_table_seeder extends Seeder
 				'receipt_user_id' => rand(1,$users_amount),
 				'distance_km' => rand(10,500),
 				'receipt_weight' => rand(100,1000),
-				'receipt_date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now', $timezone = null),
+				'receipt_date' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = null),
 				'receipt_ewc_code' => $ewc_codes[rand(1,count($ewc_codes)-1)]->ewc_code,
 			]);
 		}

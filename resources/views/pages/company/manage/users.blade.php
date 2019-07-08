@@ -31,7 +31,9 @@
                         $users = DB::table('users')
                                     ->where('user_company_id','=',$company->company_id)
                                     ->join('user_types', 'users.user_type_id', '=','user_types.user_type_id')
-                                    ->join('microlocations', 'users.user_microlocation_id', '=','microlocations.microlocation_id')
+                                    ->leftJoin('microlocations', 'users.user_microlocation_id', '=','microlocations.microlocation_id')
+                                    ->orderBy('user_id')
+                                    ->orderBy('user_microlocation_id')
                                     ->orderBy('users.user_type_id')
                                     ->orderBy('user_microlocation_id')
                                     ->orderBy('user_id')
@@ -50,9 +52,14 @@
                         </tr>
                     @endforeach
                 </table>
+                <form action="{{url(url()->current().'/create')}}">
                 <br>
-                <a href="{{url('/companies/'.$company->company_id.'/manage/users/create')}}">+ Lisää käyttäjä</a>
+                    <a href="{{url('/companies/'.$company->company_id.'/manage/users/create')}}">+ Lisää käyttäjä</a>
+                </form>
             </div>
         </div>
     </div>
 @endsection
+<!--<form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add user</button>
+                </form>-->

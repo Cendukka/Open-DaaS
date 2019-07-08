@@ -22,6 +22,7 @@ class users_table_seeder extends Seeder
 			'last_name' => 'ADMIN',
 			'first_name' => 'LSJH',
 			'username' => 'admin',
+			'email' => 'admin@test.com',
 			'password' => Hash::make('qwerty')
 			]);
 	
@@ -29,12 +30,15 @@ class users_table_seeder extends Seeder
 		
 		# Adds Admins to all the companies
 		foreach (range(2,$companies_amount) as $company_index) {
+		    $fn =$faker->firstName;
+            $ln = $faker->lastName;
 			DB::table('users')->insert([
 				'user_type_id' => 2,
 				'user_company_id' => $company_index,
-				'last_name' => $faker->lastName,
-				'first_name' => $faker->firstName,
-				'username' => $faker->userName,
+				'last_name' => $fn,
+				'first_name' => $ln,
+				'username' => $ln.'.'.$fn,
+				'email' => $ln.'.'.$fn.'@test.com',
 				'password' => Hash::make('qwerty')
 				]);
 			
@@ -45,28 +49,33 @@ class users_table_seeder extends Seeder
 			
 			
 			foreach ($microlocations as $ml_index) {
+                $fn =$faker->firstName;
+                $ln = $faker->lastName;
 				DB::table('users')->insert([
 					'user_type_id' => 3,
 					'user_company_id' => $company_index,
 					'user_microlocation_id' => $ml_index->microlocation_id,
-					'last_name' => $faker->lastName,
-					'first_name' => $faker->firstName,
-					'username' => $faker->userName,
+                    'last_name' => $fn,
+                    'first_name' => $ln,
+                    'username' => $ln.'.'.$fn,
+                    'email' => $ln.'.'.$fn.'@test.com',
 					'password' => Hash::make('qwerty')
 					]);
 				
 				# Create regular users
-				foreach (range(1,1) as $index) {
-					DB::table('users')->insert([
-						'user_type_id' => 4,
-						'user_company_id' => $company_index,
-						'user_microlocation_id' => $ml_index->microlocation_id,
-						'last_name' => $faker->lastName,
-						'first_name' => $faker->firstName,
-						'username' => $faker->userName,
-						'password' => Hash::make('qwerty')
-						]);
-				}
+				#foreach (range(1,1) as $index) {
+                #    $fn =$faker->firstName;
+                #    $ln = $faker->lastName;
+				#	DB::table('users')->insert([
+				#		'user_type_id' => 4,
+				#		'user_company_id' => $company_index,
+				#		'user_microlocation_id' => $ml_index->microlocation_id,
+                #        'last_name' => $fn,
+                #        'first_name' => $ln,
+                #        'username' => $ln.$fn,
+				#		'password' => Hash::make('qwerty')
+				#	]);
+				#}
 			}
 			
 			

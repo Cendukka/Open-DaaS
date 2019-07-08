@@ -23,15 +23,29 @@
                         <input type="text" class="form-control center" name="name" value="{{$material->material_name}}"/>
 
                     </div>
-                    <button type="submit" class="btn btn-primary">Tallenna</button>
+                    <div class="form-group">
+                        <label for="type">Material Type:&nbsp</label>
+                        <select name="type">
+                            <option {{'raw waste' == $material->material_type ? 'selected="selected"' : ''}} value="raw waste">Raw Waste</option>
+                            <option {{'refined' == $material->material_type ? 'selected="selected"' : ''}} value="refined">Refined</option>
+                            <option {{'presorted' == $material->material_type ? 'selected="selected"' : ''}} value="presorted">Presorted</option>
+                            <option {{'textile' == $material->material_type ? 'selected="selected"' : ''}} value="textile">Textile</option>
+                            <option {{'retired' == $material->material_type ? 'selected="selected"' : ''}} value="retired">Retired</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
                 <br>
-                @if (!(count($material->inventory)>0 || count($material->receipt)>0 || count($material->detail)>0 || count($material->refined)>0))
+
                 <form method="post" action="materials-destroy">
                     @csrf
-                    <button type="submit" class="btn btn-primary">Poista</button>
+                    @if (!(count($material->inventory)>0 || count($material->receipt)>0 || count($material->detail)>0 || count($material->refined)>0))
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                        @else
+                        <button type="submit" class="btn btn-secondary" disabled>Delete</button>
+                    @endif
                 </form>
-                @endif
+
             </div>
         </div>
     </div>

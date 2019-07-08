@@ -16,7 +16,7 @@ class microlocations_table_seeder extends Seeder
 		$companies_amount = DB::table('company')->count();
 		$types_amount = DB::table('microlocation_types')->count();
 		
-		foreach (range(1,$companies_amount*5) as $index) {
+		foreach (range(1,$companies_amount*3) as $index) {
 			DB::table('microlocations')->insert([
 				'microlocation_company_id' => rand(1,$companies_amount),
 				'microlocation_type_id' => rand(1,$types_amount),

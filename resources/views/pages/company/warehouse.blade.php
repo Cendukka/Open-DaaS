@@ -26,14 +26,18 @@
                         <tr>
                             <th>Microlokaation nimi</th>
                             @php
-                                $material_names = DB::table('inventory')->distinct()
-                                                    ->join('material_names', 'inventory.inventory_material_id','=','material_names.material_id')
-                                                    ->whereIn('inventory.inventory_microlocation_id', $microlocation_ids)
-                                                    ->select('material_names.material_id','material_names.material_name')
-                                                    ->get();
+                                $material_names = DB::table('inventory')
+                                    ->whereIn('inventory.inventory_microlocation_id', $microlocation_ids)
+                                    ->where('inventory_weight','>','0')
+                                    ->join('material_names', 'inventory.inventory_material_id','=','material_names.material_id')
+                                    ->whereIn('material_type', ['textile','raw waste','refined','retired'])
+                                    ->orderBy('material_type','DESC')
+                                    ->orderBy('material_name','ASC')
+                                    ->distinct('material_name')
+                                    ->pluck('material_name');
                             @endphp
                             @foreach ($material_names as $material)
-                                <th>{{title_case($material->material_name)}}</th>
+                                <th>{{title_case($material)}}</th>
                             @endforeach
                         </tr>
                         </thead>
@@ -42,10 +46,13 @@
                             <tr>
                                 @php
                                     $inventory = DB::table('inventory')
-                                                ->join('microlocations', 'inventory.inventory_microlocation_id', '=', 'microlocations.microlocation_id')
-                                                ->where('inventory.inventory_microlocation_id', $ml->microlocation_id)
-                                                ->orderBy('inventory.inventory_material_id')
-                                                ->get();
+                                        ->join('microlocations', 'inventory.inventory_microlocation_id', '=', 'microlocations.microlocation_id')
+                                        ->where('inventory.inventory_microlocation_id', $ml->microlocation_id)
+                                        ->join('material_names', 'inventory.inventory_material_id','=','material_names.material_id')
+                                        ->whereIn('material_name', $material_names)
+                                        ->orderBy('material_type','DESC')
+                                        ->orderBy('material_name','ASC')
+                                        ->get();
                                 @endphp
                                 @if (count($inventory)>0)
                                     <td>{{title_case($inventory[0]->microlocation_name)}}</td>

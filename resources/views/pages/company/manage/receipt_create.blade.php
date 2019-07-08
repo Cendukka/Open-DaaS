@@ -36,7 +36,7 @@
                         <label for="material">Materiaali:&nbsp</label>
                         <select name="material">
                             <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->get() as $material)
+                            @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $material)
                                 <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
                             @endforeach
                         </select>
@@ -90,6 +90,9 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         $(document).on("change", '#source', function(e) {
             $source = $("#source").val();
@@ -113,6 +116,11 @@
                     $("#from_community").empty().html(data);
                 }
             })
+        });
+    </script>
+    <script type="text/javascript">
+        $('.timepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
         });
     </script>
 @endsection

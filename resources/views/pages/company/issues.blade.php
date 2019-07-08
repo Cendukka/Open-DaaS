@@ -35,11 +35,22 @@
                         {{--<th>Materials</th>--}}
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="searchtable">
                     </tbody>
                 </table>
+                <form action="{{url('companies/'.$company->company_id.'/manage/issues/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add Issue</button>
+                </form>
             </div>
         </div>
     </div>
     @include('includes.search_script')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $('.timepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    </script>
 @endsection

@@ -9,36 +9,25 @@ use App\inventory_receipt;
 use Illuminate\Support\Str;
 
 class receipt_controller extends Controller {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(company $company) {
-        return view('pages.company.manage.receipts')->with('company', $company);
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(company $company) {
-        return view('pages.company.manage.receipt_create')->with('company', $company);
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, company $company) {
-        # ADD MORE AUTHENTICATION HERE
-        #dd($request);
-        $request->validate([
-            'user' => 'required|integer',
-            'datetime' => 'required|date_format:Y-m-d H:i:s',
+	public function index(company $company) {
+		#return view('pages.company.manage.receipts')->with('company', $company);
+        return view('pages.company.receipts')->with('company', $company);
+	}
+
+
+	public function create(company $company) {
+		return view('pages.company.manage.receipt_create')->with('company', $company);
+	}
+
+
+	public function store(Request $request, company $company) {
+		# ADD MORE AUTHENTICATION HERE
+
+		$request->validate([
+			'user' => 'required|integer',
+			'datetime' => 'required|date_format:Y-m-d H:i:s',
             'material' => 'required|integer',
             'source' => 'required',
             'from_community' => 'integer|required_with:from_company',
@@ -67,69 +56,55 @@ class receipt_controller extends Controller {
         return redirect()->action('receipt_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(company $company) {
-        return redirect()->action('receipt_controller@index', ['company' => $company]);
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(company $company, inventory_receipt $receipt) {
-        return view('pages.company.manage.receipt_edit')->with(['company' => $company, 'receipt' => $receipt]);
-    }
+	public function show(company $company) {
+		return redirect()->action('receipt_controller@index', ['company' => $company]);
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, company $company, inventory_receipt $receipt) {
-        # ADD MORE AUTHENTICATION HERE
+
+	public function edit(company $company, inventory_receipt $receipt) {
+		return view('pages.company.manage.receipt_edit')->with(['company' => $company, 'receipt' => $receipt]);
+	}
+
+
+	public function update(Request $request, company $company, inventory_receipt $receipt) {
+		# ADD MORE AUTHENTICATION HERE
 
         $request->validate([
-            'user_type' => 'required|integer',
-            'company' => 'required|integer',
-            'microlocation' => 'nullable|integer',
-            'first_name'=>'required|max:50',
-            'last_name'=> 'required|max:50',
-            'password'=> 'required',
+            'user' => 'required|integer',
+            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'material' => 'required|integer',
+            'source' => 'required',
+            'from_community' => 'integer|required_with:from_company',
+            'from_supplier' => 'integer',
+            'from_microlocation' => 'integer',
+            'to_microlocation' =>'required|integer',
+            'distance' => 'required|integer',
+            'weight' => 'required|integer',
+            'ewc' => 'required|max:6|digits_between:0,9',
         ]);
 
-        #####################
-        $receiptNew = inventory_receipt::find($receipt->receipt_id);
-        $receiptNew->user_type_id = $request->get('user_type');
-        $receiptNew->user_company_id = $request->get('company');
-        $receiptNew->user_microlocation_id = $request->get('microlocation');
-        $receiptNew->last_name = $request->get('last_name');
-        $receiptNew->first_name = $request->get('first_name');
-        $receiptNew->password = $request->get('password');
-        $receiptNew->save();
+		$receiptNew = inventory_receipt::find($receipt->receipt_id);
+		$receiptNew->receipt_user_id = $request->get('user');
+		$receiptNew->receipt_date = $request->get('datetime');
+		$receiptNew->receipt_material_id = $request->get('material');
+		$receiptNew->from_community_id = $request->get('from_community');
+		$receiptNew->from_supplier_id = $request->get('from_supplier');
+		$receiptNew->receipt_from_microlocation_id = $request->get('from_microlocation');
+		$receiptNew->receipt_to_microlocation_id = $request->get('to_microlocation');
+		$receiptNew->distance_km = $request->get('distance');
+		$receiptNew->receipt_weight = $request->get('weight');
+		$receiptNew->receipt_ewc_code = $request->get('ewc');
+		$receiptNew->save();
+
+		return redirect()->action('receipt_controller@index',['company' => $company])->withErrors(['Receipt successfully updated.']);
+	}
 
 
+	public function destroy($id) {
+		//
+	}
 
-        return redirect()->action('receipt_controller@index',['company' => $company])->withErrors(['Receipt successfully updated.']);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id) {
-        //
-    }
 
     public function search(Request $request, company $company){
         if($request->ajax()){
@@ -148,27 +123,29 @@ class receipt_controller extends Controller {
                 })
                 ->where(function ($query) use ($request){
                     $query
-                        ->where('to_microlocations.microlocation_name','LIKE','%'.$request->search."%")
-                        ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$request->search."%")
-                        ->orwhere('supplier.supplier_name','LIKE','%'.$request->search."%")
-                        ->orwhere('community.communitY_city','LIKE','%'.$request->search."%")
-                        ->orWhere('material_name','LIKE','%'.$request->search."%")
-                        ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%")
-                        ->orWhere(function ($query) use ($request){
-                            if(Str::contains('community',$request->search)){
-                                $query->whereNotNull('from_community_id');
-                            }
-                        })
-                        ->orWhere(function ($query) use ($request){
-                            if(Str::contains('supplier',$request->search)){
-                                $query->orWhereNotNull('from_supplier_id');
-                            }
-                        })
-                        ->orWhere(function ($query) use ($request){
-                            if(Str::contains('microlocation',$request->search)){
-                                $query->orWhereNotNull('receipt_from_microlocation_id');
-                            }
-                        });
+                    ->where('to_microlocations.microlocation_name','LIKE','%'.$request->search."%")
+                    ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$request->search."%")
+                    ->orwhere('supplier.supplier_name','LIKE','%'.$request->search."%")
+                    ->orwhere('community.communitY_city','LIKE','%'.$request->search."%")
+                    ->orWhere('material_name','LIKE','%'.$request->search."%")
+                    ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%")
+                    ->orWhere('receipt_weight','LIKE','%'.$request->search."%")
+                    ->orWhere('distance_km','LIKE','%'.$request->search."%")
+                    ->orWhere(function ($query) use ($request){
+                        if(Str::contains('community',$request->search)){
+                            $query->whereNotNull('from_community_id');
+                        }
+                    })
+                    ->orWhere(function ($query) use ($request){
+                        if(Str::contains('supplier',$request->search)){
+                            $query->orWhereNotNull('from_supplier_id');
+                        }
+                    })
+                    ->orWhere(function ($query) use ($request){
+                        if(Str::contains('microlocation',$request->search)){
+                            $query->orWhereNotNull('receipt_from_microlocation_id');
+                        }
+                    });
                 })
                 ->join('material_names','receipt_material_id','=','material_id')
                 ->leftJoin('supplier','from_supplier_id','=','supplier.supplier_id')
@@ -176,12 +153,11 @@ class receipt_controller extends Controller {
                 ->leftJoin('microlocations as from_microlocations','receipt_from_microlocation_id','=','from_microlocations.microlocation_id')
                 ->leftJoin('microlocations as to_microlocations','receipt_to_microlocation_id','=','to_microlocations.microlocation_id')
                 ->select('inventory_receipt.*','material_names.*','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','supplier.supplier_name','community.community_city')
-                ->orderBy('receipt_date')
+                ->orderBy('receipt_date','DESC')
                 ->orderBy('receipt_to_microlocation_id')
                 ->get();
             #dd($result);
             if($result){
-                $sumweight = 0;
                 foreach ($result as $key => $value){
                     $from =  ($value->from_community_id ? 'Community:'.(DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city) :
                         ($value->from_supplier_id ? 'Supplier:'.(DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name) :
@@ -195,8 +171,8 @@ class receipt_controller extends Controller {
                         '<td>'.$value->receipt_weight.'</td>'.
                         '<td>'.$value->distance_km.'</td>'.
                         '<td>'.$value->receipt_ewc_code.'</td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'">Edit</a></td>'.
                         '</tr>';
-                    $sumweight += $value->receipt_weight;
                 }
                 $output.='<tr>'.
                     '<td></td>'.
@@ -204,7 +180,8 @@ class receipt_controller extends Controller {
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.
-                    '<td>'.$sumweight.' Total</td>'.
+                    '<td>'.$result->sum('receipt_weight').' Total</td>'.
+                    '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.
                     '</tr>';
@@ -212,6 +189,8 @@ class receipt_controller extends Controller {
             }
         }
     }
+
+
     public function source(Request $request, company $company){
         if($request->ajax()){
             $ml_id = $request->ml_id ? $request->ml_id : 0;
@@ -261,6 +240,8 @@ class receipt_controller extends Controller {
             return Response($output);
         }
     }
+
+
     public function communities(Request $request, company $company){
         if($request->ajax()){
             $output="";

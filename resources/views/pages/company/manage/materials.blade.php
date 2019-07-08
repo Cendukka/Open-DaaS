@@ -15,22 +15,23 @@
                         </ul>
                     </div>
                 @endif
-                <table>
-                    <tr>
-                        <th>Materiaalin nimi</th>
-                    </tr>
-                    @php
-                        $materials = DB::table('material_names')->get();
-                    @endphp
-                    @foreach ($materials as $material)
-                        <tr>
-                            <td><a class="textMark" href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}</a></td>
-                        </tr>
+                    @foreach (DB::table('material_names')->distinct('material_type')->pluck('material_type') as $type)
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr><th>{{title_case($type)}}</th></tr>
+                        </thead>
+                        <tbody>
+                        @foreach (DB::table('material_names')->where('material_type','=',$type)->get() as $material)
+                            <tr>
+                                <td><a href="{{url('/materials/'.$material->material_id.'/edit')}}">{{title_case($material->material_name)}}</a></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                     @endforeach
-                </table>
-                <br>
-                <br>
-                <div> <button class="btn btn-primary"> <a href="{{url('/materials/create')}}">+ Lisää materiaali</a> </div>
+                <form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add Material</button>
+                </form>
             </div>
         </div>
     </div>

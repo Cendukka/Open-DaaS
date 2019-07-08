@@ -24,9 +24,9 @@
                         <th>From Name</th>
                         <th>To</th>
                         <th>Distance (km)</th>
-                        <th>Weight (km)</th>
+                        <th>Weight (kg)</th>
                         <th>EWC Code</th>
-                        <th>User ID</th>
+                        <th>User</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -46,6 +46,7 @@
                                     ->whereIn('receipt_to_microlocation_id',$microlocation_ids)
                                     ->join('material_names', 'inventory_receipt.receipt_material_id', '=','material_names.material_id')
                                     ->join('microlocations', 'inventory_receipt.receipt_to_microlocation_id', '=','microlocations.microlocation_id')
+                                    ->join('users', 'inventory_receipt.receipt_user_id', '=','users.user_id')
                                     ->orderBy('inventory_receipt.receipt_date','DESC')
                                     ->get();
                     @endphp
@@ -57,20 +58,21 @@
                                         'Microlocation:'.(DB::table('microlocations')->where('microlocation_id',$receipt->receipt_from_microlocation_id)->first()->microlocation_name)));
                             @endphp
                             <td><a href="{{url('/companies/'.$company->company_id.'/manage/receipts/'.$receipt->receipt_id.'/edit')}}">{{title_case($receipt->receipt_id)}}</a></td>
-                            <td>{{title_case($receipt->receipt_date)}}</td>
+                            <td>{{title_case(date("Y-m-d",strtotime($receipt->receipt_date)))}}</td>
                             <td>{{title_case(explode(':', $from)[0])}}</td>
-                            <td>{{title_case(mb_strimwidth(explode(':', $from)[1],0,25,'...'))}}</td>
-                            <td>{{title_case(mb_strimwidth($receipt->microlocation_name,0,25,'...'))}}</td>
+                            <td>{{title_case(mb_strimwidth(explode(':', $from)[1],0,20,'...'))}}</td>
+                            <td>{{title_case(mb_strimwidth($receipt->microlocation_name,0,20,'...'))}}</td>
                             <td>{{title_case($receipt->distance_km)}}</td>
                             <td>{{title_case($receipt->receipt_weight)}}</td>
                             <td>{{title_case($receipt->receipt_ewc_code)}}</td>
-                            <td>{{title_case($receipt->receipt_user_id)}}</td>
+                            <td>{{title_case($receipt->username)}}</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                <br>
-                <a href="{{url('/companies/'.$company->company_id.'/manage/receipts/create')}}">+ Add Receipt</a>
+                <form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Add Receipt</button>
+                </form>
             </div>
         </div>
     </div>

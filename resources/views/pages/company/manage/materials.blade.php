@@ -24,7 +24,7 @@
                         <div>
                             <ul>
                                 @foreach (DB::table('material_names')->where('material_type','=',$type)->get() as $material)
-                                    <tr class="">
+                                    <tr>
                                         <td>
                                             <a style="color: black;">{{title_case($material->material_name)}}</a>
                                             &nbsp;

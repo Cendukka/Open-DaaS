@@ -138,7 +138,7 @@ class refined_controller extends Controller {
 			if($result){
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
-						'<td>'.$value->refined_id.title_case($value->microlocation_name).'</td>'.
+						'<td>'.title_case($value->microlocation_name).'</td>'.
                         '<td>'.date("Y-m-d",strtotime($value->refined_date)).'</td>'.
 						'<td>'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
@@ -172,7 +172,6 @@ class refined_controller extends Controller {
                     ->where('material_type', 'refined')
                     ->orderBy('receipt_date', 'DESC')
                     ->get();
-                #dd($result->count());
                 $output .= '<label for="pre_receipt">Receipt:&nbsp</label>';
                 if($result->count()) {
                     $output .= '<select name="pre_receipt" id="pre_receipt">';
@@ -184,7 +183,7 @@ class refined_controller extends Controller {
                     return Response($output);
                 }
                 else{
-                    $output .= 'No receipts found';
+                    $output .= 'No raw textile receipts found.';
                     return Response($output);
                 }
             }
@@ -196,19 +195,18 @@ class refined_controller extends Controller {
                     ->where('material_type', 'refined')
                     ->orderBy('receipt_date', 'DESC')
                     ->get();
-                #dd($result);
-                $output .= '<label for="pre_receipt">Receipt:&nbsp</label>';
+                $output .= '<label for="pre_receipt">Pre-sorting:&nbsp</label>';
                 if($result->count()) {
                     $output .= '<select name="pre_receipt" id="pre_receipt">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
-                        $output .= '<option value="' . $value->receipt_id . '" ' . ($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '') . '>' . title_case($value->material_name . ', ' . $value->receipt_date . ', ' . $value->receipt_weight . ' kg') . '</option>';
+                        $output .= '<option value="' . $value->pre_sorting_id . '" ' . ($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '') . '>' . title_case($value->material_name . ', ' . $value->pre_sorting_date . ', ' . $value->pre_sorting_weight . ' kg') . '</option>';
                     }
                     $output .= '</select>';
                     return Response($output);
                 }
                 else{
-                    $output .= 'No receipts found';
+                    $output .= 'No pre-sorted raw textiles found.';
                     return Response($output);
                 }
             }

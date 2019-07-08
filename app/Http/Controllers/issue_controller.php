@@ -180,8 +180,7 @@ class issue_controller extends Controller {
                     ->join('microlocations as from_microlocations','issue_from_microlocation_id','=','from_microlocations.microlocation_id')
                     ->join('microlocations as to_microlocations','issue_to_microlocation_id','=','to_microlocations.microlocation_id')
                     ->join('users','users.user_id','=','issue_user_id')
-					->orderBy('issue_from_microlocation_id')
-					->orderBy('issue_date')
+                    ->orderBy('issue_date','DESC')
                     ->select('issue_id','issue_date','from_microlocations.microlocation_name as from_microlocation','to_microlocations.microlocation_name as to_microlocation','users.username','issue_typename')
                     ->get();
 			if($result){

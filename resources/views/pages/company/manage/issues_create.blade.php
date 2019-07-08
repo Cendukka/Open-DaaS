@@ -51,7 +51,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div id="to_microlocation" class="form-group">
                         <label for="to_microlocation">To microlocation:&nbsp</label>
                         <select name="to_microlocation">
                             <option selected="selected" disabled hidden value=""></option>
@@ -113,6 +113,17 @@
                 $("#details").children("br:last").remove();
             }
         }));
+        function toMicrolocation(){
+            var $issueType = $("#type").val();
+            if($issueType == 1){ // Transport
+                $("#to_microlocation").show();
+            }
+            else{
+                $("#to_microlocation").hide();
+            }
+        };
+        $(document).ready(toMicrolocation);
+        $('#type').on('change',toMicrolocation);
     </script>
     <script type="text/javascript">
         $('.timepicker').datetimepicker({

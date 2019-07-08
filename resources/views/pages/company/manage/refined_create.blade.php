@@ -3,7 +3,7 @@
     <div id="content" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Edit Refined Sorting </h3>
+                <h3>Create Refined Sorting </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -55,7 +55,7 @@
                         <label for="material">Material:&nbsp</label>
                         <select name="material">
                             <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->get() as $material)
+                            @foreach (DB::table('material_names')->where('material_type','=','textile')->get() as $material)
                                 <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
                             @endforeach
                         </select>

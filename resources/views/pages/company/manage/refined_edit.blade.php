@@ -81,7 +81,7 @@
                         <label for="material">Material:&nbsp</label>
                         <select name="material">
                             <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->get() as $material)
+                            @foreach (DB::table('material_names')->where('material_type','=','textile')->get() as $material)
                                 <option value="{{$material->material_id}}" {{($material->material_id == $refined->refined_material_id ? 'selected="selected"' : '')}}>{{title_case($material->material_name)}}</option>
                             @endforeach
                         </select>

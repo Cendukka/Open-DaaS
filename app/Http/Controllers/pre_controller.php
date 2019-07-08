@@ -37,7 +37,6 @@ class pre_controller extends Controller {
             'pre_sorting_material_id' => $request->get('material'),
             'pre_sorting_weight' => $request->get('weight'),
         ]);
-        #dd($pre);
         $pre->save();
         return redirect()->action('pre_controller@index', ['company' => $company])->withErrors(['Pre-sorting successfully created.']);
 	}
@@ -107,6 +106,7 @@ class pre_controller extends Controller {
 					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
 					->join('material_names','material_names.material_id','=','pre_sorting.pre_sorting_material_id')
 					->join('users','users.user_id','=','pre_sorting.pre_sorting_user_id')
+                    ->select()
 					->orderBy('pre_sorting_date', 'DESC')
 					->orderBy('receipt_to_microlocation_id')
 					->get();

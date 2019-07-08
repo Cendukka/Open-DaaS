@@ -178,7 +178,7 @@ class receipt_controller extends Controller {
                         '<td>'.$value->receipt_weight.'</td>'.
                         '<td>'.$value->distance_km.'</td>'.
                         '<td>'.$value->receipt_ewc_code.'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'">Edit</a></td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'"><i class="glyphicon glyphicon-pencil"></i></a></td>'.
                         '</tr>';
                 }
                 $output.='<tr>'.

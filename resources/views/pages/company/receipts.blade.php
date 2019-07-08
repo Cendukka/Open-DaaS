@@ -39,6 +39,7 @@
                         <th>Aikaleima</th>
                         <th>Mihin microlokationiin</th>
                         <th>Minkä tyyppisestä sijainnista</th>
+                        <th>Minkä nimisestä sijainnista</th>
                         <th>Materiaali</th>
                         <th>Paino (Kg)</th>
                         <th>Matka (Km)</th>
@@ -50,7 +51,7 @@
                     </tbody>
                 </table>
                 <form action="{{url('companies/'.$company->company_id.'/manage/receipts/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add Receipt</button>
+                    <button type="submit" class="btn btn-secondary">+ Lisää saapunut lähetys</button>
                 </form>
 {{--                    <table>--}}
 {{--                        <tr>--}}

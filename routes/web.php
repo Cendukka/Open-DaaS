@@ -35,7 +35,8 @@ Route::get('ewc/search','ewc_controller@search');
 
 
 Route::get('/manage', function () {
-	return view('pages.manage');
+    return view('pages.manage');
+});
 
 # Report Pages
 Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');

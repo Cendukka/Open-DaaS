@@ -37,7 +37,7 @@
                     @foreach ($microlocations as $ml)
                         <tr>
                             <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}">{{title_case($ml->microlocation_id)}}</a></td>
-                            <td>{{title_case($ml->microlocation_typename)}}</td>
+                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id)}}">{{title_case($ml->microlocation_typename)}}</a></td>
                             <td>{{title_case($ml->microlocation_name)}}</td>
                             <td>{{title_case($ml->microlocation_street_address)}}</td>
                             <td>{{title_case($ml->microlocation_postal_code)}}</td>

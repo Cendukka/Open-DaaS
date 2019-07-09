@@ -9,7 +9,7 @@ class user extends Model {
 	public $timestamps = false;
 	protected $table = "users";
 	protected $primaryKey = "user_id";
-	protected $fillable = ['user_company_id','user_microlocation_id','user_type_id','last_name', 'first_name', 'username', 'password'];
+	protected $fillable = ['user_company_id','user_microlocation_id','user_type_id','last_name', 'first_name', 'username', 'email', 'password'];
 	
 	public function user_type() {
 		return $this->belongsTo(user_types::class,'user_type_id');

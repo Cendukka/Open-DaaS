@@ -59,6 +59,10 @@
                         <input id="username" maxlength="50" type="text" class="form-control" name="username"/>
                     </div>
                     <div class="form-group">
+                        <label for="email">Email:&nbsp</label>
+                        <input id="email" maxlength="50" type="text" class="form-control" name="email"/>
+                    </div>
+                    <div class="form-group">
                         <label for="password">Password:&nbsp</label>
                         <input type="text" maxlength="50"class="form-control" name="password" value="qwerty" disabled>
                     </div>
@@ -72,6 +76,7 @@
     <script type="text/javascript">
         function source(){
             $("#username").val($("#last_name").val()+'.'+$("#first_name").val());
+            $("#email").val($("#last_name").val()+'.'+$("#first_name").val()+"@domain.test");
         };
         $('#first_name').on('change',source);
         $('#last_name').on('change',source);

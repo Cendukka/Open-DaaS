@@ -71,6 +71,10 @@
                             <input type="text" maxlength="50" class="form-control" name="username" value="{{$user->username}}" disabled/>
                         </div>
                         <div class="form-group">
+                            <label for="email">Email:&nbsp</label>
+                            <input id="email" maxlength="50" type="text" class="form-control" name="email" value="{{$user->email}}" disabled/>
+                        </div>
+                        <div class="form-group">
                             <label for="password">Password:&nbsp</label>
                             <input type="password" maxlength="50" class="form-control" name="password" value="{{$user->password}}" disabled>
                         </div>

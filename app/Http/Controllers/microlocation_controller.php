@@ -83,7 +83,21 @@ class microlocation_controller extends Controller {
 	}
 
 
-	public function destroy($id) {
-		//
-	}
+    public function destroy($id) {
+        //
+    }
+
+    public function add_inventory($microlocation, $material, $weight) {
+        DB::table('inventory')
+            ->updateOrInsert(
+                [
+                    'inventory_microlocation_id' => $microlocation,
+                    'inventory_material_id' => $material,
+                ],[
+                    'inventory_weight' => \DB::raw('inventory_weight + '.$weight),
+                ]
+            );
+    }
+
+
 }

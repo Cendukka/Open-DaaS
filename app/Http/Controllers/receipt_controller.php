@@ -30,29 +30,34 @@ class receipt_controller extends Controller {
 			'datetime' => 'required|date_format:Y-m-d H:i:s',
             'material' => 'required|integer',
 			'source' => 'required',
-			'from_community' => 'integer|required_with:from_company',
-			'from_supplier' => 'integer',
-            'from_microlocation' => 'integer',
+			'from_community' => 'integer|required_without_all:from_supplier,from_microlocation',
+			'from_supplier' => 'integer|required_without_all:from_community,from_microlocation',
+            'from_microlocation' => 'integer|required_without_all:from_supplier,from_community',
 			'to_microlocation' =>'required|integer',
 			'distance' => 'required|integer',
 			'weight' => 'required|integer',
 			'ewc' => 'required|max:6|digits_between:0,9',
 		]);
 
+        $microlocation = $request->get('to_microlocation');
+        $material = $request->get('material');
+        $weight = $request->get('weight');
 
 		$receipt = new inventory_receipt([
             'receipt_user_id' => $request->get('user'),
             'receipt_date' => $request->get('datetime'),
-			'receipt_material_id' => $request->get('material'),
+			'receipt_material_id' => $material,
 			'from_community_id' => $request->get('from_community'),
 			'from_supplier_id' => $request->get('from_supplier'),
 			'receipt_from_microlocation_id' => $request->get('from_microlocation'),
-			'receipt_to_microlocation_id' => $request->get('to_microlocation'),
+			'receipt_to_microlocation_id' => $microlocation,
 			'distance_km' => $request->get('distance'),
-			'receipt_weight' => $request->get('weight'),
+			'receipt_weight' => $weight,
 			'receipt_ewc_code' => $request->get('ewc'),
 		]);
 		$receipt->save();
+
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
 		return redirect()->action('receipt_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
 	}
 

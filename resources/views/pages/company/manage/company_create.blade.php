@@ -17,7 +17,7 @@
                      @endif
 
                 <div class="form-horizontal" >
-                    <form method="post" action="company-store">
+                    <form method="post" action="company-store" onsubmit="return confirm('New company is being register. Would you like to proceed?');">
                     @csrf
                 <div class="form-group">
                     <label for="companyName" class="col-sm-3 control-label">Yhtiön nimi</label>

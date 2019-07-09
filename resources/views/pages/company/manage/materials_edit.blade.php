@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="materials-update">
+                <form method="post" action="materials-update" onsubmit="return confirm('Are you sure you want to update?');">
                     @csrf
                     <div class="form-group">
 
@@ -27,7 +27,7 @@
                 </form>
                 <br>
                 @if (!(count($material->inventory)>0 || count($material->receipt)>0 || count($material->detail)>0 || count($material->refined)>0))
-                <form method="post" action="materials-destroy">
+                <form method="post" action="materials-destroy" onsubmit="return confirm('Are you sure you want to detete?');">
                     @csrf
                     <button type="submit" class="btn btn-primary">Poista</button>
                 </form>

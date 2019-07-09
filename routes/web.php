@@ -26,15 +26,15 @@ Route::get('ewc/search','ewc_controller@search');
 
 
 #contact person routes
-Route::get('contactPerson',function(){
-	return view('pages.contactPerson');
+Route::get('contactLists',function(){
+	return view('pages.contactLists');
 });
-Route::get('/companies/{company}/contactPerson',function(){
+/* Route::get('/companies/{company}/contactPerson',function(){
 	return view('pages.contactPerson');
 });
 Route::get('/companies/{company}/manage/microlocations/{ml}/contactPerson',function(){
 	return view('pages.contactPerson');
-});
+}); */
 Route::get('contactPerson/search');
 
 

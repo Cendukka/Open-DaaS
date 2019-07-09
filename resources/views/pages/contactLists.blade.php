@@ -1,10 +1,10 @@
-@extends('layouts.default')
+@extends('layouts.welcomepage')
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3>contact person</h3>
+                    <h3>contact list</h3>
                 </div>
                  <div class="panel-body">
                      <div class="form-group">
@@ -13,22 +13,22 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Company Name</th>
                             <th>Phone Number</th>
                             <th>Email</th>
                             <th>Address</th>
                         </tr>
                         <tr>
-                            <td>Jical Mackson</td>
+                            <td>Jupiter</td>
                             <td>1999</td>
                             <td>gmail@yahoo.com</td>
                             <td>bent street</td>
                         </tr>
                         <tr>
-                            <td>Jical Mackson</td>
+                            <td>Mars</td>
                             <td>1999</td>
                             <td>gmail@yahoo.com</td>
-                            <td>bent street</td>
+                            <td>straight street</td>
                         </tr>
                         </thead>
                         <tbody>

@@ -66,7 +66,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
 
-                        <a href="{{'/companies/'.$company->company_id.'/contactPerson'}}" class="btn btn-info btn-lg logout">Yhteystiedot</a>
+                        <a href="#" class="btn btn-info btn-lg logout">Yhteystiedot</a>
                         <a href="/" class="btn btn-info btn-lg logout">Etusivu</a>
                         @guest
                             <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>

@@ -34,7 +34,7 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Yhteystiedot</a></li>
+                        <li><a href="/contactLists" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Yhteystiedot</a></li>
 
                         @guest
                             <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a></li>

@@ -17,6 +17,9 @@
                     foreach ($microlocations as $microlocation){
                         array_push($microlocation_ids, $microlocation->microlocation_id);
                     }
+
+                    #$a = DB::table('material_names')->whereIn('material_type',['textile'])->get();
+                    #dd($a->contains('material_id', '5'));
                 @endphp
                 @if (count($microlocation_ids)>0)
                     <table class="table table-bordered table-hover">

@@ -27,7 +27,7 @@ class issue_controller extends Controller {
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'type' => 'required',
             'from_microlocation' => 'integer|integer',
-            'to_microlocation' => 'required|integer',
+            #'to_microlocation' => 'required|integer',
             'material' => ['required',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
@@ -57,23 +57,29 @@ class issue_controller extends Controller {
             ],
         ]);
 
+        $microlocation = $request->get('from_microlocation');
+
         $issue = new inventory_issue([
             'issue_user_id' => $request->get('user'),
             'issue_date' => $request->get('datetime'),
             'issue_type_id' => $request->get('type'),
-            'issue_from_microlocation_id' => $request->get('from_microlocation'),
+            'issue_from_microlocation_id' => $microlocation,
             'issue_to_microlocation_id' => $request->get('to_microlocation'),
         ]);
         $issue->save();
 
         for ($i = 0; $i <= count($request->ewc_code)-1; $i++) {
+            $material = $request->material[$i];
+            $weight = $request->weight[$i];
             DB::table('inventory_issue_details')->insert([
                 'detail_issue_id' => $issue->issue_id,
                 'detail_material_id' => $request->material[$i],
                 'detail_ewc_code' => $request->ewc_code[$i],
                 'detail_weight' => $request->weight[$i],
             ]);
+            app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, -$weight);
         }
+
 
         return redirect()->action('issue_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
 	}
@@ -178,7 +184,7 @@ class issue_controller extends Controller {
 					})
 					->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
                     ->join('microlocations as from_microlocations','issue_from_microlocation_id','=','from_microlocations.microlocation_id')
-                    ->join('microlocations as to_microlocations','issue_to_microlocation_id','=','to_microlocations.microlocation_id')
+                    ->leftJoin('microlocations as to_microlocations','issue_to_microlocation_id','=','to_microlocations.microlocation_id')
                     ->join('users','users.user_id','=','issue_user_id')
                     ->orderBy('issue_date','DESC')
                     ->select('issue_id','issue_date','from_microlocations.microlocation_name as from_microlocation','to_microlocations.microlocation_name as to_microlocation','users.username','issue_typename')

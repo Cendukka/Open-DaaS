@@ -38,17 +38,36 @@ class refined_controller extends Controller {
             'weight' => 'Weight',
         ]);
 
+        $receipt = ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL);
+        $pre_sorting = ($request->get('origin') == 'presort' ? $request->get('pre_receipt') : NULL);
+        $microlocation = ($receipt ?
+            DB::table('inventory_receipt')
+                ->where('receipt_id',$receipt)
+                ->first()->receipt_to_microlocation_id
+            :
+            DB::table('pre_sorting')
+                ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
+                ->where('pre_sorting_id',$pre_sorting)
+                ->first()->receipt_to_microlocation_id
+            );
+            #dd($microlocation);
+
+        $material = $request->get('material');
+        $weight = $request->get('weight');
+
         $refined = new refined_sorting([
             'refined_user_id' => $request->get('user'),
             'refined_date' => $request->get('datetime'),
-            'refined_receipt_id' => ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL),
-            'pre_sorting_id' => ($request->get('origin') == 'presort' ? $request->get('pre_receipt') : NULL),
-            'refined_material_id' => $request->get('material'),
-            'refined_weight' => $request->get('weight'),
+            'refined_receipt_id' => $receipt,
+            'pre_sorting_id' => $pre_sorting,
+            'refined_material_id' => $material,
+            'refined_weight' => $weight,
             'description' => ($request->get('description') ?: ''),
         ]);
-
         $refined->save();
+
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, '2', -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
         return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Refined-Sorting successfully created.']);
 	}
 

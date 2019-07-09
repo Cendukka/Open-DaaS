@@ -19,19 +19,19 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Company Name:&nbsp</label>
-                        <input type="text" class="form-control" name="name" value="{{$company->company_name}}"/>
+                        <input type="text" maxlength="191" class="form-control" name="name" value="{{$company->company_name}}"/>
                     </div>
                     <div class="form-group">
                         <label for="address">Street Address:&nbsp</label>
-                        <input type="text" class="form-control" name="address" value="{{$company->company_street_address}}"/>
+                        <input type="text" maxlength="191" class="form-control" name="address" value="{{$company->company_street_address}}"/>
                     </div>
                     <div class="form-group">
                         <label for="postal_code">Postal Code:&nbsp</label>
-                        <input type="text" class="form-control" name="postal_code" value="{{$company->company_postal_code}}"/>
+                        <input type="text" maxlength="5"  class="form-control" name="postal_code" value="{{$company->company_postal_code}}"/>
                     </div>
                     <div class="form-group">
                         <label for="city">City:&nbsp</label>
-                        <input type="text" class="form-control" name="city" value="{{$company->company_city}}">
+                        <input type="text" maxlength="50" class="form-control" name="city" value="{{$company->company_city}}">
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

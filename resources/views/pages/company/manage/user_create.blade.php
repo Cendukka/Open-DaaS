@@ -48,19 +48,19 @@
 
                     <div class="form-group">
                         <label for="last_name">Last Name:&nbsp</label>
-                        <input id="last_name" type="text" class="form-control" name="last_name"/>
+                        <input id="last_name" maxlength="50" type="text" class="form-control" name="last_name"/>
                     </div>
                     <div class="form-group">
                         <label for="first_name">First Name:&nbsp</label>
-                        <input id="first_name" type="text" class="form-control" name="first_name"/>
+                        <input id="first_name" maxlength="50" type="text" class="form-control" name="first_name"/>
                     </div>
                     <div class="form-group">
                         <label for="username">Username:&nbsp</label>
-                        <input id="username" type="text" class="form-control" name="username"/>
+                        <input id="username" maxlength="50" type="text" class="form-control" name="username"/>
                     </div>
                     <div class="form-group">
                         <label for="password">Password:&nbsp</label>
-                        <input type="text" class="form-control" name="password" value="qwerty" disabled>
+                        <input type="text" maxlength="50"class="form-control" name="password" value="qwerty" disabled>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Add</button>

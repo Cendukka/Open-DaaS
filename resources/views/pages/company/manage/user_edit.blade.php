@@ -60,19 +60,19 @@
 
                         <div class="form-group">
                             <label for="last_name">Last Name:&nbsp</label>
-                            <input type="text" class="form-control" name="last_name" value="{{$user->last_name}}"/>
+                            <input type="text" maxlength="50" class="form-control" name="last_name" value="{{$user->last_name}}"/>
                         </div>
                         <div class="form-group">
                             <label for="first_name">First Name:&nbsp</label>
-                            <input type="text" class="form-control" name="first_name" value="{{$user->first_name}}"/>
+                            <input type="text" maxlength="50" class="form-control" name="first_name" value="{{$user->first_name}}"/>
                         </div>
                         <div class="form-group">
                             <label for="username">Username:&nbsp</label>
-                            <input type="text" class="form-control" name="username" value="{{$user->username}}" disabled/>
+                            <input type="text" maxlength="50" class="form-control" name="username" value="{{$user->username}}" disabled/>
                         </div>
                         <div class="form-group">
                             <label for="password">Password:&nbsp</label>
-                            <input type="password" class="form-control" name="password" value="{{$user->password}}" disabled>
+                            <input type="password" maxlength="50" class="form-control" name="password" value="{{$user->password}}" disabled>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>

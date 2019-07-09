@@ -19,19 +19,19 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Company Name:&nbsp</label>
-                        <input type="text" class="form-control" name="name"/>
+                        <input type="text" maxlength="191" class="form-control" name="name"/>
                     </div>
                     <div class="form-group">
                         <label for="address">Street Address:&nbsp</label>
-                        <input type="text" class="form-control" name="address"/>
+                        <input type="text" maxlength="191" class="form-control" name="address"/>
                     </div>
                     <div class="form-group">
                         <label for="postal_code">Postal Code:&nbsp</label>
-                        <input type="text" class="form-control" name="postal_code"/>
+                        <input type="text" maxlength="5" class="form-control" name="postal_code"/>
                     </div>
                     <div class="form-group">
                         <label for="city">City:&nbsp</label>
-                        <input type="text" class="form-control" name="city">
+                        <input type="text" maxlength="50" class="form-control" name="city">
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>

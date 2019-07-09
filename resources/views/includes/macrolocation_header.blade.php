@@ -37,6 +37,7 @@
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää vastaanotto</a></li>
                     <li><a href="#">Lisää lähetys</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations'}}">Microlokaatiot</a></li>
                 </ul>
                {{-- <a href="/ewc">EWC Codes</a>--}}
             </li>

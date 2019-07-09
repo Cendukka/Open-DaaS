@@ -44,7 +44,7 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <a href="#" class="btn btn-info btn-lg logout">Yhteystiedot</a>
+                                <a href="/contactPerson" class="btn btn-info btn-lg logout">Yhteystiedot</a>
                                 <a href="/" class="btn btn-info btn-lg logout">Etusivu</a>
 
                                 @guest

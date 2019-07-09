@@ -16,7 +16,7 @@
                     </div>
                 @endif
                 <table class="table table-bordered table-hover">
-                    <thread>
+                    <thead>
                     <tr>
                         <th>ID</th>
                         <th>Type</th>
@@ -25,7 +25,7 @@
                         <th>Postcode</th>
                         <th>City</th>
                     </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                     @php
                         $microlocations = DB::table('microlocations')

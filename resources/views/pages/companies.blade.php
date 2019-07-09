@@ -27,9 +27,9 @@
                     @endforeach
                     </tbody>
                 </table>
-                <form action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Lisää yhtiö</button>
-                </form>
+{{--                <form action="{{url(url()->current().'/create')}}">--}}
+{{--                    <button type="submit" class="btn btn-secondary">+ Lisää yhtiö</button>--}}
+{{--                </form>--}}
             </div>
         </div>
     </div>

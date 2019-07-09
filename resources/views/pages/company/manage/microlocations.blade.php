@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Manage Microlocations </h3>
+                <h3>Hallitse microlokaatioita </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -19,11 +19,11 @@
                     <thread>
                     <tr>
                         <th>ID</th>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Postcode</th>
-                        <th>City</th>
+                        <th>Tyyppi</th>
+                        <th>Nimi</th>
+                        <th>Osoite</th>
+                        <th>Postinumero</th>
+                        <th>Kaupunki</th>
                     </tr>
                     </thread>
                     <tbody>
@@ -47,7 +47,7 @@
                     </tbody>
                 </table>
                     <form action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add microlocation</button>
+                    <button type="submit" class="btn btn-secondary">+ Lisää microlokaatio</button>
                 </form>
             </div>
         </div>

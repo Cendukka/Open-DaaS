@@ -22,12 +22,12 @@ class DatabaseSeeder extends Seeder
 			users_table_seeder::class,
 			community_table_seeder::class,
 			material_names_table_seeder::class,
-			inventory_table_seeder::class,
 			inventory_receipt_table_seeder::class,
 			inventory_issue_table_seeder::class,
 			inventory_issue_details_table_seeder::class,
 			pre_sorting_table_seeder::class,
-			refined_sorting_table_seeder::class
+			refined_sorting_table_seeder::class,
+			inventory_table_seeder::class,
 		]);
     }
 }

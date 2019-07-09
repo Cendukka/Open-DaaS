@@ -5,6 +5,12 @@ use Illuminate\Database\Seeder;
 class material_names_table_seeder extends Seeder{
     public function run(){
     	$mat_names = [
+            # Raw waste
+            'Raw Waste' => 'raw waste',
+
+            # Pre-sorted textile
+            'Raw Textile' => 'refined',
+
     	    # Refine Sorted Textiles
             'Villa' => 'textile',
             'Trikoo' => 'textile',
@@ -16,12 +22,6 @@ class material_names_table_seeder extends Seeder{
 
             # Material that is being removed from use
             'Old Textile' => 'retired',
-
-            # Raw waste
-    	    'Raw Waste' => 'raw waste',
-
-            # Pre-sorted textile
-            'Raw Textile' => 'refined',
 
             # Pre-sorted waste
             'Metal' => 'presorted',

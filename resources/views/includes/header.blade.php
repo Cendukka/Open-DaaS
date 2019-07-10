@@ -12,7 +12,7 @@
 			<li>
 				<a href="/home">Oma toimipiste</a>
 				<a href="/companies/">Toimipisteet</a>
-                <a href="/ewc/">EWC Codes</a>
+{{--                <a href="/ewc/">EWC Codes</a>--}}
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
                 
                 	<ul class="collapse list-unstyled" id="pageSubmenu">

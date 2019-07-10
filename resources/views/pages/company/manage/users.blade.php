@@ -18,11 +18,11 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Microlocation ID</th>
+                        <th>Microlocation</th>
                         <th>Type</th>
                         <th>Last Name</th>
                         <th>First Name</th>
+                        <th>Username</th>
                     </tr>
                     </thead>
                     @php

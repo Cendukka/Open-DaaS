@@ -132,22 +132,35 @@ class issue_controller extends Controller {
                 },
             ],
         ]);
+
+        $microlocation = $request->get('from_microlocation');
+
         $issueNew = inventory_issue::find($issue->issue_id);
         $issueNew->issue_user_id = $request->get('user');
         $issueNew->issue_date = $request->get('datetime');
         $issueNew->issue_type_id = $request->get('type');
-        $issueNew->issue_from_microlocation_id = $request->get('from_microlocation');
+        $issueNew->issue_from_microlocation_id = $microlocation;
         $issueNew->issue_to_microlocation_id = $request->get('to_microlocation');
-        $issueNew->save();
 
+
+        # Remove old data
+        foreach(DB::table('inventory_issue_details')->where('detail_issue_id','=',$issue->issue_id)->get() as $detail){
+            app('App\Http\Controllers\microlocation_controller')->add_inventory($issueNew->getOriginal('issue_from_microlocation_id'), $detail->detail_material_id, $detail->detail_weight);
+        }
         DB::table('inventory_issue_details')->where('detail_issue_id','=',$issue->issue_id)->delete();
+
+        # Save new data
+        $issueNew->save();
         for ($i = 0; $i <= count($request->ewc_code)-1; $i++) {
+            $material = $request->material[$i];
+            $weight = $request->weight[$i];
             DB::table('inventory_issue_details')->insert([
                 'detail_issue_id' => $issue->issue_id,
-                'detail_material_id' => $request->material[$i],
+                'detail_material_id' => $material,
                 'detail_ewc_code' => $request->ewc_code[$i],
-                'detail_weight' => $request->weight[$i],
+                'detail_weight' => $weight,
             ]);
+            app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, -$weight);
         }
 
         return redirect()->action('issue_controller@index',['company' => $company])->withErrors(['Issue successfully updated.']);

@@ -16,19 +16,22 @@
                             <th>Company Name</th>
                             <th>Phone Number</th>
                             <th>Email</th>
+                            <th>Website</th>
                             <th>Address</th>
                         </tr>
                         <tr>
                             <td>Jupiter</td>
                             <td>1999</td>
                             <td>gmail@yahoo.com</td>
-                            <td>bent street</td>
+                            <td> <a href="http://www.turkuamk.fi" target="_blank"> turkuamk.fi </a></td>
+                            <td>turku</td>
                         </tr>
                         <tr>
                             <td>Mars</td>
                             <td>1999</td>
                             <td>gmail@yahoo.com</td>
-                            <td>straight street</td>
+                            <td></td>
+                            <td>helsinki</td>
                         </tr>
                         </thead>
                         <tbody>

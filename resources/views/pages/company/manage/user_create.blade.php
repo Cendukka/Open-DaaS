@@ -22,16 +22,9 @@
                     <div class="form-group">
                         <label for="user_type">Käyttäjätyyppi:&nbsp</label>
                         <select name="user_type">
-                            <option disabled value="1">Superadmin</option>
-                            <option value="2">Admin</option>
-                            <option value="3">Manager</option>
+                            <option value="2">Manager</option>
+                            <option value="3">User</option>
 
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Yhtiö:&nbsp</label>
-                        <select name="company">
-                            <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                         </select>
                     </div>
                     <div class="form-group">

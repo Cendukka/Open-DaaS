@@ -10,6 +10,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
+                        <th></th>
                         <th>Nimi</th>
                         <th>Osoite</th>
                         <th>Postinumero</th>
@@ -18,8 +19,9 @@
                     </thead>
                     <tbody>
                     @foreach (DB::table('company')->get() as $company)
-                        <tr>
-                            <td><a href="{{url('/companies/'.$company->company_id)}}">{{title_case($company->company_name)}}</a></td>
+                        <tr class="text-left">
+                            <td><a href="{{url('/companies/'.$company->company_id)}}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                            <td>{{title_case($company->company_name)}}</td>
                             <td>{{title_case($company->company_street_address)}}</td>
                             <td>{{title_case($company->company_postal_code)}}</td>
                             <td>{{title_case($company->company_city)}}</td>

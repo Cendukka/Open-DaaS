@@ -46,20 +46,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Microlokaation nimi:&nbsp</label>
-                            <input type="text" class="form-control" name="name" value="{{title_case($microlocation->microlocation_name)}}"/>
+                            <label for="name">Microlocation Name:&nbsp</label>
+                            <input type="text" maxlength="191" class="form-control" name="name" value="{{title_case($microlocation->microlocation_name)}}"/>
                         </div>
                         <div class="form-group">
-                            <label for="address">Katuosoite:&nbsp</label>
-                            <input type="text" class="form-control" name="address" value="{{title_case($microlocation->microlocation_street_address)}}"/>
+                            <label for="address">Street Address:&nbsp</label>
+                            <input type="text" maxlength="191" class="form-control" name="address" value="{{title_case($microlocation->microlocation_street_address)}}"/>
                         </div>
                         <div class="form-group">
-                            <label for="postal_code">Postinumero:&nbsp</label>
-                            <input type="text" class="form-control" name="postal_code" value="{{title_case($microlocation->microlocation_postal_code)}}"/>
+                            <label for="postal_code">Postal Code:&nbsp</label>
+                            <input type="text" maxlength="5"  class="form-control" name="postal_code" value="{{title_case($microlocation->microlocation_postal_code)}}"/>
                         </div>
                         <div class="form-group">
-                            <label for="password">Kaupunki:&nbsp</label>
-                            <input type="text" class="form-control" name="city" value="{{title_case($microlocation->microlocation_city)}}">
+                            <label for="city">City:&nbsp</label>
+                            <input type="text" maxlength="50" class="form-control" name="city" value="{{title_case($microlocation->microlocation_city)}}">
                         </div>
                         <button type="submit" class="btn btn-primary">Tallenna</button>
                     </form>

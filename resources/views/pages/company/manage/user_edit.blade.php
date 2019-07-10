@@ -61,20 +61,24 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="first_name"> Etunimi:&nbsp</label>
-                            <input type="text" class="form-control center" name="first_name" value="{{$user->first_name}}"readonly style="color:lightgray;"/>
+                            <label for="last_name">Sukunimi:&nbsp</label>
+                            <input type="text" maxlength="50" class="form-control" name="last_name" value="{{$user->last_name}}"/>
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Sukunimi:&nbsp</label>
-                            <input type="text" class="form-control center" name="last_name" value="{{$user->last_name}}"readonly style="color:lightgray;"/>
+                            <label for="first_name">Etunimi:&nbsp</label>
+                            <input type="text" maxlength="50" class="form-control" name="first_name" value="{{$user->first_name}}"/>
                         </div>
                         <div class="form-group">
                             <label for="username">Käyttäjätunnus:&nbsp</label>
-                            <input type="text" class="form-control center" name="username" value="{{$user->username}}" readonly style="color:lightgray;"/>
+                            <input type="text" maxlength="50" class="form-control" name="username" value="{{$user->username}}" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Sähköposti:&nbsp</label>
+                            <input id="email" maxlength="50" type="text" class="form-control" name="email" value="{{$user->email}}" disabled/>
                         </div>
                         <div class="form-group">
                             <label for="password">Salasana:&nbsp</label>
-                            <input type="password" class="form-control center" name="password" value="{{$user->password}}"readonly style="color:lightgray;">
+                            <input type="password" maxlength="50" class="form-control" name="password" value="{{$user->password}}" disabled>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>

@@ -33,11 +33,11 @@ class user_controller extends Controller {
 		
 		$request->validate([
 			'user_type' => 'required|integer',
-			'company' => 'required|integer',
 			'microlocation' => 'nullable|integer',
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
 			'username'=> 'required|unique:users|max:50',
+			'email'=> 'required|unique:users|max:50',
 		]);
 		
 		$user = new user([
@@ -47,6 +47,7 @@ class user_controller extends Controller {
 			'last_name' => $request->get('last_name'),
 			'first_name' => $request->get('first_name'),
 			'username' => $request->get('username'),
+			'email' => $request->get('email'),
 			'password' => Hash::make('qwerty'),
 		]);
 		$user->save();
@@ -66,7 +67,9 @@ class user_controller extends Controller {
 
 	public function update(Request $request, company $company, user $user) {
 		# ADD MORE AUTHENTICATION HERE
-		
+
+        # TODO Passowrd saving needs more work
+
 		$request->validate([
 			'user_type' => 'required|integer',
 			'microlocation' => 'nullable|integer',
@@ -78,11 +81,10 @@ class user_controller extends Controller {
 		$userNew = user::find($user->user_id);
 
 		$userNew->user_type_id = $request->get('user_type');
-		$userNew->user_company_id = $request->get('company');
 		$userNew->user_microlocation_id = $request->get('microlocation');
 		$userNew->last_name = $request->get('last_name');
 		$userNew->first_name = $request->get('first_name');
-		$userNew->password = Hash::make($request->get('password'));
+		#$userNew->password = Hash::make($request->get('password'));
 		$userNew->save();
 		
 		

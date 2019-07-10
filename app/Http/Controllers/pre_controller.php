@@ -35,14 +35,25 @@ class pre_controller extends Controller {
             'material' => 'required|integer',
             'weight' => 'required|integer',
         ]);
+
+        $receipt = $request->get('receipt');
+        $microlocation = DB::table('inventory_receipt')->where('receipt_id',$receipt)->first()->receipt_to_microlocation_id;
+        $material = $request->get('material');
+        $weight = $request->get('weight');
+
         $pre = new pre_sorting([
             'pre_sorting_user_id' => $request->get('user'),
             'pre_sorting_date' => $request->get('datetime'),
-            'pre_sorting_receipt_id' => $request->get('receipt'),
-            'pre_sorting_material_id' => $request->get('material'),
-            'pre_sorting_weight' => $request->get('weight'),
+            'pre_sorting_receipt_id' => $receipt,
+            'pre_sorting_material_id' => $material,
+            'pre_sorting_weight' => $weight,
         ]);
         $pre->save();
+
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, '1', -$weight);
+        if(DB::table('material_names')->where('material_type', '=', 'refined')->get()->contains('material_id', $material)){
+            app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
+        }
         return redirect()->action('pre_controller@index', ['company' => $company])->withErrors(['Pre-sorting successfully created.']);
     }
 

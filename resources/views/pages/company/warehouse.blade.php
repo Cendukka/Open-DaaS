@@ -19,6 +19,8 @@
                         array_push($microlocation_ids, $microlocation->microlocation_id);
                     }
 
+                    #$a = DB::table('material_names')->whereIn('material_type',['textile'])->get();
+                    #dd($a->contains('material_id', '5'));
                 @endphp
                 @if (count($microlocation_ids)>0)
                     <table class="table table-bordered table-hover">
@@ -28,13 +30,10 @@
                             @php
                                 $material_names = DB::table('inventory')
                                     ->whereIn('inventory.inventory_microlocation_id', $microlocation_ids)
-                                    ->where('inventory_weight','>','0')
-                                    ->join('material_names', 'inventory.inventory_material_id','=','material_names.material_id')
-                                    ->whereIn('material_type', ['textile','raw waste','refined','retired'])
-                                    ->orderBy('material_type','DESC')
-                                    ->orderBy('material_name','ASC')
-                                    ->distinct('material_name')
-                                    ->pluck('material_name');
+                                    ->join('material_names', 'inventory_material_id','=','material_id')
+                                    ->where('material_type', '!=', 'presorted')
+                                    ->orderBy('material_id','DESC')
+                                    ->pluck('material_name','material_id');
                             @endphp
                             @foreach ($material_names as $material)
                                 <th>{{title_case($material)}}</th>
@@ -48,19 +47,21 @@
                                     $inventory = DB::table('inventory')
                                         ->join('microlocations', 'inventory.inventory_microlocation_id', '=', 'microlocations.microlocation_id')
                                         ->where('inventory.inventory_microlocation_id', $ml->microlocation_id)
-                                        ->join('material_names', 'inventory.inventory_material_id','=','material_names.material_id')
-                                        ->whereIn('material_name', $material_names)
-                                        ->orderBy('material_type','DESC')
-                                        ->orderBy('material_name','ASC')
+                                        ->whereIn('inventory_material_id', $material_names->keys())
+                                        ->orderBy('inventory_material_id','DESC')
+                                        ->select('microlocation_name','inventory_material_id','inventory_weight')
                                         ->get();
                                 @endphp
                                 @if (count($inventory)>0)
-                                    <td>{{title_case($inventory[0]->microlocation_name)}}</td>
-                                    @foreach ($inventory as $inv)
-                                        <td>{{title_case($inv->inventory_weight)}}</td>
+                                    <td>{{title_case($inventory->first()->microlocation_name)}}</td>
+                                    @foreach ($material_names->keys() as $id)
+                                        <td>{{($inventory->contains(function ($value, $key) use ($id) {return $value->inventory_material_id == $id;}) ? $inventory->keyBy('inventory_material_id')[$id]->inventory_weight : 'nil')}}</td>
                                     @endforeach
                                 @else
-                                    <td>Haulla ei löytynyt tallenteita</td>
+                                    <td>{{$ml->microlocation_name}}</td>
+                                    @foreach ($material_names->keys() as $id)
+                                        <td>nil</td>
+                                    @endforeach
                                 @endif
                             </tr>
                         @endforeach

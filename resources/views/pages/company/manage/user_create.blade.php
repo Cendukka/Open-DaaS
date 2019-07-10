@@ -50,20 +50,24 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="first_name">Etunimi:&nbsp</label>
-                        <input type="text" class="form-control center" name="first_name"/>
+                        <label for="last_name">Last Name:&nbsp</label>
+                        <input id="last_name" maxlength="50" type="text" class="form-control" name="last_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="last_name">Sukunimi:&nbsp</label>
-                        <input type="text" class="form-control center" name="last_name"/>
+                        <label for="first_name">First Name:&nbsp</label>
+                        <input id="first_name" maxlength="50" type="text" class="form-control" name="first_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="username">Käyttäjänimi:&nbsp</label>
-                        <input type="text" class="form-control center" name="username"/>
+                        <label for="username">Username:&nbsp</label>
+                        <input id="username" maxlength="50" type="text" class="form-control" name="username"/>
                     </div>
                     <div class="form-group">
-                        <label for="password">Salasana:&nbsp</label>
-                        <input type="text" class="form-control center" name="password" value="qwerty" readonly style="color:lightgray;">
+                        <label for="email">Email:&nbsp</label>
+                        <input id="email" maxlength="50" type="text" class="form-control" name="email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:&nbsp</label>
+                        <input type="text" maxlength="50"class="form-control" name="password" value="qwerty" disabled>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Lisää</button>
@@ -75,6 +79,7 @@
     <script type="text/javascript">
         function source(){
             $("#username").val($("#last_name").val()+'.'+$("#first_name").val());
+            $("#email").val($("#last_name").val()+'.'+$("#first_name").val()+"@domain.test");
         };
         $('#first_name').on('change',source);
         $('#last_name').on('change',source);

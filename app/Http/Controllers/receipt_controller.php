@@ -36,32 +36,37 @@ class receipt_controller extends Controller {
 			'user' => 'required|integer',
 			'datetime' => 'required|date_format:Y-m-d H:i:s',
             'material' => 'required|integer',
-            'source' => 'required',
-            'from_community' => 'integer|required_with:from_company',
-            'from_supplier' => 'integer',
-            'from_microlocation' => 'integer',
-            'to_microlocation' =>'required|integer',
-            'distance' => 'required|integer',
-            'weight' => 'required|integer',
-            'ewc' => 'required|max:6|digits_between:0,9',
-        ]);
+			'source' => 'required',
+			'from_community' => 'integer|required_without_all:from_supplier,from_microlocation',
+			'from_supplier' => 'integer|required_without_all:from_community,from_microlocation',
+            'from_microlocation' => 'integer|required_without_all:from_supplier,from_community',
+			'to_microlocation' =>'required|integer',
+			'distance' => 'required|integer',
+			'weight' => 'required|integer',
+			'ewc' => 'required|max:6|digits_between:0,9',
+		]);
 
+        $microlocation = $request->get('to_microlocation');
+        $material = $request->get('material');
+        $weight = $request->get('weight');
 
         $receipt = new inventory_receipt([
             'receipt_user_id' => $request->get('user'),
             'receipt_date' => $request->get('datetime'),
-            'receipt_material_id' => $request->get('material'),
-            'from_community_id' => $request->get('from_community'),
-            'from_supplier_id' => $request->get('from_supplier'),
-            'receipt_from_microlocation_id' => $request->get('from_microlocation'),
-            'receipt_to_microlocation_id' => $request->get('to_microlocation'),
-            'distance_km' => $request->get('distance'),
-            'receipt_weight' => $request->get('weight'),
-            'receipt_ewc_code' => $request->get('ewc'),
-        ]);
-        $receipt->save();
-        return redirect()->action('receipt_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
-    }
+			'receipt_material_id' => $material,
+			'from_community_id' => $request->get('from_community'),
+			'from_supplier_id' => $request->get('from_supplier'),
+			'receipt_from_microlocation_id' => $request->get('from_microlocation'),
+			'receipt_to_microlocation_id' => $microlocation,
+			'distance_km' => $request->get('distance'),
+			'receipt_weight' => $weight,
+			'receipt_ewc_code' => $request->get('ewc'),
+		]);
+		$receipt->save();
+
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
+		return redirect()->action('receipt_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
+	}
 
 
 	public function show(company $company) {
@@ -91,18 +96,25 @@ class receipt_controller extends Controller {
             'ewc' => 'required|max:6|digits_between:0,9',
         ]);
 
+        $microlocation = $request->get('to_microlocation');
+        $material = $request->get('material');
+        $weight = $request->get('weight');
+
 		$receiptNew = inventory_receipt::find($receipt->receipt_id);
 		$receiptNew->receipt_user_id = $request->get('user');
 		$receiptNew->receipt_date = $request->get('datetime');
-		$receiptNew->receipt_material_id = $request->get('material');
+		$receiptNew->receipt_material_id = $material;
 		$receiptNew->from_community_id = $request->get('from_community');
 		$receiptNew->from_supplier_id = $request->get('from_supplier');
 		$receiptNew->receipt_from_microlocation_id = $request->get('from_microlocation');
-		$receiptNew->receipt_to_microlocation_id = $request->get('to_microlocation');
+		$receiptNew->receipt_to_microlocation_id = $microlocation;
 		$receiptNew->distance_km = $request->get('distance');
-		$receiptNew->receipt_weight = $request->get('weight');
+		$receiptNew->receipt_weight = $weight;
 		$receiptNew->receipt_ewc_code = $request->get('ewc');
+
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($receiptNew->getOriginal('receipt_to_microlocation_id'), $receiptNew->getOriginal('receipt_material_id'), -$receiptNew->getOriginal('receipt_weight'));
 		$receiptNew->save();
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
 
 		return redirect()->action('receipt_controller@index',['company' => $company])->withErrors(['Receipt successfully updated.']);
 	}
@@ -211,9 +223,9 @@ class receipt_controller extends Controller {
                 if($result) {
                     $output .= '<div id="from_microlocation" class="form-group">';
                     $output .= '<label for="from_microlocation">From microlocation:&nbsp</label><select name="from_microlocation">';
-                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    $output .= '<option disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
-                        $output .= '<option value="'.$value->microlocation_id.'">'.title_case($value->microlocation_name).'</option>';
+                        $output .= '<option value="'.$value->microlocation_id.'" '.($ml_id== $value->microlocation_id? 'selected="selected"' : '').'>'.title_case($value->microlocation_name).'</option>';
                     }
                     $output .= '</select></div>';
                 }

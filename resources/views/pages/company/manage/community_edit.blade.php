@@ -15,23 +15,14 @@
                         </ul>
                     </div>
                 @endif
-                @php
-                    $communities = DB::table('community')
-                        ->where('community_company_id','=',$company->company_id)
-                        ->get();
-                @endphp
-                @if(count($communities)==0)
-                    <h4>Community not found</h4>
-                @else
-                    <form method="post" action="community-update">
-                        @csrf
-                        <div class="form-group">
-                            <label for="city">Community city:&nbsp</label>
-                            <input type="text" maxlength="50" class="form-control" name="city" value="{{title_case($community->community_city)}}">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
-                @endif
+                <form method="post" action="community-update">
+                    @csrf
+                    <div class="form-group">
+                        <label for="city">Community city:&nbsp</label>
+                        <input type="text" maxlength="50" class="form-control" name="city" value="{{title_case($community->community_city)}}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
             </div>
         </div>
     </div>

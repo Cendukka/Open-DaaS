@@ -52,6 +52,12 @@ Route::post('companies/{company}/manage/microlocations/microlocations-store',   
 Route::post('companies/{company}/manage/microlocations/{microlocation}/microlocations-update',  'microlocation_controller@update');
 
 
+# Communities
+Route::resource('companies/{company}/manage/communities',                           'community_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+Route::post('companies/{company}/manage/communities/community-store',               'community_controller@store');
+Route::post('companies/{company}/manage/communities/{community}/community-update',  'community_controller@update');
+
+
 # Receipts
 Route::get('companies/{company}/receipts',                                      'receipt_controller@index');
 Route::resource('companies/{company}/manage/receipts',                          'receipt_controller', ['only' => ['show', 'create', 'edit']]);

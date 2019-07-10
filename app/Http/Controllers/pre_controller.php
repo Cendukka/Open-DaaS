@@ -74,14 +74,31 @@ class pre_controller extends Controller {
             'weight' => 'required|integer',
         ]);
 
+        $receipt = $request->get('receipt');
+        $material = $request->get('material');
+        $weight = $request->get('weight');
+
         $preNew = pre_sorting::find($pre->pre_sorting_id);
         $preNew->pre_sorting_user_id = $request->get('user');
         $preNew->pre_sorting_date = $request->get('datetime');
-        $preNew->pre_sorting_receipt_id = $request->get('receipt');
-        $preNew->pre_sorting_material_id = $request->get('material');
-        $preNew->pre_sorting_weight = $request->get('weight');
+        $preNew->pre_sorting_receipt_id = $receipt;
+        $preNew->pre_sorting_material_id = $material;
+        $preNew->pre_sorting_weight = $weight;
+
+        $microlocation_orig = DB::table('inventory_receipt')->where('receipt_id',$preNew->getOriginal('pre_sorting_receipt_id'))->first()->receipt_to_microlocation_id;
+        $microlocation_new = DB::table('inventory_receipt')->where('receipt_id',$receipt)->first()->receipt_to_microlocation_id;
+
+        # Remove original weights from the inventory
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, '1', $preNew->getOriginal('pre_sorting_weight'));
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $preNew->getOriginal('pre_sorting_material_id'), -$preNew->getOriginal('pre_sorting_weight'));
+
         $preNew->save();
 
+        # Add new weights to the inventory
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, '1', -$weight);
+        if(DB::table('material_names')->where('material_type', '=', 'refined')->get()->contains('material_id', $material)){
+            app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
+        }
         return redirect()->action('pre_controller@index',['company' => $company])->withErrors(['Pre-sorting successfully updated.']);
 	}
 

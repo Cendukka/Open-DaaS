@@ -23,7 +23,6 @@
                         <th>Type</th>
                         <th>Last Name</th>
                         <th>First Name</th>
-                        <th>Username</th>
                     </tr>
                     </thead>
                     @php
@@ -39,12 +38,12 @@
                     @endphp
                     @foreach ($users as $user)
                         <tr>
-                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}">{{title_case($user->user_id)}}</a></td>
                             <td>{{title_case($user->microlocation_name)}}</td>
                             <td>{{title_case($user->user_typename)}}</td>
                             <td>{{title_case($user->last_name)}}</td>
                             <td>{{title_case($user->first_name)}}</td>
                             <td>{{title_case($user->username)}}</td>
+                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}">Edit</a></td>
                         </tr>
                     @endforeach
                 </table>

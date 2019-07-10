@@ -6,15 +6,15 @@
             <div class="panel-heading">
                 <h3>Yhtiöt </h3>
             </div>
-            <div class="panel-body">
-                <table class="table table-bordered table-hover">
+            <div class="panel-body table-responsive-lg">
+                <table class="table table-bordered table-hover" style="table-layout: fixed">
                     <thead>
                     <tr>
-                        <th></th>
-                        <th>Nimi</th>
-                        <th>Osoite</th>
-                        <th>Postinumero</th>
-                        <th>Kaupunki</th>
+                        <th scope="col"></th>
+                        <th scope="col">Nimi</th>
+                        <th scope="col">Osoite</th>
+                        <th scope="col">Postinumero</th>
+                        <th scope="col">Kaupunki</th>
                     </tr>
                     </thead>
                     <tbody>

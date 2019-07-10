@@ -17,22 +17,22 @@
                 @endif
                 <form method="post" action="materials-store">
                     @csrf
-                    <div class="form-group">
-                         <label for="name">Materiaalin nimi: </label> </div>
-                        <div> <input type="text" class="form-control center" name="name"/></div>
+                    <div class="form-group text-left">
+                         <label for="name">Materiaalin nimi:</label><br>
+                        <input type="text" class="form-control center" name="name"/>
                     </div>
-                    <div class="form-group">
-                        <label for="type">Material Type:&nbsp</label>
-                        <select name="type">
+                    <div class="form-group text-left">
+                        <label for="type">Materiaalin tyyppi:</label>
+                        <select name="type" class="form-control">
                             <option selected="selected" disabled hidden value=""></option>
-                            <option value="raw waste">Raw Waste</option>
-                            <option value="refined">Refined</option>
-                            <option value="presorted">Presorted</option>
-                            <option value="textile">Textile</option>
-                            <option value="retired">Retired</option>
+                            <option value="raw waste">Lajittelematon</option>
+                            <option value="refined">Jatkolajiteltu</option>
+                            <option value="presorted">Esilajiteltu</option>
+                            <option value="textile">Kierrätyskelpoinen</option>
+                            <option value="retired">Ei käytössä</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Lisää</button>
                 </form>
             </div>
          </div>

@@ -5,7 +5,7 @@
      -----------------------------------------   */
 
 
-<style>
+
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {height: 1600px}
     
@@ -36,7 +36,7 @@
         }
         
         .page{
-      background-color: ;
+      background-color: white;
       height: 1600px;
       color: black;
     }
@@ -61,11 +61,11 @@
     
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width:720px) {
-      .sidenav {
-        height: auto;
-        text-align: center;
-         
-      }
+        .sidenav {
+            height: auto;
+            text-align: center;
+
+        }
+    }
         
       
-  </style>

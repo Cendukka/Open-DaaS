@@ -18,20 +18,23 @@
                 @foreach (DB::table('material_names')->distinct('material_type')->pluck('material_type') as $type)
                     <table class="table table-bordered table-hover">
                         <thead>
-                        <tr><th style="text-align: center">{{title_case($type)}}</th></tr>
+                        <tr><th style="text-align: left">{{title_case($type)}}</th></tr>
                         </thead>
                         <tbody>
                         <div>
                             <ul>
                                 @foreach (DB::table('material_names')->where('material_type','=',$type)->get() as $material)
                                     <tr>
-                                        <td>
+                                        <td class="text-left">
                                             <a style="color: black;">{{title_case($material->material_name)}}</a>
                                             &nbsp;
+
+
+                                        </td>
+                                        <td>
                                             <a href="{{url('/materials/'.$material->material_id.'/edit')}}">
                                                 <i class="glyphicon glyphicon-pencil"></i>
                                             </a>
-
                                         </td>
 
                                     </tr>

@@ -17,34 +17,35 @@
                 @endif
                 <form method="post" action="materials-update">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group text-left">
 
-                        <label for="name">Materiaalin nimi:&nbsp</label><br>
+                        <label for="name">Materiaalin nimi:</label><br>
                         <input type="text" class="form-control center" name="name" value="{{$material->material_name}}"/>
 
                     </div>
-                    <div class="form-group">
-                        <label for="type">Material Type:&nbsp</label>
-                        <select name="type">
-                            <option {{'raw waste' == $material->material_type ? 'selected="selected"' : ''}} value="raw waste">Raw Waste</option>
-                            <option {{'refined' == $material->material_type ? 'selected="selected"' : ''}} value="refined">Refined</option>
-                            <option {{'presorted' == $material->material_type ? 'selected="selected"' : ''}} value="presorted">Presorted</option>
-                            <option {{'textile' == $material->material_type ? 'selected="selected"' : ''}} value="textile">Textile</option>
-                            <option {{'retired' == $material->material_type ? 'selected="selected"' : ''}} value="retired">Retired</option>
+                    <div class="form-group text-left">
+                        <label for="type">Materiaalin tyyppi:</label>
+                        <select name="type" class="form-control">
+                            <option {{'raw waste' == $material->material_type ? 'selected="selected"' : ''}} value="raw waste">Lajittelematon</option>
+                            <option {{'refined' == $material->material_type ? 'selected="selected"' : ''}} value="refined">Jatkolajiteltu</option>
+                            <option {{'presorted' == $material->material_type ? 'selected="selected"' : ''}} value="presorted">Esilajiteltu</option>
+                            <option {{'textile' == $material->material_type ? 'selected="selected"' : ''}} value="textile">Kierrätyskelpoinen</option>
+                            <option {{'retired' == $material->material_type ? 'selected="selected"' : ''}} value="retired">Ei käytössä</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <div style="float: left">
+                        <button type="submit" class="btn btn-primary">Tallenna</button>
+                        @csrf
+                        @if (!(count($material->inventory)>0 || count($material->receipt)>0 || count($material->detail)>0 || count($material->refined)>0))
+                            <button type="submit" class="btn btn-primary ">Poista</button>
+                        @else
+                            <button type="submit" class="btn btn-secondary " disabled>Poista</button>
+                        @endif
+                    </div>
                 </form>
                 <br>
 
-                <form method="post" action="materials-destroy">
-                    @csrf
-                    @if (!(count($material->inventory)>0 || count($material->receipt)>0 || count($material->detail)>0 || count($material->refined)>0))
-                        <button type="submit" class="btn btn-primary">Delete</button>
-                        @else
-                        <button type="submit" class="btn btn-secondary" disabled>Delete</button>
-                    @endif
-                </form>
+
 
             </div>
         </div>

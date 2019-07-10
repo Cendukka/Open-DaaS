@@ -64,6 +64,20 @@ a, a:hover, a:focus {
     margin: 40px 0;
 }
 
+.panel-body td{
+    word-wrap:break-word;
+    overflow: auto;
+
+}
+.panel-body th{
+    word-wrap:break-word;
+    overflow: auto;
+
+}
+
+.panel-body table{
+    table-layout: fixed !important;
+}
 
 /* ---------------------------------------------------
     SIDEBAR  AND UPPER MENU STYLE
@@ -314,4 +328,3 @@ a.logout:hover {
       display: inline-block;
       width: 30%;
   }
-  

@@ -58,6 +58,7 @@
                                                 ->orWhere('issue_type_id',"=", 3)
                                                 ->sum('detail_weight')
                                                 )}}");
+                            var totalWhole = recycledChart+unrecycledChart+energyChart+reuseChart;
                             /***************************************************************************/
 
                             /*****Store sum of weights of fractions in variables for piechartFraction*****/
@@ -67,9 +68,11 @@
                                             ->orWhere('inventory_material_id', 'NOT LIKE', 2)
                                             ->sum('inventory_weight')
                             }}") ;
+
+
+
                             /***************************************************************************/
 
-                            console.log(totalSumFractions);
                             /*****First Chart*****/
                             var wholeData = new google.visualization.DataTable();
                             wholeData.addColumn('string', 'Weight in Kg');
@@ -80,7 +83,7 @@
                                 ['Energia', energyChart],
                                 ['Uusiokäyttö', reuseChart]
                             ]);
-                            var wholeOptions = {'title': 'Koko Suomi - Yhteensä:'+(recycledChart+unrecycledChart+energyChart+reuseChart)+' Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
+                            var wholeOptions = {'title': 'Koko Suomi - Kierrätetyt yhteensä: '+totalWhole+' Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
                             var wholeChart = new google.visualization.PieChart(document.getElementById('piechartWhole'));
                             wholeChart.draw(wholeData, wholeOptions);
                             /**********************/
@@ -95,7 +98,7 @@
                                 ['Nahka', energyChart],
                                 ['Pellava', reuseChart]
                             ]);
-                            var fractionOptions = {'title': 'Koko Suomi - Yhteensä:'+totalSumFractions+ ' Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
+                            var fractionOptions = {'title': 'Koko Suomi - Kierrätyskelpoiset kuidut yhteensä: '+totalSumFractions+ ' Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
                             var fractionChart = new google.visualization.PieChart(document.getElementById('piechartFraction'));
                             fractionChart.draw(fractionData, fractionOptions);
                             /**********************/

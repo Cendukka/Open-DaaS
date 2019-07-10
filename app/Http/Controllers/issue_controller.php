@@ -132,7 +132,6 @@ class issue_controller extends Controller {
                 },
             ],
         ]);
-        date_default_timezone_set('Europe/Helsinki');
         $issueNew = inventory_issue::find($issue->issue_id);
         $issueNew->issue_user_id = $request->get('user');
         $issueNew->issue_date = $request->get('datetime');

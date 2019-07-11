@@ -26,7 +26,7 @@ class user_controller extends Controller {
 		
 		$request->validate([
 			'user_type' => 'required|integer',
-			'microlocation' => 'nullable|integer',
+            'microlocation' => 'required_if:user_type,3',
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
 			'username'=> 'required|unique:users|max:50',
@@ -36,7 +36,7 @@ class user_controller extends Controller {
 		$user = new user([
 			'user_type_id' => $request->get('user_type'),
 			'user_company_id' => $company->company_id,
-			'user_microlocation_id' => $request->get('microlocation'),
+			'user_microlocation_id' => ($request->get('user_type') > 2 ? $request->get('microlocation') : NULL),
 			'last_name' => $request->get('last_name'),
 			'first_name' => $request->get('first_name'),
 			'username' => $request->get('username'),
@@ -65,7 +65,7 @@ class user_controller extends Controller {
 
 		$request->validate([
 			'user_type' => 'required|integer',
-			'microlocation' => 'nullable|integer',
+			'microlocation' => 'required_if:user_type,3',
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
 		]);
@@ -74,7 +74,7 @@ class user_controller extends Controller {
 		$userNew = user::find($user->user_id);
 
 		$userNew->user_type_id = $request->get('user_type');
-		$userNew->user_microlocation_id = $request->get('microlocation');
+		$userNew->user_microlocation_id = ($request->get('user_type') > 2 ? $request->get('microlocation') : NULL);
 		$userNew->last_name = $request->get('last_name');
 		$userNew->first_name = $request->get('first_name');
 		#$userNew->password = Hash::make($request->get('password'));

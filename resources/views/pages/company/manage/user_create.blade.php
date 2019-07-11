@@ -20,7 +20,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="user_type">User Type:&nbsp</label>
-                        <select name="user_type">
+                        <select id="user_type" name="user_type">
                             @foreach(DB::table('user_types')->where('user_type_id','>','1')->get() as $type)
                                 <option value="{{$type->user_type_id}}">{{$type->user_typename}}</option>
                             @endforeach
@@ -30,7 +30,7 @@
                         <label for="company">Company:&nbsp</label>
                         {{title_case($company->company_name)}}
                     </div>
-                    <div class="form-group">
+                    <div id="microlocation" class="form-group">
                         <label for="microlocation">Microlocation:&nbsp</label>
                         <select name="microlocation">
                             <option selected="selected" value=""></option>
@@ -79,5 +79,17 @@
         };
         $('#first_name').on('change',source);
         $('#last_name').on('change',source);
+
+        function microlocation(){
+            var $userType = $("#user_type").val();
+            if($userType > 2){ // Transport
+                $("#microlocation").show();
+            }
+            else{
+                $("#microlocation").hide();
+            }
+        };
+        $(document).ready(microlocation);
+        $('#user_type').on('change',microlocation);
     </script>
 @endsection

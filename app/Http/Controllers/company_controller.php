@@ -37,7 +37,8 @@ class company_controller extends Controller {
 			'company_city' => $request->get('city'),
 		]);
 		$company->save();
-		return redirect()->action('company_controller@show', ['company' => $company])->withErrors(['Company successfully created.']);
+		#return redirect()->action('company_controller@show', ['company' => $company])->withErrors(['Company successfully created.']);
+		return redirect()->action('user_controller@create', ['company' => $company]);
 	}
 
 

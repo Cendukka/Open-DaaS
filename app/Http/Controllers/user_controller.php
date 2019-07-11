@@ -44,7 +44,12 @@ class user_controller extends Controller {
 			'password' => Hash::make('qwerty'),
 		]);
 		$user->save();
-		return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['User successfully created.']);
+        if(DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->count() == 0){
+            return redirect()->action('microlocation_controller@create', ['company' => $company]);
+        }
+        else{
+            return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['User successfully created.']);
+        }
 	}
 
 

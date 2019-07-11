@@ -79,6 +79,17 @@ a, a:hover, a:focus {
     table-layout: fixed !important;
 }
 
+.element-width-auto{
+    width: auto !important;
+}
+.element-float-left{
+    float: left!important;
+}
+.element-float-right{
+    float: right!important;
+}
+.
+
 /* ---------------------------------------------------
     SIDEBAR  AND UPPER MENU STYLE
 ----------------------------------------------------- */

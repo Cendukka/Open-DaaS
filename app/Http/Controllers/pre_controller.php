@@ -151,7 +151,7 @@ class pre_controller extends Controller {
                         '<td>'.$value->pre_sorting_weight.'</td>'.
                         '<td>'.$value->material_name.'</td>'.
                         '<td>'.$value->username.'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'">Edit</a></td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'"> <span class="glyphicon glyphicon-pencil"></span></a></td>'.
                         '</tr>';
                 }
                 $output.='<tr>'.

@@ -19,11 +19,11 @@
                     @csrf
                     <div class="form-group text-left">
                          <label for="name">Materiaalin nimi:</label><br>
-                        <input type="text" class="form-control center" name="name"/>
+                        <input type="text" class="form-control center element-width-auto" name="name"/>
                     </div>
                     <div class="form-group text-left">
                         <label for="type">Materiaalin tyyppi:</label>
-                        <select name="type" class="form-control">
+                        <select name="type" class="form-control element-width-auto" >
                             <option selected="selected" disabled hidden value=""></option>
                             <option value="raw waste">Lajittelematon</option>
                             <option value="refined">Jatkolajiteltu</option>
@@ -32,7 +32,7 @@
                             <option value="retired">Ei käytössä</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Lisää</button>
+                    <button type="submit" class="btn btn-primary element-float-left" >Lisää</button>
                 </form>
             </div>
          </div>

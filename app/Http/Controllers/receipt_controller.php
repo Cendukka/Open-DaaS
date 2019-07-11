@@ -183,9 +183,9 @@ class receipt_controller extends Controller {
                             'Microlocation:'.$value->from_microlocation_name));
                     $output.='<tr>'.
                         '<td>'.date("Y-m-d",strtotime($value->receipt_date)).'</td>'.
-                        '<td>'.title_case($value->to_microlocation_name).'</td>'.
                         '<td>'.title_case(explode(':', $from)[0]).'</td>'.
                         '<td>'.title_case(mb_strimwidth(explode(':', $from)[1],0,25,'...')).'</td>'.
+                        '<td>'.title_case($value->to_microlocation_name).'</td>'.
                         '<td>'.$value->material_name.'</td>'.
                         '<td>'.$value->receipt_weight.'</td>'.
                         '<td>'.$value->distance_km.'</td>'.

@@ -37,12 +37,15 @@
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations'}}">Microlokaatiot</a></li>
                 </ul>
-                <a href="#recordSubmenu" data-toggle="collapse" aria-expanded="false">Materiaalikirjaukset</a>
+                <a href="#recordSubmenu" data-toggle="collapse" aria-expanded="false">Tapahtumakirjaukset</a>
 
                 <ul class="collapse list-unstyled" id="recordSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää vastaanotto</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää saapunut</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/issues/create'}}">Lisää lähetys</a></li>
-                    <li><a href="#">Lisää varastokirjaus</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/pre/create'}}">Lisää esilajittelu</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/refined/create'}}">Lisää jatkolajittelu</a></li>
+
+
 
                 </ul>
                {{-- <a href="/ewc">EWC Codes</a>--}}

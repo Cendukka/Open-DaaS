@@ -9,29 +9,30 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <div class="col-sm-6">
-                        <label for="from-date">From: </label>
-                        <input type="date" class="form-control datepicker-autoclose" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
+                    <div class="col-sm-4">
+                        <label class="d-inline" for="search">Haku: </label>
+                        <input type="text" class="d-inline form-control" id="search" name="search" placeholder="Hae...">
                     </div>
-                    <div class="col-sm-6">
-                        <label for="to-date">To: </label>
-                        <input type="date" class="form-control datepicker-autoclose" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
+                    <div class="col-sm-4">
+                        <label class="d-inline" for="from-date">From: </label>
+                        <input type="date" class="d-inline form-control timepicker" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-8">
-                        <label for="search">Haku: </label>
-                        <input type="text" class="form-controller" id="search" name="search" placeholder="Hae...">
+                    <div class="col-sm-4">
+                        <label class="d-inline" for="to-date">To: </label>
+                        <input type="date" class="d-inline form-control timepicker" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
                     </div>
                 </div>
+
+
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>Aikaleima</th>
-                        <th>Mihin Microlokaatioon</th>
-                        <th>Mistä Microlokaatiosta</th>
-                        <th>Käyttäjänimi</th>
+                        <th>Päivämäärä</th>
+                        <th>Lähetyksen lähde</th>
                         <th>Lähetyksen tyyppi</th>
+                        <th>Lähetyksen kohde</th>
+                        <th>Kirjauksen tekijä</th>
+                        <th>Määrä (Kg)</th>
                         {{--<th>Materials</th>--}}
                     </tr>
                     </thead>

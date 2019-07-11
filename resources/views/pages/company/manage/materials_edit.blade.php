@@ -20,12 +20,12 @@
                     <div class="form-group text-left">
 
                         <label for="name">Materiaalin nimi:</label><br>
-                        <input type="text" class="form-control center" name="name" value="{{$material->material_name}}"/>
+                        <input type="text" class="form-control center element-width-auto" name="name" value="{{$material->material_name}}"/>
 
                     </div>
                     <div class="form-group text-left">
                         <label for="type">Materiaalin tyyppi:</label>
-                        <select name="type" class="form-control">
+                        <select name="type" class="form-control element-width-auto">
                             <option {{'raw waste' == $material->material_type ? 'selected="selected"' : ''}} value="raw waste">Lajittelematon</option>
                             <option {{'refined' == $material->material_type ? 'selected="selected"' : ''}} value="refined">Jatkolajiteltu</option>
                             <option {{'presorted' == $material->material_type ? 'selected="selected"' : ''}} value="presorted">Esilajiteltu</option>
@@ -33,15 +33,19 @@
                             <option {{'retired' == $material->material_type ? 'selected="selected"' : ''}} value="retired">Ei käytössä</option>
                         </select>
                     </div>
-                    <div style="float: left">
+                    <div class="element-float-left">
                         <button type="submit" class="btn btn-primary">Tallenna</button>
+                    </div>
+                </form>
+                    <form method="post" action="materials-destroy">
+                        <div class="element-float-left">
                         @csrf
                         @if (!(count($material->inventory)>0 || count($material->receipt)>0 || count($material->detail)>0 || count($material->refined)>0))
                             <button type="submit" class="btn btn-primary ">Poista</button>
                         @else
                             <button type="submit" class="btn btn-secondary " disabled>Poista</button>
                         @endif
-                    </div>
+                        </div>
                 </form>
                 <br>
 

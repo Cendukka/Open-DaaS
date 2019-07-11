@@ -213,13 +213,13 @@ class issue_controller extends Controller {
 				foreach ($result as $key => $value){
 				    $weight = (DB::table('inventory_issue_details')->where('detail_issue_id',$value->issue_id)->sum('detail_weight'));
 					$output.='<tr>'.
-                        '<td>'.title_case($value->from_microlocation).'</td>'.
-						'<td>'.title_case($value->to_microlocation).'</td>'.
                         '<td>'.date("Y-m-d",strtotime($value->issue_date)).'</td>'.
+                        '<td>'.title_case($value->from_microlocation).'</td>'.
+                        '<td>'.$value->issue_typename.'</td>'.
+						'<td>'.title_case($value->to_microlocation).'</td>'.
 						'<td>'.$value->username.'</td>'.
-						'<td>'.$value->issue_typename.'</td>'.
 						'<td>'.$weight.'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'">Edit</a></td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'"><i class="glyphicon glyphicon-pencil"></i></a></td>'.
 						'</tr>';
                     $sumweight += $weight;
 				}

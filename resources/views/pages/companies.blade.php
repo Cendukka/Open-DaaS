@@ -20,7 +20,7 @@
                     <tbody>
                     @foreach (DB::table('company')->get() as $company)
                         <tr class="text-left">
-                            <td><button class="btn" onclick="{{url('/companies/'.$company->company_id)}}">Valitse <span class="glyphicon glyphicon-arrow-right"></span></button></td>
+                            <td><a href="{{url('/companies/'.$company->company_id)}}" class="btn btn-info">Valitse <span class="glyphicon glyphicon-arrow-right"></span></a></td>
                             <td>{{title_case($company->company_name)}}</td>
                             <td>{{title_case($company->company_street_address)}}</td>
                             <td>{{title_case($company->company_postal_code)}}</td>

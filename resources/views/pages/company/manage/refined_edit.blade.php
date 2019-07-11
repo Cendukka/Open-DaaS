@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="datetime">Date & Time:&nbsp</label>
                         <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{$refined->refined_date}}">
+                            <input type="text" class="form-control timepicker" name="datetime" value="{{$refined->refined_date}}">
                         </div>
                     </div>
                     @php

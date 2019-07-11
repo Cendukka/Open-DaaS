@@ -27,7 +27,7 @@ class receipt_controller extends Controller {
 
 		$request->validate([
 			'user' => 'required|integer',
-			'datetime' => 'required|date_format:Y-m-d H:i:s',
+			'datetime' => 'required|date_format:Y-m-d',
             'material' => 'required|integer',
 			'source' => 'required',
 			'from_community' => 'integer|required_without_all:from_supplier,from_microlocation',
@@ -77,7 +77,7 @@ class receipt_controller extends Controller {
 
         $request->validate([
             'user' => 'required|integer',
-            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'datetime' => 'required|date_format:Y-m-d',
             'material' => 'required|integer',
             'source' => 'required',
             'from_community' => 'integer|required_with:from_company',

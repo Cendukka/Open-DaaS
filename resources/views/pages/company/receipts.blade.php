@@ -13,13 +13,13 @@
                     <div class="col-sm-6">
                         <label for="from-date">From Date: </label>
                         <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
+                            <input type="text" class="form-control timepicker" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label for="to-date">To Date: </label>
                         <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
+                            <input type="text" class="form-control timepicker" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
                         </div>
                     </div>
                 </div>

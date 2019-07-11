@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="datetime">Date & Time:&nbsp</label>
                         <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{date('Y-m-d H:i:s')}}">
+                            <input type="text" class="form-control timepicker" name="datetime" value="{{date('Y-m-d H:i:s')}}">
                         </div>
                     </div>
                     <div class="form-group">

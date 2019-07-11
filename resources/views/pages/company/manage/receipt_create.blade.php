@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="datetime">Date & Time:&nbsp</label>
                         <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{date('Y-m-d H:i:s')}}">
+                            <input type="text" class="form-control timepicker" name="datetime" id="datetime" name="to-date" value="{{date('Y-m-d')}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -90,8 +90,13 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $('.timepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    </script>
     <script type="text/javascript">
         $(document).on("change", '#source', function(e) {
             $source = $("#source").val();
@@ -115,11 +120,6 @@
                     $("#from_community").empty().html(data);
                 }
             })
-        });
-    </script>
-    <script type="text/javascript">
-        $('.timepicker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss'
         });
     </script>
 @endsection

@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <label for="datetime">Date & Time:&nbsp</label>
                         <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{$pre->pre_sorting_date}}">
+                            <input type="text" class="form-control timepicker" name="datetime" value="{{$pre->pre_sorting_date}}">
                         </div>
                     </div>
                     @php

@@ -11,9 +11,9 @@ class user_types_table_seeder extends Seeder
      */
     public function run()
     {
-		DB::table('user_types')->insert(['user_typename' => 'SuperAdmin']);
 		DB::table('user_types')->insert(['user_typename' => 'Admin']);
 		DB::table('user_types')->insert(['user_typename' => 'Manager']);
 		DB::table('user_types')->insert(['user_typename' => 'User']);
+		#DB::table('user_types')->insert(['user_typename' => '']);
     }
 }

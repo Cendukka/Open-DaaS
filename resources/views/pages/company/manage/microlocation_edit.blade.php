@@ -15,16 +15,6 @@
                         </ul>
                     </div>
                 @endif
-                @php
-                    $microlocations = DB::table('microlocations')
-                                ->where('microlocation_company_id','=',$company->company_id)
-                                ->where('microlocation_id','=',$microlocation->microlocation_id)
-                                ->orderBy('microlocation_id')
-                                ->get();
-                @endphp
-                @if(count($microlocations)==0)
-                    <h4>Microlocation not found</h4>
-                @else
                     <form method="post" action="microlocations-update" style="padding: 2% 0% 2% 2%;">
                         @csrf
                         <div class="form-group">
@@ -63,7 +53,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Tallenna</button>
                     </form>
-                @endif
+                
             </div>
         </div>
     </div>

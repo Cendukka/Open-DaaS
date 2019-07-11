@@ -31,9 +31,6 @@
                         <label>Receipt updated at:&nbsp</label>{{$receipt->updated_at}}
                     </div>
                     <div class="form-group">
-                        @php
-                            date_default_timezone_set('Europe/Helsinki')
-                        @endphp
                         <label for="datetime">Date & Time:&nbsp</label>
                         <div style="position: relative">
                             <input type="text" class="form-control timepicker form-control" name="datetime" value="{{$receipt->receipt_date}}">

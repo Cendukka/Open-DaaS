@@ -26,11 +26,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        @php
-                            date_default_timezone_set('Europe/Helsinki')
-                        @endphp
                         <label for="datetime">Aikaleima:&nbsp</label>
-                        <input type="text" class="form-control center" name="datetime" value="{{date('Y-m-d H:i:s')}}"/>
+                        <input type="text" class="form-control timepicker center" name="datetime" value="{{date('Y-m-d H:i:s')}}"/>
                     </div>
                     <div class="form-group">
                         <label for="material">Materiaali:&nbsp</label>

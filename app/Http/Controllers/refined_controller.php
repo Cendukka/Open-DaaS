@@ -57,7 +57,6 @@ class refined_controller extends Controller {
                 ->where('pre_sorting_id',$pre_sorting)
                 ->first()->receipt_to_microlocation_id
             );
-            #dd($microlocation);
 
         $material = $request->get('material');
         $weight = $request->get('weight');
@@ -107,16 +106,52 @@ class refined_controller extends Controller {
             'weight' => 'Weight',
         ]);
 
+        $receipt = ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL);
+        $pre_sorting = ($request->get('origin') == 'presort' ? $request->get('pre_receipt') : NULL);
+        $material = $request->get('material');
+        $weight = $request->get('weight');
+
         $refinedNew = refined_sorting::find($refined->refined_id);
         $refinedNew->refined_user_id = $request->get('user');
         $refinedNew->refined_date = $request->get('datetime');
-        $refinedNew->refined_receipt_id = ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL);
-        $refinedNew->pre_sorting_id = ($request->get('origin') == 'presort' ? $request->get('pre_receipt') : NULL);
-        $refinedNew->refined_material_id = $request->get('material');
-        $refinedNew->refined_weight = $request->get('weight');
+        $refinedNew->refined_receipt_id = $receipt;
+        $refinedNew->pre_sorting_id = $pre_sorting;
+        $refinedNew->refined_material_id = $material;
+        $refinedNew->refined_weight = $weight;
         $refinedNew->description = ($request->get('description') ?: '');
+
+
+        $microlocation_orig = ($refinedNew->getOriginal('refined_receipt_id') ?
+            DB::table('inventory_receipt')
+                ->where('receipt_id',$refinedNew->getOriginal('refined_receipt_id'))
+                ->first()->receipt_to_microlocation_id
+            :
+            DB::table('pre_sorting')
+                ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
+                ->where('pre_sorting_id',$refinedNew->getOriginal('pre_sorting_id'))
+                ->first()->receipt_to_microlocation_id
+        );
+        $microlocation_new = ($receipt ?
+            DB::table('inventory_receipt')
+                ->where('receipt_id',$receipt)
+                ->first()->receipt_to_microlocation_id
+            :
+            DB::table('pre_sorting')
+                ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
+                ->where('pre_sorting_id',$pre_sorting)
+                ->first()->receipt_to_microlocation_id
+        );
+
+
+        # Remove original weights from the inventory
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, '2', $refinedNew->getOriginal('refined_weight'));
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $refinedNew->getOriginal('refined_material_id'), -$refinedNew->getOriginal('refined_weight'));
+
         $refinedNew->save();
 
+        # Add new weights to the inventory
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, '2', -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
         return redirect()->action('refined_controller@index',['company' => $company])->withErrors(['Refined-Sorting successfully updated.']);
 	}
 
@@ -204,7 +239,8 @@ class refined_controller extends Controller {
                     $output .= '<select name="pre_receipt" id="pre_receipt">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
-                        $output .= '<option value="' . $value->receipt_id . '" ' . ($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '') . '>' . title_case($value->material_name . ', ' . $value->receipt_date . ', ' . $value->receipt_weight . ' kg') . '</option>';
+                        $used = DB::table('refined_sorting')->where('refined_receipt_id',$value->receipt_id)->sum('refined_weight');
+                        $output .= '<option value="'.$value->receipt_id.'" '.($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->receipt_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                     }
                     $output .= '</select>';
                     return Response($output);
@@ -227,7 +263,8 @@ class refined_controller extends Controller {
                     $output .= '<select name="pre_receipt" id="pre_receipt">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
-                        $output .= '<option value="' . $value->pre_sorting_id . '" ' . ($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '') . '>' . title_case($value->material_name . ', ' . $value->pre_sorting_date . ', ' . $value->pre_sorting_weight . ' kg') . '</option>';
+                        $used = DB::table('refined_sorting')->where('pre_sorting_id',$value->pre_sorting_id)->sum('refined_weight');
+                        $output .= '<option value="'.$value->pre_sorting_id.'" '.($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->pre_sorting_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                     }
                     $output .= '</select>';
                     return Response($output);

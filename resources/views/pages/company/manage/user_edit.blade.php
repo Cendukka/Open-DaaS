@@ -15,18 +15,6 @@
                         </ul>
                     </div>
                 @endif
-                @php
-                    $users = DB::table('users')
-                                ->where('user_company_id','=',$company->company_id)
-                                ->where('user_id','=',$user->user_id)
-                                ->join('user_types', 'users.user_type_id', '=','user_types.user_type_id')
-                                ->orderBy('user_microlocation_id')
-                                ->orderBy('users.user_type_id')
-                                ->get();
-                @endphp
-                @if(count($users)==0)
-                    <h4>Käyttäjää ei löytynyt</h4>
-                @else
 
                     <form method="post" action="users-update">
                         @csrf
@@ -82,7 +70,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
-                @endif
+                
             </div>
         </div>
     </div>

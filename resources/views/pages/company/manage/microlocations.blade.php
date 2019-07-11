@@ -18,7 +18,7 @@
                 <table class="table table-bordered table-hover">
                     <thread>
                     <tr>
-                        <th>ID</th>
+                        
                         <th>Tyyppi</th>
                         <th>Nimi</th>
                         <th>Osoite</th>
@@ -36,12 +36,12 @@
                     @endphp
                     @foreach ($microlocations as $ml)
                         <tr>
-                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}">{{title_case($ml->microlocation_id)}}</a></td>
                             <td>{{title_case($ml->microlocation_typename)}}</td>
                             <td>{{title_case($ml->microlocation_name)}}</td>
                             <td>{{title_case($ml->microlocation_street_address)}}</td>
                             <td>{{title_case($ml->microlocation_postal_code)}}</td>
                             <td>{{title_case($ml->microlocation_city)}}</td>
+                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}">Edit</a></td>
                         </tr>
                     @endforeach
                     </tbody>

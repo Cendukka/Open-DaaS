@@ -171,14 +171,14 @@ class receipt_controller extends Controller {
            #dd($result);
             if($result){
                 foreach ($result as $key => $value){
-                    $from =  ($value->from_community_id ? 'Community:'.(DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city) :
-                        ($value->from_supplier_id ? 'Supplier:'.(DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name) :
-                            'Microlocation:'.$value->from_microlocation_name));
+                    $from =  ($value->from_community_id ? ['Ulkoinen',DB::table('community')->join('company','community_company_id','company_id')->where('community_id',$value->from_community_id)->first()->company_city.', ('.DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city.')'] :
+                        ($value->from_supplier_id ? ['Toimittaja',DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name] :
+                            ['Sisäinen',$value->from_microlocation_name]));
                     $output.='<tr>'.
                         '<td>'.date("Y-m-d",strtotime($value->receipt_date)).'</td>'.
                         '<td>'.title_case($value->to_microlocation_name).'</td>'.
-                        '<td>'.title_case(explode(':', $from)[0]).'</td>'.
-                        '<td>'.title_case(mb_strimwidth(explode(':', $from)[1],0,25,'...')).'</td>'.
+                        '<td>'.title_case($from[0]).'</td>'.
+                        '<td>'.title_case(mb_strimwidth($from[1],0,30,'...')).'</td>'.
                         '<td>'.$value->material_name.'</td>'.
                         '<td>'.$value->receipt_weight.'</td>'.
                         '<td>'.$value->distance_km.'</td>'.

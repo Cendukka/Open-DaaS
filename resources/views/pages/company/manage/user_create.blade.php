@@ -21,10 +21,9 @@
                     <div class="form-group">
                         <label for="user_type">User Type:&nbsp</label>
                         <select name="user_type">
-                            <option value="1">Superadmin</option>
-                            <option value="2">Admin</option>
-                            <option value="3">Manager</option>
-                            <option value="4">User</option>
+                            @foreach(DB::table('user_types')->where('user_type_id','>','1')->get() as $type)
+                                <option value="{{$type->user_type_id}}">{{$type->user_typename}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">

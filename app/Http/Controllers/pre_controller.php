@@ -32,7 +32,8 @@ class pre_controller extends Controller {
         ]);
 
         $receipt = $request->get('receipt');
-        $microlocation = DB::table('inventory_receipt')->where('receipt_id',$receipt)->first()->receipt_to_microlocation_id;
+        $receipt_entity = DB::table('inventory_receipt')->where('receipt_id',$receipt)->first();
+        $microlocation = $receipt_entity->receipt_to_microlocation_id;
         $material = $request->get('material');
         $weight = $request->get('weight');
 
@@ -45,7 +46,7 @@ class pre_controller extends Controller {
         ]);
         $pre->save();
 
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, '1', -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $receipt_entity->receipt_material_id, -$weight);
         if(DB::table('material_names')->where('material_type', '=', 'refined')->get()->contains('material_id', $material)){
             app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
         }
@@ -85,17 +86,19 @@ class pre_controller extends Controller {
         $preNew->pre_sorting_material_id = $material;
         $preNew->pre_sorting_weight = $weight;
 
-        $microlocation_orig = DB::table('inventory_receipt')->where('receipt_id',$preNew->getOriginal('pre_sorting_receipt_id'))->first()->receipt_to_microlocation_id;
-        $microlocation_new = DB::table('inventory_receipt')->where('receipt_id',$receipt)->first()->receipt_to_microlocation_id;
+        $receipt_entity_orig = DB::table('inventory_receipt')->where('receipt_id',$preNew->getOriginal('pre_sorting_receipt_id'))->first();
+        $receipt_entity_new = DB::table('inventory_receipt')->where('receipt_id',$receipt)->first();
+        $microlocation_orig = $receipt_entity_orig->receipt_to_microlocation_id;
+        $microlocation_new = $receipt_entity_new->receipt_to_microlocation_id;
 
         # Remove original weights from the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, '1', $preNew->getOriginal('pre_sorting_weight'));
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $receipt_entity_orig->receipt_material_id, $preNew->getOriginal('pre_sorting_weight'));
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $preNew->getOriginal('pre_sorting_material_id'), -$preNew->getOriginal('pre_sorting_weight'));
 
         $preNew->save();
 
         # Add new weights to the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, '1', -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $receipt_entity_new->receipt_material_id, -$weight);
         if(DB::table('material_names')->where('material_type', '=', 'refined')->get()->contains('material_id', $material)){
             app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
         }
@@ -170,7 +173,7 @@ class pre_controller extends Controller {
             $result = DB::table('inventory_receipt')
                 ->join('material_names','material_id','receipt_material_id')
                 ->where('receipt_to_microlocation_id','=',$ml_id)
-                ->where('material_names.material_name', 'Raw Waste')
+                ->where('material_names.material_type', 'Raw Waste')
                 ->orderBy('receipt_date','DESC')
                 ->get();
             if($result) {

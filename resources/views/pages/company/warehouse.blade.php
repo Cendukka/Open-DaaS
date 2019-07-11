@@ -31,6 +31,7 @@
                                     ->whereIn('inventory.inventory_microlocation_id', $microlocation_ids)
                                     ->join('material_names', 'inventory_material_id','=','material_id')
                                     ->where('material_type', '!=', 'presorted')
+                                    ->orderBy('material_type','DESC')
                                     ->orderBy('material_id','DESC')
                                     ->pluck('material_name','material_id');
                             @endphp
@@ -45,8 +46,10 @@
                                 @php
                                     $inventory = DB::table('inventory')
                                         ->join('microlocations', 'inventory.inventory_microlocation_id', '=', 'microlocations.microlocation_id')
+                                        ->join('material_names', 'inventory_material_id','=','material_id')
                                         ->where('inventory.inventory_microlocation_id', $ml->microlocation_id)
                                         ->whereIn('inventory_material_id', $material_names->keys())
+                                        ->orderBy('material_type','DESC')
                                         ->orderBy('inventory_material_id','DESC')
                                         ->select('microlocation_name','inventory_material_id','inventory_weight')
                                         ->get();

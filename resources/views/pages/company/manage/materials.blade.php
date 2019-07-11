@@ -33,7 +33,7 @@
                                         </td>
                                         <td>
                                             <a href="{{url('/materials/'.$material->material_id.'/edit')}}">
-                                                <i class="glyphicon glyphicon-pencil"></i>
+                                                <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
                                         </td>
 

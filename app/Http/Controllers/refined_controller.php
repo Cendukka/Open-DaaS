@@ -205,7 +205,7 @@ class refined_controller extends Controller {
 						'<td>'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'">Edit</a></td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'"> <span class="glyphicon glyphicon-pencil"></span></a></td>'.
 						'</tr>';
 				}
 				$output.='<tr>'.

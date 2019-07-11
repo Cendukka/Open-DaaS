@@ -15,11 +15,11 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="receipts-store">
+                <form method="post" action="receipts-store" class="form-text-align-padd">
                     @csrf
                     <div class="form-group">
                         <label for="user">Käyttäjä:&nbsp</label>
-                        <select name="user">
+                        <select class="form-control element-width-auto" name="user">
                             @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
                                 <option value="{{$user->user_id}}">{{title_case($user->last_name.' '.$user->first_name)}}</option>
                             @endforeach
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="material">Materiaali:&nbsp</label>
-                        <select name="material">
+                        <select class="form-control element-width-auto" name="material">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $material)
                                 <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label for="source">Lähde:&nbsp</label>
-                        <select id="source" name="source">
+                        <select class="form-control element-width-auto" id="source" name="source">
                             <option value="internal">Sisäinen</option>
                             <option value="external">Ulkoinen</option>
                             <option value="supplier">Toimittaja</option>
@@ -50,7 +50,7 @@
                     </div>
                     <div id="from" class="form-group">
                         <label for="from_microlocation">Mikrolokaatiosta:&nbsp</label>
-                        <select name="from_microlocation">
+                        <select class="form-control element-width-auto" name="from_microlocation">
                             <option value="" selected="selected" hidden disabled></option>
                             @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
                                 <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="form-group">
                         <label for="to_microlocation">Microlokaatioon:&nbsp</label>
-                        <select name="to_microlocation">
+                        <select class="form-control element-width-auto" name="to_microlocation">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
                                 <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
@@ -68,15 +68,15 @@
                     </div>
                     <div class="form-group">
                         <label for="distance">Matka (Km):&nbsp</label>
-                        <input type="text" class="form-control center" name="distance"/>
+                        <input type="text" class="form-control element-width-auto" name="distance"/>
                     </div>
                     <div class="form-group">
                         <label for="weight">Paino (Kg):&nbsp</label>
-                        <input type="text" class="form-control center" name="weight"/>
+                        <input type="text" class="form-control element-width-auto" name="weight"/>
                     </div>
                     <div class="form-group">
                         <label for="ewc">EWC-Koodi:&nbsp</label>
-                        <select name="ewc">
+                        <select class="form-control element-width-auto" name="ewc">
                             @foreach (DB::table('ewc_codes')->get() as $ewc)
                                 <option value="{{$ewc->ewc_code}}">{{title_case($ewc->ewc_code)}}</option>
                             @endforeach

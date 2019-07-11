@@ -10,26 +10,26 @@
                 <h3>Hienolajittelu </h3>
             </div>
             <div class="panel-body">
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label for="from-date">From Date: </label>
-                        <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="to-date">To Date: </label>
-                        <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-8">
+                <div class="form-group form-text-align-padd margin-bottom-4-percent">
+                    <div class="col-sm-4">
                         <label for="search">Haku: </label>
-                        <input type="text" class="form-controller" id="search" name="search" placeholder="Hae...">
+                        <input type="text" class="form-control" id="search" name="search" placeholder="Hae...">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="from-date">From: </label>
+                        <div style="position: relative">
+                            <input type="text" class="form-control timepicker" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="to-date">To: </label>
+                        <div style="position: relative">
+                            <input type="text" class="form-control timepicker" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
+                        </div>
                     </div>
                 </div>
+
+
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>

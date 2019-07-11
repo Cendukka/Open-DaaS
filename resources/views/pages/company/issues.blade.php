@@ -8,7 +8,7 @@
                 <h3>Lähteneet lähetykset</h3>
             </div>
             <div class="panel-body">
-                <div class="form-group">
+                <div class="form-group form-text-align-padd margin-bottom-4-percent">
                     <div class="col-sm-4">
                         <label class="d-inline" for="search">Haku: </label>
                         <input type="text" class="d-inline form-control" id="search" name="search" placeholder="Hae...">
@@ -40,7 +40,7 @@
                     </tbody>
                 </table>
                 <form action="{{url('companies/'.$company->company_id.'/manage/issues/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add Issue</button>
+                    <button type="submit" class="btn btn-secondary">+ Lisää lähetys</button>
                 </form>
             </div>
         </div>

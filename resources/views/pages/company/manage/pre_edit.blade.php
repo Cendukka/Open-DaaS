@@ -15,25 +15,25 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="pre-update">
+                <form method="post" action="pre-update" class="form-text-align-padd">
                     @csrf
                     <div class="form-group">
-                        <label for="user">User:&nbsp</label>
-                        <select class="custom-select mr-sm-2" name="user">
+                        <label for="user">Käyttäjä:</label>
+                        <select class="form-control element-width-auto" class="form-control element-width-auto" name="user">
                             @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
                                 <option value="{{$user->user_id}}" {{($user->user_id == $pre->pre_sorting_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Pre-sorting created at:&nbsp</label>{{$pre->created_at}}
+                        <label>Esilajittelukirjaus luotu:&nbsp</label>{{$pre->created_at}}
                         <p></p>
-                        <label>Pre-sorting updated at:&nbsp</label>{{$pre->updated_at}}
+                        <label>Esilajittelukirjaus muokattu:&nbsp</label>{{$pre->updated_at}}
                     </div>
                     <div class="form-group">
-                        <label for="datetime">Date & Time:&nbsp</label>
+                        <label for="datetime">Päivämäärä:</label>
                         <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{$pre->pre_sorting_date}}">
+                            <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{$pre->pre_sorting_date}}">
                         </div>
                     </div>
                     @php
@@ -47,8 +47,8 @@
                             ->first()->microlocation_id;
                     @endphp
                     <div class="form-group">
-                        <label for="microlocation">Microlocation:&nbsp</label>
-                        <select name="microlocation" id="microlocation">
+                        <label for="microlocation">Microlokaatio:</label>
+                        <select class="form-control element-width-auto" name="microlocation" id="microlocation">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
                                 <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $selected_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
@@ -56,13 +56,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="receipt">Receipt:&nbsp</label>
-                        <select name="receipt" id="receipt">
+                        <label for="receipt">Saapunut kirjaus:</label>
+                        <select class="form-control element-width-auto" name="receipt" id="receipt">
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="material">Material Output:&nbsp</label>
-                        <select name="material">
+                        <label for="material">Esilajiteltu materiaali:</label>
+                        <select class="form-control element-width-auto" name="material">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('material_names')->whereIn('material_type',['presorted','refined'])->get() as $material)
                                 <option value="{{$material->material_id}}" {{($material->material_id == $pre->pre_sorting_material_id ? 'selected="selected"' : '')}}>{{title_case($material->material_name)}}</option>
@@ -71,10 +71,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="weight">Weight (kg):&nbsp</label>
-                        <input type="text" class="form-control" name="weight" value="{{$pre->pre_sorting_weight}}"/>
+                        <label for="weight">Paino (Kg):</label>
+                        <input type="text" class="form-control element-width-auto" name="weight" value="{{$pre->pre_sorting_weight}}"/>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Tallenna</button>
                 </form>
             </div>
         </div>

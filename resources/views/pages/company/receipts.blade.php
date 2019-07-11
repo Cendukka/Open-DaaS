@@ -17,7 +17,7 @@
                         </ul>
                     </div>
                 @endif
-                <div class="form-group">
+                <div class="form-group form-text-align-padd margin-bottom-4-percent">
                     <div class="col-sm-4">
                         <label for="search">Haku: </label>
                         <input type="text" class="form-control" id="search" name="search" placeholder="Hae...">

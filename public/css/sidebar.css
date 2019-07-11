@@ -88,7 +88,13 @@ a, a:hover, a:focus {
 .element-float-right{
     float: right!important;
 }
-.
+.form-text-align-padd{
+    text-align: left;
+    padding: 2% 2% 2% 2%;
+}
+.margin-bottom-4-percent{
+    margin-bottom: 4%;
+}
 
 /* ---------------------------------------------------
     SIDEBAR  AND UPPER MENU STYLE

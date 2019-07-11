@@ -146,8 +146,8 @@ class pre_controller extends Controller {
             if($result){
                 foreach ($result as $key => $value){
                     $output.='<tr>'.
+                        '<td>'.date("d-m-Y",strtotime($value->pre_sorting_date)).'</td>'.
                         '<td>'.title_case($value->microlocation_name).'</td>'.
-                        '<td>'.date("Y-m-d",strtotime($value->pre_sorting_date)).'</td>'.
                         '<td>'.$value->pre_sorting_weight.'</td>'.
                         '<td>'.$value->material_name.'</td>'.
                         '<td>'.$value->username.'</td>'.

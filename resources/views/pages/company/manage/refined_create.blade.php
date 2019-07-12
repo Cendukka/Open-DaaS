@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Create Refined Sorting </h3>
+                <h3>Luo hienolajittelu kirjaus </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -15,45 +15,34 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="refined-store">
+                <form method="post" action="refined-store" class="form-text-align-padd">
                     @csrf
                     <div class="form-group">
-                        <label for="user">User:&nbsp</label>
-                        <select class="custom-select mr-sm-2" name="user">
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}">{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="datetime">Date & Time:&nbsp</label>
+                        <label for="datetime">Päivämäärä:</label>
                         <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{date('Y-m-d H:i:s')}}">
+                            <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{date('Y-m-d H:i:s')}}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="origin">Refined Waste Origin:&nbsp</label>
-                        <select name="origin" id="origin">
-                            <option selected="selected" disabled hidden value=""></option>
-                                <option value="presort">Pre-Sorting</option>
-                                <option value="receipt">Receipt</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="microlocation">Microlocation:&nbsp</label>
-                        <select name="microlocation" id="microlocation">
+                        <label for="microlocation">Microlokaatio:</label>
+                        <select class="form-control element-width-auto" name="microlocation" id="microlocation">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
                                 <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group" id="originSelect">
-
+                    <div class="form-group">
+                        <label for="user">Käyttäjä:</label>
+                        <select class="form-control element-width-auto" name="user">
+                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
+                                <option value="{{$user->user_id}}">{{title_case($user->last_name.' '.$user->first_name)}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="material">Material:&nbsp</label>
-                        <select name="material">
+                        <label for="material">Materiaali:</label>
+                        <select class="form-control element-width-auto" name="material">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('material_names')->where('material_type','=','textile')->get() as $material)
                                 <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
@@ -61,14 +50,25 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="weight">Weight (kg):&nbsp</label>
-                        <input type="text" class="form-control" name="weight" value=""/>
+                        <label for="origin">Hienolajitellun tekstiilin alkuperä:</label>
+                        <select class="form-control element-width-auto" name="origin" id="origin">
+                            <option selected="selected" disabled hidden value=""></option>
+                                <option value="presort">Esilajittelu</option>
+                                <option value="receipt">Saapuneet kirjaus</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="originSelect">
+
                     </div>
                     <div class="form-group">
-                        <label for="description">Description:&nbsp</label>
+                        <label for="weight">Paino (Kg):</label>
+                        <input type="text" class="form-control element-width-auto" name="weight" value=""/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Lisätietoja:</label>
                         <textarea type="text" class="form-control" rows="8" maxlength="191" name="description"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Lisää</button>
                 </form>
             </div>
         </div>

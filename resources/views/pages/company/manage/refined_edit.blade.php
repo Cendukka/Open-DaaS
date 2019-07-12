@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Edit Refined Sorting </h3>
+                <h3>Muokkaa hienolajittelu kirjausta </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -15,26 +15,17 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="refined-update">
+                <form method="post" action="refined-update" class="form-text-align-padd">
                     @csrf
                     <div class="form-group">
-                        <label for="user">User:&nbsp</label>
-                        <select class="custom-select mr-sm-2" name="user">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}" {{($user->user_id == $refined->refined_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Pre-sorting created at:&nbsp</label>{{$refined->created_at}}
+                        <label>Hienolajittelu kirjaus luotu:</label>{{$refined->created_at}}
                         <p></p>
-                        <label>Pre-sorting updated at:&nbsp</label>{{$refined->updated_at}}
+                        <label>Hienolajittelu kirjaus muokattu:</label>{{$refined->updated_at}}
                     </div>
                     <div class="form-group">
-                        <label for="datetime">Date & Time:&nbsp</label>
+                        <label for="datetime">Päivämäärä:</label>
                         <div style="position: relative">
-                            <input type="text" class="form-control timepicker form-control" name="datetime" value="{{$refined->refined_date}}">
+                            <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{$refined->refined_date}}">
                         </div>
                     </div>
                     @php
@@ -55,28 +46,26 @@
                         }
                     @endphp
                     <div class="form-group">
-                        <label for="origin">Refined Waste Origin:&nbsp</label>
-                        <select name="origin" id="origin">
-                            <option selected="selected" disabled hidden value=""></option>
-                                <option value="presort" {{$origin == 'presorted' ? 'selected="selected"' : ''}}>Pre-Sorting</option>
-                                <option value="receipt" {{$origin == 'receipt' ? 'selected="selected"' : ''}}>Receipt</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="microlocation">Microlocation:&nbsp</label>
-                        <select name="microlocation" id="microlocation">
+                        <label for="microlocation">Microlokaatio:</label>
+                        <select class="form-control element-width-auto" name="microlocation" id="microlocation">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
                                 <option value="{{$ml->microlocation_id}}" {{$ml->microlocation_id == $ml_id ? 'selected="selected"' : ''}}>{{title_case($ml->microlocation_name)}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group" id="originSelect">
-
+                    <div class="form-group">
+                        <label for="user">Käyttäjä:</label>
+                        <select class="form-control element-width-auto" name="user">
+                            <option selected="selected" disabled hidden value=""></option>
+                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
+                                <option value="{{$user->user_id}}" {{($user->user_id == $refined->refined_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="material">Material:&nbsp</label>
-                        <select name="material">
+                        <label for="material">Materiaali:</label>
+                        <select class="form-control element-width-auto" name="material">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('material_names')->where('material_type','=','textile')->get() as $material)
                                 <option value="{{$material->material_id}}" {{($material->material_id == $refined->refined_material_id ? 'selected="selected"' : '')}}>{{title_case($material->material_name)}}</option>
@@ -84,14 +73,25 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="weight">Weight (kg):&nbsp</label>
-                        <input type="text" class="form-control" name="weight" value="{{$refined->refined_weight}}"/>
+                        <label for="origin">Hienolajitellun tekstiilin alkuperä:</label>
+                        <select class="form-control element-width-auto" name="origin" id="origin">
+                            <option selected="selected" disabled hidden value=""></option>
+                                <option value="presort" {{$origin == 'presorted' ? 'selected="selected"' : ''}}>Esilajittelu</option>
+                                <option value="receipt" {{$origin == 'receipt' ? 'selected="selected"' : ''}}>Saapuneet</option>
+                        </select>
+                    </div>
+                    <div id="originSelect">
+
                     </div>
                     <div class="form-group">
-                        <label for="description">Description:&nbsp</label>
+                        <label for="weight">Paino (Kg):</label>
+                        <input type="text" class="form-control element-width-auto" name="weight" value="{{$refined->refined_weight}}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Lisätietoja:</label>
                         <textarea type="text" class="form-control" rows="8" maxlength="191" name="description">{{$refined->description}}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Tallenna</button>
                 </form>
             </div>
         </div>

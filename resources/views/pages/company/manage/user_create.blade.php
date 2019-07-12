@@ -16,19 +16,18 @@
                         </ul>
                     </div>
                 @endif
-                <h4>Add User</h4>
-                <form method="post" action="users-store">
+                <form method="post" action="users-store" class="form-text-align-padd">
                     @csrf
                     <div class="form-group">
-                        <label for="user_type">Käyttäjätyyppi:&nbsp</label>
+                        <label for="user_type">Käyttäjätyyppi:</label>
                         <select name="user_type">
-                            <option value="2">Manager</option>
-                            <option value="3">User</option>
+                            <option value="2">Yhtiön bosse</option>
+                            <option value="3">Microlokaationin työntekijä</option>
 
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="microlocation">Microlokaatio:&nbsp</label>
+                        <label for="microlocation">Microlokaatio:</label>
                         <select name="microlocation">
                             <option selected="selected" value=""></option>
                             @php
@@ -43,23 +42,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="last_name">Last Name:&nbsp</label>
-                        <input id="last_name" maxlength="50" type="text" class="form-control" name="last_name"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="first_name">First Name:&nbsp</label>
+                        <label for="first_name">Etunimi:</label>
                         <input id="first_name" maxlength="50" type="text" class="form-control" name="first_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="username">Username:&nbsp</label>
+                        <label for="last_name">Sukunimi:</label>
+                        <input id="last_name" maxlength="50" type="text" class="form-control" name="last_name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Käyttäjänimi:</label>
                         <input id="username" maxlength="50" type="text" class="form-control" name="username"/>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:&nbsp</label>
-                        <input id="email" maxlength="50" type="text" class="form-control" name="email"/>
+                        <label for="email">Sähköposti:</label>
+                        <input id="email" maxlength="50" type="text" class="form-control text-lowercase" name="email"/>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password:&nbsp</label>
+                        <label for="password">Salasana:</label>
                         <input type="text" maxlength="50"class="form-control" name="password" value="qwerty" disabled>
                     </div>
                     <br>
@@ -71,8 +70,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript">
         function source(){
-            $("#username").val($("#last_name").val()+'.'+$("#first_name").val());
-            $("#email").val($("#last_name").val()+'.'+$("#first_name").val()+"@domain.test");
+            $("#username").val($("#first_name").val()+'.'+$("#last_name").val());
+            $("#email").val($("#first_name").val()+'.'+$("#last_name").val()+"@testdomain.fi");
         };
         $('#first_name').on('change',source);
         $('#last_name').on('change',source);

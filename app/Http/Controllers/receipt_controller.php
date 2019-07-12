@@ -182,7 +182,7 @@ class receipt_controller extends Controller {
                         ($value->from_supplier_id ? 'Supplier:'.(DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name) :
                             'Microlocation:'.$value->from_microlocation_name));
                     $output.='<tr>'.
-                        '<td>'.date("Y-m-d",strtotime($value->receipt_date)).'</td>'.
+                        '<td>'.date("d-m-Y",strtotime($value->receipt_date)).'</td>'.
                         '<td>'.title_case(explode(':', $from)[0]).'</td>'.
                         '<td>'.title_case(mb_strimwidth(explode(':', $from)[1],0,25,'...')).'</td>'.
                         '<td>'.title_case($value->to_microlocation_name).'</td>'.
@@ -222,7 +222,7 @@ class receipt_controller extends Controller {
                 $result = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
                 if($result) {
                     $output .= '<div id="from_microlocation" class="form-group">';
-                    $output .= '<label for="from_microlocation">From microlocation:&nbsp</label><select name="from_microlocation">';
+                    $output .= '<label for="from_microlocation">Microlokaatiosta:</label><select class="form-control element-width-auto" name="from_microlocation">';
                     $output .= '<option disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $output .= '<option value="'.$value->microlocation_id.'" '.($ml_id== $value->microlocation_id? 'selected="selected"' : '').'>'.title_case($value->microlocation_name).'</option>';
@@ -234,7 +234,7 @@ class receipt_controller extends Controller {
                 $result = DB::table('company')->where('company_id','!=',$company->company_id)->get();
                 if($result) {
                     $output .= '<div class="form-group">';
-                    $output .= '<label for="from_company">From company:&nbsp</label><select id="from_company" name="from_company">';
+                    $output .= '<label for="from_company">Yhtiöltä:</label><select class="form-control element-width-auto" id="from_company" name="from_company">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $output .= '<option value="'.$value->company_id.'" '.($company_id == $value->company_id ? 'selected="selected"' : '').'>'.title_case($value->company_name).'</option>';
@@ -248,7 +248,7 @@ class receipt_controller extends Controller {
                 $result = DB::table('supplier')->get();
                 if($result) {
                     $output .= '<div class="form-group">';
-                    $output .= '<label for="from_supplier">From supplier:&nbsp</label><select id="from_supplier" name="from_supplier">';
+                    $output .= '<label for="from_supplier">Yksityiseltä:</label><select class="form-control element-width-auto" id="from_supplier" name="from_supplier">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $output .= '<option value="'.$value->supplier_id.'" '.($supplier_id == $value->supplier_id ? 'selected="selected"' : '').'>'.title_case($value->supplier_name).'</option>';
@@ -270,7 +270,7 @@ class receipt_controller extends Controller {
                 ->where('community_company_id','=',$from_company)
                 ->get();
             if($result) {
-                $output .= '<label for="from_community">From community:&nbsp</label><select name="from_community">';
+                $output .= '<label for="from_community">Yksityiseltä:</label><select class="form-control element-width-auto" name="from_community">';
                 $output .= '<option selected="selected" disabled hidden value=""></option>';
                 foreach ($result as $key => $value) {
                     $output .= '<option value="'.$value->community_id.'" '.($value->community_id == $community_id ? 'selected="selected"' : '').'>'.title_case($value->community_city).'</option>';

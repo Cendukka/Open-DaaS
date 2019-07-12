@@ -20,7 +20,7 @@
                         <div style="position: relative">
                             <input type="text" class="form-control timepicker" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
                         </div>
-                    </div>
+                      </div>
                     <div class="col-sm-4">
                         <label for="to-date">To: </label>
                         <div style="position: relative">
@@ -44,7 +44,7 @@
                     </tbody>
                 </table>
                 <form action="{{url('companies/'.$company->company_id.'/manage/refined/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add Refined-Sorting</button>
+                    <button type="submit" class="btn btn-secondary">+ Luo hienolajittelu kirjaus</button>
                 </form>
             </div>
         </div>

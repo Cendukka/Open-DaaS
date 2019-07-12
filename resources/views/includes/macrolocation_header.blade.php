@@ -43,7 +43,7 @@
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää saapunut</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/issues/create'}}">Lisää lähetys</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/pre/create'}}">Lisää esilajittelu</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/refined/create'}}">Lisää jatkolajittelu</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/refined/create'}}">Lisää hienolajittelu</a></li>
 
 
 
@@ -66,7 +66,7 @@
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
                         <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Piilota ja näytä sivupalkki</span>
+                        <span>Piilota tai näytä sivupalkki</span>
                     </button>
 
                 </div>

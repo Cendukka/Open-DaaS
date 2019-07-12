@@ -48,9 +48,9 @@
                         <div class="form-group">
                             <label for="source">Lähde:</label>
                             <select class="form-control element-width-auto" id="source" name="source">
-                                <option value="internal" {{($receipt->receipt_from_microlocation_id ? 'selected="selected"' : '')}}>Internal</option>
-                                <option value="external" {{($receipt->from_community_id ? 'selected="selected"' : '')}}>External</option>
-                                <option value="supplier" {{($receipt->from_supplier_id ? 'selected="selected"' : '')}}>Supplier</option>
+                                <option value="internal" {{($receipt->receipt_from_microlocation_id ? 'selected="selected"' : '')}}>Sisäinen</option>
+                                <option value="external" {{($receipt->from_community_id ? 'selected="selected"' : '')}}>Ulkoinen</option>
+                                <option value="supplier" {{($receipt->from_supplier_id ? 'selected="selected"' : '')}}>Yksityinen</option>
                             </select>
                         </div>
                         <div id="from" class="form-group">

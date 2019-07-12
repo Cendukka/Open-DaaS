@@ -199,9 +199,8 @@ class refined_controller extends Controller {
 			if($result){
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
-                        '<td>'.$value->refined_date.'</td>'.
-						'<td>'.title_case($value->microlocation_name).'</td>'.
-                        '<td>'.date("Y-m-d",strtotime($value->refined_date)).'</td>'.
+                        '<td>'.date("d-m-Y",strtotime($value->refined_date)).'</td>'.
+                        '<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.
@@ -234,9 +233,9 @@ class refined_controller extends Controller {
                     ->where('material_type', 'refined')
                     ->orderBy('receipt_date', 'DESC')
                     ->get();
-                $output .= '<label for="pre_receipt">Receipt:&nbsp</label>';
+                $output .= '<label for="pre_receipt">Saapuneiden materiaalien kirjaus:</label>';
                 if($result->count()) {
-                    $output .= '<select name="pre_receipt" id="pre_receipt">';
+                    $output .= '<select class="form-control element-width-auto" name="pre_receipt" id="pre_receipt">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $used = DB::table('refined_sorting')->where('refined_receipt_id',$value->receipt_id)->sum('refined_weight');
@@ -258,9 +257,9 @@ class refined_controller extends Controller {
                     ->where('material_type', 'refined')
                     ->orderBy('receipt_date', 'DESC')
                     ->get();
-                $output .= '<label for="pre_receipt">Pre-sorting:&nbsp</label>';
+                $output .= '<label for="pre_receipt">Esilajittelun kirjaus:</label>';
                 if($result->count()) {
-                    $output .= '<select name="pre_receipt" id="pre_receipt">';
+                    $output .= '<select class="form-control element-width-auto" name="pre_receipt" id="pre_receipt">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $used = DB::table('refined_sorting')->where('pre_sorting_id',$value->pre_sorting_id)->sum('refined_weight');

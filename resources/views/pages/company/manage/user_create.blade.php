@@ -43,23 +43,23 @@
 
                     <div class="form-group">
                         <label for="first_name">Etunimi:</label>
-                        <input id="first_name" maxlength="50" type="text" class="form-control" name="first_name"/>
+                        <input id="first_name" maxlength="50" type="text" class="form-control element-width-auto" name="first_name"/>
                     </div>
                     <div class="form-group">
                         <label for="last_name">Sukunimi:</label>
-                        <input id="last_name" maxlength="50" type="text" class="form-control" name="last_name"/>
+                        <input id="last_name" maxlength="50" type="text" class="form-control element-width-auto" name="last_name"/>
                     </div>
                     <div class="form-group">
                         <label for="username">Käyttäjänimi:</label>
-                        <input id="username" maxlength="50" type="text" class="form-control" name="username"/>
+                        <input id="username" maxlength="50" type="text" class="form-control element-width-auto" name="username"/>
                     </div>
                     <div class="form-group">
                         <label for="email">Sähköposti:</label>
-                        <input id="email" maxlength="50" type="text" class="form-control text-lowercase" name="email"/>
+                        <input id="email" maxlength="50" type="text" class="form-control text-lowercase element-width-auto" name="email"/>
                     </div>
                     <div class="form-group">
                         <label for="password">Salasana:</label>
-                        <input type="text" maxlength="50"class="form-control" name="password" value="qwerty" disabled>
+                        <input type="text" maxlength="50"class="form-control element-width-auto" name="password" value="qwerty" disabled>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Lisää</button>

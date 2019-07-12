@@ -54,7 +54,7 @@
                 </table>
                 <form action="{{url(url()->current().'/create')}}">
                 <br>
-                    <a href="{{url('/companies/'.$company->company_id.'/manage/users/create')}}">+ Lisää käyttäjä</a>
+                    <a class="btn btn-secondary" href="{{url('/companies/'.$company->company_id.'/manage/users/create')}}">+ Lisää käyttäjä</a>
                 </form>
             </div>
         </div>

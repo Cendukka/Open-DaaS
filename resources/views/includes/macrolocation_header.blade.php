@@ -21,7 +21,7 @@
 
         <ul class="list-unstyled components">
 
-            <li>companies/7/manage/microlocations/7
+            <li>
                 <a href="{{'/companies/'.$company->company_id}}">Oma Toimipiste</a>
                 <a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'}}">Microlokaatiot</a>
                 <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">Raportit</a>

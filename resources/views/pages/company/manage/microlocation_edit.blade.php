@@ -19,13 +19,13 @@
                         @csrf
                         <div class="form-group">
                             <label for="company">Yhtiö:&nbsp</label>
-                            <select class="form-control" name="company">
+                            <select class="form-control element-width-auto" name="company">
                                 <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="type">Microlokaation tyyppi:&nbsp</label>
-                            <select class="form-control" name="type">
+                            <select class="form-control element-width-auto" name="type">
                                 @php
                                     $types = DB::table('microlocation_types')->get();
                                 @endphp
@@ -37,19 +37,19 @@
 
                         <div class="form-group">
                             <label for="name">Microlocation Name:&nbsp</label>
-                            <input type="text" maxlength="191" class="form-control" name="name" value="{{title_case($microlocation->microlocation_name)}}"/>
+                            <input type="text" maxlength="191" class="form-control element-width-auto" name="name" value="{{title_case($microlocation->microlocation_name)}}"/>
                         </div>
                         <div class="form-group">
                             <label for="address">Street Address:&nbsp</label>
-                            <input type="text" maxlength="191" class="form-control" name="address" value="{{title_case($microlocation->microlocation_street_address)}}"/>
+                            <input type="text" maxlength="191" class="form-control element-width-auto" name="address" value="{{title_case($microlocation->microlocation_street_address)}}"/>
                         </div>
                         <div class="form-group">
                             <label for="postal_code">Postal Code:&nbsp</label>
-                            <input type="text" maxlength="5"  class="form-control" name="postal_code" value="{{title_case($microlocation->microlocation_postal_code)}}"/>
+                            <input type="text" maxlength="5"  class="form-control element-width-auto" name="postal_code" value="{{title_case($microlocation->microlocation_postal_code)}}"/>
                         </div>
                         <div class="form-group">
                             <label for="city">City:&nbsp</label>
-                            <input type="text" maxlength="50" class="form-control" name="city" value="{{title_case($microlocation->microlocation_city)}}">
+                            <input type="text" maxlength="50" class="form-control element-width-auto" name="city" value="{{title_case($microlocation->microlocation_city)}}">
                         </div>
                         <button type="submit" class="btn btn-primary">Tallenna</button>
                     </form>

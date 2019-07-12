@@ -5,7 +5,7 @@
             <div class="panel-heading">
                 <h3>Lisää microlokaatio </h3>
             </div>
-            <div>
+            <div class="panel-body">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -15,17 +15,17 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="microlocations-store" style="padding: 2% 0% 2% 2%;">
+                <form method="post" action="microlocations-store" class="form-text-align-padd">
                     @csrf
                     <div class="form-group">
-                        <label for="company">Yhtiö:&nbsp</label>
-                        <select name="company">
+                        <label for="company">Yhtiö:</label>
+                        <select class="form-control element-width-auto" name="company">
                             <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="type">Microlokaation tyyppi:&nbsp</label>
-                        <select name="type">
+                        <label for="type">Microlokaation tyyppi:</label>
+                        <select class="form-control element-width-auto" name="type">
                             @php
                                 $types = DB::table('microlocation_types')->get();
                             @endphp
@@ -36,20 +36,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Microlokaation nimi:&nbsp</label>
-                        <input type="text" class="form-control" name="name"/>
+                        <label for="name">Microlokaation nimi:</label>
+                        <input type="text" class="form-control element-width-auto" name="name"/>
                     </div>
                     <div class="form-group">
-                        <label for="address">Katuosoite:&nbsp</label>
-                        <input type="text" class="form-control" name="address"/>
+                        <label for="address">Katuosoite:</label>
+                        <input type="text" class="form-control element-width-auto" name="address"/>
                     </div>
                     <div class="form-group">
-                        <label for="postal_code">Postinumero:&nbsp</label>
-                        <input type="text" class="form-control" name="postal_code"/>
+                        <label for="postal_code">Postinumero:</label>
+                        <input type="text" class="form-control element-width-auto" name="postal_code"/>
                     </div>
                     <div class="form-group">
-                        <label for="password">Kaupunki:&nbsp</label>
-                        <input type="text" class="form-control" name="city" value="{{$company->company_city}}">
+                        <label for="password">Kaupunki:</label>
+                        <input type="text" class="form-control element-width-auto" name="city" value="{{$company->company_city}}">
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Lisää</button>

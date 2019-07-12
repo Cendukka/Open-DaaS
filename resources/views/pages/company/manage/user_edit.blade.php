@@ -34,7 +34,6 @@
                         <div class="form-group">
                             <label for="microlocation">Microlokaatio:</label>
                             <select class="form-control element-width-auto" name="microlocation">
-                                <option selected="selected" value=""></option>
                                 @php
                                     $microlocations = DB::table('microlocations')
                                                 ->where('microlocation_company_id','=',$company->company_id)

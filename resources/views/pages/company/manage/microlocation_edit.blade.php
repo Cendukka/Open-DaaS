@@ -5,7 +5,7 @@
             <div class="panel-heading">
                 <h3>Muokkaa microlokaatiota </h3>
             </div>
-            <div>
+            <div class="panel-body">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                    <form method="post" action="microlocations-update" style="padding: 2% 0% 2% 2%;">
+                    <form method="post" action="microlocations-update" class="form-text-align-padd">
                         @csrf
                         <div class="form-group">
                             <label for="company">Yhtiö:&nbsp</label>

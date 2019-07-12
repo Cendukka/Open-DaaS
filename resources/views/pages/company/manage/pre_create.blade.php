@@ -18,14 +18,6 @@
                 <form method="post" action="pre-store" class="form-text-align-padd">
                     @csrf
                     <div class="form-group">
-                        <label for="user">Käyttäjä:</label>
-                        <select class="form-control element-width-auto" name="user">
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}">{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="datetime">Päivämäärä:</label>
                         <div style="position: relative">
                             <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{date('Y-m-d H:i:s')}}">
@@ -41,8 +33,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="receipt">Saapunut kirjaus:</label>
-                        <select name="receipt" id="receipt">
+                        <label for="user">Käyttäjä:</label>
+                        <select class="form-control element-width-auto" name="user">
+                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
+                                <option value="{{$user->user_id}}">{{title_case($user->last_name.' '.$user->first_name)}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
@@ -52,6 +47,11 @@
                             @foreach (DB::table('material_names')->whereIn('material_type',['presorted','refined'])->get() as $material)
                                 <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="receipt">Saapunut kirjaus:</label>
+                        <select name="receipt" id="receipt">
                         </select>
                     </div>
 

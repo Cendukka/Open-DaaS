@@ -18,14 +18,6 @@
                 <form method="post" action="issues-update" class="form-text-align-padd">
                     @csrf
                     <div class="form-group">
-                        <label for="user">Käyttäjä:</label>
-                        <select class="form-control element-width-auto" name="user">
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}" {{($user->user_id == $issue->issue_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label>Lähetys luotu:&nbsp</label>{{$issue->created_at}}
                         <p></p>
                         <label>Lähetys muokattu:&nbsp</label>{{$issue->updated_at}}
@@ -36,19 +28,27 @@
                             <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{$issue->issue_date}}">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="type">Lähetyksen tyyppi:</label>
-                        <select class="form-control element-width-auto" id="type" name="type">
-                            @foreach (DB::table('issue_types')->orderBy('issue_typename')->get() as $type)
-                                <option value="{{$type->issue_type_id}}" {{($type->issue_type_id == $issue->issue_type_id ? 'selected="selected"' : '')}}>{{title_case($type->issue_typename)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     <div id="from" class="form-group">
                         <label for="from_microlocation">Mistä microlokaatiosta:</label>
                         <select class="form-control element-width-auto" name="from_microlocation">
                             @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
                                 <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $issue->issue_from_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="user">Käyttäjä:</label>
+                        <select class="form-control element-width-auto" name="user">
+                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
+                                <option value="{{$user->user_id}}" {{($user->user_id == $issue->issue_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Lähetyksen tyyppi:</label>
+                        <select class="form-control element-width-auto" id="type" name="type">
+                            @foreach (DB::table('issue_types')->orderBy('issue_typename')->get() as $type)
+                                <option value="{{$type->issue_type_id}}" {{($type->issue_type_id == $issue->issue_type_id ? 'selected="selected"' : '')}}>{{title_case($type->issue_typename)}}</option>
                             @endforeach
                         </select>
                     </div>

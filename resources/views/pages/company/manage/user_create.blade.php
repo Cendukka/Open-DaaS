@@ -20,7 +20,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="user_type">Käyttäjätyyppi:</label>
-                        <select name="user_type">
+                        <select class="form-control element-width-auto" name="user_type">
                             <option value="2">Yhtiön bosse</option>
                             <option value="3">Microlokaationin työntekijä</option>
 
@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="microlocation">Microlokaatio:</label>
-                        <select name="microlocation">
+                        <select class="form-control element-width-auto" name="microlocation">
                             <option selected="selected" value=""></option>
                             @php
                                 $microlocations = DB::table('microlocations')

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron">
-                <p>Lorem ipsum</p>
+                <p>Lorem ipsum olen jotain, koitan ainakin. Täyttöä diviin, sekä turhanpäiväistä tekstiä käyttäen</p>
             </div>
 
 

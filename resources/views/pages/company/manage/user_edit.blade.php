@@ -1,4 +1,5 @@
 @extends('layouts.macrolocation')
+@section ('title', 'Muokkaa käyttäjää')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">

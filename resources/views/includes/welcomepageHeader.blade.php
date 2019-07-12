@@ -4,10 +4,11 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/"><h3>JALOSTUSLAITOS</h3></a>
+            <a href="/"><h4>TEHA TEkstiilikierrätyksen HAllintajärjestelmä</h4></a>
         </div>
 
         <div class="finland-map">
+            <h4 class="form-text-align-padd">Suomen jätelaitokset ja niiden sijainnit</h4>
             <img class="Responsive"
                  src="https://trello-attachments.s3.amazonaws.com/5cf4b117381b0a775d886f47/1000x2251/97da9a74ec1fd74650c8955ab34c0e1c/fi.png"
                  width="250" height="563" class="img-fluid" alt="Responsive image">

@@ -4,7 +4,7 @@
     <nav id="sidebar">
 		
 		<div class="sidebar-header">
-        	<a href="/home"><h3>JALOSTUSLAITOS</h3>SuperAdmin</a>
+        	<a href="/home"><h4>TADAH Tekstiilikierrätyksen Avoimen DAtan Hallintajärjestelmä</h4>Admin</a>
 		</div>
 
 		<ul class="list-unstyled components">

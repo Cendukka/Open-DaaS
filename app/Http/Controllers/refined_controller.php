@@ -47,7 +47,8 @@ class refined_controller extends Controller {
 
         $receipt = ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL);
         $pre_sorting = ($request->get('origin') == 'presort' ? $request->get('pre_receipt') : NULL);
-        $microlocation = ($receipt ?
+
+        $receipt_entity = ($receipt ?
             DB::table('inventory_receipt')
                 ->where('receipt_id',$receipt)
                 ->first()->receipt_to_microlocation_id
@@ -57,7 +58,7 @@ class refined_controller extends Controller {
                 ->where('pre_sorting_id',$pre_sorting)
                 ->first()->receipt_to_microlocation_id
             );
-
+        $microlocation = $receipt_entity->receipt_to_microlocation_id;
         $material = $request->get('material');
         $weight = $request->get('weight');
 
@@ -72,7 +73,7 @@ class refined_controller extends Controller {
         ]);
         $refined->save();
 
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, '2', -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $receipt_entity->receipt_material_id, -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
         return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Refined-Sorting successfully created.']);
 	}
@@ -121,36 +122,37 @@ class refined_controller extends Controller {
         $refinedNew->description = ($request->get('description') ?: '');
 
 
-        $microlocation_orig = ($refinedNew->getOriginal('refined_receipt_id') ?
+        $receipt_entity_orig = ($refinedNew->getOriginal('refined_receipt_id') ?
             DB::table('inventory_receipt')
                 ->where('receipt_id',$refinedNew->getOriginal('refined_receipt_id'))
-                ->first()->receipt_to_microlocation_id
+                ->first()
             :
             DB::table('pre_sorting')
                 ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
                 ->where('pre_sorting_id',$refinedNew->getOriginal('pre_sorting_id'))
-                ->first()->receipt_to_microlocation_id
+                ->first()
         );
-        $microlocation_new = ($receipt ?
+        $receipt_entity_new = ($receipt ?
             DB::table('inventory_receipt')
                 ->where('receipt_id',$receipt)
-                ->first()->receipt_to_microlocation_id
+                ->first()
             :
             DB::table('pre_sorting')
                 ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
                 ->where('pre_sorting_id',$pre_sorting)
-                ->first()->receipt_to_microlocation_id
+                ->first()
         );
-
+        $microlocation_orig = $receipt_entity_orig->receipt_to_microlocation_id;
+        $microlocation_new = $receipt_entity_new->receipt_to_microlocation_id;
 
         # Remove original weights from the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, '2', $refinedNew->getOriginal('refined_weight'));
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $receipt_entity_orig->receipt_material_id, $refinedNew->getOriginal('refined_weight'));
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $refinedNew->getOriginal('refined_material_id'), -$refinedNew->getOriginal('refined_weight'));
 
         $refinedNew->save();
 
         # Add new weights to the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, '2', -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $receipt_entity_new->receipt_material_id, -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
         return redirect()->action('refined_controller@index',['company' => $company])->withErrors(['Refined-Sorting successfully updated.']);
 	}

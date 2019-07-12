@@ -31,7 +31,7 @@
                     @php
                         $selected_microlocation_id = DB::table('microlocations')
                             ->where('microlocation_company_id','=',$company->company_id)
-                            ->where('material_name','=','Raw Waste')
+                            ->where('material_type','=','Raw Waste')
                             ->where('receipt_id',$pre->pre_sorting_receipt_id)
                             ->join('inventory_receipt','receipt_to_microlocation_id','microlocation_id')
                             ->join('material_names','receipt_material_id','material_id')

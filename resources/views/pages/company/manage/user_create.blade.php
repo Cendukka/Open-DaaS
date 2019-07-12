@@ -75,5 +75,17 @@
         };
         $('#first_name').on('change',source);
         $('#last_name').on('change',source);
+
+        function microlocation(){
+            var $userType = $("#user_type").val();
+            if($userType > 2){ // Transport
+                $("#microlocation").show();
+            }
+            else{
+                $("#microlocation").hide();
+            }
+        };
+        $(document).ready(microlocation);
+        $('#user_type').on('change',microlocation);
     </script>
 @endsection

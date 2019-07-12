@@ -34,7 +34,7 @@ class receipt_controller extends Controller {
 
 		$request->validate([
 			'user' => 'required|integer',
-			'datetime' => 'required|date_format:Y-m-d H:i:s',
+			'datetime' => 'required|date_format:Y-m-d',
             'material' => 'required|integer',
 			'source' => 'required',
 			'from_community' => 'integer|required_without_all:from_supplier,from_microlocation',
@@ -84,7 +84,7 @@ class receipt_controller extends Controller {
 
         $request->validate([
             'user' => 'required|integer',
-            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'datetime' => 'required|date_format:Y-m-d',
             'material' => 'required|integer',
             'source' => 'required',
             'from_community' => 'integer|required_with:from_company',
@@ -178,9 +178,9 @@ class receipt_controller extends Controller {
             #dd($result);
             if($result){
                 foreach ($result as $key => $value){
-                    $from =  ($value->from_community_id ? 'Community:'.(DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city) :
-                        ($value->from_supplier_id ? 'Supplier:'.(DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name) :
-                            'Microlocation:'.$value->from_microlocation_name));
+                    $from =  ($value->from_community_id ? ['Ulkoinen',DB::table('community')->join('company','community_company_id','company_id')->where('community_id',$value->from_community_id)->first()->company_city.', ('.DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city.')'] :
+                        ($value->from_supplier_id ? ['Toimittaja',DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name] :
+                            ['Sisäinen',$value->from_microlocation_name]));
                     $output.='<tr>'.
                         '<td>'.date("d-m-Y",strtotime($value->receipt_date)).'</td>'.
                         '<td>'.title_case(explode(':', $from)[0]).'</td>'.

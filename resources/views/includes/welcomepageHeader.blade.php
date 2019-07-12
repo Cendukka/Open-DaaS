@@ -32,26 +32,23 @@
                     </button>
                 </div>
 
-                <script language=javascript>
-function one()
-{
-    window.location = "/contactLists";
-}
-function two()
-{
-    window.location = "/";
-}
-
-function a()
-{
-	two();
-	one();
-}	
-</script>
-
+                
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a onClick="a();" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Yhteystiedot</a></li>
+                         
+                        <li>
+                            <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout" style="margin-right: 5%;">Yhteystiedot</a>
+                            <a id="home"    href="/" class="btn btn-info btn-lg logout" style="margin-right: 5%; display: none">back</a>
+                                <script type="text/javascript">
+                                    {
+                                        if (window.location.href === "http://127.0.0.1:8000/contactLists") {
+                                        document.getElementById("contact").style.display = "none";
+                                        document.getElementById("home").style.display = "block";
+                                        }
+                                        
+                                     }
+                                </script> 
+                        </li> 
 
                         @guest
                             <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a></li>

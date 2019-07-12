@@ -44,5 +44,5 @@
     @include('includes.search_script')
 @endsection
 @section ('title')
-    EWC-Koodit
+    Contact lists
 @stop

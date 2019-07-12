@@ -40,6 +40,7 @@
                                 <i class="glyphicon glyphicon-align-left"></i>
                                 <span>Piilota ja näytä sivupalkki</span>
                             </button>
+                            <span><h4>Käyttäjä: {{ Auth::user()->first_name }}</h4></span>
                         </div>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

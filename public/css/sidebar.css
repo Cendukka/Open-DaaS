@@ -296,6 +296,11 @@ a.logout:hover {
    
   }
 
+    a {
+        color: rgb(128, 175, 252);
+
+    }
+
   a.textMark:hover, a.textMark:active{
       color: #2373F6;
       font-size: 140%;

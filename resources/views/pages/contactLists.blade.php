@@ -20,18 +20,19 @@
                             <th>Address</th>
                         </tr>
                         <tr>
-                            <td>Jupiter</td>
-                            <td>1999</td>
-                            <td>gmail@yahoo.com</td>
-                            <td> <a href="http://www.turkuamk.fi" target="_blank"> turkuamk.fi </a></td>
-                            <td>turku</td>
+                            <td>Botniarosk </td>
+                            <td>+358 40 594 5121</td>
+                            <td></td>
+                            <td> <a href="https://www.botniarosk.fi/" target="_blank">www.botniarosk.fi</a></td>
+                            <td>Raatihuoneenkatu 1 
+                                64101 Kristiinankaupunki</td>
                         </tr>
                         <tr>
-                            <td>Mars</td>
-                            <td>1999</td>
-                            <td>gmail@yahoo.com</td>
-                            <td></td>
-                            <td>helsinki</td>
+                            <td>Ekokymppi</td>
+                            <td>08 636 611 </td>
+                            <td>info@ekokymppi.fi</td>
+                            <td> <a href="https://www.ekokymppi.fi/" target="_blank">www.ekokymppi.fi</a></td>
+                            <td>Viestitie 2, 87700 Kajaani</td>
                         </tr>
                         </thead>
                         <tbody>

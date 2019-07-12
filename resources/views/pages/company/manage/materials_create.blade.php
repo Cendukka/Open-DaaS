@@ -15,7 +15,9 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="materials-store">
+                
+                <div style="justify-content: center;">
+                <form method="post" action="materials-store" onsubmit="return confirm('New material is being added. Do you like to proceed?');">
                     @csrf
                     <div class="form-group text-left">
                          <label for="name">Materiaalin nimi:</label><br>

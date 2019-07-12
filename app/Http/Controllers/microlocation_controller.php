@@ -51,13 +51,26 @@ class microlocation_controller extends Controller {
 		$ml->save();
 		return redirect()->action('microlocation_controller@index', ['company' => $company])->withErrors(['Microlocation successfully created.']);
 	}
+	
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param int $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(company $company) {  /* ,user $user) {
+		return redirect()->action('microlocation_controller@index', ['company' => $company]); */
+		return view('pages.company.manage.microlocation_home')->with('company', $company);
 
-
-	public function show(company $company,user $user) {
-		return redirect()->action('microlocation_controller@index', ['company' => $company]);
 	}
 
-
+	
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param int $id
+	 * @return \Illuminate\Http\Response
+	 */
 	public function edit(company $company, microlocation $microlocation) {
 		return view('pages.company.manage.microlocation_edit')->with(['company' => $company, 'microlocation' => $microlocation]);
 	}

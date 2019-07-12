@@ -39,9 +39,27 @@ Route::get('/users', 'user_controller@index')->name('users');
 Route::get('ewc/search','ewc_controller@search');
 
 
+#contact person routes
+Route::get('contactLists',function(){
+	return view('pages.contactLists');
+});
+/* Route::get('/companies/{company}/contactPerson',function(){
+	return view('pages.contactPerson');
+});
+Route::get('/companies/{company}/manage/microlocations/{ml}/contactPerson',function(){
+	return view('pages.contactPerson');
+}); */
+Route::get('contactPerson/search');
 Route::get('/manage', function () {
     return view('pages.manage');
 });
+
+
+
+
+
+
+
 
 # Report Pages
 

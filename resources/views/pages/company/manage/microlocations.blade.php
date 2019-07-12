@@ -16,7 +16,7 @@
                     </div>
                 @endif
                 <table class="table table-bordered table-hover">
-                    <thread>
+                    <thead>
                     <tr>
                         
                         <th>Tyyppi</th>
@@ -25,7 +25,7 @@
                         <th>Postinumero</th>
                         <th>Kaupunki</th>
                     </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                     @php
                         $microlocations = DB::table('microlocations')
@@ -36,9 +36,10 @@
                     @endphp
                     @foreach ($microlocations as $ml)
                         <tr>
-                            <td>{{title_case($ml->microlocation_typename)}}</td>
+                            <td style = "color: #6D00E5 "><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}">{{title_case($ml->microlocation_id)}}</td>
+                            <td>{{title_case($ml->microlocation_typename)}}</a></td>
                             <td>{{title_case($ml->microlocation_name)}}</td>
-                            <td>{{title_case($ml->microlocation_street_address)}}</td>
+                            <td style = "color: #00C2E5 "><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id)}}">{{title_case($ml->microlocation_street_address)}}</a></td>
                             <td>{{title_case($ml->microlocation_postal_code)}}</td>
                             <td>{{title_case($ml->microlocation_city)}}</td>
                             <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>

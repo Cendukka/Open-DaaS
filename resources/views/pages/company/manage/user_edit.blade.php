@@ -16,51 +16,20 @@
                         </ul>
                     </div>
                 @endif
-                <h4>Edit User</h4>
-                <form method="post" action="users-update">
-                    @csrf
-                    <div class="form-group">
-                        <label for="user_type">User Type:&nbsp</label>
-                        <select id="user_type" name="user_type">
-                            @foreach(DB::table('user_types')->where('user_type_id','>','1')->get() as $type)
-                                <option {{($user->user_type_id == $type->user_type_id ? 'selected="selected"' : '')}} value="{{$type->user_type_id}}">{{$type->user_typename}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company:&nbsp</label>
-                        {{title_case($company->company_name)}}
-                    </div>
-                    <div id="microlocation" class="form-group">
-                        <label for="microlocation">Microlocation:&nbsp</label>
-                        <select name="microlocation">
-                            <option selected="selected" value=""></option>
-                            @php
-                                $microlocations = DB::table('microlocations')
-                                            ->where('microlocation_company_id','=',$company->company_id)
-                                            ->get();
-                            @endphp
-                            @foreach ($microlocations as $ml)
-                                <option {{($ml->microlocation_id == $user->user_microlocation_id ? 'selected="selected"' : '')}} value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_city).', '.title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
+                
                     <form method="post" action="users-update" class="form-text-align-padd">
                         @csrf
                         <div class="form-group">
                             <label for="user_type">Käyttäjä tyyppi:</label>
                             <select class="form-control element-width-auto" name="user_type">
-                                <option {{($user->user_type_id == 1 ? 'selected="selected"' : '')}} disabled value="1">Admin</option>
-                                <option {{($user->user_type_id == 2 ? 'selected="selected"' : '')}} value="2">Manager</option>
-                                <option {{($user->user_type_id == 3 ? 'selected="selected"' : '')}} value="3">User</option>
-
+                                @foreach(DB::table('user_types')->where('user_type_id','>','1')->get() as $type)
+                                    <option {{($user->user_type_id == $type->user_type_id ? 'selected="selected"' : '')}} value="{{$type->user_type_id}}">{{$type->user_typename}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="company">Yhtiö:</label>
-                            <input class="form-control element-width-auto" name="company" selected="selected" value="{{title_case($company->company_name)}}">
-
+                            {{title_case($company->company_name)}}
                         </div>
                         <div class="form-group">
                             <label for="microlocation">Microlokaatio:</label>

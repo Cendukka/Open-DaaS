@@ -52,9 +52,21 @@
                         </tr>
                     @endforeach
                 </table>
-                <form action="{{url(url()->current().'/create')}}">
+                    <form action="{{url(url()->current().'/import_csv') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type=file" name="file" accept=".csv">
+                        <br>
+                        <button class="btn btn-secondary">Import user data</button>
+                        <a class="btn btn-warning" href="{{url(url()->current().'/export_csv')}}">Export user data
+                        </a>
+                    </form>
+
+                <form method="get" action="{{url(url()->current().'/create')}}">
                 <br>
-                    <a class="btn btn-secondary" href="{{url('/companies/'.$company->company_id.'/manage/users/create')}}">+ Lisää käyttäjä</a>
+                    <button type="submit" class="btn btn-secondary">+ Lisää käyttäjä</button>
+                </form>
+                <form method="get" action="{{url(url()->current().'/user_csv')}}">
+                    <button type="submit" class="btn btn-secondary"></button>
                 </form>
             </div>
         </div>

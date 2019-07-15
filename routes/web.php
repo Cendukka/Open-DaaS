@@ -95,8 +95,10 @@ Route::post('companies/{company}/company-update',   'company_controller@update')
 
 
 # Users
-Route::resource('companiesUser', 'companyUser_controller', ['only' => ['index']]);
-Route::resource('companies/{company}/manage/users', 'user_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+Route::resource('companiesUser',                                    'companyUser_controller', ['only' => ['index']]);
+Route::get('companies/{company}/manage/users',                      'user_controller@index');
+Route::get('companies/{company}/manage/users/create',               'user_controller@create');
+Route::get('companies/{company}/manage/users/{user}/edit',          'user_controller@edit');
 Route::post('companies/{company}/manage/users/users-store',         'user_controller@store');
 Route::post('companies/{company}/manage/users/{user}/users-update', 'user_controller@update');
 
@@ -151,4 +153,9 @@ Route::get('companies/{company}/manage/refined/create/origin',              'ref
 Route::get('companies/{company}/manage/refined/{refined}/edit/origin',      'refined_controller@origin');
 Route::post('companies/{company}/manage/refined/refined-store',             'refined_controller@store');
 Route::post('companies/{company}/manage/refined/{refined}/refined-update',  'refined_controller@update');
+
+#Excel
+Route::get('companies/{company}/manage/users/user_csv', 'excel_controller@index');
+Route::get('companies/{company}/manage/users/export_csv', 'excel_controller@export_csv');
+Route::post('companies/{company}/manage/users/import_csv', 'excel_controller@import_csv');
 

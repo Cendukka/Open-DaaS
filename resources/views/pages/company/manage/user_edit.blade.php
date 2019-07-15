@@ -1,9 +1,9 @@
-@extends('layouts.default')
+@extends('layouts.macrolocation')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Edit user </h3>
+                <h3>Muokkaa käyttäjää </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -25,28 +25,28 @@
                                 ->get();
                 @endphp
                 @if(count($users)==0)
-                    <h4>User not found</h4>
+                    <h4>Käyttäjää ei löytynyt</h4>
                 @else
-                    <h4>Edit User</h4>
+
                     <form method="post" action="users-update">
                         @csrf
                         <div class="form-group">
-                            <label for="user_type">User Type:&nbsp</label>
+                            <label for="user_type">Käyttäjä tyyppi:&nbsp</label>
                             <select name="user_type">
                                 <option {{($user->user_type_id == 1 ? 'selected="selected"' : '')}} disabled value="1">Superadmin</option>
                                 <option {{($user->user_type_id == 2 ? 'selected="selected"' : '')}} value="2">Admin</option>
                                 <option {{($user->user_type_id == 3 ? 'selected="selected"' : '')}} value="3">Manager</option>
-                                <option {{($user->user_type_id == 4 ? 'selected="selected"' : '')}} value="4">User</option>
+
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="company">Company:&nbsp</label>
+                            <label for="company">Yhtiö:&nbsp</label>
                             <select name="company">
                                 <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="microlocation">Microlocation:&nbsp</label>
+                            <label for="microlocation">Microlokaatio:&nbsp</label>
                             <select name="microlocation">
                                 <option selected="selected" value=""></option>
                                 @php
@@ -61,20 +61,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="first_name">First Name:&nbsp</label>
-                            <input type="text" class="form-control" name="first_name" value="{{$user->first_name}}"/>
+                            <label for="first_name"> Etunimi:&nbsp</label>
+                            <input type="text" class="form-control center" name="first_name" value="{{$user->first_name}}"readonly style="color:lightgray;"/>
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Last Name:&nbsp</label>
-                            <input type="text" class="form-control" name="last_name" value="{{$user->last_name}}"/>
+                            <label for="last_name">Sukunimi:&nbsp</label>
+                            <input type="text" class="form-control center" name="last_name" value="{{$user->last_name}}"readonly style="color:lightgray;"/>
                         </div>
                         <div class="form-group">
-                            <label for="username">Username:&nbsp</label>
-                            <input type="text" class="form-control" name="username" value="{{$user->username}}" readonly style="color:lightgray;"/>
+                            <label for="username">Käyttäjätunnus:&nbsp</label>
+                            <input type="text" class="form-control center" name="username" value="{{$user->username}}" readonly style="color:lightgray;"/>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password:&nbsp</label>
-                            <input type="password" class="form-control" name="password" value="{{$user->password}}">
+                            <label for="password">Salasana:&nbsp</label>
+                            <input type="password" class="form-control center" name="password" value="{{$user->password}}"readonly style="color:lightgray;">
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>

@@ -1,18 +1,15 @@
 @extends('layouts.welcomepage')
-@section('title', 'Menu')
+@section('title', 'Etusivu')
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron">
-                <p>Lorem ium dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                    voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident,
-                    sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Suomalainen on suomalais-ugrilaisten kielten ryhmässä yksi Itämeren-suomen kielistä ja se liittyy 
+                     läheisesti Karjalan ja Viron kieliin. Vanhimmat historialliset asiakirjat suomalaisesta elämästä ovat
+                     peräisin noin 1150. Suomi sai kirjallisen kielen vuonna 1548, jolloin Mikael Agricola käänsi Uuden 
+                     testamentin suomen kieleksi, kun uudistus tuli Suomeen.</p>
             </div>
-            <div class="elements">
+
 
                     <div class="calender">
                         @php
@@ -31,27 +28,79 @@
 
                     </div>
                     <br>
+                    <div class="row">
+                        <div id="piechartWhole" class="col-md-6"></div>
+                        <div id="piechartFraction" class="col-md-6"></div>
+                    </div>
 
-                    <div id="piechart"></div>
                     <script type="text/javascript">
+
                         google.charts.load('current', {'packages': ['corechart']});
                         google.charts.setOnLoadCallback(drawChart);
 
                         function drawChart() {
-                            var data = google.visualization.arrayToDataTable([
-                                ['Materials', 'Weight in Kg'],
-                                ['Kierrätysenergia', 10000],
-                                ['Lajittelematon', 20000],
-                                ['Energiahyötykäyttöön', 4000],
-                                ['Uusioläyttö', 20000],
+                            /*****Store sum of weights of wanted categories in variables for piechartWhole*****/
+                            var recycledChart = parseInt("{{(DB::table('inventory')->select('inventory_weight')->where('inventory_material_id', 'NOT LIKE', 1)->sum('inventory_weight'))}}");
+                            var unrecycledChart = parseInt("{{(DB::table('inventory')->select('inventory_weight')->where('inventory_material_id', 1)->sum('inventory_weight'))}}");
+                            var energyChart = parseInt("{{(DB::table('inventory_issue_details')
+                                                ->select('detail_weight')
+                                                ->join('inventory_issue', 'inventory_issue_details.detail_issue_id', '=', 'inventory_issue.issue_id')
+                                                ->where('issue_type_id', 1)
+                                                ->sum('detail_weight')
+                                                )}}");
+                            var reuseChart = parseInt("{{(DB::table('inventory_issue_details')
+                                                ->select('detail_weight')
+                                                ->join('inventory_issue', 'inventory_issue_details.detail_issue_id', '=', 'inventory_issue.issue_id')
+                                                ->where('issue_type_id', "=", 2)
+                                                ->orWhere('issue_type_id',"=", 3)
+                                                ->sum('detail_weight')
+                                                )}}");
+                            /***************************************************************************/
+
+                            /*****Store sum of weights of fractions in variables for piechartFraction*****/
+                            var totalSumFractions = parseInt("{{DB::table('inventory')
+                                            ->select('inventory_weight')
+                                            ->where('inventory_material_id', 'NOT LIKE', 1)
+                                            ->orWhere('inventory_material_id', 'NOT LIKE', 2)
+                                            ->sum('inventory_weight')
+                            }}") ;
+                            /***************************************************************************/
+
+                            console.log(totalSumFractions);
+                            /*****First Chart*****/
+                            var wholeData = new google.visualization.DataTable();
+                            wholeData.addColumn('string', 'Weight in Kg');
+                            wholeData.addColumn('number', 'Slices');
+                            wholeData.addRows([
+                                ['Kierrätetty', recycledChart],
+                                ['Lajittelematon', unrecycledChart],
+                                ['Energia', energyChart],
+                                ['Uusiokäyttö', reuseChart]
                             ]);
-                            var options = {'title': 'Koko Suomi', 'width': 750, 'height': 500, 'backgroundColor': 'transparent'};
-                            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                            chart.draw(data, options);
-                        }
+                            var wholeOptions = {'title': 'Koko Suomi - Yhteensä:'+(recycledChart+unrecycledChart+energyChart+reuseChart)+' Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
+                            var wholeChart = new google.visualization.PieChart(document.getElementById('piechartWhole'));
+                            wholeChart.draw(wholeData, wholeOptions);
+                            /**********************/
+
+                            /*****Second Chart*****/
+                            var fractionData = new google.visualization.DataTable();
+                            fractionData.addColumn('string', 'Weight in Kg');
+                            fractionData.addColumn('number', 'Slices');
+                            fractionData.addRows([
+                                ['Villa', recycledChart],
+                                ['Puuvilla', unrecycledChart],
+                                ['Nahka', energyChart],
+                                ['Pellava', reuseChart]
+                            ]);
+                            var fractionOptions = {'title': 'Koko Suomi - Yhteensä:'+totalSumFractions+ ' Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
+                            var fractionChart = new google.visualization.PieChart(document.getElementById('piechartFraction'));
+                            fractionChart.draw(fractionData, fractionOptions);
+                            /**********************/
+                        }//End of drawChart() function
                     </script>
-            </div>
+
         </div>
+    </div>
 
 @endsection
 

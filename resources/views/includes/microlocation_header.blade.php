@@ -16,14 +16,13 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/companies/{{$company->company_id}}"><h3>JALOSTUSLAITOS</h3>{{$company->company_name}}</a>
+            <a href="/companies/{{$company->company_id}}/manage/microlocations"><h3>JALOSTUSLAITOS</h3></a>
         </div>
 
         <ul class="list-unstyled components">
 
             <li>
-                <a href="/companies/{{$company->company_id}}">Oma Toimipiste</a>
-                <a href="{{'/companies/'.$company->company_id.'/manage/microlocations'}}">microlocations</a>
+                
                 <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">Raportit</a>
                 <ul class="collapse list-unstyled" id="reportsSubmenu">
                     <li><a href="{{'/companies/'.$company->company_id.'/warehouse'}}">    Varasto</a></li>
@@ -66,9 +65,8 @@
 
                     <ul class="nav navbar-nav navbar-right">
 
-                        
-                        <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a>
-                        <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
+                        <a href="#" class="btn btn-info btn-lg logout">Yhteystiedot</a>
+                        <a href="/" class="btn btn-info btn-lg logout">Etusivu</a>
                         @guest
                             <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>
 

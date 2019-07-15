@@ -6,7 +6,7 @@
 <body>
 <div class="container">
    <header class="column">
-      @include('includes.macrolocation_header')
+      @include('includes.microlocation_header')
    </header>
    <footer class="row">
        @include('includes.footer')

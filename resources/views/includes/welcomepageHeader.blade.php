@@ -28,25 +28,25 @@
                 <div class="navbar-header">
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
                         <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Toggle Sidebar</span>
+                        <span>Piilota ja näytä sivupalkki</span>
                     </button>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" class="info-btn">Yhteystiedot</a></li>
-                        <li>
+                        <li><a href="/contactLists" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Yhteystiedot</a></li>
+
                         @guest
-                            <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li>
+                            <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a></li>
 
                         <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
-                            </li>
+
 
                         @else
                         
-                        <a href="/home" class="btn btn-info btn-lg logout">Hallita</a></li>
+                            <li><a href="/home" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
 
-                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+                            <li><a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
 
                         <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
 

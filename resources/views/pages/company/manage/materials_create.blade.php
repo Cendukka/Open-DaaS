@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Create a new material </h3>
+                <h3>Lisää uusi materiaali </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -15,16 +15,19 @@
                         </ul>
                     </div>
                 @endif
-                <h4>Create a new material:</h4>
-                <form method="post" action="materials-store">
+                
+                <div style="justify-content: center;">
+                <form method="post" action="materials-store" onsubmit="return confirm('New material is being added. Do you like to proceed?');">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Material Name:&nbsp</label>
-                        <input type="text" class="form-control" name="name"/>
+                         <label for="name">Materiaalin nimi: </label> </div>
+                        <div> <input type="text" class="form-control center" name="name"/></div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Lisää</button>
                 </form>
             </div>
+         </div>
         </div>
     </div>
 @endsection

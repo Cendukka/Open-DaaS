@@ -93,7 +93,7 @@ class refined_controller extends Controller {
 			$result=DB::table('refined_sorting')
 					->whereIn('receipt_to_microlocation_id', $microlocation_ids)
 					->when(($request->from && $request->to), function($query) use ($request){
-						return $query->whereBetween('refined_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d",strtotime($request->to))]);
+						$query->whereBetween('refined_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
 					})
 					->where(function ($query) use ($request){
 						$query
@@ -103,6 +103,7 @@ class refined_controller extends Controller {
 					->join('inventory_receipt','receipt_id','=','refined_receipt_id')
 					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
 					->join('material_names','material_id','=','refined_material_id')
+                    ->join('users','refined_sorting.refined_user_id','=','users.user_id')
 					->orderBy('refined_date')
 					->orderBy('receipt_to_microlocation_id')
 					->get();
@@ -110,11 +111,12 @@ class refined_controller extends Controller {
 				$sumweight = 0;
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
+                        '<td>'.$value->refined_date.'</td>'.
 						'<td>'.title_case($value->microlocation_name).'</td>'.
-						'<td>'.$value->refined_date.'</td>'.
+                        '<td>'.date("Y-m-d",strtotime($value->refined_date)).'</td>'.
 						'<td>'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
-						'<td>'.$value->refined_user_id.'</td>'.
+						'<td>'.$value->username.'</td>'.
 						'</tr>';
 					$sumweight += $value->refined_weight;
 				}

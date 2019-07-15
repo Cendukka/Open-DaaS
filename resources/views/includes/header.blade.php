@@ -25,9 +25,7 @@
 
 		</ul>
 
-        <ul class="list-unstyled CTAs">
-        	<li><a href="/" class="back">Back</a></li>
-        </ul>
+
 	
 	</nav>
 
@@ -40,14 +38,15 @@
                         <div class="navbar-header">
                             <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
                                 <i class="glyphicon glyphicon-align-left"></i>
-                                <span>Toggle Sidebar</span>
+                                <span>Piilota ja näytä sivupalkki</span>
                             </button>
                         </div>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <a href="/" class="info-btn">Etusivu</a>
-                                <a href="#" class="info-btn">Yhteystiedot</a>
+                            
+                            <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a>
+                            <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
 
                                 @guest
                                 <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>

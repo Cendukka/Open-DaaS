@@ -1,9 +1,10 @@
 @extends('layouts.macrolocation')
+@section('title', 'Create user')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Add user </h3>
+                <h3>Lisää käyttäjä </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -19,22 +20,22 @@
                 <form method="post" action="users-store">
                     @csrf
                     <div class="form-group">
-                        <label for="user_type">User Type:&nbsp</label>
+                        <label for="user_type">Käyttäjätyyppi:&nbsp</label>
                         <select name="user_type">
-                            <option value="1">Superadmin</option>
+                            <option disabled value="1">Superadmin</option>
                             <option value="2">Admin</option>
                             <option value="3">Manager</option>
-                            <option value="4">User</option>
+
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="company">Company:&nbsp</label>
+                        <label for="company">Yhtiö:&nbsp</label>
                         <select name="company">
                             <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="microlocation">Microlocation:&nbsp</label>
+                        <label for="microlocation">Microlokaatio:&nbsp</label>
                         <select name="microlocation">
                             <option selected="selected" value=""></option>
                             @php
@@ -49,23 +50,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="first_name">First Name:&nbsp</label>
-                        <input type="text" class="form-control" name="first_name"/>
+                        <label for="first_name">Etunimi:&nbsp</label>
+                        <input type="text" class="form-control center" name="first_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="last_name">Last Name:&nbsp</label>
-                        <input type="text" class="form-control" name="last_name"/>
+                        <label for="last_name">Sukunimi:&nbsp</label>
+                        <input type="text" class="form-control center" name="last_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="username">Username:&nbsp</label>
-                        <input type="text" class="form-control" name="username"/>
+                        <label for="username">Käyttäjänimi:&nbsp</label>
+                        <input type="text" class="form-control center" name="username"/>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password:&nbsp</label>
-                        <input type="text" class="form-control" name="password" value="qwerty" readonly style="color:lightgray;">
+                        <label for="password">Salasana:&nbsp</label>
+                        <input type="text" class="form-control center" name="password" value="qwerty" readonly style="color:lightgray;">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Lisää</button>
                 </form>
             </div>
         </div>

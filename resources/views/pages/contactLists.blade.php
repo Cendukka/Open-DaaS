@@ -42,10 +42,10 @@
                         </tr>
                         <tr>
                             <td>Etelä-Karjalan Jätehuolto Oy</td>
-                            <td>0108411818</td>
+                            <td>+358 10 841 1818</td>
                             <td>asiakaspalvelu@ekjh.fi</td>
                             <td> <a href="https://www.ekjh.fi/" target="_blank">www.ekjh.fi</a></td>
-                            <td>Viestitie 2, 87700 Kajaani</td>
+                            <td>Hulkonmäentie 130, 54190 Konnunsuo</td>
                         </tr>
                         <tr>
                             <td>HSY</td>
@@ -80,14 +80,14 @@
                             <td>(05) 744 3400</td>
                             <td></td>
                             <td> <a href="https://www.kymenlaaksonjate.fi/" target="_blank">www.kymenlaaksonjate.fi</a></td>
-                            <td>Kymenlaakson Jäte Oy Ecocycle 5046860 Yellow fabric</td>
+                            <td>Ekokaari 5046860 Keltakangas</td>
                         </tr>
                         <tr>
-                            <td>Kiertokapula</td>
-                            <td> 075 753 0000</td>
+                            <td>Lakeuden Etappi</td>
+                            <td>(06) 421 4900</td>
                             <td></td>
-                            <td> <a href="" target="_blank"></a></td>
-                            <td>Kiertokapula OY Vankanlähde 7, 13100 Hämeenlinna </td>
+                            <td> <a href="https://www.etappi.com/fi" target="_blank">www.etappi.com</a></td>
+                            <td>Laskunmäentie 15 FI-60760 Pojanluoma</td>
                         </tr>
                         </thead>
                         <tbody>

@@ -12,8 +12,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "mustache/mustache": "~2.5",
-        "ext-json": ":"
+        "mustache/mustache": "~2.5"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -6,7 +6,10 @@ Route::get('/home', 'HomeController@index')->name('pages.home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware'=>['auth']],function(){
-	
+    Route::group(['middleware'=>['company']],function() {
+        Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
+    });
+
 	Route::group(['middleware'=>['admin']],function(){
 
 		Route::get('ewc','ewc_controller@index');
@@ -56,7 +59,6 @@ Route::get('contactPerson/search');
 
 
 # Report Pages
-Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
 
 Route::get('companies/{company}/receipts', 'company_controller@receipts_index');
 Route::get('companies/{company}/receipts/search', 'receipt_controller@search');

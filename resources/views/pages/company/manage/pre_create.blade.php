@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Create Pre-Sorting </h3>
+                <h3>Luo esilajittelukirjaus </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label for="material">Esilajiteltu materiaali:</label>
-                        <select name="material">
+                        <select class="form-control element-width-auto" name="material">
                             <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('material_names')->whereIn('material_type',['presorted','refined'])->get() as $material)
                                 <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group">
                         <label for="receipt">Saapunut kirjaus:</label>
-                        <select name="receipt" id="receipt">
+                        <select class="form-control element-width-auto" name="receipt" id="receipt">
                         </select>
                     </div>
 

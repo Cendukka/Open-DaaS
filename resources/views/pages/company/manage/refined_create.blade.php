@@ -41,15 +41,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="material">Materiaali:</label>
-                        <select class="form-control element-width-auto" name="material">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->where('material_type','=','textile')->get() as $material)
-                                <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="origin">Hienolajitellun tekstiilin alkuperä:</label>
                         <select class="form-control element-width-auto" name="origin" id="origin">
                             <option selected="selected" disabled hidden value=""></option>
@@ -58,8 +49,17 @@
                         </select>
                     </div>
                     <div class="form-group" id="originSelect">
-
                     </div>
+                    <div class="form-group">
+                        <label for="material">Materiaali:</label>
+                        <select class="form-control element-width-auto" name="material">
+                            <option selected="selected" disabled hidden value=""></option>
+                            @foreach (DB::table('material_names')->where('material_type','=','textile')->get() as $material)
+                                <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="weight">Paino (Kg):</label>
                         <input type="text" class="form-control element-width-auto" name="weight" value=""/>

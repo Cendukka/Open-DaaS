@@ -32,11 +32,8 @@
                                     ->where('user_company_id','=',$company->company_id)
                                     ->join('user_types', 'users.user_type_id', '=','user_types.user_type_id')
                                     ->leftJoin('microlocations', 'users.user_microlocation_id', '=','microlocations.microlocation_id')
-                                    ->orderBy('user_id')
-                                    ->orderBy('user_microlocation_id')
                                     ->orderBy('users.user_type_id')
                                     ->orderBy('user_microlocation_id')
-                                    ->orderBy('user_id')
                                     ->get();
 
                     @endphp

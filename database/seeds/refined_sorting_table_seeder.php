@@ -19,7 +19,7 @@ class refined_sorting_table_seeder extends Seeder
 		$materials = DB::table('material_names')->where('material_type','=','textile')->get();
 		$users_amount = DB::table('users')->count();
 	
-		foreach (range(1,$microlocation_amount * 2 + $receipts->count() + $pre_sortings->count()) as $index) {
+		foreach (range(1,$receipts->count() + $pre_sortings->count()) as $index) {
 		    $pre_refined = rand(0,1);
 		    $receipt = $receipts->random();
             $pre_sorting = $pre_sortings->random();

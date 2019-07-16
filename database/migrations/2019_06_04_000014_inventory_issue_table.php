@@ -20,7 +20,10 @@ class InventoryIssueTable extends Migration
 			$table->integer('issue_type_id')->unsigned();
             $table->dateTime('issue_date');
 			$table->integer('issue_user_id')->unsigned();
-	
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+
+
 			$table->foreign('issue_from_microlocation_id')->references('microlocation_id')->on('microlocations');
 			$table->foreign('issue_to_microlocation_id')->references('microlocation_id')->on('microlocations');
 			$table->foreign('issue_type_id')->references('issue_type_id')->on('issue_types');

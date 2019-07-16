@@ -1,4 +1,5 @@
 @extends('layouts.macrolocation')
+@section ('title', 'Muokkaa käyttäjää')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
@@ -15,40 +16,24 @@
                         </ul>
                     </div>
                 @endif
-                @php
-                    $users = DB::table('users')
-                                ->where('user_company_id','=',$company->company_id)
-                                ->where('user_id','=',$user->user_id)
-                                ->join('user_types', 'users.user_type_id', '=','user_types.user_type_id')
-                                ->orderBy('user_microlocation_id')
-                                ->orderBy('users.user_type_id')
-                                ->get();
-                @endphp
-                @if(count($users)==0)
-                    <h4>Käyttäjää ei löytynyt</h4>
-                @else
-
-                    <form method="post" action="users-update">
+                
+                    <form method="post" action="users-update" class="form-text-align-padd">
                         @csrf
                         <div class="form-group">
-                            <label for="user_type">Käyttäjä tyyppi:&nbsp</label>
-                            <select name="user_type">
-                                <option {{($user->user_type_id == 1 ? 'selected="selected"' : '')}} disabled value="1">Superadmin</option>
-                                <option {{($user->user_type_id == 2 ? 'selected="selected"' : '')}} value="2">Admin</option>
-                                <option {{($user->user_type_id == 3 ? 'selected="selected"' : '')}} value="3">Manager</option>
-
+                            <label for="user_type">Käyttäjä tyyppi:</label>
+                            <select class="form-control element-width-auto" name="user_type">
+                                @foreach(DB::table('user_types')->where('user_type_id','>','1')->get() as $type)
+                                    <option {{($user->user_type_id == $type->user_type_id ? 'selected="selected"' : '')}} value="{{$type->user_type_id}}">{{$type->user_typename}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="company">Yhtiö:&nbsp</label>
-                            <select name="company">
-                                <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
-                            </select>
+                            <label for="company">Yhtiö:</label>
+                            {{title_case($company->company_name)}}
                         </div>
                         <div class="form-group">
-                            <label for="microlocation">Microlokaatio:&nbsp</label>
-                            <select name="microlocation">
-                                <option selected="selected" value=""></option>
+                            <label for="microlocation">Microlokaatio:</label>
+                            <select class="form-control element-width-auto" name="microlocation">
                                 @php
                                     $microlocations = DB::table('microlocations')
                                                 ->where('microlocation_company_id','=',$company->company_id)
@@ -61,25 +46,44 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="first_name"> Etunimi:&nbsp</label>
-                            <input type="text" class="form-control center" name="first_name" value="{{$user->first_name}}"readonly style="color:lightgray;"/>
+                            <label for="last_name">Etunimi:</label>
+                            <input type="text" maxlength="50" class="form-control element-width-auto" name="last_name" value="{{$user->last_name}}"/>
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Sukunimi:&nbsp</label>
-                            <input type="text" class="form-control center" name="last_name" value="{{$user->last_name}}"readonly style="color:lightgray;"/>
+                            <label for="first_name">Sukunimi:</label>
+                            <input type="text" maxlength="50" class="form-control element-width-auto" name="first_name" value="{{$user->first_name}}"/>
                         </div>
                         <div class="form-group">
-                            <label for="username">Käyttäjätunnus:&nbsp</label>
-                            <input type="text" class="form-control center" name="username" value="{{$user->username}}" readonly style="color:lightgray;"/>
+                            <label for="username">Käyttäjätunnus:</label>
+                            <input type="text" maxlength="50" class="form-control element-width-auto" name="username" value="{{$user->username}}" disabled/>
                         </div>
                         <div class="form-group">
-                            <label for="password">Salasana:&nbsp</label>
-                            <input type="password" class="form-control center" name="password" value="{{$user->password}}"readonly style="color:lightgray;">
+                            <label for="email">Sähköposti:</label>
+                            <input id="email" maxlength="50" type="text" class="form-control element-width-auto text-lowercase" name="email" value="{{$user->email}}" disabled/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="password">Salasana:</label>--}}
+{{--                            <input type="password" maxlength="50" class="form-control" name="password" value="{{$user->password}}" disabled>--}}
+{{--                        </div>--}}
+                        <button type="submit" class="btn btn-primary">Tallenna</button>
+
                     </form>
-                @endif
+                
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function microlocation(){
+            var $userType = $("#user_type").val();
+            if($userType > 2){
+                $("#microlocation").show();
+            }
+            else{
+                $("#microlocation").hide();
+            }
+        };
+        $(document).ready(microlocation);
+        $('#user_type').on('change',microlocation);
+    </script>
 @endsection

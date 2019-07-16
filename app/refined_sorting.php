@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class refined_sorting extends Model {
 	public $incrementing = true;
+	public $timestamps = true;
 	protected $table = "refined_sorting";
-	protected $primaryKey = "refined_sorting_id";
-	protected $fillable = ['weight_kg', 'date'];
+	protected $primaryKey = "refined_id";
+	protected $fillable = ['refined_id', 'refined_receipt_id', 'pre_sorting_id', 'refined_material_id', 'refined_user_id', 'refined_weight', 'refined_date', 'description'];
 	
 	public function textile_inventory() {
 		return $this->belongsTo(textile_inventory::class, 'textile inventory_id');
@@ -22,11 +23,11 @@ class refined_sorting extends Model {
 		return $this->belongsTo(users::class,'user_id');
 	}
 	
-	public function inventory_receipt() {
+	public function receipt() {
 		return $this->belongsTo(inventory_receipt::class,'inventory_receipt_id');
 	}
-	
-	public function status_types() {
-		return $this->belongsTo(status_types::class,'status_type_id');
+
+	public function material() {
+		return $this->belongsTo(material_names::class,'material_id');
 	}
 }

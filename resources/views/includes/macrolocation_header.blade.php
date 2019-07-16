@@ -16,13 +16,14 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/companies/{{$company->company_id}}"><h3>JALOSTUSLAITOS</h3>{{$company->company_name}}</a>
+            <a href="/companies/{{$company->company_id}}"><h4>TEKIHA TEkstiiliKIerrätyksen  HAllintajärjestelmä</h4>{{$company->company_name}}</a>
         </div>
 
         <ul class="list-unstyled components">
 
             <li>
-                <a href="/companies/{{$company->company_id}}">Oma Toimipiste</a>
+                <a href="{{'/companies/'.$company->company_id}}">Oma Toimipiste</a>
+                <a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'}}">Microlokaatiot</a>
                 <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">Raportit</a>
                 <ul class="collapse list-unstyled" id="reportsSubmenu">
                     <li><a href="{{'/companies/'.$company->company_id.'/warehouse'}}">    Varasto</a></li>
@@ -34,9 +35,19 @@
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää vastaanotto</a></li>
-                    <li><a href="#">Lisää lähetys</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations'}}">Microlokaatiot</a></li>
+                </ul>
+                <a href="#recordSubmenu" data-toggle="collapse" aria-expanded="false">Tapahtumakirjaukset</a>
+
+                <ul class="collapse list-unstyled" id="recordSubmenu">
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää saapunut</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/issues/create'}}">Lisää lähetys</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/pre/create'}}">Lisää esilajittelu</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/refined/create'}}">Lisää hienolajittelu</a></li>
+
+
+
                 </ul>
                {{-- <a href="/ewc">EWC Codes</a>--}}
             </li>
@@ -56,17 +67,18 @@
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
                         <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Piilota ja näytä sivupalkki</span>
+                        <span>Piilota tai näytä sivupalkki</span>
                     </button>
-
+                    <span><h4>Käyttäjä: {{ Auth::user()->first_name }}</h4></span>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
 
-                        <a href="#" class="btn btn-info btn-lg logout">Yhteystiedot</a>
-                        <a href="/" class="btn btn-info btn-lg logout">Etusivu</a>
+                        
+                        <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a>
+                        <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
                         @guest
                             <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>
 

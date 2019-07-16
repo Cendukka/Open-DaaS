@@ -35,7 +35,7 @@ class receipt_controller extends Controller {
             'from_microlocation' => 'integer|required_without_all:from_supplier,from_community',
 			'to_microlocation' =>'required|integer',
 			'distance' => 'required|integer',
-			'weight' => 'required|integer',
+			'weight' => 'required|integer|min:0',
 			'ewc' => 'required|max:6|digits_between:0,9',
 		]);
 
@@ -85,7 +85,7 @@ class receipt_controller extends Controller {
             'from_microlocation' => 'integer',
             'to_microlocation' =>'required|integer',
             'distance' => 'required|integer',
-            'weight' => 'required|integer',
+            'weight' => 'required|integer|min:0',
             'ewc' => 'required|max:6|digits_between:0,9',
         ]);
 

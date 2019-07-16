@@ -35,7 +35,7 @@ class refined_controller extends Controller {
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
-            'weight' => 'required|integer',
+            'weight' => 'required|integer|min:0',
             'description' => 'max:191',
         ],[],[
             'user' => 'User',
@@ -97,7 +97,7 @@ class refined_controller extends Controller {
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
-            'weight' => 'required|integer',
+            'weight' => 'required|integer|min:0',
             'description' => 'max:191',
         ],[],[
             'user' => 'User',

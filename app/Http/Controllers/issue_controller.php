@@ -53,7 +53,7 @@ class issue_controller extends Controller {
                     }
                 },
             ],
-            'weight' => ['required',
+            'weight' => ['required','min:0',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
                         if(!is_numeric($v)) {
@@ -129,7 +129,7 @@ class issue_controller extends Controller {
                     }
                 },
             ],
-            'weight' => ['required',
+            'weight' => ['required','min:0',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
                         if(!is_numeric($v)) {

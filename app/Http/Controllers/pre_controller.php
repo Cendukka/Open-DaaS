@@ -33,7 +33,7 @@ class pre_controller extends Controller {
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'receipt' => 'integer|integer',
             'material' => 'required|integer',
-            'weight' => 'required|integer',
+            'weight' => 'required|integer|min:0',
         ]);
 
         $receipt = $request->get('receipt');
@@ -77,7 +77,7 @@ class pre_controller extends Controller {
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'receipt' => 'integer|integer',
             'material' => 'required|integer',
-            'weight' => 'required|integer',
+            'weight' => 'required|integer|min:0',
         ]);
 
         $receipt = $request->get('receipt');

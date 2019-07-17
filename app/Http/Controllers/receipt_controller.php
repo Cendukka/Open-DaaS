@@ -31,7 +31,7 @@ class receipt_controller extends Controller {
             'material' => 'required|integer',
 			'source' => 'required',
 			'from_community' => 'integer|required_without_all:from_supplier,from_microlocation',
-			'from_supplier' => 'integer|required_without_all:from_community,from_microlocation',
+			'from_supplier' => 'required_without_all:from_community,from_microlocation|max:191',
             'from_microlocation' => 'integer|required_without_all:from_supplier,from_community',
 			'to_microlocation' =>'required|integer',
 			'distance' => 'required|integer',
@@ -48,7 +48,7 @@ class receipt_controller extends Controller {
             'receipt_date' => $request->get('datetime'),
 			'receipt_material_id' => $material,
 			'from_community_id' => $request->get('from_community'),
-			'from_supplier_id' => $request->get('from_supplier'),
+			'from_supplier' => $request->get('from_supplier'),
 			'receipt_from_microlocation_id' => $request->get('from_microlocation'),
 			'receipt_to_microlocation_id' => $microlocation,
 			'distance_km' => $request->get('distance'),
@@ -81,7 +81,7 @@ class receipt_controller extends Controller {
             'material' => 'required|integer',
             'source' => 'required',
             'from_community' => 'integer|required_with:from_company',
-            'from_supplier' => 'integer',
+            'from_supplier' => 'max:191',
             'from_microlocation' => 'integer',
             'to_microlocation' =>'required|integer',
             'distance' => 'required|integer',
@@ -98,7 +98,7 @@ class receipt_controller extends Controller {
 		$receiptNew->receipt_date = $request->get('datetime');
 		$receiptNew->receipt_material_id = $material;
 		$receiptNew->from_community_id = $request->get('from_community');
-		$receiptNew->from_supplier_id = $request->get('from_supplier');
+		$receiptNew->from_supplier = $request->get('from_supplier');
 		$receiptNew->receipt_from_microlocation_id = $request->get('from_microlocation');
 		$receiptNew->receipt_to_microlocation_id = $microlocation;
 		$receiptNew->distance_km = $request->get('distance');
@@ -137,7 +137,7 @@ class receipt_controller extends Controller {
                     $query
                     ->where('to_microlocations.microlocation_name','LIKE','%'.$request->search."%")
                     ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$request->search."%")
-                    ->orwhere('supplier.supplier_name','LIKE','%'.$request->search."%")
+                    ->orwhere('from_supplier','LIKE','%'.$request->search."%")
                     ->orwhere('community.communitY_city','LIKE','%'.$request->search."%")
                     ->orWhere('material_name','LIKE','%'.$request->search."%")
                     ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%")
@@ -150,7 +150,7 @@ class receipt_controller extends Controller {
                     })
                     ->orWhere(function ($query) use ($request){
                         if(Str::contains('supplier',$request->search)){
-                            $query->orWhereNotNull('from_supplier_id');
+                            $query->orWhereNotNull('from_supplier');
                         }
                     })
                     ->orWhere(function ($query) use ($request){
@@ -160,19 +160,17 @@ class receipt_controller extends Controller {
                     });
                 })
                 ->join('material_names','receipt_material_id','=','material_id')
-                ->leftJoin('supplier','from_supplier_id','=','supplier.supplier_id')
                 ->leftJoin('community','from_community_id','=','community.community_id')
                 ->leftJoin('microlocations as from_microlocations','receipt_from_microlocation_id','=','from_microlocations.microlocation_id')
                 ->leftJoin('microlocations as to_microlocations','receipt_to_microlocation_id','=','to_microlocations.microlocation_id')
-                ->select('inventory_receipt.*','material_names.*','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','supplier.supplier_name','community.community_city')
+                ->select('inventory_receipt.*','material_names.*','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','from_supplier','community.community_city')
                 ->orderBy('receipt_date','DESC')
                 ->orderBy('receipt_to_microlocation_id')
                 ->get();
-           #dd($result);
             if($result){
                 foreach ($result as $key => $value){
                     $from =  ($value->from_community_id ? ['Ulkoinen',DB::table('community')->join('company','community_company_id','company_id')->where('community_id',$value->from_community_id)->first()->company_city.', ('.DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city.')'] :
-                        ($value->from_supplier_id ? ['Toimittaja',DB::table('supplier')->where('supplier_id',$value->from_supplier_id)->first()->supplier_name] :
+                        ($value->from_supplier ? ['Toimittaja',$value->from_supplier] :
                             ['Sisäinen',$value->from_microlocation_name]));
                     $output.='<tr>'.
                         '<td>'.date("Y-m-d",strtotime($value->receipt_date)).'</td>'.
@@ -208,7 +206,7 @@ class receipt_controller extends Controller {
             $ml_id = $request->ml_id ? $request->ml_id : 0;
             $community_id = $request->community_id ? $request->community_id : 0;
             $company_id = $community_id ? DB::table('community')->where('community_id','=',$community_id)->first()->community_company_id : 0;
-            $supplier_id = $request->supplier_id ? $request->supplier_id : 0;
+            $supplier = $request->supplier ? $request->supplier : '-';
             $output="";
             $source = $request->input('source');
             if($source == 'internal'){
@@ -238,16 +236,10 @@ class receipt_controller extends Controller {
                 }
             }
             elseif($source == 'supplier'){
-                $result = DB::table('supplier')->get();
-                if($result) {
-                    $output .= '<div class="form-group">';
-                    $output .= '<label for="from_supplier">From supplier:&nbsp</label><select id="from_supplier" name="from_supplier">';
-                    $output .= '<option selected="selected" disabled hidden value=""></option>';
-                    foreach ($result as $key => $value) {
-                        $output .= '<option value="'.$value->supplier_id.'" '.($supplier_id == $value->supplier_id ? 'selected="selected"' : '').'>'.title_case($value->supplier_name).'</option>';
-                    }
-                    $output .= '</select></div>';
-                }
+                $output .= '<div class="form-group">';
+                $output .= '<label for="from_supplier">From supplier:&nbsp</label>';
+                $output .= '<input type="text" class="form-control" name="from_supplier" value="'.$supplier.'"/>';
+                $output .= '</div>';
             }
             return Response($output);
         }

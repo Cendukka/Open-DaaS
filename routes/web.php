@@ -129,8 +129,10 @@ Route::get('companies/{company}/manage/receipts/{receipt}/edit/communities',    
 
 # Issues
 Route::get('companies/{company}/issues',                                'issue_controller@index');
-Route::resource('companies/{company}/manage/issues',                    'issue_controller', ['only' => ['show', 'create', 'edit']]);
+Route::get('companies/{company}/manage/issues/create',                  'issue_controller@create');
+Route::get('companies/{company}/manage/issues/{issue}/edit',            'issue_controller@edit');
 Route::get('companies/{company}/issues/search',                         'issue_controller@search');
+Route::get('companies/{company}/manage/issues/inventory',               'issue_controller@inventory');
 Route::post('companies/{company}/manage/issues/issues-store',           'issue_controller@store');
 Route::post('companies/{company}/manage/issues/{issue}/issues-update',  'issue_controller@update');
 

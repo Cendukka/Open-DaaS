@@ -17,9 +17,6 @@
                     foreach ($microlocations as $microlocation){
                         array_push($microlocation_ids, $microlocation->microlocation_id);
                     }
-
-                    #$a = DB::table('material_names')->whereIn('material_type',['textile'])->get();
-                    #dd($a->contains('material_id', '5'));
                 @endphp
                 @if (count($microlocation_ids)>0)
                     <table class="table table-bordered table-hover">
@@ -59,11 +56,16 @@
                                     @foreach ($material_names->keys() as $id)
                                         <td>{{($inventory->contains(function ($value, $key) use ($id) {return $value->inventory_material_id == $id;}) ? $inventory->keyBy('inventory_material_id')[$id]->inventory_weight : 'nil')}}</td>
                                     @endforeach
+
                                 @else
                                     <td>{{$ml->microlocation_name}}</td>
-                                    @foreach ($material_names->keys() as $id)
-                                        <td>nil</td>
-                                    @endforeach
+                                    @if($material_names->count()>0)
+                                        @foreach ($material_names->keys() as $id)
+                                            <td>nil</td>
+                                        @endforeach
+                                    @else
+                                        <td>No inventory records found.</td>
+                                    @endif
                                 @endif
                             </tr>
                         @endforeach

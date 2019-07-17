@@ -234,6 +234,9 @@ class refined_controller extends Controller {
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $used = DB::table('refined_sorting')->where('refined_receipt_id',$value->receipt_id)->sum('refined_weight');
+                        if($pre_receipt_id != $value->receipt_id && $used >= $value->receipt_weight){
+                            continue;
+                        }
                         $output .= '<option value="'.$value->receipt_id.'" '.($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->receipt_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                     }
                     $output .= '</select>';
@@ -258,7 +261,10 @@ class refined_controller extends Controller {
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $used = DB::table('refined_sorting')->where('pre_sorting_id',$value->pre_sorting_id)->sum('refined_weight');
-                        $output .= '<option value="'.$value->pre_sorting_id.'" '.($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->pre_sorting_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
+                        if($pre_receipt_id != $value->pre_sorting_id && $used >= $value->pre_sorting_weight){
+                            continue;
+                        }
+                        $output .= '<option value="'.$value->pre_sorting_id.'" '.($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->pre_sorting_date.', '.$value->pre_sorting_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                     }
                     $output .= '</select>';
                     return Response($output);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\company;
+use App\microlocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\inventory_issue;
@@ -228,4 +229,15 @@ class issue_controller extends Controller {
 			}
 		}
 	}
+
+    public function inventory(Request $request, company $company){
+        if($request->ajax()){
+            $output=[];
+            $ml = $request->get('ml_id');
+            foreach(DB::table('inventory')->where('inventory_microlocation_id',$ml)->get() as $inv){
+                $output[$inv->inventory_material_id] = $inv->inventory_weight;
+            }
+            return Response($output);
+        }
+    }
 }

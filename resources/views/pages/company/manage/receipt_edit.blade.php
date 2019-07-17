@@ -50,7 +50,7 @@
                             <select class="form-control element-width-auto" id="source" name="source">
                                 <option value="internal" {{($receipt->receipt_from_microlocation_id ? 'selected="selected"' : '')}}>Sisäinen</option>
                                 <option value="external" {{($receipt->from_community_id ? 'selected="selected"' : '')}}>Ulkoinen</option>
-                                <option value="supplier" {{($receipt->from_supplier_id ? 'selected="selected"' : '')}}>Yksityinen</option>
+                                <option value="supplier" {{($receipt->from_supplier ? 'selected="selected"' : '')}}>Yksityinen</option>
                             </select>
                         </div>
                         <div id="from" class="form-group">
@@ -100,11 +100,11 @@
             $source = $("#source").val();
             $ml_id = {{$receipt->receipt_from_microlocation_id ?: 0}}
             $community_id = {{$receipt->from_community_id ?: 0}}
-            $supplier_id = {{$receipt->from_supplier_id ?: 0}}
+            $supplier = "{{$receipt->from_supplier ?: ''}}";
             $.ajax({
                 type: "get",
                 url: '{{URL::to(trim(url()->current(),'/').'/source')}}',
-                data: {'source':$source,'ml_id':$ml_id,'community_id':$community_id,'supplier_id':$supplier_id},
+                data: {'source':$source,'ml_id':$ml_id,'community_id':$community_id,'supplier':$supplier},
                 success:function(data){
                     $("#from").empty().html(data);
                 }
@@ -113,7 +113,7 @@
         function communities(){
             $from_company = $("#from_company").val();
             $community_id = {{$receipt->from_community_id ?: 0}}
-            if($community_id!=0) {
+            if($community_id!=0){
                 $.ajax({
                     type: "get",
                     url: '{{URL::to(trim(url()->current(),'/').'/communities')}}',

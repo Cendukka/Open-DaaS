@@ -9,7 +9,7 @@ class inventory_receipt extends Model {
 	public $timestamps = true;
 	protected $table = "inventory_receipt";
 	protected $primaryKey = "receipt_id";
-	protected $fillable = ['receipt_material_id','from_company_id','from_community_id','from_supplier_id','receipt_from_microlocation_id','receipt_to_microlocation_id',
+	protected $fillable = ['receipt_material_id','from_company_id','from_community_id','from_supplier','receipt_from_microlocation_id','receipt_to_microlocation_id',
 		'distance_km','receipt_weight','receipt_date','receipt_ewc_code','receipt_user_id'];
 	
 	public function ewc_code() {
@@ -22,10 +22,6 @@ class inventory_receipt extends Model {
 	
 	public function from_company() {
 		return $this->belongsTo(company::class,'company_id','from_company_id');
-	}
-	
-	public function from_supplier() {
-		return $this->belongsTo(supplier::class,'supplier_id','from_supplier_id');
 	}
 	
 	public function from_microlocation() {

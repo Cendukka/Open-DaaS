@@ -11,7 +11,7 @@
                 <div class="row">
                     <div id="pieChartCompany"></div>
                 </div>
-                <script type="javascript">
+                <script type="text/javascript">
                     google.charts.load('current', {packages: ['corechart', 'line']});
                     google.charts.setOnLoadCallback(drawCompanyWarehouse);
 
@@ -21,9 +21,18 @@
                         inventoryData.addColumn('number', 'Weight');
                         @foreach(DB::table('material_names')->where('material_type','textile')->get() as $mat)
 
-                        inventoryData.addRow(['{{$mat->material_name}}', {{DB::table('inventory')->where('inventory_material_id',$mat->material_id)->sum('inventory_weight')}}]);
+                        inventoryData.addRow(['{{$mat->material_name}}', {{max(0, DB::table('inventory')
+                                                                            ->join('microlocations','microlocation_id','inventory_microlocation_id')
+                                                                            ->where('inventory_material_id',$mat->material_id)
+                                                                            ->where('microlocation_company_id',$company->company_id)
+                                                                            ->sum('inventory_weight'))}}]);
                             @endforeach
-                        var wholeOptions = {'title': 'Yhtiö - Kierrätetyt yhteensä: {{DB::table('inventory')->join('material_names','material_id','inventory_material_id')->where('material_type','textile')->sum('inventory_weight')}} Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
+                        var wholeOptions = {'title': 'Yhtiö - Kierrätetyt yhteensä: {{DB::table('inventory')
+                                                                                        ->join('material_names','material_id','inventory_material_id')
+                                                                                        ->join('microlocations','microlocation_id','inventory_microlocation_id')
+                                                                                        ->where('material_type','textile')
+                                                                                        ->where('microlocation_company_id',$company->company_id)
+                                                                                        ->sum('inventory_weight')}} Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
                         var wholeChart = new google.visualization.PieChart(document.getElementById('pieChartCompany'));
                         wholeChart.draw(inventoryData, wholeOptions);
                     }

@@ -35,7 +35,7 @@ class receipt_controller extends Controller {
             'from_microlocation' => 'integer|required_without_all:from_supplier,from_community',
 			'to_microlocation' =>'required|integer',
 			'distance' => 'required|integer',
-			'weight' => 'required|integer',
+			'weight' => 'required|integer|min:0',
 			'ewc' => 'required|max:6|digits_between:0,9',
 		]);
 
@@ -85,7 +85,7 @@ class receipt_controller extends Controller {
             'from_microlocation' => 'integer',
             'to_microlocation' =>'required|integer',
             'distance' => 'required|integer',
-            'weight' => 'required|integer',
+            'weight' => 'required|integer|min:0',
             'ewc' => 'required|max:6|digits_between:0,9',
         ]);
 
@@ -216,7 +216,7 @@ class receipt_controller extends Controller {
                 if($result) {
                     $output .= '<div id="from_microlocation" class="form-group">';
                     $output .= '<label for="from_microlocation">From microlocation:&nbsp</label><select name="from_microlocation">';
-                    $output .= '<option disabled hidden value=""></option>';
+                    $output .= '<option class="form-control form-text-align-padd" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $output .= '<option value="'.$value->microlocation_id.'" '.($ml_id== $value->microlocation_id? 'selected="selected"' : '').'>'.title_case($value->microlocation_name).'</option>';
                     }
@@ -228,7 +228,7 @@ class receipt_controller extends Controller {
                 if($result) {
                     $output .= '<div class="form-group">';
                     $output .= '<label for="from_company">From company:&nbsp</label><select id="from_company" name="from_company">';
-                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    $output .= '<option class="form-control form-text-align-padd" selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $output .= '<option value="'.$value->company_id.'" '.($company_id == $value->company_id ? 'selected="selected"' : '').'>'.title_case($value->company_name).'</option>';
                     }
@@ -242,7 +242,7 @@ class receipt_controller extends Controller {
                 if($result) {
                     $output .= '<div class="form-group">';
                     $output .= '<label for="from_supplier">From supplier:&nbsp</label><select id="from_supplier" name="from_supplier">';
-                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    $output .= '<option class="form-control form-text-align-padd" selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $output .= '<option value="'.$value->supplier_id.'" '.($supplier_id == $value->supplier_id ? 'selected="selected"' : '').'>'.title_case($value->supplier_name).'</option>';
                     }

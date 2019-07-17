@@ -35,7 +35,7 @@ class refined_controller extends Controller {
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
-            'weight' => 'required|integer',
+            'weight' => 'required|integer|min:0',
             'description' => 'max:191',
         ],[],[
             'user' => 'User',
@@ -51,12 +51,12 @@ class refined_controller extends Controller {
         $receipt_entity = ($receipt ?
             DB::table('inventory_receipt')
                 ->where('receipt_id',$receipt)
-                ->first()->receipt_to_microlocation_id
+                ->first()
             :
             DB::table('pre_sorting')
                 ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
                 ->where('pre_sorting_id',$pre_sorting)
-                ->first()->receipt_to_microlocation_id
+                ->first()
             );
         $microlocation = $receipt_entity->receipt_to_microlocation_id;
         $material = $request->get('material');
@@ -97,7 +97,7 @@ class refined_controller extends Controller {
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
-            'weight' => 'required|integer',
+            'weight' => 'required|integer|min:0',
             'description' => 'max:191',
         ],[],[
             'user' => 'User',
@@ -265,7 +265,7 @@ class refined_controller extends Controller {
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $used = DB::table('refined_sorting')->where('pre_sorting_id',$value->pre_sorting_id)->sum('refined_weight');
-                        $output .= '<option value="'.$value->pre_sorting_id.'" '.($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->pre_sorting_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
+                        $output .= '<option value="'.$value->pre_sorting_id.'" '.($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->pre_sorting_date.', '.$value->pre_sorting_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                     }
                     $output .= '</select>';
                     return Response($output);

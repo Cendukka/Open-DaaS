@@ -23,7 +23,7 @@ class excel_controller extends Controller
 
     public function export_csv(company $company){
         $exporter = app()->makeWith(user_export::class, compact('company'));
-        return $exporter ->download('sample.csv');
+        return $exporter ->download('users.xlsx', \Maatwebsite\Excel\Excel::XLSX);
 
     }
     public function import_csv(){

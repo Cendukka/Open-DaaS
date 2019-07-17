@@ -51,7 +51,7 @@
                             inventoryData.addColumn('string', 'Name');
                             inventoryData.addColumn('number', 'Weight');
                             @foreach(DB::table('material_names')->where('material_type','textile')->get() as $mat)
-                                inventoryData.addRow(['{{$mat->material_name}}', {{DB::table('inventory')->where('inventory_material_id',$mat->material_id)->sum('inventory_weight')}}]);
+                                inventoryData.addRow(['{{$mat->material_name}}', {{max(0, DB::table('inventory')->where('inventory_material_id',$mat->material_id)->sum('inventory_weight'))}}]);
                             @endforeach
                             var wholeOptions = {'title': 'Koko Suomi - Kierrätetyt yhteensä: {{DB::table('inventory')->join('material_names','material_id','inventory_material_id')->where('material_type','textile')->sum('inventory_weight')}} Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
                             var wholeChart = new google.visualization.PieChart(document.getElementById('piechartWhole'));
@@ -75,7 +75,7 @@
                                 }
                             @endphp
                             @foreach($values as $v)
-                                data.addRow([new Date(parseInt('{{$v[0][0]}}'),parseInt('{{$v[0][1]}}')), {{$v[1]}}]);
+                                data.addRow([new Date(parseInt('{{$v[0][0]}}'),parseInt('{{$v[0][1]}}')), {{max(0, $v[1])}}]);
                             @endforeach
 
                             var options = {

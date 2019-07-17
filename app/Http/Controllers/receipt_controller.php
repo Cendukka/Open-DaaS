@@ -206,7 +206,7 @@ class receipt_controller extends Controller {
             $ml_id = $request->ml_id ? $request->ml_id : 0;
             $community_id = $request->community_id ? $request->community_id : 0;
             $company_id = $community_id ? DB::table('community')->where('community_id','=',$community_id)->first()->community_company_id : 0;
-            $supplier = $request->supplier ? $request->supplier : '-';
+            $supplier = $request->supplier ? $request->supplier : '';
             $output="";
             $source = $request->input('source');
             if($source == 'internal'){

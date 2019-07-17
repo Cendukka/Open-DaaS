@@ -44,12 +44,12 @@ class refined_controller extends Controller {
         $receipt_entity = ($receipt ?
             DB::table('inventory_receipt')
                 ->where('receipt_id',$receipt)
-                ->first()->receipt_to_microlocation_id
+                ->first()
             :
             DB::table('pre_sorting')
                 ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
                 ->where('pre_sorting_id',$pre_sorting)
-                ->first()->receipt_to_microlocation_id
+                ->first()
             );
         $microlocation = $receipt_entity->receipt_to_microlocation_id;
         $material = $request->get('material');
@@ -66,7 +66,7 @@ class refined_controller extends Controller {
         ]);
         $refined->save();
 
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $receipt_entity->receipt_material_id, -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $receipt_entity->pre_sorting_material_id, -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
         return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Refined-Sorting successfully created.']);
 	}
@@ -139,13 +139,13 @@ class refined_controller extends Controller {
         $microlocation_new = $receipt_entity_new->receipt_to_microlocation_id;
 
         # Remove original weights from the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $receipt_entity_orig->receipt_material_id, $refinedNew->getOriginal('refined_weight'));
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $receipt_entity_orig->pre_sorting_material_id, $refinedNew->getOriginal('refined_weight'));
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $refinedNew->getOriginal('refined_material_id'), -$refinedNew->getOriginal('refined_weight'));
 
         $refinedNew->save();
 
         # Add new weights to the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $receipt_entity_new->receipt_material_id, -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $receipt_entity_new->pre_sorting_material_id, -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
         return redirect()->action('refined_controller@index',['company' => $company])->withErrors(['Refined-Sorting successfully updated.']);
 	}

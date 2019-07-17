@@ -14,19 +14,17 @@ class pre_sorting_table_seeder extends Seeder
     {
 		$faker = Faker::create('fi_FI');
 		$microlocation_amount = DB::table('microlocations')->count();
-		$receipt_amount = DB::table('inventory_receipt')->count();
-		$presorted_amount = DB::table('presorted_material')->count();
-		$users_amount = DB::table('users')->count();
-		$status_amount = DB::table('status_types')->count();
+		$receipts = DB::table('inventory_receipt')->join('material_names','receipt_material_id','material_id')->where('material_type','=','raw waste')->get();
+		$materials = DB::table('material_names')->where('material_type','=','presorted')->orWhere('material_type','=','refined')->get();
 		
-		foreach (range(1,$microlocation_amount * 2 + $receipt_amount * 3) as $index) {
+		foreach (range(1,$microlocation_amount * 2 + $receipts->count() * 6) as $index) {
+            $receipt = $receipts->random();
 			DB::table('pre_sorting')->insert([
-				'pre_sorting_receipt_id' => rand(1,$receipt_amount),
-				'presorted_material_id' => rand(1,$presorted_amount),
-				'pre_sorting_user_id' => rand(1,$users_amount),
-				'pre_sorting_status_id' => rand(1,$status_amount),
+				'pre_sorting_receipt_id' => $receipt->receipt_id,
+				'pre_sorting_material_id' => $materials->random()->material_id,
+				'pre_sorting_user_id' => DB::table('users')->where('user_microlocation_id','=',$receipt->receipt_to_microlocation_id)->get()->random()->user_id,
 				'pre_sorting_weight' => rand(100,500),
-				'pre_sorting_date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now', $timezone = null),
+				'pre_sorting_date' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = null),
 			]);
 		}
     }

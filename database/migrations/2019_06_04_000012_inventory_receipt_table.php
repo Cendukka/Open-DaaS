@@ -25,6 +25,8 @@ class InventoryReceiptTable extends Migration
 			$table->integer('receipt_weight');
 			$table->dateTime('receipt_date');
 			$table->char('receipt_ewc_code',6);
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 	
 			$table->foreign('receipt_material_id')->references('material_id')->on('material_names');
 			$table->foreign('receipt_from_microlocation_id')->references('microlocation_id')->on('microlocations');

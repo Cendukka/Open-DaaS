@@ -1,9 +1,9 @@
 @extends('layouts.macrolocation')
 @section('content')
-    <div id="content" class="row">
+    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Edit receipt </h3>
+                <h3>Muokkaa saapuneet-kirjausta </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -15,74 +15,86 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="receipts-store">
-                    @csrf
-                    <div class="form-group">
-                        <label for="user">User:&nbsp</label>
-                        <select name="user">
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}" {{($user->user_id == $receipt->receipt_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        @php
-                            date_default_timezone_set('Europe/Helsinki')
-                        @endphp
-                        <label for="datetime">Date & Time:&nbsp</label>
-                        <input type="text" class="form-control" name="datetime" value="{{$receipt->receipt_date}}"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="material">Material:&nbsp</label>
-                        <select name="material">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->get() as $material)
-                                <option value="{{$material->material_id}}" {{($material->material_id == $receipt->receipt_material_id ? 'selected="selected"' : '')}}>{{title_case($material->material_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="source">Source:&nbsp</label>
-                        <select id="source" name="source">
-                            <option value="internal" {{($receipt->receipt_from_microlocation_id ? 'selected="selected"' : '')}}>Internal</option>
-                            <option value="external" {{($receipt->from_community_id ? 'selected="selected"' : '')}}>External</option>
-                            <option value="supplier" {{($receipt->from_supplier_id ? 'selected="selected"' : '')}}>Supplier</option>
-                        </select>
-                    </div>
-                    <div id="from" class="form-group">
-                    </div>
-                    <div class="form-group">
-                        <label for="to_microlocation">To microlocation:&nbsp</label>
-                        <select name="to_microlocation">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $receipt->receipt_to_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="distance">Disance (km):&nbsp</label>
-                        <input type="text" class="form-control" name="distance" value="{{$receipt->distance_km}}"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="weight">Weight (kg):&nbsp</label>
-                        <input type="text" class="form-control" name="weight" value="{{$receipt->receipt_weight}}"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="ewc">EWC Code:&nbsp</label>
-                        <select name="ewc">
-                            @foreach (DB::table('ewc_codes')->get() as $ewc)
-                                <option value="{{$ewc->ewc_code}}">{{title_case($ewc->ewc_code)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </form>
+                    <form method="post" action="receipts-update" class="form-text-align-padd">
+                        @csrf
+                        <div class="form-group">
+                            <label>Vastaanotto kirjattu:&nbsp</label>{{$receipt->created_at}}
+                            <p></p>
+                            <label>Vastaanotto muokattu:&nbsp</label>{{$receipt->updated_at}}
+                        </div>
+                        <div class="form-group">
+                            <label for="datetime">Päivämäärä:</label>
+                            <div>
+                                <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{$receipt->receipt_date}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user">Käyttäjä:</label>
+                            <select class="form-control element-width-auto" name="user">
+                                @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
+                                    <option value="{{$user->user_id}}" {{($user->user_id == $receipt->receipt_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="material">Materiaali:</label>
+                            <select name="material" class="form-control element-width-auto">
+                                <option selected="selected" disabled hidden value=""></option>
+                                @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $material)
+                                    <option value="{{$material->material_id}}" {{($material->material_id == $receipt->receipt_material_id ? 'selected="selected"' : '')}}>{{title_case($material->material_name)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="source">Lähde:</label>
+                            <select class="form-control element-width-auto" id="source" name="source">
+                                <option value="internal" {{($receipt->receipt_from_microlocation_id ? 'selected="selected"' : '')}}>Sisäinen</option>
+                                <option value="external" {{($receipt->from_community_id ? 'selected="selected"' : '')}}>Ulkoinen</option>
+                                <option value="supplier" {{($receipt->from_supplier_id ? 'selected="selected"' : '')}}>Yksityinen</option>
+                            </select>
+                        </div>
+                        <div id="from" class="form-group">
+                        </div>
+                        <div class="form-group">
+                            <label for="to_microlocation">Microlokaatioon:</label>
+                            <select class="form-control element-width-auto" name="to_microlocation">
+                                <option selected="selected" disabled hidden value=""></option>
+                                @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
+                                    <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $receipt->receipt_to_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Paino (kg):</label>
+                            <input type="text" class="form-control element-width-auto" name="weight" value="{{$receipt->receipt_weight}}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="distance">Kuljetusmatka (km):</label>
+                            <input type="text" class="form-control element-width-auto" name="distance" value="{{$receipt->distance_km}}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="ewc">EWC-koodi:</label>
+                            <select class="form-control element-width-auto" name="ewc">
+                                @foreach (DB::table('ewc_codes')->get() as $ewc)
+                                    <option value="{{$ewc->ewc_code}}" {{($ewc->ewc_code== $receipt->receipt_ewc_code ? 'selected="selected"' : '')}}>{{title_case($ewc->ewc_code)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
             </div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $('.timepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    </script>
     <script type="text/javascript">
         function source(){
             $source = $("#source").val();
@@ -101,19 +113,26 @@
         function communities(){
             $from_company = $("#from_company").val();
             $community_id = {{$receipt->from_community_id ?: 0}}
-            $.ajax({
-                type: "get",
-                url: '{{URL::to(trim(url()->current(),'/').'/communities')}}',
-                data: {'from_company':$from_company,'community_id':$community_id},
-                success:function(data){
-                    $("#from_community").empty().html(data);
-                }
-            })
+            if($community_id!=0) {
+                $.ajax({
+                    type: "get",
+                    url: '{{URL::to(trim(url()->current(),'/').'/communities')}}',
+                    data: {'from_company': $from_company, 'community_id': $community_id},
+                    success: function (data) {
+                        $("#from_community").empty().html(data);
+                    }
+                })
+            }
         };
 
         $(document).ready(source);
         $('#source').on('change',source);
         $(document).ready(communities);
         $(document).on("change", '#from_company', communities);
+    </script>
+    <script type="text/javascript">
+        $('.timepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
     </script>
 @endsection

@@ -19,16 +19,16 @@ class RefinedSortingTable extends Migration
 			$table->integer('pre_sorting_id')->unsigned()->nullable();
 			$table->integer('refined_material_id')->unsigned();
 			$table->integer('refined_user_id')->unsigned();
-			$table->integer('refined_status_id')->unsigned();
 			$table->integer('refined_weight');
 			$table->dateTime('refined_date');
-			$table->string('refined_description',191);
-	
+			$table->string('description',191);
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+
 			$table->foreign('refined_receipt_id')->references('receipt_id')->on('inventory_receipt');
 			$table->foreign('pre_sorting_id')->references('pre_sorting_id')->on('pre_sorting');
 			$table->foreign('refined_material_id')->references('material_id')->on('material_names');
 			$table->foreign('refined_user_id')->references('user_id')->on('users');
-			$table->foreign('refined_status_id')->references('status_type_id')->on('status_types');
         });
     }
 

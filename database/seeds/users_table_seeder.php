@@ -19,59 +19,50 @@ class users_table_seeder extends Seeder
 		DB::table('users')->insert([
 			'user_type_id' => 1,
 			'user_company_id' => '1',
+			'user_microlocation_id' => '1',
 			'last_name' => 'ADMIN',
 			'first_name' => 'LSJH',
 			'username' => 'admin',
+			'email' => 'admin@test.com',
 			'password' => Hash::make('qwerty')
 			]);
 	
-		$companies_amount = DB::table('company')->count();
+		$companies = DB::table('company')->get();
 		
 		# Adds Admins to all the companies
-		foreach (range(2,$companies_amount) as $company_index) {
+		foreach($companies as $company) {
+            $microlocations = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
+
+		    $fn =$faker->firstName;
+            $ln = $faker->lastName;
 			DB::table('users')->insert([
 				'user_type_id' => 2,
-				'user_company_id' => $company_index,
-				'last_name' => $faker->lastName,
-				'first_name' => $faker->firstName,
-				'username' => $faker->userName,
+				'user_company_id' => $company->company_id,
+                'user_microlocation_id' => $microlocations->random()->microlocation_id,
+				'last_name' => $fn,
+				'first_name' => $ln,
+				'username' => $ln.'.'.$fn,
+				'email' => $ln.'.'.$fn.'@test.com',
 				'password' => Hash::make('qwerty')
-				]);
-			
-			# Adds managers to all the microlocations
-			$microlocations = DB::table('microlocations')
-								->where('microlocations.microlocation_company_id','=',$company_index)
-								->get();
-			
-			
-			foreach ($microlocations as $ml_index) {
+			]);
+
+
+
+            # Adds managers to all the microlocations
+			foreach ($microlocations as $ml) {
+                $fn =$faker->firstName;
+                $ln = $faker->lastName;
 				DB::table('users')->insert([
 					'user_type_id' => 3,
-					'user_company_id' => $company_index,
-					'user_microlocation_id' => $ml_index->microlocation_id,
-					'last_name' => $faker->lastName,
-					'first_name' => $faker->firstName,
-					'username' => $faker->userName,
+					'user_company_id' => $company->company_id,
+					'user_microlocation_id' => $ml->microlocation_id,
+                    'last_name' => $fn,
+                    'first_name' => $ln,
+                    'username' => $ln.'.'.$fn,
+                    'email' => $ln.'.'.$fn.'@test.com',
 					'password' => Hash::make('qwerty')
-					]);
-				
-				# Create regular users
-				foreach (range(1,1) as $index) {
-					DB::table('users')->insert([
-						'user_type_id' => 4,
-						'user_company_id' => $company_index,
-						'user_microlocation_id' => $ml_index->microlocation_id,
-						'last_name' => $faker->lastName,
-						'first_name' => $faker->firstName,
-						'username' => $faker->userName,
-						'password' => Hash::make('qwerty')
-						]);
-				}
+				]);
 			}
-			
-			
 		}
-		
-		
     }
 }

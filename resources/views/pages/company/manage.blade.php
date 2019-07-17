@@ -10,8 +10,9 @@
                     <li><a href="{{url(action('company_controller@edit',['company' => $company]))}}">Company</a></li>
                     <li><a href="{{url(action('user_controller@index',['company' => $company]))}}">Users</a></li>
                     <li><a href="{{url(action('microlocation_controller@index',['company' => $company]))}}">Microlocations</a></li>
-                    <li><a href="{{url(action('receipt_controller@index',['company' => $company]))}}">Receipts</a></li>
-                    <li><a href="{{url(action('issue_controller@index',['company' => $company]))}}">Issues</a></li>
+                    <li><a href="{{url(action('community_controller@index',['company' => $company]))}}">Communities</a></li>
+{{--                    <li><a href="{{url(action('receipt_controller@index',['company' => $company]))}}">Receipts</a></li>--}}
+{{--                    <li><a href="{{url(action('issue_controller@index',['company' => $company]))}}">Issues</a></li>--}}
                 </ul>
             </div>
         </div>

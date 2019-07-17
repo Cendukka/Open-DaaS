@@ -16,27 +16,19 @@
                         </ul>
                     </div>
                 @endif
-                <h4>Add User</h4>
-                <form method="post" action="users-store">
+                <form method="post" action="users-store" class="form-text-align-padd">
                     @csrf
                     <div class="form-group">
-                        <label for="user_type">Käyttäjätyyppi:&nbsp</label>
-                        <select name="user_type">
-                            <option disabled value="1">Superadmin</option>
-                            <option value="2">Admin</option>
-                            <option value="3">Manager</option>
+                        <label for="user_type">Käyttäjätyyppi:</label>
+                        <select class="form-control element-width-auto" name="user_type">
+                            <option value="2">Yhtiön bosse</option>
+                            <option value="3">Microlokaationin työntekijä</option>
 
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="company">Yhtiö:&nbsp</label>
-                        <select name="company">
-                            <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="microlocation">Microlokaatio:&nbsp</label>
-                        <select name="microlocation">
+                        <label for="microlocation">Microlokaatio:</label>
+                        <select class="form-control element-width-auto" name="microlocation">
                             <option selected="selected" value=""></option>
                             @php
                                 $microlocations = DB::table('microlocations')
@@ -50,20 +42,24 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="first_name">Etunimi:&nbsp</label>
-                        <input type="text" class="form-control center" name="first_name"/>
+                        <label for="first_name">Etunimi:</label>
+                        <input id="first_name" maxlength="50" type="text" class="form-control element-width-auto" name="first_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="last_name">Sukunimi:&nbsp</label>
-                        <input type="text" class="form-control center" name="last_name"/>
+                        <label for="last_name">Sukunimi:</label>
+                        <input id="last_name" maxlength="50" type="text" class="form-control element-width-auto" name="last_name"/>
                     </div>
                     <div class="form-group">
-                        <label for="username">Käyttäjänimi:&nbsp</label>
-                        <input type="text" class="form-control center" name="username"/>
+                        <label for="username">Käyttäjänimi:</label>
+                        <input id="username" maxlength="50" type="text" class="form-control element-width-auto" name="username"/>
                     </div>
                     <div class="form-group">
-                        <label for="password">Salasana:&nbsp</label>
-                        <input type="text" class="form-control center" name="password" value="qwerty" readonly style="color:lightgray;">
+                        <label for="email">Sähköposti:</label>
+                        <input id="email" maxlength="50" type="text" class="form-control text-lowercase element-width-auto" name="email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Salasana:</label>
+                        <input type="text" maxlength="50"class="form-control element-width-auto" name="password" value="qwerty" disabled>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Lisää</button>
@@ -71,4 +67,25 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function source(){
+            $("#username").val($("#first_name").val()+'.'+$("#last_name").val());
+            $("#email").val($("#first_name").val()+'.'+$("#last_name").val()+"@testdomain.fi");
+        };
+        $('#first_name').on('change',source);
+        $('#last_name').on('change',source);
+
+        function microlocation(){
+            var $userType = $("#user_type").val();
+            if($userType > 2){ // Transport
+                $("#microlocation").show();
+            }
+            else{
+                $("#microlocation").hide();
+            }
+        };
+        $(document).ready(microlocation);
+        $('#user_type').on('change',microlocation);
+    </script>
 @endsection

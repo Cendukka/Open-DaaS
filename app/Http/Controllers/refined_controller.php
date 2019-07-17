@@ -8,74 +8,161 @@ use Illuminate\Support\Facades\DB;
 use App\refined_sorting;
 
 class refined_controller extends Controller {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(company $company) {
-	
+        return view('pages.company.refined')->with('company', $company);
 	}
-	
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function create(company $company) {
-	
+        return view('pages.company.manage.refined_create')->with('company', $company);
 	}
-	
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request, refined_sorting $refined) {
-	
+
+
+	public function store(Request $request, company $company) {
+        # ADD MORE AUTHENTICATION HERE
+
+        $request->validate([
+            'user' => 'required|integer',
+            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'pre_receipt' => 'required|integer',
+            'material' => 'required|integer',
+            'weight' => 'required|integer|min:0',
+            'description' => 'max:191',
+        ],[],[
+            'user' => 'User',
+            'datetime' => 'Date & Time',
+            'pre_receipt' => 'Pre-Sorting or Receipt',
+            'material' => 'Material',
+            'weight' => 'Weight',
+        ]);
+
+        $receipt = ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL);
+        $pre_sorting = ($request->get('origin') == 'presort' ? $request->get('pre_receipt') : NULL);
+
+        $receipt_entity = ($receipt ?
+            DB::table('inventory_receipt')
+                ->where('receipt_id',$receipt)
+                ->first()
+            :
+            DB::table('pre_sorting')
+                ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
+                ->where('pre_sorting_id',$pre_sorting)
+                ->first()
+            );
+        $microlocation = $receipt_entity->receipt_to_microlocation_id;
+        $material = $request->get('material');
+        $weight = $request->get('weight');
+
+        $refined = new refined_sorting([
+            'refined_user_id' => $request->get('user'),
+            'refined_date' => $request->get('datetime'),
+            'refined_receipt_id' => $receipt,
+            'pre_sorting_id' => $pre_sorting,
+            'refined_material_id' => $material,
+            'refined_weight' => $weight,
+            'description' => ($request->get('description') ?: ''),
+        ]);
+        $refined->save();
+
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $receipt_entity->receipt_material_id, -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
+        return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Refined-Sorting successfully created.']);
 	}
-	
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function show(company $company, refined_sorting $refined) {
-	
+
 	}
-	
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function edit(company $company, refined_sorting $refined) {
-	
+        return view('pages.company.manage.refined_edit')->with(['company' => $company, 'refined' => $refined]);
 	}
-	
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function update(Request $request, company $company, refined_sorting $refined) {
+        # ADD MORE AUTHENTICATION HERE
+
+        $request->validate([
+            'user' => 'required|integer',
+            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'pre_receipt' => 'required|integer',
+            'material' => 'required|integer',
+            'weight' => 'required|integer|min:0',
+            'description' => 'max:191',
+        ],[],[
+            'user' => 'User',
+            'datetime' => 'Date & Time',
+            'pre_receipt' => 'Pre-Sorting or Receipt',
+            'material' => 'Material',
+            'weight' => 'Weight',
+        ]);
+
+        $receipt = ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL);
+        $pre_sorting = ($request->get('origin') == 'presort' ? $request->get('pre_receipt') : NULL);
+        $material = $request->get('material');
+        $weight = $request->get('weight');
+
+        $refinedNew = refined_sorting::find($refined->refined_id);
+        $refinedNew->refined_user_id = $request->get('user');
+        $refinedNew->refined_date = $request->get('datetime');
+        $refinedNew->refined_receipt_id = $receipt;
+        $refinedNew->pre_sorting_id = $pre_sorting;
+        $refinedNew->refined_material_id = $material;
+        $refinedNew->refined_weight = $weight;
+        $refinedNew->description = ($request->get('description') ?: '');
+
+
+        $receipt_entity_orig = ($refinedNew->getOriginal('refined_receipt_id') ?
+            DB::table('inventory_receipt')
+                ->where('receipt_id',$refinedNew->getOriginal('refined_receipt_id'))
+                ->first()
+            :
+            DB::table('pre_sorting')
+                ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
+                ->where('pre_sorting_id',$refinedNew->getOriginal('pre_sorting_id'))
+                ->first()
+        );
+        $receipt_entity_new = ($receipt ?
+            DB::table('inventory_receipt')
+                ->where('receipt_id',$receipt)
+                ->first()
+            :
+            DB::table('pre_sorting')
+                ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
+                ->where('pre_sorting_id',$pre_sorting)
+                ->first()
+        );
+        $microlocation_orig = $receipt_entity_orig->receipt_to_microlocation_id;
+        $microlocation_new = $receipt_entity_new->receipt_to_microlocation_id;
+
+        # Remove original weights from the inventory
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $receipt_entity_orig->receipt_material_id, $refinedNew->getOriginal('refined_weight'));
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $refinedNew->getOriginal('refined_material_id'), -$refinedNew->getOriginal('refined_weight'));
+
+        $refinedNew->save();
+
+        # Add new weights to the inventory
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $receipt_entity_new->receipt_material_id, -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
+        return redirect()->action('refined_controller@index',['company' => $company])->withErrors(['Refined-Sorting successfully updated.']);
 	}
-	
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function destroy($id) {
 		//
 	}
-	
+
+
 	public function search(Request $request, company $company){
 		if($request->ajax()){
 			$microlocations = DB::table('microlocations')
@@ -86,40 +173,46 @@ class refined_controller extends Controller {
 				array_push($microlocation_ids, $microlocation->microlocation_id);
 			}
 			$output="";
+
 			$result=DB::table('refined_sorting')
-					->whereIn('receipt_to_microlocation_id', $microlocation_ids)
+                    ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
 					->when(($request->from && $request->to), function($query) use ($request){
 						$query->whereBetween('refined_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
 					})
 					->where(function ($query) use ($request){
 						$query
 						->where('microlocation_name','LIKE','%'.$request->search."%")
-						->orWhere('material_name','LIKE','%'.$request->search."%");
+						->orWhere('material_name','LIKE','%'.$request->search."%")
+						->orWhere('refined_weight','LIKE','%'.$request->search."%")
+						->orWhere('username','LIKE','%'.$request->search."%");
 					})
-					->join('inventory_receipt','receipt_id','=','refined_receipt_id')
-					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
+                    ->leftJoin('pre_sorting','refined_sorting.pre_sorting_id','pre_sorting.pre_sorting_id')
+                    ->leftJoin('inventory_receipt', function($join){
+                        $join->on('pre_sorting.pre_sorting_receipt_id', '=', 'inventory_receipt.receipt_id')
+                            ->orOn('refined_sorting.refined_receipt_id', '=', 'inventory_receipt.receipt_id');
+                    })
+                    ->join('microlocations','receipt_to_microlocation_id','microlocation_id')
 					->join('material_names','material_id','=','refined_material_id')
-                    ->join('users','refined_sorting.refined_user_id','=','users.user_id')
-					->orderBy('refined_date')
+                    ->join('users','users.user_id','=','refined_user_id')
+					->orderBy('refined_date','DESC')
 					->orderBy('receipt_to_microlocation_id')
+                    ->select(['refined_id','username','refined_weight','material_name','refined_date','refined_receipt_id','microlocation_name'])
 					->get();
 			if($result){
-				$sumweight = 0;
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
-                        '<td>'.$value->refined_date.'</td>'.
-						'<td>'.title_case($value->microlocation_name).'</td>'.
-                        '<td>'.date("Y-m-d",strtotime($value->refined_date)).'</td>'.
+                        '<td>'.date("d-m-Y",strtotime($value->refined_date)).'</td>'.
+                        '<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'"> <span class="glyphicon glyphicon-pencil"></span></a></td>'.
 						'</tr>';
-					$sumweight += $value->refined_weight;
 				}
 				$output.='<tr>'.
 					'<td></td>'.
 					'<td></td>'.
-					'<td>'.$sumweight.' Total</td>'.
+					'<td>'.$result->sum('refined_weight').' Total</td>'.
 					'<td></td>'.
 					'<td></td>'.
 					'</tr>';
@@ -127,4 +220,66 @@ class refined_controller extends Controller {
 			}
 		}
 	}
+
+
+    public function origin(Request $request, company $company){
+        if($request->ajax()){
+            $output="";
+            $origin = $request->input('origin') ?: 0;
+            $ml_id = $request->input('ml_id') ?: 0;
+            $pre_receipt_id = $request->input('pre_receipt_id') ?: 0;
+            if($origin == 'receipt') {
+                $result = DB::table('inventory_receipt')
+                    ->join('material_names', 'material_id', 'receipt_material_id')
+                    ->where('receipt_to_microlocation_id', '=', $ml_id)
+                    ->where('material_type', 'refined')
+                    ->orderBy('receipt_date', 'DESC')
+                    ->get();
+                $output .= '<label for="pre_receipt">Saapuneiden materiaalien kirjaus:</label>';
+                if($result->count()) {
+                    $output .= '<select class="form-control element-width-auto" name="pre_receipt" id="pre_receipt">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    foreach ($result as $key => $value) {
+                        $used = DB::table('refined_sorting')->where('refined_receipt_id',$value->receipt_id)->sum('refined_weight');
+                        $output .= '<option value="'.$value->receipt_id.'" '.($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->receipt_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
+                    }
+                    $output .= '</select>';
+                    return Response($output);
+                }
+                else{
+                    $output .= 'No raw textile receipts found.';
+                    return Response($output);
+                }
+            }
+            elseif($origin == 'presort'){
+                $result = DB::table('pre_sorting')
+                    ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
+                    ->join('material_names', 'pre_sorting.pre_sorting_material_id', 'material_names.material_id')
+                    ->where('receipt_to_microlocation_id', '=', $ml_id)
+                    ->where('material_type', 'refined')
+                    ->orderBy('receipt_date', 'DESC')
+                    ->get();
+                $output .= '<label for="pre_receipt">Esilajittelun kirjaus:</label>';
+                if($result->count()) {
+                    $output .= '<select class="form-control element-width-auto" name="pre_receipt" id="pre_receipt">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
+                    foreach ($result as $key => $value) {
+                        $used = DB::table('refined_sorting')->where('pre_sorting_id',$value->pre_sorting_id)->sum('refined_weight');
+                        $output .= '<option value="'.$value->pre_sorting_id.'" '.($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->pre_sorting_date.', '.$value->pre_sorting_weight.' kg (Sorted: '.$used.'kg)').'</option>';
+                    }
+                    $output .= '</select>';
+                    return Response($output);
+                }
+                else{
+                    $output .= 'No pre-sorted raw textiles found.';
+                    return Response($output);
+                }
+            }
+            else{
+                return Response('ERROR');
+            }
+        }
+    }
 }
+
+

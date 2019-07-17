@@ -4,7 +4,7 @@
     <nav id="sidebar">
 		
 		<div class="sidebar-header">
-        	<a href="/home"><h3>JALOSTUSLAITOS</h3>SuperAdmin</a>
+        	<a href="/home"><h4>TADAH Tekstiilikierrätyksen Avoimen DAtan Hallintajärjestelmä</h4>Admin</a>
 		</div>
 
 		<ul class="list-unstyled components">
@@ -12,7 +12,7 @@
 			<li>
 				<a href="/home">Oma toimipiste</a>
 				<a href="/companies/">Toimipisteet</a>
-                <a href="/ewc/">EWC Codes</a>
+{{--                <a href="/ewc/">EWC Codes</a>--}}
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
                 
                 	<ul class="collapse list-unstyled" id="pageSubmenu">
@@ -40,6 +40,7 @@
                                 <i class="glyphicon glyphicon-align-left"></i>
                                 <span>Piilota ja näytä sivupalkki</span>
                             </button>
+                            <span><h4>Käyttäjä: {{ Auth::user()->first_name }}</h4></span>
                         </div>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -8,11 +8,16 @@
             </div>
             <div class="panel-body">
                 <form>
-                    @foreach (DB::table('company')->get() as $company)
-                        <a href="{{url('/companies/'.$company->company_id.'/manage/users')}}">{{title_case($company->company_name)}}</a>
-                        <br>
-                        <br>
-                    @endforeach
+                    <table class="table table-borderless table-hover" style="table-layout: auto">
+                        <tbody>
+                            @foreach (DB::table('company')->get() as $company)
+                                <tr>
+                                    <td class="text-right "><a href="{{url('/companies/'.$company->company_id.'/manage/users')}}" class="btn btn-info">Valitse <span class="glyphicon glyphicon-arrow-right"></span></a></td>
+                                    <td class="text-left">{{title_case($company->company_name)}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </form>
             </div>
         </div>

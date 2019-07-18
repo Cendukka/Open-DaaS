@@ -73,7 +73,7 @@ class refined_controller extends Controller {
         ]);
         $refined->save();
 
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $receipt_entity->pre_sorting_material_id, -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, ($pre_sorting ? $receipt_entity->pre_sorting_material_id : $receipt_entity->receipt_material_id), -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
         return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Refined-Sorting successfully created.']);
 	}
@@ -173,18 +173,21 @@ class refined_controller extends Controller {
 				array_push($microlocation_ids, $microlocation->microlocation_id);
 			}
 			$output="";
-
 			$result=DB::table('refined_sorting')
                     ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
 					->when(($request->from && $request->to), function($query) use ($request){
 						$query->whereBetween('refined_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
 					})
 					->where(function ($query) use ($request){
-						$query
-						->where('microlocation_name','LIKE','%'.$request->search."%")
-						->orWhere('material_name','LIKE','%'.$request->search."%")
-						->orWhere('refined_weight','LIKE','%'.$request->search."%")
-						->orWhere('username','LIKE','%'.$request->search."%");
+					    foreach(explode(' ',$request->search) as $word){
+                            $query->where(function ($query) use ($word) {
+                                $query
+                                    ->where('microlocation_name', 'LIKE', '%' . $word . "%")
+                                    ->orWhere('material_name', 'LIKE', '%' . $word . "%")
+                                    ->orWhere('refined_weight', 'LIKE', '%' . $word . "%")
+                                    ->orWhere('username', 'LIKE', '%' . $word . "%");
+                            });
+                        }
 					})
                     ->leftJoin('pre_sorting','refined_sorting.pre_sorting_id','pre_sorting.pre_sorting_id')
                     ->leftJoin('inventory_receipt', function($join){

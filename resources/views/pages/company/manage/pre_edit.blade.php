@@ -75,6 +75,7 @@
                         <input type="text" class="form-control element-width-auto" name="weight" value="{{$pre->pre_sorting_weight}}"/>
                     </div>
                     <button type="submit" class="btn btn-primary">Tallenna</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
                 </form>
             </div>
         </div>

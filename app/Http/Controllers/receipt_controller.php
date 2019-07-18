@@ -134,30 +134,34 @@ class receipt_controller extends Controller {
                     $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
                 })
                 ->where(function ($query) use ($request){
-                    $query
-                    ->where('to_microlocations.microlocation_name','LIKE','%'.$request->search."%")
-                    ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$request->search."%")
-                    ->orwhere('from_supplier','LIKE','%'.$request->search."%")
-                    ->orwhere('community.communitY_city','LIKE','%'.$request->search."%")
-                    ->orWhere('material_name','LIKE','%'.$request->search."%")
-                    ->orWhere('receipt_ewc_code','LIKE','%'.$request->search."%")
-                    ->orWhere('receipt_weight','LIKE','%'.$request->search."%")
-                    ->orWhere('distance_km','LIKE','%'.$request->search."%")
-                    ->orWhere(function ($query) use ($request){
-                        if(Str::contains('community',$request->search)){
-                            $query->whereNotNull('from_community_id');
-                        }
-                    })
-                    ->orWhere(function ($query) use ($request){
-                        if(Str::contains('supplier',$request->search)){
-                            $query->orWhereNotNull('from_supplier');
-                        }
-                    })
-                    ->orWhere(function ($query) use ($request){
-                        if(Str::contains('microlocation',$request->search)){
-                            $query->orWhereNotNull('receipt_from_microlocation_id');
-                        }
-                    });
+                    foreach(explode(' ',$request->search) as $word){
+                        $query->where(function ($query) use ($word) {
+                            $query
+                                ->where('to_microlocations.microlocation_name','LIKE','%'.$word."%")
+                                ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$word."%")
+                                ->orwhere('from_supplier','LIKE','%'.$word."%")
+                                ->orwhere('community.communitY_city','LIKE','%'.$word."%")
+                                ->orWhere('material_name','LIKE','%'.$word."%")
+                                ->orWhere('receipt_ewc_code','LIKE','%'.$word."%")
+                                ->orWhere('receipt_weight','LIKE','%'.$word."%")
+                                ->orWhere('distance_km','LIKE','%'.$word."%")
+                                ->orWhere(function ($query) use ($word){
+                                    if(Str::contains('ulkoinen',$word)){
+                                        $query->whereNotNull('from_community_id');
+                                    }
+                                })
+                                ->orWhere(function ($query) use ($word){
+                                    if(Str::contains('toimittaja',$word)){
+                                        $query->whereNotNull('from_supplier');
+                                    }
+                                })
+                                ->orWhere(function ($query) use ($word){
+                                    if(Str::contains('sisäinen',$word)){
+                                        $query->whereNotNull('receipt_from_microlocation_id');
+                                    }
+                                });
+                        });
+                    }
                 })
                 ->join('material_names','receipt_material_id','=','material_id')
                 ->leftJoin('community','from_community_id','=','community.community_id')

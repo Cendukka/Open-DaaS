@@ -92,6 +92,7 @@
                         <textarea type="text" class="form-control" rows="8" maxlength="191" name="description">{{$refined->description}}</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Tallenna</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
                 </form>
             </div>
         </div>

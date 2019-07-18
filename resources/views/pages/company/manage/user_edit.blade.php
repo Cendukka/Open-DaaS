@@ -61,11 +61,8 @@
                             <label for="email">Sähköposti:</label>
                             <input id="email" maxlength="50" type="text" class="form-control element-width-auto text-lowercase" name="email" value="{{$user->email}}" disabled/>
                         </div>
-{{--                        <div class="form-group">--}}
-{{--                            <label for="password">Salasana:</label>--}}
-{{--                            <input type="password" maxlength="50" class="form-control" name="password" value="{{$user->password}}" disabled>--}}
-{{--                        </div>--}}
                         <button type="submit" class="btn btn-primary">Tallenna</button>
+                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
 
                     </form>
                 

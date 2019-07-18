@@ -58,36 +58,14 @@
                         </select>
                     </div>
                     <div id="details" class="form-group">
-                        <br>
-                        <div class="form-group detail-info">
-                            <div class="form-group">
-                                <label for="material">Materiaali:</label>
-                                <select class="form-control element-width-auto" name="material[]">
-                                    <option selected="selected" disabled hidden value=""></option>
-                                    @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $mat)
-                                        <option value="{{$mat->material_id}}" >{{title_case($mat->material_name)}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="ewc_code">EWC-Koodi:</label>
-                                <select class="form-control element-width-auto" name="ewc_code[]">
-                                    @foreach (DB::table('ewc_codes')->get() as $ewc)
-                                        <option value="{{$ewc->ewc_code}}" >{{title_case($ewc->ewc_code)}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group"> <label for="weight">Paino (Kg):</label>
-                                <input type="text" class="form-control element-width-auto" name="weight[]" value="0"/>
-                            </div>
-                        </div>
-                        <p>********************************************</p>
-                  </div>
-                    <br>
+
+                    </div>
+                    
                     <button id="addMat" type="button" class="btn">Lisää materiaali</button>
                     <button id="removeMat" type="button" class="btn">Poista materiaali</button>
                     <br>
                     <button type="submit" class="btn btn-primary">Tallenna</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
                 </form>
             </div>
         </div>

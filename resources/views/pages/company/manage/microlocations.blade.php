@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Manage Microlocations </h3>
+                <h3>Hallitse microlokaatioita </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -18,12 +18,12 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Postcode</th>
-                        <th>City</th>
+                        
+                        <th>Tyyppi</th>
+                        <th>Nimi</th>
+                        <th>Osoite</th>
+                        <th>Postinumero</th>
+                        <th>Kaupunki</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,18 +36,21 @@
                     @endphp
                     @foreach ($microlocations as $ml)
                         <tr>
-                            <td style = "color: #6D00E5 "><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}">{{title_case($ml->microlocation_id)}}</td>
-                            <td>{{title_case($ml->microlocation_typename)}}</a></td>
+                            <td>{{title_case($ml->microlocation_id)}}</td>
+                            <td>{{title_case($ml->microlocation_typename)}}</td>
                             <td>{{title_case($ml->microlocation_name)}}</td>
-                            <td style = "color: #00C2E5 "><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id)}}">{{title_case($ml->microlocation_street_address)}}</a></td>
+{{--                            <td style = "color: #00C2E5 "><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id)}}">{{title_case($ml->microlocation_street_address)}}</a></td>--}}
+                            <td>{{title_case($ml->microlocation_street_address)}}</td>
                             <td>{{title_case($ml->microlocation_postal_code)}}</td>
                             <td>{{title_case($ml->microlocation_city)}}</td>
+                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                <br>
-                <a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/create')}}">+ Add microlocation</a>
+                    <form action="{{url(url()->current().'/create')}}">
+                    <button type="submit" class="btn btn-secondary">+ Lisää microlokaatio</button>
+                </form>
             </div>
         </div>
     </div>

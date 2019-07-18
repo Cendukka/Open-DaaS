@@ -64,6 +64,37 @@ a, a:hover, a:focus {
     margin: 40px 0;
 }
 
+.panel-body td{
+    word-wrap:break-word;
+    overflow: auto;
+
+}
+.panel-body th{
+    word-wrap:break-word;
+    overflow: auto;
+
+}
+
+.panel-body table{
+    table-layout: fixed !important;
+}
+
+.element-width-auto{
+    width: auto !important;
+}
+.element-float-left{
+    float: left!important;
+}
+.element-float-right{
+    float: right!important;
+}
+.form-text-align-padd{
+    text-align: left;
+    padding: 2% 2% 2% 2%;
+}
+.margin-bottom-4-percent{
+    margin-bottom: 4%;
+}
 
 /* ---------------------------------------------------
     SIDEBAR  AND UPPER MENU STYLE
@@ -296,6 +327,7 @@ a.logout:hover {
    
   }
 
+   
   a.textMark:hover, a.textMark:active{
       color: #2373F6;
       font-size: 140%;
@@ -314,4 +346,3 @@ a.logout:hover {
       display: inline-block;
       width: 30%;
   }
-  

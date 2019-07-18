@@ -1,19 +1,21 @@
 @extends('layouts.default')
 @section ('title', 'Toimipisteet')
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
+    <div id="content2" class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Valitse yhtiö:</h3>
+            </div>
+            <div class="panel-body">
+                <form>
                     @foreach (DB::table('company')->get() as $company)
-                        <div class="panel-heading">
-                            <a class="textMark" href="{{url('/companies/'.$company->company_id.'/manage/users')}}">{{title_case($company->company_name)}}</a>
-                        </div>
+                        <a href="{{url('/companies/'.$company->company_id.'/manage/users')}}">{{title_case($company->company_name)}}</a>
+                        <br>
+                        <br>
                     @endforeach
-                    <br>
-                <!--<a href="{{url(action('company_controller@create'))}}" style="color:blue;">+ Add company</a>-->
-                </div>
+                </form>
             </div>
         </div>
+    </div>
 @endsection
 

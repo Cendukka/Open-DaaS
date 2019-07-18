@@ -3,7 +3,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Edit a microlocation </h3>
+                <h3>Muokkaa microlokaatiota </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -15,27 +15,17 @@
                         </ul>
                     </div>
                 @endif
-                @php
-                    $microlocations = DB::table('microlocations')
-                                ->where('microlocation_company_id','=',$company->company_id)
-                                ->where('microlocation_id','=',$microlocation->microlocation_id)
-                                ->orderBy('microlocation_id')
-                                ->get();
-                @endphp
-                @if(count($microlocations)==0)
-                    <h4>Microlocation not found</h4>
-                @else
-                    <form method="post" action="microlocations-update">
+                    <form method="post" action="microlocations-update" class="form-text-align-padd">
                         @csrf
                         <div class="form-group">
-                            <label for="company">Company:&nbsp</label>
-                            <select name="company">
+                            <label for="company">Yhtiö:&nbsp</label>
+                            <select class="form-control element-width-auto" name="company">
                                 <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="type">Microlocation Type:&nbsp</label>
-                            <select name="type">
+                            <label for="type">Microlokaation tyyppi:&nbsp</label>
+                            <select class="form-control element-width-auto" name="type">
                                 @php
                                     $types = DB::table('microlocation_types')->get();
                                 @endphp
@@ -47,23 +37,23 @@
 
                         <div class="form-group">
                             <label for="name">Microlocation Name:&nbsp</label>
-                            <input type="text" class="form-control" name="name" value="{{title_case($microlocation->microlocation_name)}}"/>
+                            <input type="text" maxlength="191" class="form-control element-width-auto" name="name" value="{{title_case($microlocation->microlocation_name)}}"/>
                         </div>
                         <div class="form-group">
                             <label for="address">Street Address:&nbsp</label>
-                            <input type="text" class="form-control" name="address" value="{{title_case($microlocation->microlocation_street_address)}}"/>
+                            <input type="text" maxlength="191" class="form-control element-width-auto" name="address" value="{{title_case($microlocation->microlocation_street_address)}}"/>
                         </div>
                         <div class="form-group">
                             <label for="postal_code">Postal Code:&nbsp</label>
-                            <input type="text" class="form-control" name="postal_code" value="{{title_case($microlocation->microlocation_postal_code)}}"/>
+                            <input type="text" maxlength="5"  class="form-control element-width-auto" name="postal_code" value="{{title_case($microlocation->microlocation_postal_code)}}"/>
                         </div>
                         <div class="form-group">
-                            <label for="password">City:&nbsp</label>
-                            <input type="text" class="form-control" name="city" value="{{title_case($microlocation->microlocation_city)}}">
+                            <label for="city">City:&nbsp</label>
+                            <input type="text" maxlength="50" class="form-control element-width-auto" name="city" value="{{title_case($microlocation->microlocation_city)}}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Tallenna</button>
                     </form>
-                @endif
+                
             </div>
         </div>
     </div>

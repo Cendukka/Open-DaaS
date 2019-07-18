@@ -16,6 +16,7 @@ class MaterialNamesTable extends Migration
         Schema::create('material_names', function (Blueprint $table) {
             $table->increments('material_id')->unsigned();
             $table->string('material_name',50);
+            $table->string('material_type',50);
         });
     }
 

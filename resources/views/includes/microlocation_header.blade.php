@@ -65,8 +65,9 @@
 
                     <ul class="nav navbar-nav navbar-right">
 
-                        <a href="#" class="btn btn-info btn-lg logout">Yhteystiedot</a>
-                        <a href="/" class="btn btn-info btn-lg logout">Etusivu</a>
+                        
+                        <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a>
+                        <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
                         @guest
                             <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>
 

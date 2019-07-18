@@ -20,22 +20,13 @@ class microlocation_controller extends Controller {
 	public function index(company $company) {
 		return view('pages.company.manage.microlocations')->with('company', $company);
 	}
-	
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function create(company $company) {
 		return view('pages.company.manage.microlocation_create')->with('company', $company);
 	}
-	
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function store(Request $request, company $company) {
 		# ADD MORE AUTHENTICATION HERE
 		
@@ -83,14 +74,8 @@ class microlocation_controller extends Controller {
 	public function edit(company $company, microlocation $microlocation) {
 		return view('pages.company.manage.microlocation_edit')->with(['company' => $company, 'microlocation' => $microlocation]);
 	}
-	
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param \Illuminate\Http\Request $request
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function update(Request $request, company $company, microlocation $microlocation) {
 		# ADD MORE AUTHENTICATION HERE
 		
@@ -116,14 +101,23 @@ class microlocation_controller extends Controller {
 		
 		return redirect()->action('microlocation_controller@index',['company' => $company])->withErrors(['Microlocation successfully updated.']);
 	}
-	
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($id) {
-		//
-	}
+
+
+    public function destroy($id) {
+        //
+    }
+
+    public function add_inventory($microlocation, $material, $weight) {
+        DB::table('inventory')
+            ->updateOrInsert(
+                [
+                    'inventory_microlocation_id' => $microlocation,
+                    'inventory_material_id' => $material,
+                ],[
+                    'inventory_weight' => \DB::raw('inventory_weight + '.$weight),
+                ]
+            );
+    }
+
+
 }

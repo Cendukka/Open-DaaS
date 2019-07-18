@@ -69,6 +69,7 @@
                         <textarea type="text" class="form-control" rows="8" maxlength="191" name="description"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Cancel</button>
                 </form>
             </div>
         </div>

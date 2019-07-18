@@ -33,6 +33,7 @@
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Cancel</button>
                 </form>
             </div>
         </div>

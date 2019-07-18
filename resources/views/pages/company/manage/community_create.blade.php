@@ -30,6 +30,7 @@
                             <input type="text" maxlength="50" class="form-control" name="city" value="">
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
+                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Cancel</button>
                     </form>
                 @endif
             </div>

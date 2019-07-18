@@ -126,13 +126,17 @@ class pre_controller extends Controller {
 					->when(($request->from && $request->to), function($query) use ($request){
 						$query->whereBetween('pre_sorting_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
 					})
-					->where(function ($query) use ($request){
-						$query
-						->where('microlocation_name','LIKE','%'.$request->search."%")
-						->orWhere('material_name','LIKE','%'.$request->search."%")
-						->orWhere('pre_sorting_weight','LIKE','%'.$request->search."%")
-						->orWhere('username','LIKE','%'.$request->search."%");
-					})
+                    ->where(function ($query) use ($request){
+                        foreach(explode(' ',$request->search) as $word){
+                            $query->where(function ($query) use ($word) {
+                                $query
+                                    ->where('microlocation_name','LIKE','%'.$word."%")
+                                    ->orWhere('material_name','LIKE','%'.$word."%")
+                                    ->orWhere('pre_sorting_weight','LIKE','%'.$word."%")
+                                    ->orWhere('username','LIKE','%'.$word."%");
+                            });
+                        }
+                    })
 					->join('inventory_receipt','receipt_id','=','pre_sorting_receipt_id')
 					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
 					->join('material_names','material_names.material_id','=','pre_sorting.pre_sorting_material_id')

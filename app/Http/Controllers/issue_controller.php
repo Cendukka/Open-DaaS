@@ -188,13 +188,17 @@ class issue_controller extends Controller {
 					->when(($request->from && $request->to), function($query) use ($request){
 						$query->whereBetween('issue_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
 					})
-					->where(function ($query) use ($request){
-						$query
-						->where('from_microlocations.microlocation_name','LIKE','%'.$request->search."%")
-						->orWhere('to_microlocations.microlocation_name','LIKE','%'.$request->search."%")
-						->orWhere('username','LIKE','%'.$request->search."%")
-						->orWhere('issue_typename','LIKE','%'.$request->search."%");
-					})
+                    ->where(function ($query) use ($request){
+                        foreach(explode(' ',$request->search) as $word){
+                            $query->where(function ($query) use ($word) {
+                                $query
+                                    ->where('from_microlocations.microlocation_name','LIKE','%'.$word."%")
+                                    ->orWhere('to_microlocations.microlocation_name','LIKE','%'.$word."%")
+                                    ->orWhere('username','LIKE','%'.$word."%")
+                                    ->orWhere('issue_typename','LIKE','%'.$word."%");
+                            });
+                        }
+                    })
 					->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
                     ->join('microlocations as from_microlocations','issue_from_microlocation_id','=','from_microlocations.microlocation_id')
                     ->leftJoin('microlocations as to_microlocations','issue_to_microlocation_id','=','to_microlocations.microlocation_id')

@@ -25,6 +25,7 @@
                     @php
                         $communities = DB::table('community')
                             ->where('community_company_id','=',$company->company_id)
+                            ->select('community_id','community_city')
                             ->get();
                     @endphp
                     @foreach ($communities as $com)

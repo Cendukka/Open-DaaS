@@ -141,7 +141,7 @@ class pre_controller extends Controller {
 					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
 					->join('material_names','material_names.material_id','=','pre_sorting.pre_sorting_material_id')
 					->join('users','users.user_id','=','pre_sorting.pre_sorting_user_id')
-                    ->select()
+                    ->select('username','material_name','pre_sorting_weight','pre_sorting_date','microlocation_name','pre_sorting_id')
 					->orderBy('pre_sorting_date', 'DESC')
 					->orderBy('receipt_to_microlocation_id')
 					->get();
@@ -169,7 +169,7 @@ class pre_controller extends Controller {
 	}
 
 
-    public function receipt(Request $request, company $company){
+    public function receipt(Request $request){
         if($request->ajax()){
             $output="";
             $ml_id = $request->input('ml_id') ?: 0;
@@ -178,6 +178,7 @@ class pre_controller extends Controller {
                 ->join('material_names','material_id','receipt_material_id')
                 ->where('receipt_to_microlocation_id','=',$ml_id)
                 ->where('material_names.material_type', 'Raw Waste')
+                ->select('material_name','material_type','receipt_to_microlocation_id','receipt_id','receipt_weight')
                 ->orderBy('receipt_date','DESC')
                 ->get();
             if($result) {

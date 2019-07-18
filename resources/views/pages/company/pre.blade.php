@@ -35,8 +35,8 @@
                     <tr>
                         <th>Aikaleima</th>
                         <th>Microlokaatio</th>
-                        <th>Paino (Kg)</th>
                         <th>Materiaali</th>
+                        <th>Paino (Kg)</th>
                         <th>Käyttäjä</th>
                     </tr>
                     </thead>
@@ -46,6 +46,8 @@
                 <form action="{{url('companies/'.$company->company_id.'/manage/pre/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Lisää esilajiteltu</button>
                 </form>
+
+                <button id="export" type="button" class="btn">Export Data</button>
             </div>
         </div>
     </div>
@@ -57,5 +59,26 @@
         $('.timepicker').datepicker({
             format: 'yyyy-mm-dd'
         });
+
+        function exporter(){
+            $search = $('#search').val();
+            $from = $('#from-date').val() ? $('#from-date').val() : '';
+            $to = $('#to-date').val() ? $('#to-date').val() : '';
+            window.location.href="{{url(url()->current().'/export')}}?search="+$search+"&from="+$from+"&to="+$to;
+
+            {{--$search = $('#search').val();--}}
+            {{--$from = $('#from-date').val() ? $('#from-date').val() : '';--}}
+            {{--$to = $('#to-date').val() ? $('#to-date').val() : '';--}}
+            {{--$.ajax({--}}
+            {{--    type : 'get',--}}
+            {{--    url : '{{url(url()->current().'/export')}}',--}}
+            {{--    data:{'search':$search,'from':$from,'to':$to},--}}
+            {{--    success:function(data){--}}
+            {{--        download(data);--}}
+            {{--    }--}}
+            {{--});--}}
+        }
+
+        $('#export').on('click',exporter);
     </script>
 @endsection

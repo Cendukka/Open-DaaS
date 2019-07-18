@@ -49,23 +49,13 @@
                         </tr>
                     @endforeach
                 </table>
-                    <form action="{{url(url()->current().'/import_csv') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="file" accept=".csv">
-                        <br>
-                        <button class="btn btn-secondary">Import user data</button>
-                        <a class="btn btn-warning" href="{{url(url()->current().'/export_csv')}}">Export user data
-                        </a>
-                    </form>
+
+                <a class="btn btn-warning" href="{{url(url()->current().'/export_csv')}}">Export user data</a>
 
                 <form method="get" action="{{url(url()->current().'/create')}}">
-                <br>
                     <button type="submit" class="btn btn-secondary">+ Lisää käyttäjä</button>
                 </form>
             </div>
         </div>
     </div>
 @endsection
-<!--<form action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add user</button>
-                </form>-->

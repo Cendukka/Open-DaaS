@@ -116,47 +116,51 @@ class pre_controller extends Controller {
 	}
 
 
+    public function query(company $company, Request $request) {
+        $microlocation_ids = [];
+        foreach (DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->get() as $microlocation){
+            array_push($microlocation_ids, $microlocation->microlocation_id);
+        }
+
+        return DB::table('pre_sorting')
+            ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
+            ->when(($request->from && $request->to), function($query) use ($request){
+                $query->whereBetween('pre_sorting_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
+            })
+            ->where(function ($query) use ($request){
+                foreach(explode(' ',$request->search) as $word){
+                    $query->where(function ($query) use ($word) {
+                        $query
+                            ->where('microlocation_name','LIKE','%'.$word."%")
+                            ->orWhere('material_name','LIKE','%'.$word."%")
+                            ->orWhere('pre_sorting_weight','LIKE','%'.$word."%")
+                            ->orWhere('username','LIKE','%'.$word."%");
+                    });
+                }
+            })
+            ->join('inventory_receipt','receipt_id','=','pre_sorting_receipt_id')
+            ->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
+            ->join('material_names','material_names.material_id','=','pre_sorting.pre_sorting_material_id')
+            ->join('users','users.user_id','=','pre_sorting.pre_sorting_user_id')
+            ->orderBy('pre_sorting_date', 'DESC')
+            ->orderBy('receipt_to_microlocation_id');
+    }
+
+
 	public function search(Request $request, company $company){
 		if($request->ajax()){
-			$microlocations = DB::table('microlocations')
-							->where('microlocation_company_id','=',$company->company_id)
-							->get();
-			$microlocation_ids = [];
-			foreach ($microlocations as $microlocation){
-				array_push($microlocation_ids, $microlocation->microlocation_id);
-			}
 			$output="";
-			$result=DB::table('pre_sorting')
-					->whereIn('receipt_to_microlocation_id', $microlocation_ids)
-					->when(($request->from && $request->to), function($query) use ($request){
-						$query->whereBetween('pre_sorting_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
-					})
-                    ->where(function ($query) use ($request){
-                        foreach(explode(' ',$request->search) as $word){
-                            $query->where(function ($query) use ($word) {
-                                $query
-                                    ->where('microlocation_name','LIKE','%'.$word."%")
-                                    ->orWhere('material_name','LIKE','%'.$word."%")
-                                    ->orWhere('pre_sorting_weight','LIKE','%'.$word."%")
-                                    ->orWhere('username','LIKE','%'.$word."%");
-                            });
-                        }
-                    })
-					->join('inventory_receipt','receipt_id','=','pre_sorting_receipt_id')
-					->join('microlocations','receipt_to_microlocation_id','=','microlocation_id')
-					->join('material_names','material_names.material_id','=','pre_sorting.pre_sorting_material_id')
-					->join('users','users.user_id','=','pre_sorting.pre_sorting_user_id')
-                    ->select('username','material_name','pre_sorting_weight','pre_sorting_date','microlocation_name','pre_sorting_id')
-					->orderBy('pre_sorting_date', 'DESC')
-					->orderBy('receipt_to_microlocation_id')
-					->get();
+			$result = app('App\Http\Controllers\pre_controller')
+                ->query($company,$request)
+                ->select('pre_sorting_date','microlocation_name','material_name','pre_sorting_weight','username','pre_sorting_id')
+                ->get();
 			if($result){
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
-						'<td>'.title_case($value->microlocation_name).'</td>'.
                         '<td>'.date("Y-m-d",strtotime($value->pre_sorting_date)).'</td>'.
-						'<td>'.$value->pre_sorting_weight.'</td>'.
+						'<td>'.title_case($value->microlocation_name).'</td>'.
 						'<td>'.$value->material_name.'</td>'.
+						'<td>'.$value->pre_sorting_weight.'</td>'.
 						'<td>'.$value->username.'</td>'.
                         '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'">Edit</a></td>'.
 						'</tr>';
@@ -183,7 +187,7 @@ class pre_controller extends Controller {
                 ->join('material_names','material_id','receipt_material_id')
                 ->where('receipt_to_microlocation_id','=',$ml_id)
                 ->where('material_names.material_type', 'Raw Waste')
-                ->select('material_name','material_type','receipt_to_microlocation_id','receipt_id','receipt_weight')
+                ->select('material_name','material_type','receipt_to_microlocation_id','receipt_id','receipt_weight','receipt_date')
                 ->orderBy('receipt_date','DESC')
                 ->get();
             if($result) {

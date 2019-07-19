@@ -28,8 +28,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -46,12 +44,12 @@
                 <form action="{{url('companies/'.$company->company_id.'/manage/pre/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Lisää esilajiteltu</button>
                 </form>
-
                 <button id="export" type="button" class="btn">Export Data</button>
             </div>
         </div>
     </div>
     @include('includes.search_script')
+    @include('includes.export_script')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -59,26 +57,5 @@
         $('.timepicker').datepicker({
             format: 'yyyy-mm-dd'
         });
-
-        function exporter(){
-            $search = $('#search').val();
-            $from = $('#from-date').val() ? $('#from-date').val() : '';
-            $to = $('#to-date').val() ? $('#to-date').val() : '';
-            window.location.href="{{url(url()->current().'/export')}}?search="+$search+"&from="+$from+"&to="+$to;
-
-            {{--$search = $('#search').val();--}}
-            {{--$from = $('#from-date').val() ? $('#from-date').val() : '';--}}
-            {{--$to = $('#to-date').val() ? $('#to-date').val() : '';--}}
-            {{--$.ajax({--}}
-            {{--    type : 'get',--}}
-            {{--    url : '{{url(url()->current().'/export')}}',--}}
-            {{--    data:{'search':$search,'from':$from,'to':$to},--}}
-            {{--    success:function(data){--}}
-            {{--        download(data);--}}
-            {{--    }--}}
-            {{--});--}}
-        }
-
-        $('#export').on('click',exporter);
     </script>
 @endsection

@@ -118,58 +118,62 @@ class receipt_controller extends Controller {
 	}
 
 
+    public function query(company $company, Request $request) {
+        $microlocation_ids = [];
+        foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $microlocation){
+            array_push($microlocation_ids, $microlocation->microlocation_id);
+        }
+
+        return DB::table('inventory_receipt')
+            ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
+            ->when(($request->from && $request->to), function($query) use ($request){
+                $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
+            })
+            ->where(function ($query) use ($request){
+                foreach(explode(' ',$request->search) as $word){
+                    $query->where(function ($query) use ($word) {
+                        $query
+                            ->where('to_microlocations.microlocation_name','LIKE','%'.$word."%")
+                            ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$word."%")
+                            ->orwhere('from_supplier','LIKE','%'.$word."%")
+                            ->orwhere('community.communitY_city','LIKE','%'.$word."%")
+                            ->orWhere('material_name','LIKE','%'.$word."%")
+                            ->orWhere('receipt_ewc_code','LIKE','%'.$word."%")
+                            ->orWhere('receipt_weight','LIKE','%'.$word."%")
+                            ->orWhere('distance_km','LIKE','%'.$word."%")
+                            ->orWhere(function ($query) use ($word){
+                                if(Str::contains('ulkoinen',$word)){
+                                    $query->whereNotNull('from_community_id');
+                                }
+                            })
+                            ->orWhere(function ($query) use ($word){
+                                if(Str::contains('toimittaja',$word)){
+                                    $query->whereNotNull('from_supplier');
+                                }
+                            })
+                            ->orWhere(function ($query) use ($word){
+                                if(Str::contains('sisäinen',$word)){
+                                    $query->whereNotNull('receipt_from_microlocation_id');
+                                }
+                            });
+                    });
+                }
+            })
+            ->join('material_names','receipt_material_id','=','material_id')
+            ->leftJoin('community','from_community_id','=','community.community_id')
+            ->leftJoin('microlocations as from_microlocations','receipt_from_microlocation_id','=','from_microlocations.microlocation_id')
+            ->leftJoin('microlocations as to_microlocations','receipt_to_microlocation_id','=','to_microlocations.microlocation_id')
+            ->orderBy('receipt_date','DESC')
+            ->orderBy('receipt_to_microlocation_id');
+    }
+
+
     public function search(Request $request, company $company){
         if($request->ajax()){
-            $microlocations = DB::table('microlocations')
-                ->where('microlocation_company_id','=',$company->company_id)
-                ->get();
-            $microlocation_ids = [];
-            foreach ($microlocations as $microlocation){
-                array_push($microlocation_ids, $microlocation->microlocation_id);
-            }
             $output="";
-            $result=DB::table('inventory_receipt')
-                ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
-                ->when(($request->from && $request->to), function($query) use ($request){
-                    $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
-                })
-                ->where(function ($query) use ($request){
-                    foreach(explode(' ',$request->search) as $word){
-                        $query->where(function ($query) use ($word) {
-                            $query
-                                ->where('to_microlocations.microlocation_name','LIKE','%'.$word."%")
-                                ->orwhere('from_microlocations.microlocation_name','LIKE','%'.$word."%")
-                                ->orwhere('from_supplier','LIKE','%'.$word."%")
-                                ->orwhere('community.communitY_city','LIKE','%'.$word."%")
-                                ->orWhere('material_name','LIKE','%'.$word."%")
-                                ->orWhere('receipt_ewc_code','LIKE','%'.$word."%")
-                                ->orWhere('receipt_weight','LIKE','%'.$word."%")
-                                ->orWhere('distance_km','LIKE','%'.$word."%")
-                                ->orWhere(function ($query) use ($word){
-                                    if(Str::contains('ulkoinen',$word)){
-                                        $query->whereNotNull('from_community_id');
-                                    }
-                                })
-                                ->orWhere(function ($query) use ($word){
-                                    if(Str::contains('toimittaja',$word)){
-                                        $query->whereNotNull('from_supplier');
-                                    }
-                                })
-                                ->orWhere(function ($query) use ($word){
-                                    if(Str::contains('sisäinen',$word)){
-                                        $query->whereNotNull('receipt_from_microlocation_id');
-                                    }
-                                });
-                        });
-                    }
-                })
-                ->join('material_names','receipt_material_id','=','material_id')
-                ->leftJoin('community','from_community_id','=','community.community_id')
-                ->leftJoin('microlocations as from_microlocations','receipt_from_microlocation_id','=','from_microlocations.microlocation_id')
-                ->leftJoin('microlocations as to_microlocations','receipt_to_microlocation_id','=','to_microlocations.microlocation_id')
-                ->select('inventory_receipt.*','material_names.*','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','from_supplier','community.community_city')
-                ->orderBy('receipt_date','DESC')
-                ->orderBy('receipt_to_microlocation_id')
+            $result = app('App\Http\Controllers\receipt_controller')
+                ->query($company,$request)
+                ->select('receipt_date','from_community_id','receipt_weight','distance_km','receipt_ewc_code','receipt_id','material_name','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','from_supplier','community.community_city')
                 ->get();
             if($result){
                 foreach ($result as $key => $value){

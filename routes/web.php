@@ -157,5 +157,8 @@ Route::post('companies/{company}/manage/refined/refined-store',             'ref
 Route::post('companies/{company}/manage/refined/{refined}/refined-update',  'refined_controller@update');
 
 #Excel
-Route::get('companies/{company}/pre/export', 'excel_controller@pre');
+Route::get('companies/{company}/pre/export',        'excel_controller@pre');
+Route::get('companies/{company}/refined/export',    'excel_controller@refined');
+Route::get('companies/{company}/receipts/export',   'excel_controller@receipt');
+Route::get('companies/{company}/issues/export',     'excel_controller@issue');
 

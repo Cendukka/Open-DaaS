@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class pre_export implements ShouldAutoSize, FromCollection, WithHeadings {
+class issue_export implements ShouldAutoSize, FromCollection, WithHeadings {
     use Exportable;
     protected $company;
 
@@ -22,9 +22,9 @@ class pre_export implements ShouldAutoSize, FromCollection, WithHeadings {
         $company = $this->company;
         $request = $this->request;
 
-        $data = app('App\Http\Controllers\pre_controller')
+        $data = app('App\Http\Controllers\issue_controller')
             ->query($company, $request)
-            ->select('pre_sorting_date','microlocation_name','material_name','pre_sorting_weight','username')
+            ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','sumweight')
             ->get();
 
         return $data;
@@ -32,11 +32,12 @@ class pre_export implements ShouldAutoSize, FromCollection, WithHeadings {
 
     public function headings(): array {
         return [
-            'Aika',
-            'Microlokaatio',
-            'Materiaali',
-            'Paino (Kg)',
-            'Käyttäjä',
+            'Päivämäärä',
+            'Lähetyksen lähde',
+            'Lähetyksen tyyppi',
+            'Lähetyksen kohde',
+            'Kirjauksen tekijä',
+            'Määrä (Kg)'
         ];
     }
 }

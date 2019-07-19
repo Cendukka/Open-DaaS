@@ -18,7 +18,6 @@
         <div class="sidebar-header">
             <a href="/companies/{{$company->company_id}}/manage/microlocations"><h3>JALOSTUSLAITOS</h3></a>
         </div>
-
         <ul class="list-unstyled components">
 
             <li>
@@ -93,6 +92,8 @@
         <!-- Main Page Content Holder -->
         <div id="main" class="column">
             @yield('content')
+
+            {{$microlocation->microlocation_id}}
         </div>
 
         <!-- Back To The Top Button -->

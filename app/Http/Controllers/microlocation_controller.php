@@ -58,9 +58,9 @@ class microlocation_controller extends Controller {
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(company $company) {  /* ,user $user) {
+	public function show(company $company, microlocation $microlocation) {  /* ,user $user) {
 		return redirect()->action('microlocation_controller@index', ['company' => $company]); */
-		return view('pages.company.manage.microlocation_home')->with('company', $company);
+		return view('pages.company.manage.microlocation_home')->with('company', $company)->with('microlocation', $microlocation);
 
 	}
 

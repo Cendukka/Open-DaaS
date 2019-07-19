@@ -73,7 +73,7 @@ class refined_controller extends Controller {
         ]);
         $refined->save();
 
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $receipt_entity->receipt_material_id, -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, ($pre_sorting ? $receipt_entity->pre_sorting_material_id : $receipt_entity->receipt_material_id), -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
         return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Refined-Sorting successfully created.']);
 	}
@@ -146,13 +146,13 @@ class refined_controller extends Controller {
         $microlocation_new = $receipt_entity_new->receipt_to_microlocation_id;
 
         # Remove original weights from the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $receipt_entity_orig->receipt_material_id, $refinedNew->getOriginal('refined_weight'));
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $receipt_entity_orig->pre_sorting_material_id, $refinedNew->getOriginal('refined_weight'));
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $refinedNew->getOriginal('refined_material_id'), -$refinedNew->getOriginal('refined_weight'));
 
         $refinedNew->save();
 
         # Add new weights to the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $receipt_entity_new->receipt_material_id, -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $receipt_entity_new->pre_sorting_material_id, -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
         return redirect()->action('refined_controller@index',['company' => $company])->withErrors(['Refined-Sorting successfully updated.']);
 	}
@@ -173,18 +173,21 @@ class refined_controller extends Controller {
 				array_push($microlocation_ids, $microlocation->microlocation_id);
 			}
 			$output="";
-
 			$result=DB::table('refined_sorting')
                     ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
 					->when(($request->from && $request->to), function($query) use ($request){
 						$query->whereBetween('refined_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
 					})
 					->where(function ($query) use ($request){
-						$query
-						->where('microlocation_name','LIKE','%'.$request->search."%")
-						->orWhere('material_name','LIKE','%'.$request->search."%")
-						->orWhere('refined_weight','LIKE','%'.$request->search."%")
-						->orWhere('username','LIKE','%'.$request->search."%");
+					    foreach(explode(' ',$request->search) as $word){
+                            $query->where(function ($query) use ($word) {
+                                $query
+                                    ->where('microlocation_name', 'LIKE', '%' . $word . "%")
+                                    ->orWhere('material_name', 'LIKE', '%' . $word . "%")
+                                    ->orWhere('refined_weight', 'LIKE', '%' . $word . "%")
+                                    ->orWhere('username', 'LIKE', '%' . $word . "%");
+                            });
+                        }
 					})
                     ->leftJoin('pre_sorting','refined_sorting.pre_sorting_id','pre_sorting.pre_sorting_id')
                     ->leftJoin('inventory_receipt', function($join){
@@ -241,6 +244,9 @@ class refined_controller extends Controller {
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $used = DB::table('refined_sorting')->where('refined_receipt_id',$value->receipt_id)->sum('refined_weight');
+                        if($pre_receipt_id != $value->receipt_id && $used >= $value->receipt_weight){
+                            continue;
+                        }
                         $output .= '<option value="'.$value->receipt_id.'" '.($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->receipt_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                     }
                     $output .= '</select>';
@@ -265,6 +271,9 @@ class refined_controller extends Controller {
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $used = DB::table('refined_sorting')->where('pre_sorting_id',$value->pre_sorting_id)->sum('refined_weight');
+                        if($pre_receipt_id != $value->pre_sorting_id && $used >= $value->pre_sorting_weight){
+                            continue;
+                        }
                         $output .= '<option value="'.$value->pre_sorting_id.'" '.($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->pre_sorting_date.', '.$value->pre_sorting_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                     }
                     $output .= '</select>';

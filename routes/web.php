@@ -129,8 +129,10 @@ Route::get('companies/{company}/manage/receipts/{receipt}/edit/communities',    
 
 # Issues
 Route::get('companies/{company}/issues',                                'issue_controller@index');
-Route::resource('companies/{company}/manage/issues',                    'issue_controller', ['only' => ['show', 'create', 'edit']]);
+Route::get('companies/{company}/manage/issues/create',                  'issue_controller@create');
+Route::get('companies/{company}/manage/issues/{issue}/edit',            'issue_controller@edit');
 Route::get('companies/{company}/issues/search',                         'issue_controller@search');
+Route::get('companies/{company}/manage/issues/inventory',               'issue_controller@inventory');
 Route::post('companies/{company}/manage/issues/issues-store',           'issue_controller@store');
 Route::post('companies/{company}/manage/issues/{issue}/issues-update',  'issue_controller@update');
 
@@ -155,7 +157,5 @@ Route::post('companies/{company}/manage/refined/refined-store',             'ref
 Route::post('companies/{company}/manage/refined/{refined}/refined-update',  'refined_controller@update');
 
 #Excel
-Route::get('companies/{company}/manage/users/user_csv', 'excel_controller@index');
-Route::get('companies/{company}/manage/users/export_csv', 'excel_controller@export_csv');
-Route::post('companies/{company}/manage/users/import_csv', 'excel_controller@import_csv');
+Route::get('companies/{company}/pre/export', 'excel_controller@pre');
 

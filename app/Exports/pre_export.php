@@ -32,7 +32,7 @@ class pre_export implements ShouldAutoSize, FromCollection, WithHeadings {
 
     public function headings(): array {
         return [
-            'Aika',
+            'Päivämäärä',
             'Microlokaatio',
             'Materiaali',
             'Paino (Kg)',

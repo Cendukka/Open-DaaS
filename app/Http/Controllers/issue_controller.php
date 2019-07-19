@@ -180,53 +180,60 @@ class issue_controller extends Controller {
 	}
 
 
+    public function query(company $company, Request $request) {
+        $microlocation_ids = [];
+        foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $microlocation){
+            array_push($microlocation_ids, $microlocation->microlocation_id);
+        }
+
+        return DB::table('inventory_issue')
+            ->whereIn('issue_from_microlocation_id', $microlocation_ids)
+            ->when(($request->from && $request->to), function($query) use ($request){
+                $query->whereBetween('issue_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
+            })
+            ->where(function ($query) use ($request){
+                foreach(explode(' ',$request->search) as $word){
+                    $query->where(function ($query) use ($word) {
+                        $query
+                            ->where('from_microlocations.microlocation_name','LIKE','%'.$word."%")
+                            ->orWhere('to_microlocations.microlocation_name','LIKE','%'.$word."%")
+                            ->orWhere('username','LIKE','%'.$word."%")
+                            ->orWhere('issue_typename','LIKE','%'.$word."%");
+                    });
+                }
+            })
+            ->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
+            ->join('microlocations as from_microlocations','issue_from_microlocation_id','=','from_microlocations.microlocation_id')
+            ->leftJoin('microlocations as to_microlocations','issue_to_microlocation_id','=','to_microlocations.microlocation_id')
+            ->join('users','users.user_id','=','issue_user_id')
+            ->joinSub(DB::table('inventory_issue_details')
+                ->select('detail_issue_id',DB::raw('SUM(detail_weight) as sumweight'))
+                ->groupBy('detail_issue_id'),'details', function ($join) {
+                    $join->on('detail_issue_id', '=', 'issue_id');
+                })
+            ->orderBy('issue_date','DESC');
+    }
+
+
 	public function search(Request $request, company $company){
 		if($request->ajax()){
-			$microlocations = DB::table('microlocations')
-							->where('microlocation_company_id','=',$company->company_id)
-							->get();
-			$microlocation_ids = [];
-			foreach ($microlocations as $microlocation){
-				array_push($microlocation_ids, $microlocation->microlocation_id);
-			}
 			$output="";
-			$result=DB::table('inventory_issue')
-					->whereIn('issue_from_microlocation_id', $microlocation_ids)
-					->when(($request->from && $request->to), function($query) use ($request){
-						$query->whereBetween('issue_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
-					})
-                    ->where(function ($query) use ($request){
-                        foreach(explode(' ',$request->search) as $word){
-                            $query->where(function ($query) use ($word) {
-                                $query
-                                    ->where('from_microlocations.microlocation_name','LIKE','%'.$word."%")
-                                    ->orWhere('to_microlocations.microlocation_name','LIKE','%'.$word."%")
-                                    ->orWhere('username','LIKE','%'.$word."%")
-                                    ->orWhere('issue_typename','LIKE','%'.$word."%");
-                            });
-                        }
-                    })
-					->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
-                    ->join('microlocations as from_microlocations','issue_from_microlocation_id','=','from_microlocations.microlocation_id')
-                    ->leftJoin('microlocations as to_microlocations','issue_to_microlocation_id','=','to_microlocations.microlocation_id')
-                    ->join('users','users.user_id','=','issue_user_id')
-                    ->orderBy('issue_date','DESC')
-                    ->select('issue_id','issue_date','from_microlocations.microlocation_name as from_microlocation','to_microlocations.microlocation_name as to_microlocation','users.username','issue_typename')
-                    ->get();
+            $result = app('App\Http\Controllers\issue_controller')
+                ->query($company,$request)
+                ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','issue_id','sumweight')
+                ->get();
 			if($result){
 			    $sumweight = 0;
 				foreach ($result as $key => $value){
-				    $weight = (DB::table('inventory_issue_details')->where('detail_issue_id',$value->issue_id)->sum('detail_weight'));
 					$output.='<tr>'.
                         '<td>'.date("Y-m-d",strtotime($value->issue_date)).'</td>'.
                         '<td>'.title_case($value->from_microlocation).'</td>'.
                         '<td>'.$value->issue_typename.'</td>'.
 						'<td>'.title_case($value->to_microlocation).'</td>'.
 						'<td>'.$value->username.'</td>'.
-						'<td>'.$weight.'</td>'.
+						'<td>'.$value->sumweight.'</td>'.
                         '<td><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'"><i class="glyphicon glyphicon-pencil"></i></a></td>'.
 						'</tr>';
-                    $sumweight += $weight;
 				}
                 $output.='<tr>'.
                     '<td></td>'.

@@ -46,10 +46,13 @@
                 <form action="{{url('companies/'.$company->company_id.'/manage/refined/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Luo hienolajittelu kirjaus</button>
                 </form>
+
+                <button id="export" type="button" class="btn">Export Data</button>
             </div>
         </div>
     </div>
     @include('includes.search_script')
+    @include('includes.export_script')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>

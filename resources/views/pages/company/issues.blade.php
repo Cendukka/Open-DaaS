@@ -33,7 +33,6 @@
                         <th>Lähetyksen kohde</th>
                         <th>Kirjauksen tekijä</th>
                         <th>Määrä (Kg)</th>
-                        {{--<th>Materials</th>--}}
                     </tr>
                     </thead>
                     <tbody id="searchtable">
@@ -42,10 +41,12 @@
                 <form action="{{url('companies/'.$company->company_id.'/manage/issues/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Lisää lähetys</button>
                 </form>
+                <button id="export" type="button" class="btn">Export Data</button>
             </div>
         </div>
     </div>
     @include('includes.search_script')
+    @include('includes.export_script')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>

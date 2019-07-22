@@ -1,6 +1,6 @@
 @extends('layouts.welcomepage')
 @section('content')
-    <!-- <div class="row">
+     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -61,7 +61,7 @@
                             <td> <a href="https://www.jatekukko.fi/" target="_blank">www.jatekukko.fi</a></td>
                             <td>Microkatu 1, Kuopio</td>
                         </tr>
-                        <tr>
+                      <!--  <tr>
                             <td>Kiertokaari</td>
                             <td> (08) 5584 0010</td>
                             <td> jatehuolto@kiertokaari.fi</td>
@@ -123,7 +123,7 @@
                             <td>toimisto@millespakka.fi</td>
                             <td> <a href="https://www.millespakka.fi/" target="_blank">www.millespakka.fi</a></td>
                             <td>Kyyjärventie 1054 62900 Alajärvi</td>
-                        </tr>
+                        </tr> --> 
                         </thead>
                         <tbody>
                         </tbody>
@@ -131,8 +131,11 @@
                  </div>
             </div>
         </div>
-    </div> -->
+    </div>  <br>
     
+    <div class="panel-heading">
+                    <h3>contact lists</h3>
+                </div>   <br>
     <div class="container-flex" >
        <div class="row">
             <div class="col-md-4">
@@ -190,6 +193,37 @@
                     service@jatekukko.fi
                     <a href="https://www.jatekukko.fi/" target="_blank" style="color: blue" class="textMark">www.jatekukko.fi</a></td>
                     Microkatu 1, Kuopio
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #65D72D ">Kiertokaari</div>
+                    <div class="panel-body" style="background: #EAB127 ">Tel: (08) 5584 0010,
+                    jatehuolto@kiertokaari.fi
+                    <a href="https://kiertokaari.fi/" target="_blank" style="color: blue" class="textMark">kiertokaari.fi</a>,
+                    Ruskonniityntie 1090620 Oulu
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: # ">Kiertokapula</div>
+                    <div class="panel-body" style="background: #2786EA ">Tel: +358 075 753 0000,
+                    <a href="https://www.kiertokapula.fi/" target="_blank" style="color: blue" class="textMark">www.kiertokapula.fi</a>,
+                    Vankanlähde 7, 13100 Hämeenlinna
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #EA5050 ">Kymenlaakson Jäte Oy</div>
+                    <div class="panel-body" style="background: #1FC93F ">Tel: (05) 744 3400,
+                    service@jatekukko.fi
+                    <a href="https://www.kymenlaaksonjate.fi/" target="_blank" style="color: blue" class="textMark">www.kymenlaaksonjate.fi</a>,
+                    Ekokaari 5046860 Keltakangas
                     </div>
                 </div>
             </div>

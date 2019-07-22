@@ -303,7 +303,8 @@ a.logout:hover {
 .panel-heading{
     background-color: #EEEEEE;
     padding: 1%;
-    text-align: center;   
+    text-align: center;
+    font-size: 111%;   
 }
 
 .form-horizontal {

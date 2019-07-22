@@ -149,14 +149,14 @@
                     <div class="panel-heading" style="background:  ">Ekokymppi</div>
                     <div class="panel-body" style="background: #7599F1 ">Tel: +358 08 636 611,
                     info@ekokymppi.fi,
-                    <a href="https://www.ekokymppi.fi/" target="_blank" style="color:blue" class="textMark">www.ekokymppi.fi, </a>
+                    <a href="https://www.ekokymppi.fi/" target="_blank" style="color: blue" class="textMark">www.ekokymppi.fi,</a>
                     Viestitie 2, 87700 Kajaani
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="panel panel-default">
-                <div class="panel-heading" style="background: #DCDCDC ">Ab Ekorosk Oy</div>
+                    <div class="panel-heading" style="background: #DCDCDC ">Ab Ekorosk Oy</div>
                     <div class="panel-body" style="background: #A6E8D7 ">Tel: (06) 781 4500,
                     <a href="https://www.ekorosk.fi/" target="_blank" style="color:blue" class="textMark">www.ekorosk.fi,</a>
                     Launisaarentie 9068600 PIETARSAARI
@@ -167,20 +167,30 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">hfghfghcvgcfg</div>
-                    <div class="panel-body">Content here -- div with no footer</div>
+                    <div class="panel-heading" style="background: # ">Etelä-Karjalan Jätehuolto Oy</div>
+                    <div class="panel-body" style="background: #3BD40F ">Tel: +358 10 841 1818,
+                    <a href="https://www.ekjh.fi/" target="_blank" style="color: blue" class="textMark">www.ekjh.fi,</a>
+                    Hulkonmäentie 130, 54190 Konnunsuo
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">hfghfghcvgcfg</div>
-                    <div class="panel-body">Content here -- div with no footer</div>
+                    <div class="panel-heading" style="background: #0FD4C3 ">HSY</div>
+                    <div class="panel-body" style="background: #F9F9F9 ">Tel: +358 09 1561 2110,
+                    <a href="https://www.hsy.fi/" target="_blank" style="color: blue" class="textMark">www.hsy.fi</a> <br>
+                    Ilmalantori 1, 00240 Helsinki
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">hfghfghcvgcfg</div>
-                    <div class="panel-body">Content here -- div with no footer</div>
+                    <div class="panel-heading" style="background: # ">Jätekukko</div>
+                    <div class="panel-body" style="background: #AAD72D ">Tel: +358 17 368 0152,
+                    service@jatekukko.fi
+                    <a href="https://www.jatekukko.fi/" target="_blank" style="color: blue" class="textMark">www.jatekukko.fi</a></td>
+                    Microkatu 1, Kuopio
+                    </div>
                 </div>
             </div>
         </div>

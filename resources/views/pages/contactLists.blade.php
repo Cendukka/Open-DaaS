@@ -1,6 +1,6 @@
 @extends('layouts.welcomepage')
 @section('content')
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -89,6 +89,41 @@
                             <td> <a href="https://www.etappi.com/fi" target="_blank">www.etappi.com</a></td>
                             <td>Laskunmäentie 15 FI-60760 Pojanluoma</td>
                         </tr>
+                        <tr>
+                            <td>Lapin jätehuolto kuntayhtymä</td>
+                            <td>040 3511 771</td>
+                            <td>asiakaspalvelu@lapeco.fi</td>
+                            <td> <a href="https://lapeco.fi/" target="_blank">www.lapeco.fi</a></td>
+                            <td>Inari </td>
+                        </tr>
+                        <tr>
+                            <td>Loimi-Hämeen Jätehuolto</td>
+                            <td>0440 242 700</td>
+                            <td>info@lhj.fi</td>
+                            <td> <a href="http://www.lhj.fi/" target="_blank">www.lhj.fi</a></td>
+                            <td>Kiimassuontie 127, 30420 Forssa </td>
+                        </tr>
+                        <tr>
+                            <td>Loimi-Hämeen Jätehuolto</td>
+                            <td>0200 47470</td>
+                            <td>asiakaspalvelu@lsjh.fi</td>
+                            <td> <a href="https://www.lsjh.fi" target="_blank">www.lsjh.fi</a></td>
+                            <td>Kuormakatu 17, 20380 Turku</td>
+                        </tr>
+                        <tr>
+                            <td>Metsäsairila Oy </td>
+                            <td>044 722 2300</td>
+                            <td>jatehuolto@metsasairila.fi</td>
+                            <td> <a href="https://www.metsasairila.fi/" target="_blank">www.metsasairila.fi</a></td>
+                            <td>Metsä-Sairilantie 18, 50800 Mikkeli </td>
+                        </tr>
+                        <tr>
+                            <td>Millespakka Oy </td>
+                            <td>(06) 557 8400</td>
+                            <td>toimisto@millespakka.fi</td>
+                            <td> <a href="https://www.millespakka.fi/" target="_blank">www.millespakka.fi</a></td>
+                            <td>Kyyjärventie 1054 62900 Alajärvi</td>
+                        </tr>
                         </thead>
                         <tbody>
                         </tbody>
@@ -96,7 +131,52 @@
                  </div>
             </div>
         </div>
+    </div> -->
+    
+    <div class="container-flex" >
+       <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">hfghfghcvgcfg</div>
+                    <div class="panel-body">Content here -- div with no footer</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">hfghfghcvgcfg</div>
+                    <div class="panel-body">Content here -- div with no footer</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">hfghfghcvgcfg</div>
+                    <div class="panel-body">Content here -- div with no footer</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">hfghfghcvgcfg</div>
+                    <div class="panel-body">Content here -- div with no footer</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">hfghfghcvgcfg</div>
+                    <div class="panel-body">Content here -- div with no footer</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">hfghfghcvgcfg</div>
+                    <div class="panel-body">Content here -- div with no footer</div>
+                </div>
+            </div>
+        </div>
     </div>
+    
+
     @include('includes.search_script')
 @endsection
 @section ('title')

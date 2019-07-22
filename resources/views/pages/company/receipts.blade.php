@@ -30,7 +30,6 @@
                         <label for="to-date">To: </label>
                         <input type="date" class="form-control timepicker" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
                     </div>
-
                 </div>
                 <table class="table table-bordered table-hover">
                     <thead>

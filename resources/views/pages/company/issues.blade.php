@@ -14,12 +14,16 @@
                         <input type="text" class="d-inline form-control" id="search" name="search" placeholder="Hae...">
                     </div>
                     <div class="col-sm-4">
-                        <label class="d-inline" for="from-date">From: </label>
-                        <input type="date" class="d-inline form-control timepicker" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
+                        <label for="from-date">From: </label>
+                        <div style="position: relative">
+                            <input type="text" class="form-control timepicker" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
+                        </div>
                     </div>
                     <div class="col-sm-4">
-                        <label class="d-inline" for="to-date">To: </label>
-                        <input type="date" class="d-inline form-control timepicker" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
+                        <label for="to-date">To: </label>
+                        <div style="position: relative">
+                            <input type="text" class="form-control timepicker" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
+                        </div>
                     </div>
                 </div>
 

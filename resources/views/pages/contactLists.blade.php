@@ -137,20 +137,30 @@
        <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">hfghfghcvgcfg</div>
-                    <div class="panel-body">Content here -- div with no footer</div>
+                    <div class="panel-heading" style="background: #CAF173 ">Botniarosk</div>
+                    <div class="panel-body" style="background: #EAF173 ">Tel: +358 40 594 5121,
+                    <a href="https://www.botniarosk.fi/" target="_blank" style="color: blue" class="textMark">www.botniarosk.fi,</a>
+                    Raatihuoneenkatu 164101 Kristiinankaupunki
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+            <div class="panel panel-default">
+                    <div class="panel-heading" style="background:  ">Ekokymppi</div>
+                    <div class="panel-body" style="background: #7599F1 ">Tel: +358 08 636 611,
+                    info@ekokymppi.fi,
+                    <a href="https://www.ekokymppi.fi/" target="_blank" style="color:blue" class="textMark">www.ekokymppi.fi, </a>
+                    Viestitie 2, 87700 Kajaani
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">hfghfghcvgcfg</div>
-                    <div class="panel-body">Content here -- div with no footer</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">hfghfghcvgcfg</div>
-                    <div class="panel-body">Content here -- div with no footer</div>
+                <div class="panel-heading" style="background: #DCDCDC ">Ab Ekorosk Oy</div>
+                    <div class="panel-body" style="background: #A6E8D7 ">Tel: (06) 781 4500,
+                    <a href="https://www.ekorosk.fi/" target="_blank" style="color:blue" class="textMark">www.ekorosk.fi,</a>
+                    Launisaarentie 9068600 PIETARSAARI
+                    </div>
                 </div>
             </div>
         </div>

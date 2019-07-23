@@ -1,11 +1,4 @@
-
-@if(Auth::user()->user_type_id == 2)
-    @extends('layouts.macrolocation')
-@else(Auth::user()->user_type_id == 3)
-    @extends('layouts.microlocation')
-@endif
-
-
+@extends (Auth::user()->user_type_id == 3 ? 'layouts.microlocation' : 'layouts.macrolocation')
 @section ('title', 'Raportit: Varasto')
 @section('content')
     <!--<div id="macrolocation_name" class="row">
@@ -25,7 +18,7 @@
                     foreach ($microlocations as $microlocation){
                         array_push($microlocation_ids, $microlocation->microlocation_id);
                     }
-                @endphp
+                @endphp  
                 @if (count($microlocation_ids)>0)
                     <table class="table table-bordered table-hover">
                         <thead>

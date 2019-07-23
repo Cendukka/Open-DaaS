@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class company_controller extends Controller {
 	public function __construct()
@@ -14,7 +15,10 @@ class company_controller extends Controller {
 	public function index() {
 		return view('pages.companies');
 	}
-
+	public function companyinfo(company $company) {
+		$company=DB::table('company')->get();
+	return view('includes.welcomepageHeader')->with('company', $company);
+	}
 
 	public function create() {
 		return view('pages.company.manage.company_create');
@@ -45,6 +49,12 @@ class company_controller extends Controller {
 
 
 	public function show(company $company) {
+		//$company=Auth::user()->user_company_id;
+		//dd($company);
+		// $company=company::findorfail($company)->first();
+		// if($company->company_id=== Auth::user()->user_company_id);
+		// 		// dd($company);
+
 		return view('pages.company.company_home')->with('company', $company);
 	}
 

@@ -85,7 +85,7 @@
                                 <input type="text" class="form-control element-width-auto" name="weight[]" value="{{$detail->detail_weight}}"/>
                             </div>
                         </div>
-                            <p>********************************************</p>
+                            <p>*******************************</p>
                         @endforeach
                     </div>
                     <br>
@@ -127,7 +127,8 @@
                 '<div class="form-group"> <label for="weight">Weight (kg):&nbsp</label>' +
                 '<input type="text" class="form-control form-control-sm" name="weight[]" value="0"/>' +
                 '</div>' +
-                '</div>'
+                '*******************************' +
+            '</div>'
             );
         }
         $('#removeMat').on('click',(function(){

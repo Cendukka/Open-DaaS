@@ -59,11 +59,11 @@
 
                         @else
                         
-                            <li><a href="/home" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
+                            <li><a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
 
                             <li><a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
 
-                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
+                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> --> 
 
                         @csrf
                     @endguest

@@ -99,6 +99,7 @@
                 '<div class="form-group"> <label for="weight">Weight (kg):&nbsp</label>' +
                     '<input type="text" class="form-control form-control-sm" name="weight[]" value="0"/>' +
                 '</div>' +
+                '*******************************' +
             '</div>'
             );
         }

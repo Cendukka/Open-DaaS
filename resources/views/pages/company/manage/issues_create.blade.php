@@ -41,7 +41,7 @@
                     </div>
                     <div id="from" class="form-group">
                         <label for="from_microlocation">Mistä microlokaatiosta:</label>
-                        <select class="form-control element-width-auto" name="from_microlocation">
+                        <select class="form-control element-width-auto" id="from_microlocation" name="from_microlocation">
                             <option value="" selected="selected" hidden disabled></option>
                             @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
                                 <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
@@ -152,8 +152,18 @@
         $('#from_microlocation').on('change',function(){
             if($("#details").children("div").length == 0){
                 addMat();
+                clearMaterials();
             }
         });
+
+        // Add first material, if none exists
+        $(document).ready(function(){
+            if($("#details").children("div").length == 0){
+                addMat();
+                clearMaterials();
+            }
+        });
+
         $('#from_microlocation').on('change',clearMaterials);
     </script>
     <script type="text/javascript">

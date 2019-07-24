@@ -45,16 +45,19 @@
                             <td>{{title_case($user->last_name)}}</td>
                             <td>{{title_case($user->first_name)}}</td>
                             <td>{{title_case($user->username)}}</td>
+                            @if (Auth::user()->user_type_id < 3 ) 
                             <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                            @endif
                         </tr>
                     @endforeach
                 </table>
 
                 <a class="btn btn-warning" href="{{url(url()->current().'/export_csv')}}">Export user data</a>
-
+                    @if (Auth::user()->user_type_id < 3 ) 
                 <form method="get" action="{{url(url()->current().'/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Lisää käyttäjä</button>
                 </form>
+                    @endif
             </div>
         </div>
     </div>

@@ -50,9 +50,9 @@
                             <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
 
                             @if(!(Auth::user()->user_type_id=='3'))
-                            {
+
                                 <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a>
-                                                }
+
                                 @endif
                                 @guest
                                 <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>

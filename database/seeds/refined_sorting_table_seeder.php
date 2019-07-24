@@ -41,7 +41,7 @@ class refined_sorting_table_seeder extends Seeder
 				'pre_sorting_id' => ($pre_refined ? NULL : $pre_sorting->pre_sorting_id),
 				'refined_material_id' => $materials->random()->material_id,
 				'refined_user_id' => $user->user_id,
-				'refined_weight' => rand(100,500),
+				'refined_weight' => rand(200,500),
 				'refined_date' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = null),
 				'description' => $faker->text(40)
 			]);

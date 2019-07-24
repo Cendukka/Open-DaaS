@@ -19,8 +19,8 @@ class inventory_issue_details_table_seeder extends Seeder
 			DB::table('inventory_issue_details')->insert([
 				'detail_issue_id' => $index,
 				'detail_material_id' => rand(1,$material_amount),
-				'detail_ewc_code' => $ewc_codes[rand(1,count($ewc_codes)-1)]->ewc_code,
-				'detail_weight' => rand(100,1000),
+				'detail_ewc_code' => $ewc_codes->random()->ewc_code,
+				'detail_weight' => rand(100,500),
 			]);
 		}
 	
@@ -28,8 +28,8 @@ class inventory_issue_details_table_seeder extends Seeder
 			DB::table('inventory_issue_details')->insert([
 				'detail_issue_id' => rand(1,$issue_amount),
 				'detail_material_id' => rand(1,$material_amount),
-				'detail_ewc_code' => $ewc_codes[rand(1,count($ewc_codes)-1)]->ewc_code,
-				'detail_weight' => rand(100,1000),
+				'detail_ewc_code' => $ewc_codes->random()->ewc_code,
+				'detail_weight' => rand(100,300),
 			]);
 		}
     }

@@ -23,7 +23,7 @@ class pre_sorting_table_seeder extends Seeder
 				'pre_sorting_receipt_id' => $receipt->receipt_id,
 				'pre_sorting_material_id' => $materials->random()->material_id,
 				'pre_sorting_user_id' => DB::table('users')->where('user_microlocation_id','=',$receipt->receipt_to_microlocation_id)->get()->random()->user_id,
-				'pre_sorting_weight' => rand(100,500),
+				'pre_sorting_weight' => rand(200,600),
 				'pre_sorting_date' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = null),
 			]);
 		}

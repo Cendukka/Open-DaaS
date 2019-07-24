@@ -10,15 +10,15 @@
 		<ul class="list-unstyled components">
 
 			<li>
-				<a href="/home">Oma toimipiste</a>
-				<a href="/companies/">Toimipisteet</a>
+				<a href="/home">Etusivu</a>
+				<a href="/companies/">Organisaatiot</a>
 {{--                <a href="/ewc/">EWC Codes</a>--}}
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
                 
                 	<ul class="collapse list-unstyled" id="pageSubmenu">
                     	<li><a href="/companiesUser/">Käyttäjät</a></li>
                         <li><a href="/materials">Materiaalit</a></li>
-                        <li><a href="{{url(action('company_controller@create'))}}">Lisää uusi toimipiste</a></li>
+                        <li><a href="{{url(action('company_controller@create'))}}">Registeröi uusi organisaatio</a></li>
 					</ul>
 			
 			</li>
@@ -45,24 +45,19 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                            
-                            <!-- <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a> -->
-                            <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
-
                             @if(!(Auth::user()->user_type_id=='3'))
-
                                 <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a>
-
                                 @endif
+                                <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
                                 @guest
-                                <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>
+                                <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
 
                                 <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
 
                             
                         @else 
 
-                        <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
+                        <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
 
                                 <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
 

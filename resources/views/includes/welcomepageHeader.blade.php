@@ -34,49 +34,38 @@
                 </div>
 
                 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav navbar-right">
-                         
-                        <li>
-                            <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout" style="margin-right: 5%;">Yhteystiedot</a>
-                            <a id="home"    href="/" class="btn btn-info btn-lg logout" style="margin-right: 5%; display: none">back</a>
-                                <script type="text/javascript">
-                                    {
-                                        if (window.location.href === "http://127.0.0.1:8000/contactLists") {
-                                        document.getElementById("contact").style.display = "none";
-                                        document.getElementById("home").style.display = "block";
-                                        }
-                                        
-                                     }
-                                </script> 
-                        </li> 
+                        <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout">Yhteystiedot</a>
+                        <a id="home"    href="/" class="btn btn-info btn-lg logout" style="display: none;">Takaisin etusivulle</a>
+                            <script type="text/javascript">
 
+                                    if (window.location.href === "http://localhost:8000/contactLists") {
+                                    document.getElementById("contact").style.display = "none";
+                                    document.getElementById("home").style.display = "";
+                                    }
+                            </script>
                         @guest
-                            <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a></li>
+                            <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
 
                         <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
 
 
                         @else
                             @if(Auth::user()->user_type_id == 1)
-                                <li><a href="/home" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
+                                <a href="/home" class="btn btn-info btn-lg logout">Hallinta</a>
                             @elseif(Auth::user()->user_type_id == 2)
-                                <li><a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
+                                <a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout">Hallinta</a>
                             @elseif(Auth::user()->user_type_id == 3)
-                                <li><a href="/companies/{{Auth::user()->user_company_id}}/manage/microlocations/{{Auth::user()->user_microlocation_id}}" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
+                                <a href="/companies/{{Auth::user()->user_company_id}}/manage/microlocations/{{Auth::user()->user_microlocation_id}}" class="btn btn-info btn-lg logout">Hallinta</a>
                             @endif
 
-                            <li><a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
-
-                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> --> 
-
+                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a>
+                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
                         @csrf
-                    @endguest
-
-
+                        @endguest
                     <!-- <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
                                 <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li> -->
-
                     </ul>
                 </div>
             </div>

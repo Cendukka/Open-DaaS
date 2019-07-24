@@ -18,16 +18,15 @@
         <div class="sidebar-header">
             <a href="/companies/{{$company->company_id}}"><h4>TEKIHA TEkstiiliKIerrätyksen  HAllintajärjestelmä</h4>{{$company->company_name}}</a>
         </div>
-
         <ul class="list-unstyled components">
-
             <li>
-                <a href="{{'/companies/'.$company->company_id}}">Oma Toimipiste</a>
+                <a href="{{'/companies/'.$company->company_id}}">Etusivu</a>
+                <a href="{{'/companies/'.$company->company_id.'/manage/microlocations'}}">Organisaation toimipisteet</a>
                 <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">Raportit</a>
                 <ul class="collapse list-unstyled" id="reportsSubmenu">
                     <li><a href="{{'/companies/'.$company->company_id.'/warehouse'}}">    Varasto</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/receipts'}}">     Saapuneet</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/issues'}}">       Lähteneet</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/issues'}}">       Lähetetyt</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/pre'}}">          Esilajiteltu</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/refined'}}">      Hienolajiteltu</a></li>
                 </ul>
@@ -35,12 +34,12 @@
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations'}}">Microlokaatiot</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations'}}">Toimipisteet</a></li>
                 </ul>
-                <a href="#recordSubmenu" data-toggle="collapse" aria-expanded="false">Tapahtumakirjaukset</a>
+                <a href="#recordSubmenu" data-toggle="collapse" aria-expanded="false">Materiaalikirjaukset</a>
 
                 <ul class="collapse list-unstyled" id="recordSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää saapunut</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää vastaanotto</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/issues/create'}}">Lisää lähetys</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/pre/create'}}">Lisää esilajittelu</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/refined/create'}}">Lisää hienolajittelu</a></li>

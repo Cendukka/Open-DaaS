@@ -349,3 +349,7 @@ a.logout:hover {
       display: inline-block;
       width: 30%;
   }
+
+  .form-field-width{
+      min-width:50%;
+  }

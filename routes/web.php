@@ -1,21 +1,37 @@
 <?php
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('pages.home');
+//Route::get('/home', 'HomeController@index')->name('pages.home');
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware'=>['auth']],function(){
-    Route::group(['middleware'=>['company']],function() {
-        Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
-    });
+   
+	
+	Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
+    
 
-	Route::group(['middleware'=>['admin']],function(){
+	Route::group(['middleware'=>['manager','company']],function(){
+		Route::resource('companies',                        'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 
 		Route::get('ewc','ewc_controller@index');
 
-			Route::group(['middleware'=>['superadmin']],function(){
+			Route::group(['middleware'=>['admin']],function(){
+
+			//	Route::resource('companies',                        'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+
+
+				#Manage Pages
+				Route::get('companies/{company}/manage', 'company_controller@manage_index');
+				Route::get('/manage', function () {
+    				return view('pages.manage');
+					});
+
+				
+				Route::get('/home', 'HomeController@index')->name('pages.home');
+
 				Route::get('yahoo', function () {
+
 					return view('yahoo');
 				});
 	
@@ -49,10 +65,10 @@ Route::get('contactLists',function(){
 Route::get('/companies/{company}/manage/microlocations/{ml}/contactPerson',function(){
 	return view('pages.contactPerson');
 }); */
-Route::get('contactPerson/search');
-Route::get('/manage', function () {
-    return view('pages.manage');
-});
+Route::get('contactlist/search');
+// Route::get('/manage', function () {
+//     return view('pages.manage');
+// });
 
 
 
@@ -65,10 +81,10 @@ Route::get('/manage', function () {
 
 
 #Manage Pages
-Route::get('companies/{company}/manage', 'company_controller@manage_index');
-Route::get('/manage', function () {
-    return view('pages.manage');
-});
+// Route::get('companies/{company}/manage', 'company_controller@manage_index');
+// Route::get('/manage', function () {
+//     return view('pages.manage');
+// });
 
 
 # EWC Codes
@@ -89,7 +105,7 @@ Route::post('materials/{material}/materials-destroy',   'materials_controller@de
 
 
 # Companies
-Route::resource('companies',                        'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+//( Route::resource('companies',                        'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/company-store',              'company_controller@store');
 Route::post('companies/{company}/company-update',   'company_controller@update');
 
@@ -107,6 +123,8 @@ Route::post('companies/{company}/manage/users/{user}/users-update', 'user_contro
 Route::resource('companies/{company}/manage/microlocations',                                    'microlocation_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/{company}/manage/microlocations/microlocations-store',                   'microlocation_controller@store');
 Route::post('companies/{company}/manage/microlocations/{microlocation}/microlocations-update',  'microlocation_controller@update');
+
+Route::get('companies/{company}/manage/microlocation/{microlocation}/warehouse', 'microlocation_controller@warehouse_index');
 
 
 # Communities

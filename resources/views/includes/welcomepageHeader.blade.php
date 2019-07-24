@@ -58,12 +58,17 @@
 
 
                         @else
-                        
-                            <li><a href="/home" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
+                            @if(Auth::user()->user_type_id == 1)
+                                <li><a href="/home" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
+                            @elseif(Auth::user()->user_type_id == 2)
+                                <li><a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
+                            @elseif(Auth::user()->user_type_id == 3)
+                                <li><a href="/companies/{{Auth::user()->user_company_id}}/manage/microlocations/{{Auth::user()->user_microlocation_id}}" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
+                            @endif
 
                             <li><a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
 
-                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
+                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> --> 
 
                         @csrf
                     @endguest

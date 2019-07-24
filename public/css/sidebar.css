@@ -64,6 +64,11 @@ a, a:hover, a:focus {
     margin: 40px 0;
 }
 
+.col-md-4{
+    padding: 0% ;
+    margin-bottom: 3%;
+}
+
 .panel-body td{
     word-wrap:break-word;
     overflow: auto;
@@ -283,6 +288,9 @@ a.logout:hover {
       
         display: inline-block;
     }
+    .col-md-4{
+        margin-bottom: 5%
+    }
 
    
 
@@ -295,7 +303,8 @@ a.logout:hover {
 .panel-heading{
     background-color: #EEEEEE;
     padding: 1%;
-    text-align: center;   
+    text-align: center;
+    font-size: 111%;   
 }
 
 .form-horizontal {

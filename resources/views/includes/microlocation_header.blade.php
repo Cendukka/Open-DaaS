@@ -16,7 +16,7 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/companies/{{$company->company_id}}/manage/microlocations"><h3>JALOSTUSLAITOS</h3></a>
+            <a href="/companies/{{$company->company_id}}/manage/microlocations/{{$microlocation->microlocation_id}}"><h3>JALOSTUSLAITOS</h3>{{$microlocation->microlocation_name}}</a>
         </div>
         <ul class="list-unstyled components">
 
@@ -24,11 +24,11 @@
                 
                 <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">Raportit</a>
                 <ul class="collapse list-unstyled" id="reportsSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/warehouse'}}">    Varasto</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/receipts'}}">     Saapuneet</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/issues'}}">       Lähteneet</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/pre'}}">          Esilajiteltu</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/refined'}}">      Hienolajiteltu</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/warehouse'}}">    Varasto</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/receipts'}}">     Saapuneet</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/issues'}}">       Lähteneet</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/pre'}}">          Esilajiteltu</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/refined'}}">      Hienolajiteltu</a></li>
                 </ul>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
@@ -92,8 +92,6 @@
         <!-- Main Page Content Holder -->
         <div id="main" class="column">
             @yield('content')
-
-            {{$microlocation->microlocation_id}}
         </div>
 
         <!-- Back To The Top Button -->

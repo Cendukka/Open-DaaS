@@ -1,4 +1,4 @@
-@extends (Auth::user()->user_type_id == 3 ? 'layouts.microlocation' : 'layouts.macrolocation')
+@extends (Auth::user()->user_type_id < 3 ? 'layouts.macrolocation' : 'layouts.microlocation')
 @section ('title', 'Raportit: Varasto')
 @section('content')
     <!--<div id="macrolocation_name" class="row">

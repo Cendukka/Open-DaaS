@@ -119,8 +119,20 @@ class microlocation_controller extends Controller {
             );
     }
 
-	public function warehouse_index(company $company, microlocation $microlocation) {
-		return view('pages.company.warehouse')->with(['company' => $company, 'microlocation' => $microlocation]);
-	}
+	//  public function warehouse_index(company $company, microlocation $microlocation) {
+	//  	return view('pages.company.warehouse')->with(['company' => $company, 'microlocation' => $microlocation]);
+	//  }
+	// public function warehouse_index(company $company, microlocation $microlocation) {
+	// 	return view('pages.company.warehouse')->with(['company' => $company, 'microlocation' => $microlocation]);
+	// }
+	// public function warehouse_index(company $company, microlocation $microlocation) {
+	// 	return view('pages.company.warehouse')->with(['company' => $company, 'microlocation' => $microlocation]);
+	// }
+	// public function warehouse_index(company $company, microlocation $microlocation) {
+	// 	return view('pages.company.warehouse')->with(['company' => $company, 'microlocation' => $microlocation]);
+	// }
+	// public function warehouse_index(company $company, microlocation $microlocation) {
+	// 	return view('pages.company.warehouse')->with(['company' => $company, 'microlocation' => $microlocation]);
+	// }
 
 }

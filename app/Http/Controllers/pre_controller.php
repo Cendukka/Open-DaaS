@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
     use App\pre_sorting;
+    use App\microlocation;
 
 class pre_controller extends Controller {
 
@@ -15,8 +16,8 @@ class pre_controller extends Controller {
     }
 
 
-    public function index(company $company) {
-        return view('pages.company.pre')->with('company', $company);
+    public function index(company $company,  microlocation $microlocation) {
+        return view('pages.company.pre')->with(['company' => $company, 'microlocation' => $microlocation]);
     }
 
 

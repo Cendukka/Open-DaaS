@@ -18,8 +18,8 @@ class users_table_seeder extends Seeder
 		$faker = Faker::create('fi_FI');
 		DB::table('users')->insert([
 			'user_type_id' => 1,
-			'user_company_id' => '1',
-			'user_microlocation_id' => '1',
+			'user_company_id' => NULL,
+			'user_microlocation_id' => NULL,
 			'last_name' => 'Zitting',
 			'first_name' => 'Jaakko',
 			'username' => 'Admin.Jaakko',

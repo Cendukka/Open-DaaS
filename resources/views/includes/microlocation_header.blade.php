@@ -24,18 +24,18 @@
                 
                 <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">Raportit</a>
                 <ul class="collapse list-unstyled" id="reportsSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/warehouse'}}">    Varasto</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/receipts'}}">     Saapuneet</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/issues'}}">       Lähteneet</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/pre'}}">          Esilajiteltu</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/refined'}}">      Hienolajiteltu</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/warehouse'}}">    Varasto</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/receipts'}}">     Saapuneet</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/issues'}}">       Lähteneet</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/pre'}}">          Esilajiteltu</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/refined'}}">      Hienolajiteltu</a></li>
                 </ul>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/receipts/create'}}">Lisää vastaanotto</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/manage/receipts/create'}}">Lisää vastaanotto</a></li>
                     <li><a href="#">Lisää lähetys</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/manage/users'}}">Käyttäjät</a></li>
                 </ul>
                {{-- <a href="/ewc">EWC Codes</a>--}}
             </li>

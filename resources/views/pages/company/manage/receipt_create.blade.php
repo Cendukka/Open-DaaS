@@ -1,4 +1,4 @@
-@extends('layouts.macrolocation')
+@extends (Auth::user()->user_type_id < 3 ? 'layouts.macrolocation' : 'layouts.microlocation')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\user;
+use App\microlocation;
 
 class user_controller extends Controller {
 	public function __construct()
@@ -18,8 +19,8 @@ class user_controller extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index(company $company) {
-		return view('pages.company.manage.users')->with('company', $company);
+	public function index(company $company,  microlocation $microlocation) {
+		return view('pages.company.manage.users')->with('company', $company)->with('microlocation', $microlocation);
 	}
 
 

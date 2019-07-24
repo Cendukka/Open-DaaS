@@ -126,11 +126,15 @@ Route::post('companies/{company}/manage/microlocations/{microlocation}/microloca
 
 
 #Microlocations Reports
-Route::get('companies/{company}/manage/microlocation/{microlocation}/warehouse',	'company_controller@warehouse_index');
-Route::get('/companies/{company}/manage/microlocation/{microlocation}/receipts',	'receipt_controller@index');
-Route::get('/companies/{company}/manage/microlocation/{microlocation}/issues',		'issue_controller@index');
-Route::get('/companies/{company}/manage/microlocation/{microlocation}/pre',			'pre_controller@index');
-Route::get('/companies/{company}/manage/microlocation/{microlocation}/refined',		'refined_controller@index');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/warehouse',	'company_controller@warehouse_index');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/receipts',	'receipt_controller@index');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/issues',		'issue_controller@index');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/pre',			'pre_controller@index');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/refined',		'refined_controller@index');
+
+#Microlocation Manage
+Route::get('companies/{company}/manage/microlocations/{microlocation}/manage/receipts/create',	'receipt_controller@create');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/manage/users',	'user_controller@index');
 
 # Communities
 Route::resource('companies/{company}/manage/communities',                           'community_controller', ['only' => ['index', 'show', 'create', 'edit']]);

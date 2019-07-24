@@ -12,15 +12,15 @@ use App\microlocation;
 class receipt_controller extends Controller {
 
 
-	public function index(company $company,  microlocation $microlocation) {
+	public function index(company $company,   microlocation $microlocation) {
 		#return view('pages.company.manage.receipts')->with('company', $company);
         return view('pages.company.receipts')->with('company', $company)->with('microlocation', $microlocation);
 
 	}
 
 
-	public function create(company $company) {
-		return view('pages.company.manage.receipt_create')->with('company', $company);
+	public function create(company $company,  microlocation $microlocation) {
+		return view('pages.company.manage.receipt_create')->with('company', $company)->with('microlocation', $microlocation);
 	}
 
 

@@ -124,6 +124,8 @@ Route::resource('companies/{company}/manage/microlocations',                    
 Route::post('companies/{company}/manage/microlocations/microlocations-store',                   'microlocation_controller@store');
 Route::post('companies/{company}/manage/microlocations/{microlocation}/microlocations-update',  'microlocation_controller@update');
 
+Route::get('companies/{company}/manage/microlocation/{microlocation}/warehouse', 'microlocation_controller@warehouse_index');
+
 
 # Communities
 Route::resource('companies/{company}/manage/communities',                           'community_controller', ['only' => ['index', 'show', 'create', 'edit']]);

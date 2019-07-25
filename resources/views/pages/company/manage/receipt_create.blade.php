@@ -18,7 +18,7 @@
                 <form method="post" action="receipts-store" class="form-text-align-padd">
                     @csrf
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="datetime">Aikaleima:</label>
+                        <label class="col-sm-2 col-form-label" for="datetime">Päivämäärä:</label>
                         <div class="col-sm-10" style="position: relative">
                             <input type="text" class="form-control timepicker element-width-auto form-field-width" name="datetime" value="{{date('Y-m-d')}}"/>
                         </div>
@@ -77,15 +77,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="distance">Matka (Km):</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control element-width-auto form-field-width" name="distance"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="weight">Paino (Kg):</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control element-width-auto form-field-width" name="weight"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="distance">Matka (Km):</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control element-width-auto form-field-width" name="distance"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -97,6 +97,19 @@
                                     <option value="{{$ewc->ewc_code}}">{{title_case($ewc->ewc_code)}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="for_issue" name="for_issue">
+                                <label class="form-check-label" for="for_issue">Materiaali menee lähetykseen</label>
+                            </div>
+                            <small class="form-text text-muted">
+                                Valitse, jos materiaali menee suoraan lähetykseen, eikä sitä lajitella.<br>
+                                Jos valittuna, tämä lähetys ei näy kirjatessa lajitteluita.
+                            </small>
                         </div>
                     </div>
                     <br>
@@ -138,11 +151,6 @@
                     $("#from_community").empty().html(data);
                 }
             })
-        });
-    </script>
-    <script type="text/javascript">
-        $('.timepicker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss'
         });
     </script>
 @endsection

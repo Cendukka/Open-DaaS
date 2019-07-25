@@ -30,7 +30,7 @@
                         <div class="form-group row">
                             <label for="from-date" class="col-sm-2 col-form-label form-text-align-padd">From:</label>
                             <div class="col-sm-8">
-                                <input type="date" class="form-control timepicker" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
+                                <input type="text" class="form-control timepicker" id="from-date" name="from-date" value="{{date('Y-m-d', strtotime("-12 months", strtotime(date('Y-m-d'))))}}">
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="form-group row">
                             <label for="date-date" class="col-sm-2 col-form-label form-text-align-padd">To:</label>
                             <div class="col-sm-8">
-                                <input type="date" class="form-control timepicker" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
+                                <input type="text" class="form-control timepicker" id="to-date" name="to-date" value="{{date('Y-m-d')}}">
                             </div>
                         </div>
                     </div>
@@ -54,6 +54,7 @@
                         <th>Paino (Kg)</th>
                         <th>Matka (Km)</th>
                         <th>EWC-Koodi</th>
+                        <th>Lähetykseen</th>
                     </tr>
                     </thead>
                     <tbody id="searchtable">

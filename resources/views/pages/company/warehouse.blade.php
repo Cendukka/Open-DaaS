@@ -1,7 +1,7 @@
 
-@if(Auth::user()->user_type_id == 2)
+@if(Auth::user()->user_type_id == 2 || 1)
     @extends('layouts.macrolocation')
-@else(Auth::user()->user_type_id == 3)
+@elseif(Auth::user()->user_type_id == 3)
     @extends('layouts.microlocation')
 @endif
 

@@ -1,11 +1,11 @@
 @extends('layouts.default')
 @section('content')
     <div id="content2" class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="card">
+            <div class="card-header">
                 <h3>Materiaalit </h3>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -27,16 +27,10 @@
                                     <tr>
                                         <td class="text-left">
                                             <a style="color: black;">{{title_case($material->material_name)}}</a>
-                                            &nbsp;
-
-
-                                        </td>
-                                        <td>
-                                            <a href="{{url('/materials/'.$material->material_id.'/edit')}}">
+                                            <a style="padding-left: 100px;" href="{{url('/materials/'.$material->material_id.'/edit')}}">
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </ul>

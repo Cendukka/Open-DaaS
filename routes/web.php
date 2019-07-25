@@ -58,14 +58,14 @@ Route::get('ewc/search','ewc_controller@search');
 #contact person routes
 Route::get('contactLists',function(){
 	return view('pages.contactLists');
-});
+})->name('ContactList');
 /* Route::get('/companies/{company}/contactPerson',function(){
 	return view('pages.contactPerson');
 });
 Route::get('/companies/{company}/manage/microlocations/{ml}/contactPerson',function(){
 	return view('pages.contactPerson');
 }); */
-Route::get('contactlist/search');
+//Route::get('contactlist/search');
 // Route::get('/manage', function () {
 //     return view('pages.manage');
 // });

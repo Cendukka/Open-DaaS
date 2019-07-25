@@ -27,8 +27,6 @@ class pre_controller extends Controller {
 
 
     public function store(Request $request, company $company) {
-        # ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
@@ -42,6 +40,7 @@ class pre_controller extends Controller {
         $microlocation = $receipt_entity->receipt_to_microlocation_id;
         $material = $request->get('material');
         $weight = $request->get('weight');
+        $for_issue = $request->get('for_issue') ? True : False;
 
         $pre = new pre_sorting([
             'pre_sorting_user_id' => $request->get('user'),
@@ -49,6 +48,7 @@ class pre_controller extends Controller {
             'pre_sorting_receipt_id' => $receipt,
             'pre_sorting_material_id' => $material,
             'pre_sorting_weight' => $weight,
+            'is_for_issue' => $for_issue,
         ]);
         $pre->save();
 
@@ -71,8 +71,6 @@ class pre_controller extends Controller {
 
 
     public function update(Request $request, company $company, pre_sorting $pre) {
-        # ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
@@ -84,6 +82,7 @@ class pre_controller extends Controller {
         $receipt = $request->get('receipt');
         $material = $request->get('material');
         $weight = $request->get('weight');
+        $for_issue = $request->get('for_issue') ? true : false;
 
         $preNew = pre_sorting::find($pre->pre_sorting_id);
         $preNew->pre_sorting_user_id = $request->get('user');
@@ -91,6 +90,7 @@ class pre_controller extends Controller {
         $preNew->pre_sorting_receipt_id = $receipt;
         $preNew->pre_sorting_material_id = $material;
         $preNew->pre_sorting_weight = $weight;
+        $preNew->is_for_issue = $for_issue;
 
         $receipt_entity_orig = DB::table('inventory_receipt')->where('receipt_id',$preNew->getOriginal('pre_sorting_receipt_id'))->first();
         $receipt_entity_new = DB::table('inventory_receipt')->where('receipt_id',$receipt)->first();

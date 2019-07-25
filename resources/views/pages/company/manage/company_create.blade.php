@@ -51,7 +51,7 @@
             
                 
                     <div class="col-sm-9"> 
-                        <button type="submit"  class=" btn btn-primary" style="width: 32%" >Rekisteröi</button>
+                        <button type="submit"  class="btn btn-primary" style="width: 32%" >Rekisteröi</button>
                         <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button> 
                     
                     </div>

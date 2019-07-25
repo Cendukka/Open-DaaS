@@ -24,7 +24,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {{--        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>--}}
-{{--        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>--}}
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <!-- jQuery CDN for LeftSide Menu-->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <!-- jQuery Custom Scroller CDN -->

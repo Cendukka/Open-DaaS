@@ -45,29 +45,15 @@
 
                         <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                            @if(!(Auth::user()->user_type_id=='3'))
-                                <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a>
-                                @endif
-                                <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
-                                @guest
+                            <a href="/home" class="btn btn-info btn-lg logout">Admin Etusivu</a>
+                            <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
+                            @guest
                                 <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
+                            @else
 
-                                <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
-
-                            
-                        @else 
-
-                        <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
-
-                                <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
-
-                                        @csrf
+                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
+                            @csrf
                         @endguest
-                                
-
-                                <!-- <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
-                                <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li> -->
-
                             </ul>
                         </div>
                     </div>

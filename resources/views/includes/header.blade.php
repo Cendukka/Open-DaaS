@@ -18,7 +18,7 @@
                 	<ul class="collapse list-unstyled" id="pageSubmenu">
                     	<li><a href="/companiesUser/">Käyttäjät</a></li>
                         <li><a href="/materials">Materiaalit</a></li>
-                        <li><a href="{{url(action('company_controller@create'))}}">Registeröi uusi organisaatio</a></li>
+                        <li><a href="{{url(action('company_controller@create'))}}">Rekisteröi uusi organisaatio</a></li>
 					</ul>
 			
 			</li>

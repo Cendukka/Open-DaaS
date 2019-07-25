@@ -221,7 +221,7 @@ class receipt_controller extends Controller {
             $source = $request->input('source');
             if($source == 'internal'){
                 $result = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
-                if($result) {
+                if($result->count()>0) {
                     $output .= '<div id="from_microlocation" class="form-group">';
                         $output .= '<label class="col-sm-2 col-form-label" for="from_microlocation">Mikrolokaatiosta:</label>';
                         $output .= '<div class="col-sm-10">';
@@ -232,10 +232,13 @@ class receipt_controller extends Controller {
                             }
                     $output .= '</select></div></div>';
                 }
+                else{
+                    $output .= '<option>ei sopivia kirjauksia</option>';
+                }
             }
             elseif($source == 'external'){
                 $result = DB::table('company')->where('company_id','!=',$company->company_id)->get();
-                if($result) {
+                if($result->count()>0) {
                     $output .= '<div class="form-group">';
                     $output .= '<label class="col-sm-2 col-form-label" for="from_company">From company:&nbsp</label>';
                     $output .= '<div class="col-sm-10">';
@@ -245,6 +248,9 @@ class receipt_controller extends Controller {
                         $output .= '<option value="'.$value->company_id.'" '.($company_id == $value->company_id ? 'selected="selected"' : '').'>'.title_case($value->company_name).'</option>';
                     }
                     $output .= '</select></div></div>';
+                }
+                else{
+                    $output .= '<option>ei sopivia kirjauksia</option>';
                 }
             }
             elseif($source == 'supplier'){

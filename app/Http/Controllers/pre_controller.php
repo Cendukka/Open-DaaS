@@ -152,7 +152,7 @@ class pre_controller extends Controller {
 			$output="";
 			$result = app('App\Http\Controllers\pre_controller')
                 ->query($company,$request)
-                ->select('pre_sorting_date','microlocation_name','material_name','pre_sorting_weight','username','pre_sorting_id')
+                ->select('pre_sorting_date','microlocation_name','material_name','pre_sorting_weight','username','pre_sorting_id','pre_sorting.is_for_issue')
                 ->get();
 			if($result){
 				foreach ($result as $key => $value){
@@ -162,13 +162,15 @@ class pre_controller extends Controller {
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->pre_sorting_weight.'</td>'.
 						'<td>'.$value->username.'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'">Edit</a></td>'.
+                        '<td>'.($value->is_for_issue ? 'Kyllä' : 'Ei').'</td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>'.
 						'</tr>';
 				}
 				$output.='<tr>'.
 					'<td></td>'.
 					'<td></td>'.
 					'<td>'.$result->sum('pre_sorting_weight').' Total</td>'.
+					'<td></td>'.
 					'<td></td>'.
 					'<td></td>'.
 					'</tr>';
@@ -190,12 +192,15 @@ class pre_controller extends Controller {
                 ->select('material_name','material_type','receipt_to_microlocation_id','receipt_id','receipt_weight','receipt_date')
                 ->orderBy('receipt_date','DESC')
                 ->get();
-            if($result) {
+            if($result->count()>0) {
                 $output .= '<option selected="selected" disabled hidden value=""></option>';
                 foreach ($result as $key => $value) {
                     $used = DB::table('pre_sorting')->where('pre_sorting_receipt_id',$value->receipt_id)->sum('pre_sorting_weight');
                     $output .= '<option value="'.$value->receipt_id.'" '.($value->receipt_id == $receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->receipt_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                 }
+            }
+            else{
+                $output .= '<option>ei sopivia kirjauksia</option>';
             }
             return Response($output);
         }

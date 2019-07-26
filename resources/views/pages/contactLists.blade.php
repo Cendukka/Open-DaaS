@@ -194,7 +194,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background: #d1dec2 ">Jätekukko</div>
                     <div class="panel-body" style="background: #EEEEEE ">Tel: +358 17 368 0152,
-                    service@jatekukko.fi
+                    asiakaspalvelu@jatekukko.fi
                     <a href="https://www.jatekukko.fi/" target="_blank" style="color: blue" class="textMark">www.jatekukko.fi</a></td>
                     Microkatu 1, Kuopio
                     </div>
@@ -225,9 +225,106 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background: #d1dec2 ">Kymenlaakson Jäte Oy</div>
                     <div class="panel-body" style="background: #EEEEEE ">Tel: (05) 744 3400,
-                    service@jatekukko.fi
+                    asiakaspalvelu@kymenlaaksonjate.fi
                     <a href="https://www.kymenlaaksonjate.fi/" target="_blank" style="color: blue" class="textMark">www.kymenlaaksonjate.fi</a>,
                     Ekokaari 5046860 Keltakangas
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #d1dec2 ">Lakeuden Etappi</div>
+                    <div class="panel-body" style="background: #EEEEEE ">Tel: (06) 421 4900,
+                    <a href="https://www.etappi.com/fi" target="_blank" style="color: blue" class="textMark">www.etappi.com</a>,
+                    Laskunmäentie 15 FI-60760 Pojanluoma
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #d1dec2 ">Lapin jätehuolto kuntayhtymä</div>
+                    <div class="panel-body" style="background: #EEEEEE ">Tel: 040 3511 771,
+                    asiakaspalvelu@lapeco.fi
+                    <a href="https://lapeco.fi/" target="_blank" style="color: blue" class="textMark">www.lapeco.fi</a>,
+                    Inari
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #d1dec2 ">Loimi-Hämeen Jätehuolto</div>
+                    <div class="panel-body" style="background: #EEEEEE ">Tel: 03 424 2622,
+                    laskutus@lhj.fi
+                    <a href="http://www.lhj.fi/" target="_blank" style="color: blue" class="textMark">www.lhj.fi</a>,
+                    Kiimassuontie 127, 30420 Forssa
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #d1dec2 ">Lounais-Suomen Jätehuolto Oy </div>
+                    <div class="panel-body" style="background: #EEEEEE ">Tel: 0200 47470,
+                    asiakaspalvelu@lsjh.fi
+                    <a href="https://www.lsjh.fi" target="_blank" style="color: blue" class="textMark">www.lsjh.fi</a>,
+                    Laskunmäentie 15 FI-60760 Pojanluoma
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #d1dec2 ">Metsäsairila Oy</div>
+                    <div class="panel-body" style="background: #EEEEEE ">Tel: 044 722 2300,
+                    jatehuolto@metsasairila.fi
+                    <a href="https://www.metsasairila.fi/" target="_blank" style="color: blue" class="textMark">www.metsasairila.fi</a>,
+                    Metsä-Sairilantie 18, 50800 Mikkeli
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #d1dec2 ">Millespakka Oy</div>
+                    <div class="panel-body" style="background: #EEEEEE ">Tel: (06) 557 8400,
+                    toimisto@millespakka.fi
+                    <a href="https://www.millespakka.fi/" target="_blank" style="color: blue" class="textMark">www.millespakka.fi</a>,
+                    Kyyjärventie 1054 62900 Alajärvi
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #d1dec2 ">Mustankorkea </div>
+                    <div class="panel-body" style="background: #EEEEEE ">Tel: 010 325 3900,
+                    asiakaspalvelu@mustankorkea.fi
+                    <a href="https://mustankorkea.fi/" target="_blank" style="color: blue" class="textMark">www.mustankorkea.fi</a>,
+                    Ronsuntaipaleentie 204
+40500 Jyväskylä
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #d1dec2 ">Napapiirin residuum </div>
+                    <div class="panel-body" style="background: #EEEEEE ">Tel: +358 207 120 230,
+                    asiakaspalvelu@residuum.fi
+                    <a href="https://residuum.fi/" target="_blank" style="color: blue" class="textMark">www.residuum.fi</a>,
+                    Betonitie 3 
+96320 ROVANIEMI
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #d1dec2 ">Perämeren Jätehuolto </div>
+                    <div class="panel-body" style="background: #EEEEEE ">Tel: 040 710 7373,
+                    asiakaspalvelu@pmjh.fi
+                    <a href="https://www.jakala.fi/" target="_blank" style="color: blue" class="textMark">www.jakala.fi</a>,
+                    Kalkkimaantie 614, 95460 Tornio 
                     </div>
                 </div>
             </div>

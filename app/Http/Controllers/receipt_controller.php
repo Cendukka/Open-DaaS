@@ -273,12 +273,12 @@ class receipt_controller extends Controller {
                 ->where('community_company_id','=',$from_company)
                 ->get();
             if($result) {
-                $output .= '<label for="from_community">From community:&nbsp</label><select name="from_community">';
+                $output .= '<label class="col-sm-2 col-form-label" for="from_community">From community:&nbsp</label><div class="col-sm-10"><select class="form-control element-width-auto form-field-width" name="from_community">';
                 $output .= '<option selected="selected" disabled hidden value=""></option>';
                 foreach ($result as $key => $value) {
                     $output .= '<option value="'.$value->community_id.'" '.($value->community_id == $community_id ? 'selected="selected"' : '').'>'.title_case($value->community_city).'</option>';
                 }
-                $output .= '</select>';
+                $output .= '</select></div>';
             }
             return Response($output);
         }

@@ -22,6 +22,7 @@
                         </div>
                     </div>
                     @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:'])
+                    <div class="form-group row" id="from_community"></div>
                     @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'to_microlocation', 'name' => 'Microlokaatioon:'])
                     @include('includes.forms.materials', ['materials' => DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get()])
                     @include('includes.forms.weight')
@@ -54,7 +55,13 @@
                 success:function(data){
                     $("#from").empty().html(data);
                 }
-            })
+            });
+            if($source != 'external'){
+                $("#from_community").hide()
+            }
+            else{
+                $("#from_community").show()
+            }
         });
         $(document).on("change", '#from_company', function(e) {
             $from_company = $("#from_company").val();

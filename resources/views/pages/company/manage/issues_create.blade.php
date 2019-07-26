@@ -50,32 +50,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         function addMat(){
-            $("#details").append(
-            '<br>' +
-            '<div class="form-group detail-info">' +
-                '<div class="form-group">' +
-                    '<label for="material">Material:&nbsp</label>' +
-                    '<select name="material[]" id="material[]" class="material-select">' +
-                        '<option selected="selected" disabled hidden value=""></option>' +
-                        @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $mat)
-                            '<option value="{{$mat->material_id}}">{{title_case($mat->material_name)}} []</option>' +
-                        @endforeach
-                    '</select>' +
-                '</div>' +
-                '<div class="form-group">' +
-                    '<label for="ewc_code">EWC Code:&nbsp</label>' +
-                    '<select name="ewc_code[]">' +
-                        @foreach (DB::table('ewc_codes')->get() as $ewc)
-                            '<option value="{{$ewc->ewc_code}}" >{{title_case($ewc->ewc_code)}}</option>' +
-                        @endforeach
-                    '</select>' +
-                '</div>' +
-                '<div class="form-group"> <label for="weight">Weight (kg):&nbsp</label>' +
-                    '<input type="text" class="form-control form-control-sm" name="weight[]" value="0"/>' +
-                '</div>' +
-                '*******************************' +
-            '</div>'
-            );
+            $.ajax({
+                type: 'GET',
+                url : "/companies/{{$company->company_id}}/manage/issues/new_details",
+                success : function (data) {
+                    $("#details").append(data);
+                }
+            });
         }
         $('#removeMat').on('click',(function(){
             if($("#details").children("div").length > 1){

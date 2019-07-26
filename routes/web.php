@@ -6,13 +6,22 @@ Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware'=>['auth']],function(){
-   
+	Route::resource('companies/{company}/manage/microlocations',                                    'microlocation_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+	Route::get('companies/{company}/manage/microlocation/{microlocation}/warehouse', 'microlocation_controller@warehouse_index');
+
 	
 	Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
     
 
-	Route::group(['middleware'=>['manager','company']],function(){
-		Route::resource('companies',                        'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+	Route::group(['middleware'=>['manager']],function(){
+
+		Route::get('companies', 'company_controller@index')->name('companies.index');
+		Route::get('companies/create', 'company_controller@create')->name('companies.create');
+		Route::get('companies/{company}/edit', 'company_controller@edit')->name('companies.edit');
+		Route::get('companies/{company}', 'company_controller@show')->name('companies.show');
+
+
+		//Route::resource('companies',                        'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 
 		Route::get('ewc','ewc_controller@index');
 
@@ -38,6 +47,10 @@ Route::group(['middleware'=>['auth']],function(){
 			});
 
 	});
+});
+Route::get('yahoo', function () {
+
+	return view('yahoo');
 });
 
 Route::get('/', function () {
@@ -120,11 +133,11 @@ Route::post('companies/{company}/manage/users/{user}/users-update', 'user_contro
 
 
 # Microlocations
-Route::resource('companies/{company}/manage/microlocations',                                    'microlocation_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+// Route::resource('companies/{company}/manage/microlocations',                                    'microlocation_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 Route::post('companies/{company}/manage/microlocations/microlocations-store',                   'microlocation_controller@store');
 Route::post('companies/{company}/manage/microlocations/{microlocation}/microlocations-update',  'microlocation_controller@update');
 
-Route::get('companies/{company}/manage/microlocation/{microlocation}/warehouse', 'microlocation_controller@warehouse_index');
+// Route::get('companies/{company}/manage/microlocation/{microlocation}/warehouse', 'microlocation_controller@warehouse_index');
 
 
 # Communities

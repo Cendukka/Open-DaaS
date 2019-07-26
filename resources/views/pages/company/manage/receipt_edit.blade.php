@@ -32,7 +32,7 @@
                     @include('includes.forms.for_issue', ['checked' => $receipt->is_for_issue])
                     <br>
                     <button type="submit" class="btn btn-primary">Save</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/receipts')}}';">Peruuta</button>
                 </form>
             </div>
         </div>

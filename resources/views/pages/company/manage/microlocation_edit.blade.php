@@ -52,7 +52,7 @@
                             <input type="text" maxlength="50" class="form-control element-width-auto" name="city" value="{{title_case($microlocation->microlocation_city)}}">
                         </div>
                         <button type="submit" class="btn btn-primary">Tallenna</button>
-                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/microlocations')}}';">Peruuta</button>
                     </form>
                 
             </div>

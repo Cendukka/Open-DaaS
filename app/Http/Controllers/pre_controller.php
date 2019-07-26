@@ -29,7 +29,7 @@ class pre_controller extends Controller {
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
-            'receipt' => 'integer|integer',
+            'receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0',
         ]);
@@ -73,7 +73,7 @@ class pre_controller extends Controller {
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
-            'receipt' => 'integer|integer',
+            'receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0',
         ]);

@@ -42,7 +42,7 @@
                     <button id="removeMat" type="button" class="btn" style="margin-bottom:10px;">Poista materiaali</button>
                     <br>
                     <button type="submit" class="btn btn-primary" style="margin-bottom:10px;">Tallenna</button>
-                    <button id="cancel" type="button" class="btn" style="margin-bottom:10px;" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    <button id="cancel" type="button" class="btn" style="margin-bottom:10px;" onclick="location.href='{{url('/companies/'.$company->company_id.'/issues')}}';">Peruuta</button>
                 </form>
             </div>
         </div>

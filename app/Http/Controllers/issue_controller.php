@@ -54,10 +54,10 @@ class issue_controller extends Controller {
                     }
                 },
             ],
-            'weight' => ['required','min:0',
+            'weight' => ['required',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
-                        if(!is_numeric($v)) {
+                        if(!is_numeric($v) || $v<0) {
                             $fail($attribute.' is invalid.');
                         }
                     }
@@ -130,10 +130,10 @@ class issue_controller extends Controller {
                     }
                 },
             ],
-            'weight' => ['required','min:0',
+            'weight' => ['required',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
-                        if(!is_numeric($v)) {
+                        if(!is_numeric($v) || $v<0) {
                             $fail($attribute.' is invalid.');
                         }
                     }
@@ -223,7 +223,6 @@ class issue_controller extends Controller {
                 ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','issue_id','sumweight')
                 ->get();
 			if($result){
-			    $sumweight = 0;
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
                         '<td>'.date("Y-m-d",strtotime($value->issue_date)).'</td>'.
@@ -241,7 +240,7 @@ class issue_controller extends Controller {
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.
-                    '<td>'.$sumweight.' Total</td>'.
+                    '<td>'.$result->sum('sumweight').' Total</td>'.
                     '</tr>';
 				return Response($output);
 			}

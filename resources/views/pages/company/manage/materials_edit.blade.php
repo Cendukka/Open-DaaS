@@ -35,7 +35,7 @@
                     </div>
                     <div class="element-float-left">
                         <button type="submit" class="btn btn-primary">Tallenna</button>
-                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/materials')}}';">Peruuta</button>
                     </div>
                 </form>
                     <form method="post" action="materials-destroy" onsubmit="return confirm('Are you sure you want to delete?');">

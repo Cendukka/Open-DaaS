@@ -53,7 +53,7 @@
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Lisää</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/microlocations')}}';">Peruuta</button>
                 </form>
             </div>
         </div>

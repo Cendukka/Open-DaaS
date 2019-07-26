@@ -28,7 +28,7 @@
                     @include('includes.forms.weight')
                     @include('includes.forms.description')
                     <button type="submit" class="btn btn-primary">Lisää</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/refined')}}';">Peruuta</button>
                 </form>
             </div>
         </div>

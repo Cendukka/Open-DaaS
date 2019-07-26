@@ -7,15 +7,7 @@
                 <h3>Lisää käyttäjä </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="users-store" class="form-text-align-padd" onsubmit="return confirm('Uusi käyttäjä lisätään yhtiöön. Haluatko jatkaa?');">
                     @csrf
                     <div class="form-group">
@@ -63,7 +55,7 @@
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Lisää</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/users')}}';">Peruuta</button>
                 </form>
             </div>
         </div>

@@ -7,16 +7,7 @@
                 <h3>Muokkaa käyttäjää </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                     <form method="post" action="users-update" class="form-text-align-padd">
                         @csrf
                         <div class="form-group">
@@ -62,7 +53,7 @@
                             <input id="email" maxlength="50" type="text" class="form-control element-width-auto text-lowercase" name="email" value="{{$user->email}}" disabled/>
                         </div>
                         <button type="submit" class="btn btn-primary">Tallenna</button>
-                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/users')}}';">Peruuta</button>
 
                     </form>
                 

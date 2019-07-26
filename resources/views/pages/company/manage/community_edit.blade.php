@@ -22,7 +22,7 @@
                         <input type="text" maxlength="50" class="form-control" name="city" value="{{title_case($community->community_city)}}">
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Cancel</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id)}}';">Cancel</button>
                 </form>
             </div>
         </div>

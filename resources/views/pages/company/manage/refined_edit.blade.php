@@ -47,7 +47,7 @@
                     @include('includes.forms.weight', ['weight' => $refined->refined_weight])
                     @include('includes.forms.description', ['description' => $refined->description])
                     <button type="submit" class="btn btn-primary">Tallenna</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/refined')}}';">Peruuta</button>
                 </form>
             </div>
         </div>

@@ -21,37 +21,37 @@
             <div class="form-horizontal">
                 <form method="post" action="company-store" onsubmit="return confirm('New company is being register. Would you like to proceed?');">
                 @csrf
-                    <div class="form-group row">
-                        <label for="companyName" class="col-sm-2 col-form-label text-left">Yhtiön nimi</label>
-                        <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="companyName" class="col-sm-3 control-label">Yhtiön nimi</label>
+                        <div class="col-sm-9">
                             <input type="text" name="name" placeholder="Yhtiön nimi" class="form-control" autofocus>
                         </div>
                     </div>
             
-                    <div class="form-group row">
-                        <label for="companyAdd" class="col-sm-2 col-form-label text-left">Katuosoite</label>
-                        <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="companyAdd" class="col-sm-3 control-label">Katuosoite</label>
+                        <div class="col-sm-9">
                             <input type="text" name="address" placeholder="Katuosoite" class="form-control" autofocus>
                         </div>
                     </div>
                     
-                    <div class="form-group row">
-                        <label for="companyPostalCode" class="col-sm-2 col-form-label text-left">Postinumero</label>
-                        <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="companyPostalCode" class="col-sm-3 control-label">Postinumero</label>
+                        <div class="col-sm-9">
                             <input  type="text" name="postal_code" placeholder="Postinumero" class="form-control" >
                         </div>
                     </div>
                     
-                    <div class="form-group row">
-                        <label for="companyCity" class="col-sm-2 col-form-label text-left">Kaupunki</label>
-                        <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="companyCity" class="col-sm-3 control-label">Kaupunki</label>
+                        <div class="col-sm-9">
                             <input type="text" name="city" placeholder="Kaupunki" class="form-control">
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <div class="col-sm-2">
-                            <button type="submit"  class="btn btn-primary">Rekisteröi</button>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <button type="submit"  class="btn btn-primary" style="width: 32%">Rekisteröi</button>
                             <button id="cancel" type="button" class="btn btn-primary" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
                         </div>
                     </div>

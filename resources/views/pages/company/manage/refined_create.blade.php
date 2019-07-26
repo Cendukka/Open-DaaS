@@ -6,68 +6,27 @@
                 <h3>Luo hienolajittelu kirjaus </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="refined-store" class="form-text-align-padd">
                     @csrf
-                    <div class="form-group">
-                        <label for="datetime">Päivämäärä:</label>
-                        <div style="position: relative">
-                            <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{date('Y-m-d H:i:s')}}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="microlocation">Microlokaatio:</label>
-                        <select class="form-control element-width-auto" name="microlocation" id="microlocation">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="user">Käyttäjä:</label>
-                        <select class="form-control element-width-auto" name="user">
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}">{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="origin">Hienolajitellun tekstiilin alkuperä:</label>
-                        <select class="form-control element-width-auto" name="origin" id="origin">
-                            <option selected="selected" disabled hidden value=""></option>
+                    @include('includes.forms.datetime',     ['time' => date('Y-m-d H:i:s')])
+                    @include('includes.forms.users',        ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get()])
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'microlocation', 'name' => 'Microlokaatio:'])
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="origin">Tekstiilin alkuperä:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control element-width-auto form-field-width" name="origin" id="origin">
+                                <option selected="selected" disabled hidden value=""></option>
                                 <option value="presort">Esilajittelu</option>
                                 <option value="receipt">Saapuneet kirjaus</option>
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group" id="originSelect">
+                    <div id="originSelect" class="form-group row">
                     </div>
-                    <div class="form-group">
-                        <label for="material">Materiaali:</label>
-                        <select class="form-control element-width-auto" name="material">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->where('material_type','=','textile')->get() as $material)
-                                <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="weight">Paino (Kg):</label>
-                        <input type="text" class="form-control element-width-auto" name="weight" value=""/>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Lisätietoja:</label>
-                        <textarea type="text" class="form-control" rows="8" maxlength="191" name="description"></textarea>
-                    </div>
+                    @include('includes.forms.materials',    ['materials' => DB::table('material_names')->where('material_type','=','textile')->get()])
+                    @include('includes.forms.weight')
+                    @include('includes.forms.description')
                     <button type="submit" class="btn btn-primary">Lisää</button>
                     <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
                 </form>

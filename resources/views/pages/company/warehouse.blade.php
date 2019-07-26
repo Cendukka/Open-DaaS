@@ -1,9 +1,7 @@
-@extends (Auth::user()->user_type_id < 3 ? 'layouts.macrolocation' : 'layouts.microlocation')
+@extends( !(Auth::user()->user_type_id == '3') ? 'layouts.macrolocation' : 'layouts.microlocation')
+{{--@extends( 'layouts.microlocation')--}}
 @section ('title', 'Raportit: Varasto')
 @section('content')
-    <!--<div id="macrolocation_name" class="row">
-        @include('includes.macrolocation_name')
-    </div>-->
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">

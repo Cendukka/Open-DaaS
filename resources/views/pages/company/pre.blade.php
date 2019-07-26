@@ -36,6 +36,7 @@
                         <th>Materiaali</th>
                         <th>Paino (Kg)</th>
                         <th>Käyttäjä</th>
+                        <th>Lähetykseen</th>
                     </tr>
                     </thead>
                     <tbody id="searchtable">

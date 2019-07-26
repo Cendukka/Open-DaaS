@@ -44,6 +44,7 @@ class receipt_controller extends Controller {
         $microlocation = $request->get('to_microlocation');
         $material = $request->get('material');
         $weight = $request->get('weight');
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
 		$receipt = new inventory_receipt([
             'receipt_user_id' => $request->get('user'),
@@ -94,6 +95,7 @@ class receipt_controller extends Controller {
         $microlocation = $request->get('to_microlocation');
         $material = $request->get('material');
         $weight = $request->get('weight');
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
 		$receiptNew = inventory_receipt::find($receipt->receipt_id);
 		$receiptNew->receipt_user_id = $request->get('user');
@@ -221,7 +223,7 @@ class receipt_controller extends Controller {
             $source = $request->input('source');
             if($source == 'internal'){
                 $result = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
-                if($result) {
+                if($result->count()>0) {
                     $output .= '<div id="from_microlocation" class="form-group">';
                     $output .= '<label for="from_microlocation">From microlocation:&nbsp</label><select name="from_microlocation">';
                     $output .= '<option class="form-control form-text-align-padd" disabled hidden value=""></option>';
@@ -230,13 +232,18 @@ class receipt_controller extends Controller {
                     }
                     $output .= '</select></div>';
                 }
+                else{
+                    $output .= '<option>ei sopivia kirjauksia</option>';
+                }
             }
             elseif($source == 'external'){
                 $result = DB::table('company')->where('company_id','!=',$company->company_id)->get();
-                if($result) {
+                if($result->count()>0) {
                     $output .= '<div class="form-group">';
-                    $output .= '<label for="from_company">From company:&nbsp</label><select id="from_company" name="from_company">';
-                    $output .= '<option class="form-control form-text-align-padd" selected="selected" disabled hidden value=""></option>';
+                    $output .= '<label class="col-sm-2 col-form-label" for="from_company">Organisaatiosta:</label>';
+                    $output .= '<div class="col-sm-10">';
+                    $output .= '<select class="form-control element-width-auto form-field-width" id="from_company" name="from_company">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $output .= '<option value="'.$value->company_id.'" '.($company_id == $value->company_id ? 'selected="selected"' : '').'>'.title_case($value->company_name).'</option>';
                     }
@@ -244,12 +251,15 @@ class receipt_controller extends Controller {
                     $output .= '<div id="from_community" class="form-group">';
                     $output .= '</select></div>';
                 }
+                else{
+                    $output .= '<option>ei sopivia kirjauksia</option>';
+                }
             }
             elseif($source == 'supplier'){
                 $output .= '<div class="form-group">';
-                $output .= '<label for="from_supplier">From supplier:&nbsp</label>';
-                $output .= '<input type="text" class="form-control" name="from_supplier" value="'.$supplier.'"/>';
-                $output .= '</div>';
+                $output .= '<label class="col-sm-2 col-form-label" for="from_supplier">Toimittajalta:</label>';
+                $output .= '<div class="col-sm-10"><input type="text" class="form-control element-width-auto form-field-width" name="from_supplier" value="'.$supplier.'"/>';
+                $output .= '</div></div>';
             }
             return Response($output);
         }
@@ -265,12 +275,12 @@ class receipt_controller extends Controller {
                 ->where('community_company_id','=',$from_company)
                 ->get();
             if($result) {
-                $output .= '<label for="from_community">From community:&nbsp</label><select name="from_community">';
+                $output .= '<label class="col-sm-2 col-form-label" for="from_community">From community:&nbsp</label><div class="col-sm-10"><select class="form-control element-width-auto form-field-width" name="from_community">';
                 $output .= '<option selected="selected" disabled hidden value=""></option>';
                 foreach ($result as $key => $value) {
                     $output .= '<option value="'.$value->community_id.'" '.($value->community_id == $community_id ? 'selected="selected"' : '').'>'.title_case($value->community_city).'</option>';
                 }
-                $output .= '</select>';
+                $output .= '</select></div>';
             }
             return Response($output);
         }

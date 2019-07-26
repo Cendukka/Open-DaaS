@@ -162,7 +162,7 @@ Route::get('companies/{company}/issues/search',                         'issue_c
 Route::get('companies/{company}/manage/issues/inventory',               'issue_controller@inventory');
 Route::post('companies/{company}/manage/issues/issues-store',           'issue_controller@store');
 Route::post('companies/{company}/manage/issues/{issue}/issues-update',  'issue_controller@update');
-
+Route::get('companies/{company}/manage/issues/new_details',            function(){return view('includes.forms.details');});
 
 # Pre Sorting
 Route::get('companies/{company}/pre',                           'pre_controller@index');

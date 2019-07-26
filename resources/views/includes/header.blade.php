@@ -18,7 +18,7 @@
                 	<ul class="collapse list-unstyled" id="pageSubmenu">
                     	<li><a href="/companiesUser/">Käyttäjät</a></li>
                         <li><a href="/materials">Materiaalit</a></li>
-                        <li><a href="{{url(action('company_controller@create'))}}">Lisää uusi toimipiste</a></li>
+                        <li><a href="{{url(action('company_controller@create'))}}">Rekisteröi uusi organisaatio</a></li>
 					</ul>
 			
 			</li>
@@ -68,11 +68,6 @@
 
                                         @csrf
                         @endguest
-                                
-
-                                <!-- <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
-                                <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li> -->
-
                             </ul>
                         </div>
                     </div>

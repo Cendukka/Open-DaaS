@@ -74,22 +74,16 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
-
-                        
-                        <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a>
-                        <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
-                        @guest
-                            <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a>
-
-                        <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
-
-
+                        @if(!(Auth::user()->user_type_id=='1'))
+                            <a href="/companies/{{$company->company_id}}/" class="btn btn-info btn-lg logout">Koordinaattori Etusivu</a>
                         @else
-
-                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
-
-                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
-
+                            <a href="/home" class="btn btn-info btn-lg logout">Admin Etusivu</a>
+                        @endif
+                            <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
+                            @guest
+                                <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
+                        @else
+                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
                             @csrf
                         @endguest
                     </ul>

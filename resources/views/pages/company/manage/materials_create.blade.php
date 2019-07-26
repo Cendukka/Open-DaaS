@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                
+
                 <div style="justify-content: center;">
                 <form method="post" action="materials-store" onsubmit="return confirm('New material is being added. Do you like to proceed?');">
                     @csrf
@@ -34,8 +34,10 @@
                             <option value="retired">Ei käytössä</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary element-float-left" >Lisää</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    <div class="element-float-left">
+                        <button type="submit" class="btn btn-primary" >Lisää</button>
+                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    </div>
                 </form>
             </div>
          </div>

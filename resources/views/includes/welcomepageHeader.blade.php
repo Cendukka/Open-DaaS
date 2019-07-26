@@ -61,11 +61,9 @@
                             @endif
 
                             <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a>
-                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
                         @csrf
                         @endguest
-                    <!-- <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
-                                <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li> -->
+
                     </ul>
                 </div>
             </div>

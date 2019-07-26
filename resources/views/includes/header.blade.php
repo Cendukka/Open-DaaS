@@ -1,32 +1,25 @@
 <div class="wrapper">
-    
+
     <!-- Sidebar Holder -->
     <nav id="sidebar">
-		
+
 		<div class="sidebar-header">
         	<a href="/home"><h4>TADAH Tekstiilikierrätyksen Avoimen DAtan Hallintajärjestelmä</h4>Admin</a>
 		</div>
 
 		<ul class="list-unstyled components">
-
 			<li>
 				<a href="/home">Etusivu</a>
 				<a href="/companies/">Organisaatiot</a>
-{{--                <a href="/ewc/">EWC Codes</a>--}}
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
-                
-                	<ul class="collapse list-unstyled" id="pageSubmenu">
-                    	<li><a href="/companiesUser/">Käyttäjät</a></li>
-                        <li><a href="/materials">Materiaalit</a></li>
-                        <li><a href="{{url(action('company_controller@create'))}}">Rekisteröi uusi organisaatio</a></li>
-					</ul>
-			
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li><a href="/companiesUser/">Käyttäjät</a></li>
+                    <li><a href="/materials">Materiaalit</a></li>
+                    <li><a href="{{url(action('company_controller@create'))}}">Rekisteröi uusi organisaatio</a></li>
+                </ul>
 			</li>
-
 		</ul>
 
-
-	
 	</nav>
 
     <!-- Page Content Holder -->
@@ -57,9 +50,9 @@
                             </ul>
                         </div>
                     </div>
-                
+
                 </nav>
-                
+
 		<!-- Main Page Content Holder -->
 		<div id="main" class="column">
       		@yield('content')
@@ -67,7 +60,7 @@
 
         <!-- Back To The Top Button -->
         <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span> Ylös</button>
-                
+
 	</div>
 
 </div>

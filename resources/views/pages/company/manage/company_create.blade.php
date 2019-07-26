@@ -7,7 +7,7 @@
         </div>
 
         <div class="panel-body">
-        
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -19,7 +19,7 @@
                     @endif
 
             <div class="form-horizontal">
-                <form method="post" action="company-store" onsubmit="return confirm('New company is being register. Would you like to proceed?');">
+                <form method="post" action="company-store" onsubmit="return confirm('Uusi organisaatio rekisteröidään. Haluatko jatkaa?');">
                 @csrf
                     <div class="form-group row">
                         <label for="companyName" class="col-sm-2 col-form-label text-left">Yhtiön nimi</label>
@@ -27,21 +27,21 @@
                             <input type="text" name="name" placeholder="Yhtiön nimi" class="form-control" autofocus>
                         </div>
                     </div>
-            
+
                     <div class="form-group row">
                         <label for="companyAdd" class="col-sm-2 col-form-label text-left">Katuosoite</label>
                         <div class="col-sm-4">
                             <input type="text" name="address" placeholder="Katuosoite" class="form-control" autofocus>
                         </div>
                     </div>
-                    
+
                     <div class="form-group row">
                         <label for="companyPostalCode" class="col-sm-2 col-form-label text-left">Postinumero</label>
                         <div class="col-sm-4">
                             <input  type="text" name="postal_code" placeholder="Postinumero" class="form-control" >
                         </div>
                     </div>
-                    
+
                     <div class="form-group row">
                         <label for="companyCity" class="col-sm-2 col-form-label text-left">Kaupunki</label>
                         <div class="col-sm-4">
@@ -58,7 +58,7 @@
                 </form>
             </div>
         </div>
-        
+
     </div>
 </div>
 

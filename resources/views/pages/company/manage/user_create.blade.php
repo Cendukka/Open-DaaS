@@ -16,7 +16,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="users-store" class="form-text-align-padd">
+                <form method="post" action="users-store" class="form-text-align-padd" onsubmit="return confirm('Uusi käyttäjä lisätään yhtiöön. Haluatko jatkaa?');">
                     @csrf
                     <div class="form-group">
                         <label for="user_type">Käyttäjätyyppi:</label>

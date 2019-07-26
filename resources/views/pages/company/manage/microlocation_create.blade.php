@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="microlocations-store" class="form-text-align-padd">
+                <form method="post" action="microlocations-store" class="form-text-align-padd" onsubmit="return confirm('Uusi toimipiste lisätään organisaatioon. Haluatko jatkaa?');">
                     @csrf
                     <div class="form-group">
                         <label for="company">Yhtiö:</label>

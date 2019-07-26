@@ -1,11 +1,11 @@
 @extends('layouts.default')
 @section('content')
     <div id="content2" class="row">
-        <div class="card">
-            <div class="card-header">
+        <div class="panel panel-defaul">
+            <div class="panel-heading">
                 <h3>Materiaalit </h3>
             </div>
-            <div class="card-body">
+            <div class="panel-body">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -16,7 +16,7 @@
                     </div>
                 @endif
                 @foreach (DB::table('material_names')->distinct('material_type')->pluck('material_type') as $type)
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-borderless table-hover">
                         <thead>
                         <tr><th style="text-align: left">{{title_case($type)}}</th></tr>
                         </thead>
@@ -25,11 +25,11 @@
                             <ul>
                                 @foreach (DB::table('material_names')->where('material_type','=',$type)->get() as $material)
                                     <tr>
-                                        <td class="text-left">
+                                        <td class="text-left" >
                                             <a style="color: black;">{{title_case($material->material_name)}}</a>
-                                            <a style="padding-left: 100px;" href="{{url('/materials/'.$material->material_id.'/edit')}}">
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </a>
+                                        </td>
+                                        <td class="element-float-left">
+                                            <a href="{{url('/materials/'.$material->material_id.'/edit')}}"><span class="glyphicon glyphicon-pencil"></span></a>
                                         </td>
                                     </tr>
                                 @endforeach

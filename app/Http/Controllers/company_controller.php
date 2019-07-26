@@ -98,6 +98,6 @@ class company_controller extends Controller {
 
 
 	public function warehouse_index(company $company) {
-		return view('pages.company.warehouse')->with('company', $company);
+	    		return view('pages.company.warehouse')->with('company', $company);
 	}
 }

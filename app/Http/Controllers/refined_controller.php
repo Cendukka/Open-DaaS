@@ -92,6 +92,7 @@ class refined_controller extends Controller {
 	public function update(Request $request, company $company, refined_sorting $refined) {
         # ADD MORE AUTHENTICATION HERE
 
+
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
@@ -146,13 +147,13 @@ class refined_controller extends Controller {
         $microlocation_new = $receipt_entity_new->receipt_to_microlocation_id;
 
         # Remove original weights from the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $receipt_entity_orig->pre_sorting_material_id, $refinedNew->getOriginal('refined_weight'));
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, ($refinedNew->getOriginal('refined_receipt_id') ? $receipt_entity_orig->receipt_material_id: $receipt_entity_orig->pre_sorting_material_id ), $refinedNew->getOriginal('refined_weight'));
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_orig, $refinedNew->getOriginal('refined_material_id'), -$refinedNew->getOriginal('refined_weight'));
 
         $refinedNew->save();
 
         # Add new weights to the inventory
-        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $receipt_entity_new->pre_sorting_material_id, -$weight);
+        app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, ($receipt ? $receipt_entity_new->receipt_material_id: $receipt_entity_new->pre_sorting_material_id ), -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
         return redirect()->action('refined_controller@index',['company' => $company])->withErrors(['Refined-Sorting successfully updated.']);
 	}
@@ -240,11 +241,12 @@ class refined_controller extends Controller {
                     ->join('material_names', 'material_id', 'receipt_material_id')
                     ->where('receipt_to_microlocation_id', '=', $ml_id)
                     ->where('material_type', 'refined')
+                    ->where('is_for_issue','!=',1)
                     ->orderBy('receipt_date', 'DESC')
                     ->get();
-                $output .= '<label for="pre_receipt">Saapuneiden materiaalien kirjaus:</label>';
-                if($result->count()) {
-                    $output .= '<select class="form-control element-width-auto" name="pre_receipt" id="pre_receipt">';
+                $output .= '<label class="col-sm-2 col-form-label" for="pre_receipt">Saapuneiden materiaalien kirjaus:</label><div class="col-sm-10">';
+                $output .= '<select class="form-control element-width-auto form-field-width" name="pre_receipt" id="pre_receipt">';
+                if($result->count()>0) {
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $used = DB::table('refined_sorting')->where('refined_receipt_id',$value->receipt_id)->sum('refined_weight');
@@ -253,25 +255,24 @@ class refined_controller extends Controller {
                         }
                         $output .= '<option value="'.$value->receipt_id.'" '.($value->receipt_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->receipt_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                     }
-                    $output .= '</select>';
-                    return Response($output);
                 }
                 else{
-                    $output .= 'No raw textile receipts found.';
-                    return Response($output);
+                    $output .= '<option>ei sopivia kirjauksia</option></select></div>';
                 }
+                return Response($output);
             }
             elseif($origin == 'presort'){
                 $result = DB::table('pre_sorting')
                     ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
                     ->join('material_names', 'pre_sorting.pre_sorting_material_id', 'material_names.material_id')
                     ->where('receipt_to_microlocation_id', '=', $ml_id)
+                    ->where('pre_sorting.is_for_issue','!=',1)
                     ->where('material_type', 'refined')
                     ->orderBy('receipt_date', 'DESC')
                     ->get();
-                $output .= '<label for="pre_receipt">Esilajittelun kirjaus:</label>';
-                if($result->count()) {
-                    $output .= '<select class="form-control element-width-auto" name="pre_receipt" id="pre_receipt">';
+                $output .= '<label class="col-sm-2 col-form-label" for="pre_receipt">Esilajittelun kirjaus:</label><div class="col-sm-10">';
+                $output .= '<select class="form-control element-width-auto form-field-width" name="pre_receipt" id="pre_receipt">';
+                if($result->count()>0) {
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $used = DB::table('refined_sorting')->where('pre_sorting_id',$value->pre_sorting_id)->sum('refined_weight');
@@ -280,13 +281,12 @@ class refined_controller extends Controller {
                         }
                         $output .= '<option value="'.$value->pre_sorting_id.'" '.($value->pre_sorting_id == $pre_receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->pre_sorting_date.', '.$value->pre_sorting_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                     }
-                    $output .= '</select>';
                     return Response($output);
                 }
                 else{
-                    $output .= 'No pre-sorted raw textiles found.';
-                    return Response($output);
+                    $output .= '<option>ei sopivia kirjauksia</option></select></div>';
                 }
+                return Response($output);
             }
             else{
                 return Response('ERROR');

@@ -26,8 +26,6 @@ class pre_controller extends Controller {
 
 
     public function store(Request $request, company $company) {
-        # ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
@@ -41,6 +39,7 @@ class pre_controller extends Controller {
         $microlocation = $receipt_entity->receipt_to_microlocation_id;
         $material = $request->get('material');
         $weight = $request->get('weight');
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
         $pre = new pre_sorting([
             'pre_sorting_user_id' => $request->get('user'),
@@ -48,6 +47,7 @@ class pre_controller extends Controller {
             'pre_sorting_receipt_id' => $receipt,
             'pre_sorting_material_id' => $material,
             'pre_sorting_weight' => $weight,
+            'is_for_issue' => $for_issue,
         ]);
         $pre->save();
 
@@ -70,8 +70,6 @@ class pre_controller extends Controller {
 
 
     public function update(Request $request, company $company, pre_sorting $pre) {
-        # ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
@@ -83,6 +81,7 @@ class pre_controller extends Controller {
         $receipt = $request->get('receipt');
         $material = $request->get('material');
         $weight = $request->get('weight');
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
         $preNew = pre_sorting::find($pre->pre_sorting_id);
         $preNew->pre_sorting_user_id = $request->get('user');
@@ -90,6 +89,7 @@ class pre_controller extends Controller {
         $preNew->pre_sorting_receipt_id = $receipt;
         $preNew->pre_sorting_material_id = $material;
         $preNew->pre_sorting_weight = $weight;
+        $preNew->is_for_issue = $for_issue;
 
         $receipt_entity_orig = DB::table('inventory_receipt')->where('receipt_id',$preNew->getOriginal('pre_sorting_receipt_id'))->first();
         $receipt_entity_new = DB::table('inventory_receipt')->where('receipt_id',$receipt)->first();
@@ -152,7 +152,7 @@ class pre_controller extends Controller {
 			$output="";
 			$result = app('App\Http\Controllers\pre_controller')
                 ->query($company,$request)
-                ->select('pre_sorting_date','microlocation_name','material_name','pre_sorting_weight','username','pre_sorting_id')
+                ->select('pre_sorting_date','microlocation_name','material_name','pre_sorting_weight','username','pre_sorting_id','pre_sorting.is_for_issue')
                 ->get();
 			if($result){
 				foreach ($result as $key => $value){
@@ -162,13 +162,15 @@ class pre_controller extends Controller {
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->pre_sorting_weight.'</td>'.
 						'<td>'.$value->username.'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'">Edit</a></td>'.
+                        '<td>'.($value->is_for_issue ? 'Kyllä' : 'Ei').'</td>'.
+                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>'.
 						'</tr>';
 				}
 				$output.='<tr>'.
 					'<td></td>'.
 					'<td></td>'.
 					'<td>'.$result->sum('pre_sorting_weight').' Total</td>'.
+					'<td></td>'.
 					'<td></td>'.
 					'<td></td>'.
 					'</tr>';
@@ -187,15 +189,19 @@ class pre_controller extends Controller {
                 ->join('material_names','material_id','receipt_material_id')
                 ->where('receipt_to_microlocation_id','=',$ml_id)
                 ->where('material_names.material_type', 'Raw Waste')
-                ->select('material_name','material_type','receipt_to_microlocation_id','receipt_id','receipt_weight','receipt_date')
+                ->where('is_for_issue','!=',1)
+                ->select('material_name','material_type','receipt_to_microlocation_id','receipt_id','receipt_weight','receipt_date','is_for_issue')
                 ->orderBy('receipt_date','DESC')
                 ->get();
-            if($result) {
+            if($result->count()>0) {
                 $output .= '<option selected="selected" disabled hidden value=""></option>';
                 foreach ($result as $key => $value) {
                     $used = DB::table('pre_sorting')->where('pre_sorting_receipt_id',$value->receipt_id)->sum('pre_sorting_weight');
                     $output .= '<option value="'.$value->receipt_id.'" '.($value->receipt_id == $receipt_id ? 'selected="selected"' : '').'>'.title_case($value->material_name.', '.$value->receipt_date.', '.$value->receipt_weight.' kg (Sorted: '.$used.'kg)').'</option>';
                 }
+            }
+            else{
+                $output .= '<option>ei sopivia kirjauksia</option>';
             }
             return Response($output);
         }

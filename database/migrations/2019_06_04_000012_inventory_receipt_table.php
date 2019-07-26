@@ -25,6 +25,7 @@ class InventoryReceiptTable extends Migration
 			$table->integer('receipt_weight');
 			$table->dateTime('receipt_date');
 			$table->char('receipt_ewc_code',6);
+			$table->boolean('is_for_issue')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 	

@@ -18,18 +18,18 @@ class users_table_seeder extends Seeder
 		$faker = Faker::create('fi_FI');
 		DB::table('users')->insert([
 			'user_type_id' => 1,
-			'user_company_id' => '1',
-			'user_microlocation_id' => '1',
-			'last_name' => 'ADMIN',
-			'first_name' => 'LSJH',
-			'username' => 'admin',
-			'email' => 'admin@test.com',
+			'user_company_id' => NULL,
+			'user_microlocation_id' => NULL,
+			'last_name' => 'Zitting',
+			'first_name' => 'Jaakko',
+			'username' => 'Admin.Jaakko',
+			'email' => 'jaakko.zitting@lsjh.fi',
 			'password' => Hash::make('qwerty')
 			]);
 	
 		$companies = DB::table('company')->get();
 		
-		# Adds Admins to all the companies
+		# Adds Manager to all the companies
 		foreach($companies as $company) {
             $microlocations = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
 
@@ -48,7 +48,7 @@ class users_table_seeder extends Seeder
 
 
 
-            # Adds managers to all the microlocations
+            # Adds users to all the microlocations
 			foreach ($microlocations as $ml) {
                 $fn =$faker->firstName;
                 $ln = $faker->lastName;

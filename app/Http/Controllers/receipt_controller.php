@@ -23,8 +23,6 @@ class receipt_controller extends Controller {
 
 
 	public function store(Request $request, company $company) {
-		# ADD MORE AUTHENTICATION HERE
-
 		$request->validate([
 			'user' => 'required|integer',
 			'datetime' => 'required|date_format:Y-m-d',
@@ -42,6 +40,7 @@ class receipt_controller extends Controller {
         $microlocation = $request->get('to_microlocation');
         $material = $request->get('material');
         $weight = $request->get('weight');
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
 		$receipt = new inventory_receipt([
             'receipt_user_id' => $request->get('user'),
@@ -54,6 +53,7 @@ class receipt_controller extends Controller {
 			'distance_km' => $request->get('distance'),
 			'receipt_weight' => $weight,
 			'receipt_ewc_code' => $request->get('ewc'),
+            'is_for_issue' => $for_issue,
 		]);
 		$receipt->save();
 
@@ -73,8 +73,6 @@ class receipt_controller extends Controller {
 
 
 	public function update(Request $request, company $company, inventory_receipt $receipt) {
-		# ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d',
@@ -92,6 +90,7 @@ class receipt_controller extends Controller {
         $microlocation = $request->get('to_microlocation');
         $material = $request->get('material');
         $weight = $request->get('weight');
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
 		$receiptNew = inventory_receipt::find($receipt->receipt_id);
 		$receiptNew->receipt_user_id = $request->get('user');
@@ -104,6 +103,7 @@ class receipt_controller extends Controller {
 		$receiptNew->distance_km = $request->get('distance');
 		$receiptNew->receipt_weight = $weight;
 		$receiptNew->receipt_ewc_code = $request->get('ewc');
+		$receiptNew->is_for_issue = $for_issue;
 
         app('App\Http\Controllers\microlocation_controller')->add_inventory($receiptNew->getOriginal('receipt_to_microlocation_id'), $receiptNew->getOriginal('receipt_material_id'), -$receiptNew->getOriginal('receipt_weight'));
 		$receiptNew->save();
@@ -173,7 +173,7 @@ class receipt_controller extends Controller {
             $output="";
             $result = app('App\Http\Controllers\receipt_controller')
                 ->query($company,$request)
-                ->select('receipt_date','from_community_id','receipt_weight','distance_km','receipt_ewc_code','receipt_id','material_name','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','from_supplier','community.community_city')
+                ->select('receipt_date','from_community_id','receipt_weight','distance_km','receipt_ewc_code','receipt_id','material_name','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','from_supplier','community.community_city','is_for_issue')
                 ->get();
             if($result){
                 foreach ($result as $key => $value){
@@ -189,6 +189,7 @@ class receipt_controller extends Controller {
                         '<td>'.$value->receipt_weight.'</td>'.
                         '<td>'.$value->distance_km.'</td>'.
                         '<td>'.$value->receipt_ewc_code.'</td>'.
+                        '<td>'.($value->is_for_issue ? 'Kyllä' : 'Ei').'</td>'.
                         '<td><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>'.
                         '</tr>';
                 }
@@ -199,6 +200,7 @@ class receipt_controller extends Controller {
                     '<td></td>'.
                     '<td></td>'.
                     '<td>'.$result->sum('receipt_weight').' Total</td>'.
+                    '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.
@@ -219,35 +221,43 @@ class receipt_controller extends Controller {
             $source = $request->input('source');
             if($source == 'internal'){
                 $result = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
-                if($result) {
+                if($result->count()>0) {
                     $output .= '<div id="from_microlocation" class="form-group">';
-                    $output .= '<label for="from_microlocation">From microlocation:&nbsp</label><select name="from_microlocation">';
-                    $output .= '<option class="form-control form-text-align-padd" disabled hidden value=""></option>';
-                    foreach ($result as $key => $value) {
-                        $output .= '<option value="'.$value->microlocation_id.'" '.($ml_id== $value->microlocation_id? 'selected="selected"' : '').'>'.title_case($value->microlocation_name).'</option>';
-                    }
-                    $output .= '</select></div>';
+                        $output .= '<label class="col-sm-2 col-form-label" for="from_microlocation">Mikrolokaatiosta:</label>';
+                        $output .= '<div class="col-sm-10">';
+                            $output .= '<select class="form-control element-width-auto form-field-width" name="from_microlocation">';
+                            $output .= '<option selected="selected" disabled hidden value=""></option>';
+                            foreach ($result as $key => $value) {
+                                $output .= '<option value="'.$value->microlocation_id.'" '.($ml_id== $value->microlocation_id? 'selected="selected"' : '').'>'.title_case($value->microlocation_name).'</option>';
+                            }
+                    $output .= '</select></div></div>';
+                }
+                else{
+                    $output .= '<option>ei sopivia kirjauksia</option>';
                 }
             }
             elseif($source == 'external'){
                 $result = DB::table('company')->where('company_id','!=',$company->company_id)->get();
-                if($result) {
+                if($result->count()>0) {
                     $output .= '<div class="form-group">';
-                    $output .= '<label for="from_company">From company:&nbsp</label><select id="from_company" name="from_company">';
-                    $output .= '<option class="form-control form-text-align-padd" selected="selected" disabled hidden value=""></option>';
+                    $output .= '<label class="col-sm-2 col-form-label" for="from_company">Organisaatiosta:</label>';
+                    $output .= '<div class="col-sm-10">';
+                    $output .= '<select class="form-control element-width-auto form-field-width" id="from_company" name="from_company">';
+                    $output .= '<option selected="selected" disabled hidden value=""></option>';
                     foreach ($result as $key => $value) {
                         $output .= '<option value="'.$value->company_id.'" '.($company_id == $value->company_id ? 'selected="selected"' : '').'>'.title_case($value->company_name).'</option>';
                     }
-                    $output .= '</select></div>';
-                    $output .= '<div id="from_community" class="form-group">';
-                    $output .= '</select></div>';
+                    $output .= '</select></div></div>';
+                }
+                else{
+                    $output .= '<option>ei sopivia kirjauksia</option>';
                 }
             }
             elseif($source == 'supplier'){
                 $output .= '<div class="form-group">';
-                $output .= '<label for="from_supplier">From supplier:&nbsp</label>';
-                $output .= '<input type="text" class="form-control" name="from_supplier" value="'.$supplier.'"/>';
-                $output .= '</div>';
+                $output .= '<label class="col-sm-2 col-form-label" for="from_supplier">Toimittajalta:</label>';
+                $output .= '<div class="col-sm-10"><input type="text" class="form-control element-width-auto form-field-width" name="from_supplier" value="'.$supplier.'"/>';
+                $output .= '</div></div>';
             }
             return Response($output);
         }
@@ -263,12 +273,12 @@ class receipt_controller extends Controller {
                 ->where('community_company_id','=',$from_company)
                 ->get();
             if($result) {
-                $output .= '<label for="from_community">From community:&nbsp</label><select name="from_community">';
+                $output .= '<label class="col-sm-2 col-form-label" for="from_community">From community:&nbsp</label><div class="col-sm-10"><select class="form-control element-width-auto form-field-width" name="from_community">';
                 $output .= '<option selected="selected" disabled hidden value=""></option>';
                 foreach ($result as $key => $value) {
                     $output .= '<option value="'.$value->community_id.'" '.($value->community_id == $community_id ? 'selected="selected"' : '').'>'.title_case($value->community_city).'</option>';
                 }
-                $output .= '</select>';
+                $output .= '</select></div>';
             }
             return Response($output);
         }

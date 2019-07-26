@@ -17,11 +17,7 @@
                 @endif
                 <form method="post" action="issues-update" class="form-text-align-padd">
                     @csrf
-                    <div class="form-group">
-                        <label>Lähetys luotu:&nbsp</label>{{$issue->created_at}}
-                        <p></p>
-                        <label>Lähetys muokattu:&nbsp</label>{{$issue->updated_at}}
-                    </div>
+                    @include('includes.forms.created_modified', ['created_at' => $issue->created_at, 'updated_at' => $issue->updated_at])
                     <div class="form-group">
                         <label for="datetime">Päivämäärä:</label>
                         <div style="position: relative">

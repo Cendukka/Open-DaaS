@@ -4,7 +4,7 @@
         <select class="form-control element-width-auto form-field-width" name="ewc">
             <option value="" selected="selected" hidden disabled value=""></option>
             @foreach (DB::table('ewc_codes')->get() as $ewc)
-                <option {{($code == $ewc->ewc_code ? 'selected="selected"' : '')}} value="{{$ewc->ewc_code}}">{{title_case($ewc->ewc_code)}}</option>
+                <option {{isset($code) ? ($code == $ewc->ewc_code ? 'selected="selected"' : '') : ''}} value="{{$ewc->ewc_code}}">{{title_case($ewc->ewc_code)}}</option>
             @endforeach
         </select>
     </div>

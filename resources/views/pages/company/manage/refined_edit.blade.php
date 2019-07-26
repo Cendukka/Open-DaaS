@@ -17,11 +17,7 @@
                 @endif
                 <form method="post" action="refined-update" class="form-text-align-padd">
                     @csrf
-                    <div class="form-group">
-                        <label>Hienolajittelu kirjaus luotu:</label>{{$refined->created_at}}
-                        <p></p>
-                        <label>Hienolajittelu kirjaus muokattu:</label>{{$refined->updated_at}}
-                    </div>
+                    @include('includes.forms.created_modified', ['created_at' => $refined->created_at, 'updated_at' => $refined->updated_at])
                     <div class="form-group">
                         <label for="datetime">Päivämäärä:</label>
                         <div style="position: relative">

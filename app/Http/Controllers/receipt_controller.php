@@ -40,7 +40,7 @@ class receipt_controller extends Controller {
         $microlocation = $request->get('to_microlocation');
         $material = $request->get('material');
         $weight = $request->get('weight');
-        $for_issue = $request->get('for_issue') ? True : False;
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
 		$receipt = new inventory_receipt([
             'receipt_user_id' => $request->get('user'),
@@ -90,7 +90,7 @@ class receipt_controller extends Controller {
         $microlocation = $request->get('to_microlocation');
         $material = $request->get('material');
         $weight = $request->get('weight');
-        $for_issue = $request->get('for_issue') ? True : False;
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
 		$receiptNew = inventory_receipt::find($receipt->receipt_id);
 		$receiptNew->receipt_user_id = $request->get('user');

@@ -241,6 +241,7 @@ class refined_controller extends Controller {
                     ->join('material_names', 'material_id', 'receipt_material_id')
                     ->where('receipt_to_microlocation_id', '=', $ml_id)
                     ->where('material_type', 'refined')
+                    ->where('is_for_issue','!=',1)
                     ->orderBy('receipt_date', 'DESC')
                     ->get();
                 $output .= '<label class="col-sm-2 col-form-label" for="pre_receipt">Saapuneiden materiaalien kirjaus:</label><div class="col-sm-10">';
@@ -265,6 +266,7 @@ class refined_controller extends Controller {
                     ->join('inventory_receipt','pre_sorting_receipt_id','receipt_id')
                     ->join('material_names', 'pre_sorting.pre_sorting_material_id', 'material_names.material_id')
                     ->where('receipt_to_microlocation_id', '=', $ml_id)
+                    ->where('pre_sorting.is_for_issue','!=',1)
                     ->where('material_type', 'refined')
                     ->orderBy('receipt_date', 'DESC')
                     ->get();

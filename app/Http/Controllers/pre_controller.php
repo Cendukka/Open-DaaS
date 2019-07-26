@@ -39,7 +39,7 @@ class pre_controller extends Controller {
         $microlocation = $receipt_entity->receipt_to_microlocation_id;
         $material = $request->get('material');
         $weight = $request->get('weight');
-        $for_issue = $request->get('for_issue') ? True : False;
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
         $pre = new pre_sorting([
             'pre_sorting_user_id' => $request->get('user'),
@@ -81,7 +81,7 @@ class pre_controller extends Controller {
         $receipt = $request->get('receipt');
         $material = $request->get('material');
         $weight = $request->get('weight');
-        $for_issue = $request->get('for_issue') ? true : false;
+        $for_issue = $request->get('for_issue') ? 1 : 0;
 
         $preNew = pre_sorting::find($pre->pre_sorting_id);
         $preNew->pre_sorting_user_id = $request->get('user');
@@ -189,7 +189,8 @@ class pre_controller extends Controller {
                 ->join('material_names','material_id','receipt_material_id')
                 ->where('receipt_to_microlocation_id','=',$ml_id)
                 ->where('material_names.material_type', 'Raw Waste')
-                ->select('material_name','material_type','receipt_to_microlocation_id','receipt_id','receipt_weight','receipt_date')
+                ->where('is_for_issue','!=',1)
+                ->select('material_name','material_type','receipt_to_microlocation_id','receipt_id','receipt_weight','receipt_date','is_for_issue')
                 ->orderBy('receipt_date','DESC')
                 ->get();
             if($result->count()>0) {

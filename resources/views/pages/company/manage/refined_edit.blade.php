@@ -6,24 +6,11 @@
                 <h3>Muokkaa hienolajittelu kirjausta </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="refined-update" class="form-text-align-padd">
                     @csrf
                     @include('includes.forms.created_modified', ['created_at' => $refined->created_at, 'updated_at' => $refined->updated_at])
-                    <div class="form-group">
-                        <label for="datetime">Päivämäärä:</label>
-                        <div style="position: relative">
-                            <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{$refined->refined_date}}">
-                        </div>
-                    </div>
+                    @include('includes.forms.datetime',     ['time' => $refined->refined_date])
                     @php
                         $origin = ($refined->pre_sorting_id ? 'presorted' : ($refined->refined_receipt_id ? 'receipt' : 'error'));
                         if($origin == 'presorted'){
@@ -41,52 +28,24 @@
                             $ml_id = 0;
                         }
                     @endphp
-                    <div class="form-group">
-                        <label for="microlocation">Microlokaatio:</label>
-                        <select class="form-control element-width-auto" name="microlocation" id="microlocation">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}" {{$ml->microlocation_id == $ml_id ? 'selected="selected"' : ''}}>{{title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="user">Käyttäjä:</label>
-                        <select class="form-control element-width-auto" name="user">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}" {{($user->user_id == $refined->refined_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="material">Materiaali:</label>
-                        <select class="form-control element-width-auto" name="material">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->where('material_type','=','textile')->get() as $material)
-                                <option value="{{$material->material_id}}" {{($material->material_id == $refined->refined_material_id ? 'selected="selected"' : '')}}>{{title_case($material->material_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="origin">Hienolajitellun tekstiilin alkuperä:</label>
-                        <select class="form-control element-width-auto" name="origin" id="origin">
-                            <option selected="selected" disabled hidden value=""></option>
+                    @include('includes.forms.users',        ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get(), 'selected_user_id' => $refined->refined_user_id])
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => $ml_id, 'tag' => 'microlocation', 'name' => 'Microlokaatio:'])
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="origin">Tekstiilin alkuperä:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control element-width-auto form-field-width" name="origin" id="origin">
+                                <option selected="selected" disabled hidden value=""></option>
                                 <option value="presort" {{$origin == 'presorted' ? 'selected="selected"' : ''}}>Esilajittelu</option>
                                 <option value="receipt" {{$origin == 'receipt' ? 'selected="selected"' : ''}}>Saapuneet</option>
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                    <div id="originSelect">
+                    <div id="originSelect" class="form-group row">
 
                     </div>
-                    <div class="form-group">
-                        <label for="weight">Paino (Kg):</label>
-                        <input type="text" class="form-control element-width-auto" name="weight" value="{{$refined->refined_weight}}"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Lisätietoja:</label>
-                        <textarea type="text" class="form-control" rows="8" maxlength="191" name="description">{{$refined->description}}</textarea>
-                    </div>
+                    @include('includes.forms.materials',    ['materials' => DB::table('material_names')->where('material_type','=','textile')->get(), 'selected_material_id' => $refined->refined_material_id])
+                    @include('includes.forms.weight', ['weight' => $refined->refined_weight])
+                    @include('includes.forms.description', ['description' => $refined->description])
                     <button type="submit" class="btn btn-primary">Tallenna</button>
                     <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
                 </form>

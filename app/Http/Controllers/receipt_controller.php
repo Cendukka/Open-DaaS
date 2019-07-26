@@ -240,7 +240,7 @@ class receipt_controller extends Controller {
                 $result = DB::table('company')->where('company_id','!=',$company->company_id)->get();
                 if($result->count()>0) {
                     $output .= '<div class="form-group">';
-                    $output .= '<label class="col-sm-2 col-form-label" for="from_company">From company:&nbsp</label>';
+                    $output .= '<label class="col-sm-2 col-form-label" for="from_company">Organisaatiosta:</label>';
                     $output .= '<div class="col-sm-10">';
                     $output .= '<select class="form-control element-width-auto form-field-width" id="from_company" name="from_company">';
                     $output .= '<option selected="selected" disabled hidden value=""></option>';
@@ -255,9 +255,9 @@ class receipt_controller extends Controller {
             }
             elseif($source == 'supplier'){
                 $output .= '<div class="form-group">';
-                $output .= '<label for="from_supplier">From supplier:&nbsp</label>';
-                $output .= '<input type="text" class="form-control" name="from_supplier" value="'.$supplier.'"/>';
-                $output .= '</div>';
+                $output .= '<label class="col-sm-2 col-form-label" for="from_supplier">Toimittajalta:</label>';
+                $output .= '<div class="col-sm-10"><input type="text" class="form-control element-width-auto form-field-width" name="from_supplier" value="'.$supplier.'"/>';
+                $output .= '</div></div>';
             }
             return Response($output);
         }

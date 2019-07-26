@@ -6,48 +6,24 @@
                 <h3>Muokkaa lähetystä </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="issues-update" class="form-text-align-padd">
                     @csrf
                     @include('includes.forms.created_modified', ['created_at' => $issue->created_at, 'updated_at' => $issue->updated_at])
-                    <div class="form-group">
-                        <label for="datetime">Päivämäärä:</label>
-                        <div style="position: relative">
-                            <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{$issue->issue_date}}">
+                    @include('includes.forms.datetime', ['time' => $issue->issue_date])
+                    @include('includes.forms.users', ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get(), 'selected_user_id' => $issue->issue_user_id])
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="type">Lähetyksen tyyppi:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control element-width-auto form-field-width" id="type" name="type">
+                                <option selected="selected" disabled hidden value=""></option>
+                                @foreach (DB::table('issue_types')->orderBy('issue_typename')->get() as $issue_type)
+                                    <option value="{{$issue_type->issue_type_id}}" {{$issue->issue_type_id == $issue_type->issue_type_id ? 'selected="selected"' : ''}}>{{title_case($issue_type->issue_typename)}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div id="from" class="form-group">
-                        <label for="from_microlocation">Mistä microlokaatiosta:</label>
-                        <select class="form-control element-width-auto" name="from_microlocation">
-                            @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $issue->issue_from_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="user">Käyttäjä:</label>
-                        <select class="form-control element-width-auto" name="user">
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}" {{($user->user_id == $issue->issue_user_id ? 'selected="selected"' : '')}}>{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div id="from" class="form-group">
-                        <label for="from_microlocation">From microlocation:&nbsp</label>
-                        <select id="from_microlocation" name="from_microlocation">
-                            @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $issue->issue_from_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id'=> $issue->issue_from_microlocation_id,'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:'])
                     <div id="to_microlocation" class="form-group">
                         <label for="to_microlocation">Mihin microlokaatioon:</label>
                         <select class="form-control element-width-auto" name="to_microlocation">
@@ -58,38 +34,15 @@
                     </div>
                     <div id="details" class="form-group">
                         @foreach (DB::table('inventory_issue_details')->where('detail_issue_id','=',$issue->issue_id)->get() as $detail)
-                        <br>
-                        <div class="form-group detail-info">
-                            <div class="form-group">
-                                <label for="material">Material:&nbsp</label>
-                                <select name="material[]" id="material[]" class="material-select">>
-                                    @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $mat)
-                                        <option value="{{$mat->material_id}}" {{($mat->material_id == $detail->detail_material_id ? 'selected="selected"' : '')}}>{{title_case($mat->material_name)}} []</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="ewc_code">EWC-koodi:</label>
-                                <select class="form-control element-width-auto" name="ewc_code[]">
-                                    @foreach (DB::table('ewc_codes')->get() as $ewc)
-                                        <option value="{{$ewc->ewc_code}}" {{($ewc->ewc_code== $detail->detail_ewc_code ? 'selected="selected"' : '')}}>{{title_case($ewc->ewc_code)}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="weight">Paino (Kg):</label>
-                                <input type="text" class="form-control element-width-auto" name="weight[]" value="{{$detail->detail_weight}}"/>
-                            </div>
-                        </div>
-                            <p>*******************************</p>
+                            @include('includes.forms.details', ['detail' => $detail])
                         @endforeach
                     </div>
                     <br>
-                    <button id="addMat" type="button" class="btn">Lisää materiaali</button>
-                    <button id="removeMat" type="button" class="btn">Poista materiaali</button>
+                    <button id="addMat" type="button" class="btn" style="margin-bottom:10px;">Lisää materiaali</button>
+                    <button id="removeMat" type="button" class="btn" style="margin-bottom:10px;">Poista materiaali</button>
                     <br>
-                    <button type="submit" class="btn btn-primary">Tallenna</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    <button type="submit" class="btn btn-primary" style="margin-bottom:10px;">Tallenna</button>
+                    <button id="cancel" type="button" class="btn" style="margin-bottom:10px;" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
                 </form>
             </div>
         </div>
@@ -100,38 +53,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         function addMat(){
-            $("#details").append(
-                '<br>' +
-                '<div class="form-group detail-info">' +
-                '<div class="form-group">' +
-                '<label for="material">Material:&nbsp</label>' +
-                '<select name="material[]" id="material[]" class="material-select">' +
-                '<option selected="selected" disabled hidden value=""></option>' +
-                    @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $mat)
-                        '<option value="{{$mat->material_id}}">{{title_case($mat->material_name)}} []</option>' +
-                    @endforeach
-                        '</select>' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label for="ewc_code">EWC Code:&nbsp</label>' +
-                '<select name="ewc_code[]">' +
-                    @foreach (DB::table('ewc_codes')->get() as $ewc)
-                        '<option value="{{$ewc->ewc_code}}" >{{title_case($ewc->ewc_code)}}</option>' +
-                    @endforeach
-                        '</select>' +
-                '</div>' +
-                '<div class="form-group"> <label for="weight">Weight (kg):&nbsp</label>' +
-                '<input type="text" class="form-control form-control-sm" name="weight[]" value="0"/>' +
-                '</div>' +
-                '*******************************' +
-            '</div>'
-            );
+            $.ajax({
+                type: 'GET',
+                url : "/companies/{{$company->company_id}}/manage/issues/new_details",
+                success : function (data) {
+                    $("#details").append(data);
+                }
+            });
         }
         $('#removeMat').on('click',(function(){
             if($("#details").children("div").length > 1){
                 $("#details").children("div:last").remove();
                 $("#details").children("br:last").remove();
-                $("#details").children("p:last").remove();
             }
         }));
         function toMicrolocation(){

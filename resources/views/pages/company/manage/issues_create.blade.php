@@ -6,66 +6,40 @@
                 <h3>Lisää lähetys</h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="issues-store" class="form-text-align-padd">
                     @csrf
-                    <div class="form-group">
-                        <label for="datetime">Päivämäärä:</label>
-                        <div style="position: relative">
-                            <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{date('Y-m-d H:i:s')}}">
+                    @include('includes.forms.datetime', ['time' => date('Y-m-d H:i:s')])
+                    @include('includes.forms.users', ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get()])
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="type">Lähetyksen tyyppi:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control element-width-auto form-field-width" id="type" name="type">
+                                <option selected="selected" disabled hidden value=""></option>
+                                @foreach (DB::table('issue_types')->orderBy('issue_typename')->get() as $issue_type)
+                                    <option value="{{$issue_type->issue_type_id}}">{{title_case($issue_type->issue_typename)}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="user">Käyttäjä:</label>
-                        <select class="form-control element-width-auto" name="user">
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}">{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Lähetyksen tyyppi:</label>
-                        <select class="form-control element-width-auto" id="type" name="type">
-                            @foreach (DB::table('issue_types')->orderBy('issue_typename')->get() as $issue)
-                                <option value="{{$issue->issue_type_id}}">{{title_case($issue->issue_typename)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div id="from" class="form-group">
-                        <label for="from_microlocation">Mistä microlokaatiosta:</label>
-                        <select class="form-control element-width-auto" id="from_microlocation" name="from_microlocation">
-                            <option value="" selected="selected" hidden disabled></option>
-                            @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(),'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:'])
                     <div id="to_microlocation" class="form-group">
-                        <label for="to_microlocation">Mihin micorlokaatioon:</label>
+                        <label for="to_microlocation">Mihin microlokaatioon:</label>
                         <select class="form-control element-width-auto" name="to_microlocation">
-                            <option selected="selected" disabled hidden value=""></option>
                             @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
                                 <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div id="details" class="form-group">
-
+                        @include('includes.forms.details')
                     </div>
-                    
-                    <button id="addMat" type="button" class="btn">Lisää materiaali</button>
-                    <button id="removeMat" type="button" class="btn">Poista materiaali</button>
                     <br>
-                    <button type="submit" class="btn btn-primary">Tallenna</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
+                    <button id="addMat" type="button" class="btn" style="margin-bottom:10px;">Lisää materiaali</button>
+                    <button id="removeMat" type="button" class="btn" style="margin-bottom:10px;">Poista materiaali</button>
+                    <br>
+                    <button type="submit" class="btn btn-primary" style="margin-bottom:10px;">Tallenna</button>
+                    <button id="cancel" type="button" class="btn" style="margin-bottom:10px;" onclick="location.href='{{url()->previous()}}';">Peruuta</button>
                 </form>
             </div>
         </div>

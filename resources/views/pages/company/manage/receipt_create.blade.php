@@ -6,20 +6,11 @@
                 <h3>Materiaalin vastaanotto</h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="receipts-store" class="form-text-align-padd">
                     @csrf
                     @include('includes.forms.datetime', ['time' => date('Y-m-d')])
                     @include('includes.forms.users', ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get()])
-                    @include('includes.forms.materials', ['materials' => DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get()])
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="source">Lähde:</label>
                         <div class="col-sm-10">
@@ -32,6 +23,7 @@
                     </div>
                     @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:'])
                     @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'to_microlocation', 'name' => 'Microlokaatioon:'])
+                    @include('includes.forms.materials', ['materials' => DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get()])
                     @include('includes.forms.weight')
                     @include('includes.forms.distance')
                     @include('includes.forms.ewc_code')

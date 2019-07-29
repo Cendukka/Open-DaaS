@@ -5,13 +5,13 @@
 </head>
 <body>
 <div class="container">
-    <header class="column">
+   <header class="column">
       @include('includes.header')
-    </header>
+   </header>
 
-    <footer class="row">
+   <footer class="row">
        @include('includes.footer')
-    </footer>
+   </footer>
 </div>
 </body>
 </html>

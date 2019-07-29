@@ -4,10 +4,10 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Organisaation hallinnan kotisivut: {{$company->company_name}}</h3>
+                <h3>Yhtiön hallinnan kotisivut: {{$company->company_name}}</h3>
             </div>
             <div class="panel-body">
-                    <h4>Mahdollisesti yleisnäkymää organisaation toiminnasta tjms.</h4>
+                    <h4>Mahdollisesti yleisnäkymää yhtiön toiminnasta tjms.</h4>
                 <div class="row">
                     <div id="pieChartCompany"></div>
                 </div>

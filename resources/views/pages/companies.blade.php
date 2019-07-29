@@ -4,7 +4,7 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Organisaatiot </h3>
+                <h3>Yhtiöt </h3>
             </div>
             <div class="panel-body table-responsive-lg">
                 <table class="table table-bordered table-hover" style="table-layout: fixed">

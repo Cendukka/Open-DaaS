@@ -1,4 +1,4 @@
-@extends('layouts.macrolocation')
+@extends (Auth::user()->user_type_id < 3 ? 'layouts.macrolocation' : 'layouts.microlocation')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
@@ -71,6 +71,11 @@
                     $("#from_community").empty().html(data);
                 }
             })
+        });
+    </script>
+    <script type="text/javascript">
+        $('.timepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
         });
     </script>
 @endsection

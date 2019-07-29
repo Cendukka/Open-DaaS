@@ -10,7 +10,7 @@ class inventory_receipt extends Model {
 	protected $table = "inventory_receipt";
 	protected $primaryKey = "receipt_id";
 	protected $fillable = ['receipt_material_id','from_company_id','from_community_id','from_supplier','receipt_from_microlocation_id','receipt_to_microlocation_id',
-		'distance_km','receipt_weight','receipt_date','receipt_ewc_code','receipt_user_id','is_for_issue'];
+		'distance_km','receipt_weight','receipt_date','receipt_ewc_code','receipt_user_id'];
 	
 	public function ewc_code() {
 		return $this->belongsTo(ewc_codes::class,'ewc_code','receipt_ewc_code');

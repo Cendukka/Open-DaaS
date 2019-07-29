@@ -1,9 +1,9 @@
 @extends('layouts.macrolocation')
 @section('content')
-    <div id="content" class="row">
+    <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Manage Communities </h3>
+                <h3>Kunnat </h3>
             </div>
             <div class="panel-body">
                 @if ($errors->any())
@@ -15,13 +15,8 @@
                         </ul>
                     </div>
                 @endif
-                <table class="table table-bordered table-hover">
-                    <thread>
-                    <tr>
-                        <th>City</th>
-                    </tr>
-                    </thread>
-                    <tbody>
+
+
                     @php
                         $communities = DB::table('community')
                             ->where('community_company_id','=',$company->company_id)
@@ -29,15 +24,24 @@
                             ->get();
                     @endphp
                     @foreach ($communities as $com)
-                        <tr>
-                            <td>{{title_case($com->community_city)}}</td>
-                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/communities/'.$com->community_id.'/edit')}}">Edit</a></td>
-                        </tr>
+                    <div class="form-group row ">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-3 text-left">
+                            <label >{{title_case($com->community_city)}}</label>
+                        </div>
+
+                        <div class="col-sm-1 text-left">
+                            <a href="{{url('/companies/'.$company->company_id.'/manage/communities/'.$com->community_id.'/edit')}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </div>
+                    </div>
+
+
+
                     @endforeach
-                    </tbody>
-                </table>
+
+
                     <form action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add community</button>
+                    <button type="submit" class="btn btn-secondary">+ Lisää kunta</button>
                 </form>
             </div>
         </div>

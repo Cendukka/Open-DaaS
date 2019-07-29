@@ -1,9 +1,14 @@
 $(document).ready(function () {
-
+    let sidebarCollapseBool = false;
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar, #content').toggleClass('active');
         $('.collapse.in').toggleClass('in');
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        if (!sidebarCollapseBool){
+            sidebarCollapseBool = true;
+        }else{
+            sidebarCollapseBool = false;
+        }
     });
 
 

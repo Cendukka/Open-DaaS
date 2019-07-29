@@ -33,6 +33,7 @@
                     </button>
                 </div>
 
+
                 <div class="navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav navbar-right">
                         <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout">Yhteystiedot</a>
@@ -45,6 +46,25 @@
                                     }
                             </script>
 
+
+                <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+
+
+                            <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout" >Yhteystiedot</a>
+                            <a id="home"    href="/" class="btn btn-info btn-lg logout" style="display: none">Etusivu</a>
+                                <script type="text/javascript">
+                                    {
+                                        if (window.location.href === "http://127.0.0.1:8000/contactLists") {
+                                        document.getElementById("contact").style.display = "none";
+                                        document.getElementById("home").style.display = "";
+                                        }
+
+                                     }
+                                </script>
+
+
+
                         @guest
                             <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
 
@@ -53,11 +73,19 @@
 
                         @else
                             @if(Auth::user()->user_type_id == 1)
+
                                 <a href="/home" class="btn btn-info btn-lg logout">Hallinta</a>
                             @elseif(Auth::user()->user_type_id == 2)
                                 <a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout">Hallinta</a>
                             @elseif(Auth::user()->user_type_id == 3)
                                 <a href="/companies/{{Auth::user()->user_company_id}}/manage/microlocations/{{Auth::user()->user_microlocation_id}}" class="btn btn-info btn-lg logout">Hallinta</a>
+
+                                <a href="/home" class="btn btn-info btn-lg logout" >Hallinta</a>
+                            @elseif(Auth::user()->user_type_id == 2)
+                                <a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout" >Hallinta</a>
+                            @elseif(Auth::user()->user_type_id == 3)
+                                <a href="/companies/{{Auth::user()->user_company_id}}/manage/microlocations/{{Auth::user()->user_microlocation_id}}" class="btn btn-info btn-lg logout" >Hallinta</a>
+
                             @endif
 
                             <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a>

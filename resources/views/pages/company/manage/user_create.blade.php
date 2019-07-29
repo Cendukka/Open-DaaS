@@ -53,9 +53,7 @@
                         <label for="password">Salasana:</label>
                         <input type="text" maxlength="50"class="form-control element-width-auto" name="password" value="qwerty" disabled>
                     </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Lisää</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/users')}}';">Peruuta</button>
+                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/users')])
                 </form>
             </div>
         </div>

@@ -29,9 +29,7 @@
                     @include('includes.forms.distance')
                     @include('includes.forms.ewc_code')
                     @include('includes.forms.for_issue')
-                    <br>
-                    <button type="submit" class="btn btn-primary">Lisää</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/receipts')}}';">Peruuta</button>
+                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/receipts')])
                 </form>
             </div>
         </div>

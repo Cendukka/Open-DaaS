@@ -33,10 +33,7 @@
                             <option {{'retired' == $material->material_type ? 'selected="selected"' : ''}} value="retired">Ei käytössä</option>
                         </select>
                     </div>
-                    <div class="element-float-left">
-                        <button type="submit" class="btn btn-primary">Tallenna</button>
-                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/materials')}}';">Peruuta</button>
-                    </div>
+                    @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/materials')])
                 </form>
                     <form method="post" action="materials-destroy" onsubmit="return confirm('Are you sure you want to delete?');">
                         <div class="element-float-left">

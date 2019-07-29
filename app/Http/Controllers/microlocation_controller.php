@@ -31,7 +31,7 @@ class microlocation_controller extends Controller {
 		# ADD MORE AUTHENTICATION HERE
 		
 		$request->validate([
-			'company' => 'required|integer',
+			#'company' => 'required|integer',
 			'type' => 'required|integer',
 			'name' => 'max:191',
 			'address'=>'required|max:191',
@@ -41,7 +41,7 @@ class microlocation_controller extends Controller {
 		
 		
 		$ml = new microlocation([
-			'microlocation_company_id' => $request->get('company'),
+			'microlocation_company_id' => $company->company_id,
 			'microlocation_type_id' => $request->get('type'),
 			'microlocation_name' => $request->get('name'),
 			'microlocation_street_address' => $request->get('address'),
@@ -80,7 +80,7 @@ class microlocation_controller extends Controller {
 		# ADD MORE AUTHENTICATION HERE
 		
 		$request->validate([
-			'company' => 'required|integer',
+			#'company' => 'required|integer',
 			'type' => 'required|integer',
 			'name' => 'max:191',
 			'address'=>'required|max:191',
@@ -91,7 +91,7 @@ class microlocation_controller extends Controller {
 		
 		$microlocationNew = microlocation::find($microlocation->microlocation_id);
 		
-		$microlocationNew->microlocation_company_id = $request->get('company');
+		$microlocationNew->microlocation_company_id = $company->company_id;
 		$microlocationNew->microlocation_type_id = $request->get('type');
 		$microlocationNew->microlocation_name = $request->get('name');
 		$microlocationNew->microlocation_street_address = $request->get('address');

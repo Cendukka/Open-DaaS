@@ -35,8 +35,7 @@
                     </div>
                     @include('includes.forms.weight', ['weight' => $pre->pre_sorting_weight])
                     @include('includes.forms.for_issue', ['checked' => $pre->is_for_issue])
-                    <button type="submit" class="btn btn-primary">Tallenna</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/pre')}}';">Peruuta</button>
+                    @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/companies/'.$company->company_id.'/pre')])
                 </form>
             </div>
         </div>

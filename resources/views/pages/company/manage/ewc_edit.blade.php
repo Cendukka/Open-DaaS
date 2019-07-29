@@ -25,8 +25,8 @@
                         <label for="description">Description:&nbsp</label>
                         <textarea type="text" class="form-control" rows="8" maxlength="191" name="description">{{$ewc_code->description}}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/ewc')}}';">Cancel</button>
+
+                    @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/ewc')])
                 </form>
                 <br>
                 <form method="post" action="ewc-destroy">

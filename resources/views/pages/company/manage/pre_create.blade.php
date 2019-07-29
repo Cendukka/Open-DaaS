@@ -22,8 +22,7 @@
                     </div>
                     @include('includes.forms.weight', ['weight' => ''])
                     @include('includes.forms.for_issue', ['checked' => 0])
-                    <button type="submit" class="btn btn-primary">Tallenna</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/pre')}}';">Peruuta</button>
+                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/pre')])
                 </form>
             </div>
         </div>

@@ -30,9 +30,7 @@
                     @include('includes.forms.distance', ['distance' => $receipt->distance_km])
                     @include('includes.forms.ewc_code', ['code' => $receipt->receipt_ewc_code])
                     @include('includes.forms.for_issue', ['checked' => $receipt->is_for_issue])
-                    <br>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/receipts')}}';">Peruuta</button>
+                    @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/companies/'.$company->company_id.'/receipts')])
                 </form>
             </div>
         </div>

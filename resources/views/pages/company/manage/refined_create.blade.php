@@ -27,8 +27,7 @@
                     @include('includes.forms.materials',    ['materials' => DB::table('material_names')->where('material_type','=','textile')->get()])
                     @include('includes.forms.weight')
                     @include('includes.forms.description')
-                    <button type="submit" class="btn btn-primary">Lisää</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/refined')}}';">Peruuta</button>
+                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/refined')])
                 </form>
             </div>
         </div>

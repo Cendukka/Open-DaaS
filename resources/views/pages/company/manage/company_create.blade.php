@@ -48,13 +48,7 @@
                             <input type="text" name="city" placeholder="Kaupunki" class="form-control">
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-2">
-                            <button type="submit"  class="btn btn-primary">Rekisteröi</button>
-                            <button id="cancel" type="button" class="btn btn-primary" onclick="location.href='{{url('/home')}}';">Peruuta</button>
-                        </div>
-                    </div>
+                    @include('includes.forms.buttons', ['submit' => 'Rekisteröi', 'cancel' => url('/home')])
                 </form>
             </div>
         </div>

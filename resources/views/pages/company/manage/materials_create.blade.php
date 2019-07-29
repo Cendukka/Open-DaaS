@@ -34,6 +34,7 @@
                             <option value="retired">Ei käytössä</option>
                         </select>
                     </div>
+                    @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/materials')])
                     <div class="element-float-left">
                         <button type="submit" class="btn btn-primary" >Lisää</button>
                         <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/materials')}}';">Peruuta</button>

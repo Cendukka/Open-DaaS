@@ -21,8 +21,7 @@
                         <label for="city">Community city:&nbsp</label>
                         <input type="text" maxlength="50" class="form-control" name="city" value="">
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id)}}';">Cancel</button>
+                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/manage/communities')])
                 </form>
             </div>
         </div>

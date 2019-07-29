@@ -52,8 +52,7 @@
                             <label for="email">Sähköposti:</label>
                             <input id="email" maxlength="50" type="text" class="form-control element-width-auto text-lowercase" name="email" value="{{$user->email}}" disabled/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Tallenna</button>
-                        <button id="cancel" type="button" class="btn" onclick="location.href='{{url('/companies/'.$company->company_id.'/users')}}';">Peruuta</button>
+                        @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/companies/'.$company->company_id.'/users')])
 
                     </form>
                 

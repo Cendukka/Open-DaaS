@@ -71,14 +71,14 @@ Route::get('ewc/search','ewc_controller@search');
 #contact person routes
 Route::get('contactLists',function(){
 	return view('pages.contactLists');
-})->name('ContactList');
+});
 /* Route::get('/companies/{company}/contactPerson',function(){
 	return view('pages.contactPerson');
 });
 Route::get('/companies/{company}/manage/microlocations/{ml}/contactPerson',function(){
 	return view('pages.contactPerson');
 }); */
-//Route::get('contactlist/search');
+Route::get('contactlist/search');
 // Route::get('/manage', function () {
 //     return view('pages.manage');
 // });
@@ -139,6 +139,16 @@ Route::post('companies/{company}/manage/microlocations/{microlocation}/microloca
 
 // Route::get('companies/{company}/manage/microlocation/{microlocation}/warehouse', 'microlocation_controller@warehouse_index');
 
+#Microlocations Reports
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/warehouse',	'company_controller@warehouse_index');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/receipts',	'receipt_controller@index');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/issues',		'issue_controller@index');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/pre',			'pre_controller@index');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/refined',		'refined_controller@index');
+
+#Microlocation Manage
+Route::get('companies/{company}/manage/microlocations/{microlocation}/manage/receipts/create',	'receipt_controller@create');
+Route::get('/companies/{company}/manage/microlocations/{microlocation}/manage/users',	'user_controller@index');
 
 # Communities
 Route::resource('companies/{company}/manage/communities',                           'community_controller', ['only' => ['index', 'show', 'create', 'edit']]);

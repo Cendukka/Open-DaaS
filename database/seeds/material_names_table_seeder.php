@@ -6,7 +6,7 @@ class material_names_table_seeder extends Seeder{
     public function run(){
     	$mat_names = [
             # Raw waste
-            '1V. Poistotekstiili' => 'raw waste',
+            'Raw Waste' => 'raw waste',
 
             # Pre-sorted textile
             'Raw Textile' => 'refined',

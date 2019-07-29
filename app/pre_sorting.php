@@ -9,7 +9,7 @@ class pre_sorting extends Model {
 	public $timestamps = true;
 	protected $table = "pre_sorting";
 	protected $primaryKey = "pre_sorting_id";
-	protected $fillable = ['pre_sorting_user_id', 'pre_sorting_date', 'pre_sorting_receipt_id', 'pre_sorting_material_id', 'pre_sorting_weight','is_for_issue'];
+	protected $fillable = ['pre_sorting_user_id', 'pre_sorting_date', 'pre_sorting_receipt_id', 'pre_sorting_material_id', 'pre_sorting_weight'];
 	
 	public function refined_sorting() {
 		return $this->hasMany(refined_sorting::class,'pre_sorting_id');

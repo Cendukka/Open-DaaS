@@ -26,7 +26,8 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div id="piechartWhole" class="col-md-4"></div>
+                        <div id="piechartWhole" class="col-md-6"></div>
+                        <div id="piechartFraction" class="col-md-6"></div>
                         <div id="chart_div" class="col-md-6" style="width: 900px; height: 500px"></div>
                     </div>
 

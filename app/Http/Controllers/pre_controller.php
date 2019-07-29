@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
     use App\pre_sorting;
+    use App\microlocation;
 
 class pre_controller extends Controller {
 
@@ -15,8 +16,8 @@ class pre_controller extends Controller {
     }
 
 
-    public function index(company $company) {
-        return view('pages.company.pre')->with('company', $company);
+    public function index(company $company,  microlocation $microlocation) {
+        return view('pages.company.pre')->with(['company' => $company, 'microlocation' => $microlocation]);
     }
 
 
@@ -26,6 +27,8 @@ class pre_controller extends Controller {
 
 
     public function store(Request $request, company $company) {
+        # ADD MORE AUTHENTICATION HERE
+
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
@@ -47,7 +50,6 @@ class pre_controller extends Controller {
             'pre_sorting_receipt_id' => $receipt,
             'pre_sorting_material_id' => $material,
             'pre_sorting_weight' => $weight,
-            'is_for_issue' => $for_issue,
         ]);
         $pre->save();
 
@@ -70,6 +72,8 @@ class pre_controller extends Controller {
 
 
     public function update(Request $request, company $company, pre_sorting $pre) {
+        # ADD MORE AUTHENTICATION HERE
+
         $request->validate([
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
@@ -89,7 +93,6 @@ class pre_controller extends Controller {
         $preNew->pre_sorting_receipt_id = $receipt;
         $preNew->pre_sorting_material_id = $material;
         $preNew->pre_sorting_weight = $weight;
-        $preNew->is_for_issue = $for_issue;
 
         $receipt_entity_orig = DB::table('inventory_receipt')->where('receipt_id',$preNew->getOriginal('pre_sorting_receipt_id'))->first();
         $receipt_entity_new = DB::table('inventory_receipt')->where('receipt_id',$receipt)->first();

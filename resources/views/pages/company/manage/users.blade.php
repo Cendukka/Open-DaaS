@@ -27,12 +27,11 @@
                                     ->orderBy('users.user_type_id')
                                     ->orderBy('user_microlocation_id')
                                     ->get();
-
                     @endphp
 
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{title_case($user->microlocation_name)}}</td>
+                            <td>{{title_case($user->microlocation_name ?: 'Toimisto')}}</td>
                             <td>{{title_case($user->user_typename)}}</td>
                             <td>{{title_case($user->last_name)}}</td>
                             <td>{{title_case($user->first_name)}}</td>

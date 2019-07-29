@@ -7,7 +7,6 @@
             </div>
             <div class="panel-body">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
-                @endif
                     <form method="post" action="microlocations-update" class="form-text-align-padd">
                         @csrf
                         <div class="form-group row">

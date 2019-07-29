@@ -33,20 +33,6 @@
                     </button>
                 </div>
 
-
-                <div class="navbar-collapse" id="bs-example-navbar-collapse-2">
-                    <ul class="nav navbar-nav navbar-right">
-                        <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout">Yhteystiedot</a>
-                        <a id="home"    href="/" class="btn btn-info btn-lg logout" style="display: none;">Takaisin etusivulle</a>
-                            <script type="text/javascript">
-
-                                    if (window.location.href === "{{route('ContactList')}}") {
-                                    document.getElementById("contact").style.display = "none";
-                                    document.getElementById("home").style.display = "";
-                                    }
-                            </script>
-
-
                 <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
 

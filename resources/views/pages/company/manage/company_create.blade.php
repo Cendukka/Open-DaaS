@@ -3,28 +3,18 @@
 <div id="content2" class="row">
     <div class="panel panel-default">
         <div class="panel-heading" >
-            <h2>Yhtiön rekisteröinti lomake</h2>
+            <h2>Organisaation rekisteröinti lomake</h2>
         </div>
 
         <div class="panel-body">
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li STYLE="text-align:left;">{{ $error }}</li>
-                        @endforeach
-                        </ul>
-                    </div>
-                    @endif
-
+            @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
             <div class="form-horizontal">
                 <form method="post" action="company-store" onsubmit="return confirm('Uusi organisaatio rekisteröidään. Haluatko jatkaa?');">
                 @csrf
                     <div class="form-group row">
-                        <label for="companyName" class="col-sm-2 col-form-label text-left">Yhtiön nimi</label>
+                        <label for="companyName" class="col-sm-2 col-form-label text-left">Organisaation nimi</label>
                         <div class="col-sm-4">
-                            <input type="text" name="name" placeholder="Yhtiön nimi" class="form-control" autofocus>
+                            <input type="text" name="name" placeholder="Organisaation nimi" class="form-control" autofocus>
                         </div>
                     </div>
 

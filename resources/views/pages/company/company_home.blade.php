@@ -7,16 +7,7 @@
                 <h3>Organisaation hallinnan kotisivut: {{$company->company_name}}</h3>
             </div>
             <div class="panel-body">
-                    <h4>Mahdollisesti yleisnäkymää organisaation toiminnasta tjms.</h4>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                <h4>Mahdollisesti yleisnäkymää organisaation toiminnasta tjms.</h4>
                 <div class="row">
                     <div id="pieChartCompany"></div>
                 </div>
@@ -36,7 +27,7 @@
                                                                             ->where('microlocation_company_id',$company->company_id)
                                                                             ->sum('inventory_weight'))}}]);
                             @endforeach
-                        var wholeOptions = {'title': 'Yhtiö - Kierrätetyt yhteensä: {{DB::table('inventory')
+                        var wholeOptions = {'title': 'Organisaatio - Kierrätetyt yhteensä: {{DB::table('inventory')
                                                                                         ->join('material_names','material_id','inventory_material_id')
                                                                                         ->join('microlocations','microlocation_id','inventory_microlocation_id')
                                                                                         ->where('material_type','textile')

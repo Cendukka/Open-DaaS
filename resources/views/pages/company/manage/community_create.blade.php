@@ -6,15 +6,7 @@
                 <h3>Lisää kunta</h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <div class="form-horizontal">
                     <form method="post" action="community-store" onsubmit="return confirm('Uusi kunta rekisteröidään. Haluatko jatkaa?');">
                         @csrf

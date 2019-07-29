@@ -38,9 +38,9 @@ class users_table_seeder extends Seeder
 			DB::table('users')->insert([
 				'user_type_id' => 2,
 				'user_company_id' => $company->company_id,
-                'user_microlocation_id' => $microlocations->random()->microlocation_id,
-				'last_name' => $fn,
-				'first_name' => $ln,
+                'user_microlocation_id' => NULL,
+				'last_name' => $ln,
+				'first_name' => $fn,
 				'username' => $ln.'.'.$fn,
 				'email' => $ln.'.'.$fn.'@test.com',
 				'password' => Hash::make('qwerty')
@@ -56,8 +56,8 @@ class users_table_seeder extends Seeder
 					'user_type_id' => 3,
 					'user_company_id' => $company->company_id,
 					'user_microlocation_id' => $ml->microlocation_id,
-                    'last_name' => $fn,
-                    'first_name' => $ln,
+                    'last_name' => $ln,
+                    'first_name' => $fn,
                     'username' => $ln.'.'.$fn,
                     'email' => $ln.'.'.$fn.'@test.com',
 					'password' => Hash::make('qwerty')

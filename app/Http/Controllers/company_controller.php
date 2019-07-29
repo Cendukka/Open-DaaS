@@ -27,15 +27,15 @@ class company_controller extends Controller {
 
 	public function store(Request $request) {
 		# ADD MORE AUTHENTICATION HERE
-		
+
 		$request->validate([
 			'name' => 'required|max:191',
 			'address'=>'required|max:191',
 			'postal_code'=> 'required|min:5|max:5|digits_between:0,9',
 			'city'=> 'required|max:50',
 		]);
-		
-		
+
+
 		$company = new company([
 			'company_name' => $request->get('name'),
 			'company_street_address' => $request->get('address'),
@@ -66,22 +66,23 @@ class company_controller extends Controller {
 
 	public function update(Request $request, company $company) {
 		# ADD MORE AUTHENTICATION HERE
-		
+
 		$request->validate([
 			'name' => 'required|max:191',
 			'address'=>'required|max:191',
 			'postal_code'=> 'required|min:5|max:5|digits_between:0,9',
 			'city'=> 'required|max:50',
 		]);
-		
+
 		$companyNew = company::find($company->company_id);
 		$companyNew->company_name = $request->get('name');
 		$companyNew->company_street_address = $request->get('address');
 		$companyNew->company_postal_code = $request->get('postal_code');
 		$companyNew->company_city = $request->get('city');
 		$companyNew->save();
-		
+
 		return redirect()->action('company_controller@manage_index',['company' => $company])->withErrors(['Company successfully updated.']);
+
 	}
 
 
@@ -93,7 +94,8 @@ class company_controller extends Controller {
 
 
 	public function manage_index(company $company) {
-		return view('pages.company.manage')->with('company', $company);
+
+		return view('pages.company.company_home')->with('company', $company);
 	}
 
 

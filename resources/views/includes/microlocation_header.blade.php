@@ -21,7 +21,7 @@
         <ul class="list-unstyled components">
 
             <li>
-                
+
                 <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">Raportit</a>
                 <ul class="collapse list-unstyled" id="reportsSubmenu">
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/warehouse'}}">    Varasto</a></li>
@@ -57,7 +57,7 @@
                         <i class="glyphicon glyphicon-align-left"></i>
                         <span>Piilota ja näytä sivupalkki</span>
                     </button>
-
+                    <span><h4>Käyttäjä: {{ Auth::user()->first_name }}</h4></span>
                 </div>
 
                 <div class="navbar-collapse" id="bs-example-navbar-collapse-1">

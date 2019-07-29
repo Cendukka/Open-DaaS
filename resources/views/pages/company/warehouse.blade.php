@@ -16,7 +16,7 @@
                     foreach ($microlocations as $microlocation){
                         array_push($microlocation_ids, $microlocation->microlocation_id);
                     }
-                @endphp  
+                @endphp
                 @if (count($microlocation_ids)>0)
                     <table class="table table-bordered table-hover">
                         <thead>

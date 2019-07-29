@@ -27,7 +27,10 @@
                     <br>
                     <div class="row">
                         <div id="piechartWhole" class="col-md-4"></div>
+<<<<<<< HEAD
                         <div id="piechartFraction" class="col-md-6"></div>
+=======
+>>>>>>> parent of 07bdcf2... Merge branch 'ajit' into TestCompile
                         <div id="chart_div" class="col-md-6" style="width: 900px; height: 500px"></div>
                     </div>
 

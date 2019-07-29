@@ -85,9 +85,4 @@
         $(document).ready(communities);
         $(document).on("change", '#from_company', communities);
     </script>
-    <script type="text/javascript">
-        $('.timepicker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss'
-        });
-    </script>
 @endsection

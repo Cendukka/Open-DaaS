@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\microlocation;
 use Auth;
 
 class company_controller extends Controller {
@@ -98,7 +97,7 @@ class company_controller extends Controller {
 	}
 
 
-	public function warehouse_index(company $company,  microlocation $microlocation) {
-		return view('pages.company.warehouse')->with(['company' => $company, 'microlocation' => $microlocation]);
+	public function warehouse_index(company $company) {
+	    		return view('pages.company.warehouse')->with('company', $company);
 	}
 }

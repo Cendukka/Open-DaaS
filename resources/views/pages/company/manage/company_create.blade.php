@@ -21,9 +21,9 @@
             <div class="form-horizontal">
                 <form method="post" action="company-store" onsubmit="return confirm('Uusi organisaatio rekisteröidään. Haluatko jatkaa?');">
                 @csrf
-                    <div class="form-group">
-                        <label for="companyName" class="col-sm-3 control-label">Yhtiön nimi</label>
-                        <div class="col-sm-9">
+                    <div class="form-group row">
+                        <label for="companyName" class="col-sm-2 col-form-label text-left">Yhtiön nimi</label>
+                        <div class="col-sm-4">
                             <input type="text" name="name" placeholder="Yhtiön nimi" class="form-control" autofocus>
                         </div>
                     </div>

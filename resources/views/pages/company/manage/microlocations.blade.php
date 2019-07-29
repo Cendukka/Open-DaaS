@@ -6,15 +6,7 @@
                 <h3>Hallitse microlokaatioita </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <table class="table table-bordeless table-hover">
                     <thead>
                     <tr>

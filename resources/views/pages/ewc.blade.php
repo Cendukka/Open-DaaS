@@ -7,15 +7,7 @@
                     <h3>EWC Koodit</h3>
                 </div>
                  <div class="panel-body">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                     @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                      <div class="form-group">
                          <input type="text" class="form-controller" id="search" name="search">
                      </div>

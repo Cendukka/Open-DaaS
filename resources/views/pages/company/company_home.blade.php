@@ -7,16 +7,7 @@
                 <h3>Organisaation hallinnan kotisivut: {{$company->company_name}}</h3>
             </div>
             <div class="panel-body">
-                    <h4>Mahdollisesti yleisnäkymää organisaation toiminnasta tjms.</h4>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                <h4>Mahdollisesti yleisnäkymää organisaation toiminnasta tjms.</h4>
                 <div class="row">
                     <div id="pieChartCompany"></div>
                 </div>

@@ -6,15 +6,7 @@
                 <h3>Materiaalit </h3>
             </div>
             <div class="panel-body" style="text-align:left;">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 @foreach (DB::table('material_names')->distinct('material_type')->pluck('material_type') as $type)
                     <table class="table table-bordered table-hover" style="max-width: 300px;">
                         <thead>

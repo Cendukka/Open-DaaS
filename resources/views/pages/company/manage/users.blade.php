@@ -6,15 +6,7 @@
                 <h3>Hallitse käyttäjätilejä </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -49,9 +41,6 @@
                         </tr>
                     @endforeach
                 </table>
-
-                <a class="btn btn-warning" href="{{url(url()->current().'/export_csv')}}">Export user data</a>
-
                 <form method="get" action="{{url(url()->current().'/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Lisää käyttäjä</button>
                 </form>

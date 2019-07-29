@@ -6,14 +6,7 @@
                 <h3>Muokkaa microlokaatiota </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 @endif
                     <form method="post" action="microlocations-update" class="form-text-align-padd">
                         @csrf
@@ -24,7 +17,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="type">Microlokaation tyyppi:&nbsp</label>
+                            <label class="col-sm-2 col-form-label" for="type">Microlokaation tyyppi:</label>
                             <div class="col-sm-10">
                                 <select class="form-control element-width-auto form-field-width" name="type">
                                     <option selected="selected" hidden disabled value=""></option>
@@ -35,7 +28,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="name">Microlocation Name:</label>
+                            <label class="col-sm-2 col-form-label" for="name">Microlokaation nimi</label>
                             <div class="col-sm-10">
                                 <input type="text" maxlength="191" class="form-control element-width-auto form-field-width" name="name" value="{{title_case($microlocation->microlocation_name)}}"/>
                                 <small class="form-text text-muted">
@@ -44,26 +37,25 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="address">Street Address:</label>
+                            <label class="col-sm-2 col-form-label" for="address">Katuosoite:</label>
                             <div class="col-sm-10">
                                 <input type="text" maxlength="191" class="form-control element-width-auto form-field-width" name="address" value="{{title_case($microlocation->microlocation_street_address)}}"/>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="postal_code">Postal Code:</label>
+                            <label class="col-sm-2 col-form-label" for="postal_code">Postinumero:</label>
                             <div class="col-sm-10">
                                 <input type="text" maxlength="5" class="form-control element-width-auto form-field-width" name="postal_code" value="{{title_case($microlocation->microlocation_postal_code)}}"/>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="city">City:</label>
+                            <label class="col-sm-2 col-form-label" for="city">Kaupunki:</label>
                             <div class="col-sm-10">
                                 <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="city" value="{{title_case($microlocation->microlocation_city)}}"/>
                             </div>
                         </div>
                         @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/companies/'.$company->company_id.'/manage/microlocations')])
                     </form>
-
             </div>
         </div>
     </div>

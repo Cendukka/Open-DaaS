@@ -18,7 +18,7 @@
                     <form method="post" action="microlocations-update" class="form-text-align-padd">
                         @csrf
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Yhtiö:</label></label>
+                            <label class="col-sm-2 col-form-label">Organisaatio:</label></label>
                             <div class="col-sm-10">
                                 <label class="col-form-label">{{title_case($company->company_name)}}</label>
                             </div>

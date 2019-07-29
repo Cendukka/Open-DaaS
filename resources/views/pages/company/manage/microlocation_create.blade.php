@@ -18,7 +18,7 @@
                 <form method="post" action="microlocations-store" class="form-text-align-padd" onsubmit="return confirm('Uusi toimipiste lisätään organisaatioon. Haluatko jatkaa?');">
                     @csrf
                     <div class="form-group">
-                        <label for="company">Yhtiö:</label>
+                        <label for="company">Organisaatio:</label>
                         <select class="form-control element-width-auto" name="company">
                             <option selected="selected" hidden value="{{$company->company_id}}">{{title_case($company->company_name)}}</option>
                         </select>

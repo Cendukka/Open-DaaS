@@ -8,12 +8,12 @@
             </div>
             <div class="panel-body">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
-                <form method="post" action="users-store" class="form-text-align-padd" onsubmit="return confirm('Uusi käyttäjä lisätään yhtiöön. Haluatko jatkaa?');">
+                <form method="post" action="users-store" class="form-text-align-padd" onsubmit="return confirm('Uusi käyttäjä lisätään organisaatioon. Haluatko jatkaa?');">
                     @csrf
                     <div class="form-group">
                         <label for="user_type">Käyttäjätyyppi:</label>
                         <select class="form-control element-width-auto" name="user_type">
-                            <option value="2">Yhtiön bosse</option>
+                            <option value="2">Organisaation johtaja</option>
                             <option value="3">Microlokaationin työntekijä</option>
 
                         </select>

@@ -7,7 +7,7 @@
                 <h3>microlocation hallinnan kotisivut: </h3>
             </div>
             <div class="panel-body">
-                    <h4>Mahdollisesti yleisnäkymää yhtiön toiminnasta tjms.</h4>
+                    <h4>Mahdollisesti yleisnäkymää organisaation toiminnasta tjms.</h4>
 
                 
             </div>

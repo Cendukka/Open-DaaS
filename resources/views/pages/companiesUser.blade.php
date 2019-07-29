@@ -4,7 +4,7 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Valitse yhtiö:</h3>
+                <h3>Valitse organisaatio:</h3>
             </div>
             <div class="panel-body">
                 <form>

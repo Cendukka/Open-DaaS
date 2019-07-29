@@ -19,7 +19,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="company">Yhtiö:</label>
+                            <label for="company">Organisaatio:</label>
                             {{title_case($company->company_name)}}
                         </div>
                         <div class="form-group">

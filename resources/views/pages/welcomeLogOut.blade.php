@@ -60,28 +60,73 @@
                         function drawCurveTypes() {
                             var data = new google.visualization.DataTable();
                             data.addColumn('date', 'Time');
-                            data.addColumn('number', 'Weight');
+                            data.addColumn('number', 'Receipts');
+                            data.addColumn('number', 'Incineration');
+                            data.addColumn('number', 'For sale');
+                            data.addColumn('number', 'Charity');
 
                             @php
-                                # $$receipt = timevalue of Y-m
-                                # $$receipts[0][0] = Year
-                                # $$receipts[0][1] = Month
-                                # $$receipts[1] = Weight
+                                # value = timevalue of Y-m
+                                # $values[0][0] = Year
+                                # $values[0][1] = Month
+                                # $values[1] = Receipt Weight
+                                # $values[2] = Energiaan
+                                # $values[3] = Uusiokäyttöön
+                                # $values[4] = Jatkokierrätykseen
 
-                                $receipts = collect([]);
-                                foreach(DB::table('inventory_receipt')->orderBy('receipt_date','ASC')->get() as $receipt){
+                                $values = collect([]);
+                                foreach(DB::table('inventory_receipt')->orderBy('receipt_date','ASC')->select('receipt_date','receipt_weight')->get() as $receipt){
                                     $date = date('Y-m', strtotime($receipt->receipt_date));
-                                    if($receipts->has(strtotime($date))){
-                                        $receipts->put(strtotime($date),[explode('-',$date), $receipts[strtotime($date)][1]+$receipt->receipt_weight]);
+                                    if($values->has(strtotime($date))){
+                                        $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1]+$receipt->receipt_weight, 0, 0, 0]);
                                     }
                                     else{
-                                        $receipts->put(strtotime($date),[explode('-',$date), $receipt->receipt_weight]);
+                                        $values->put(strtotime($date),[explode('-',$date), $receipt->receipt_weight, 0, 0, 0]);
                                     }
                                 }
-                            #dd($values);
+
+                                $issueQuery = DB::table('inventory_issue')
+                                    ->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
+                                    ->orderBy('issue_date','ASC')
+                                    ->joinSub(DB::table('inventory_issue_details')
+                                    ->select('detail_issue_id',DB::raw('SUM(detail_weight) as sumweight'))
+                                    ->groupBy('detail_issue_id'),'details', function ($join) {
+                                        $join->on('detail_issue_id', '=', 'issue_id');
+                                    })
+                                    ->select('issue_date','sumweight','issue_typename');
+
+                                foreach((clone $issueQuery)->where('issue_typename','Incineration')->get() as $issue){
+                                    $date = date('Y-m', strtotime($issue->issue_date));
+                                    if($values->has(strtotime($date))){
+                                        $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2]+$issue->sumweight, 0, 0]);
+                                    }
+                                    else{
+                                        $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $issue->sumweight, 0, 0]);
+                                    }
+                                }
+
+                                foreach((clone $issueQuery)->where('issue_typename','For sale')->get() as $issue){
+                                    $date = date('Y-m', strtotime($issue->issue_date));
+                                    if($values->has(strtotime($date))){
+                                        $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2], $values[strtotime($date)][2]+$issue->sumweight, 0]);
+                                    }
+                                    else{
+                                        $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2], $issue->sumweight, 0]);
+                                    }
+                                }
+
+                                foreach((clone $issueQuery)->where('issue_typename','Charity')->get() as $issue){
+                                    $date = date('Y-m', strtotime($issue->issue_date));
+                                    if($values->has(strtotime($date))){
+                                        $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2], $values[strtotime($date)][3], $values[strtotime($date)][2]+$issue->sumweight]);
+                                    }
+                                    else{
+                                        $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2], $values[strtotime($date)][3], $issue->sumweight]);
+                                    }
+                                }
                             @endphp
-                            @foreach($receipts as $v)
-                                data.addRow([new Date(parseInt('{{$v[0][0]}}'),parseInt('{{$v[0][1]}}')), {{max(0, $v[1])}}]);
+                            @foreach($values as $v)
+                                data.addRow([new Date(parseInt('{{$v[0][0]}}'),parseInt('{{$v[0][1]}}')), {{max(0, $v[1])}}, {{max(0, $v[2])}}, {{max(0, $v[3])}}, {{max(0, $v[4])}}]);
                             @endforeach
 
                             var options = {

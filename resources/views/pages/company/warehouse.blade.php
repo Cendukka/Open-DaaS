@@ -1,5 +1,4 @@
 @extends( !(Auth::user()->user_type_id == '3') ? 'layouts.macrolocation' : 'layouts.microlocation')
-{{--@extends( 'layouts.microlocation')--}}
 @section ('title', 'Raportit: Varasto')
 @section('content')
     <div id="content2" class="row">
@@ -13,8 +12,8 @@
                                         ->where('microlocation_company_id','=',$company->company_id)
                                         ->get();
                     $microlocation_ids = [];
-                    foreach ($microlocations as $microlocation){
-                        array_push($microlocation_ids, $microlocation->microlocation_id);
+                    foreach ($microlocations as $eachMicrolocation){
+                        array_push($microlocation_ids, $eachMicrolocation->microlocation_id);
                     }
                 @endphp
                 @if (count($microlocation_ids)>0)

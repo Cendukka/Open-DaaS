@@ -1,22 +1,11 @@
-<!--<div class="navbar">
-    <div class="navbar-inner">
-        <a id="logo" href="/">{{$company->company_name}}</a>
-        <ul class="nav">
-            <li><a href="/companies/{{$company->company_id}}">Oma Toimipiste</a></li>
-            <li><a href="/companies/{{$company->company_id}}/warehouse">Raportit</a></li>
-            <li><a href="/companies/{{$company->company_id}}/manage">Hallinnoi</a></li>
-            <li><a href="/ewc">EWC Codes</a></li>
-        </ul>
-    </div>
-</div>
-<br>-->
 <div class="wrapper">
 
     <!-- Sidebar Holder -->
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/companies/{{$company->company_id}}/manage/microlocations/{{$microlocation->microlocation_id}}"><h3>JALOSTUSLAITOS</h3>{{$microlocation->microlocation_name}}</a>
+            <a href="/companies/{{$company->company_id}}/manage/microlocations/{{$microlocation->microlocation_id}}"><h4>JALOSTUSLAITOS</h4><br>
+                <h5>Organisaatio: {{$company->company_name}}</h5><br><h5>Toimipiste: {{$microlocation->microlocation_name}}</h5></a>
         </div>
         <ul class="list-unstyled components">
 
@@ -24,11 +13,11 @@
 
                 <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">Raportit</a>
                 <ul class="collapse list-unstyled" id="reportsSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/warehouse'}}">    Varasto</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/receipts'}}">     Saapuneet</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/issues'}}">       Lähteneet</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/pre'}}">          Esilajiteltu</a></li>
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocation/'.$microlocation->microlocation_id.'/refined'}}">      Hienolajiteltu</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/warehouse'}}">    Varasto</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/receipts'}}">     Saapuneet</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/issues'}}">       Lähteneet</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/pre'}}">          Esilajiteltu</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations/'.$microlocation->microlocation_id.'/refined'}}">      Hienolajiteltu</a></li>
                 </ul>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 

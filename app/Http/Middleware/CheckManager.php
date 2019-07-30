@@ -18,8 +18,8 @@ class CheckManager
      */
     public function handle($request, Closure $next)
     {
-        $userTypes=Auth::user()->user_type_id=='2'||'1';
-        // dd($userTypes);
+        $userTypes=Auth::user()->user_type_id=='2' || Auth::user()->user_type_id=='1';
+//        dd($userTypes);
         // DB::table('user_types')->pluck('user_typename');
         if(!($userTypes=='2'||$userTypes=='1')){
             return redirect('/');

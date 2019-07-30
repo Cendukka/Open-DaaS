@@ -1,4 +1,4 @@
-@extends('layouts.macrolocation')
+@extends( !(Auth::user()->user_type_id == '3') ? 'layouts.macrolocation' : 'layouts.microlocation')
 @section ('title', 'Raportit: Saapuneet')
 @section('content')
 

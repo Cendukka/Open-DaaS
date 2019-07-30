@@ -16,7 +16,7 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/companies/{{$company->company_id}}"><h4>TEKIHA TEkstiiliKIerrätyksen  HAllintajärjestelmä</h4>{{$company->company_name}}</a>
+            <a href="/companies/{{$company->company_id}}"><h4>TEKIHA TEkstiiliKIerrätyksen  HAllintajärjestelmä</h4><br><h5>Organisaatio: {{$company->company_name}}</h5></a>
         </div>
         <ul class="list-unstyled components">
             <li>

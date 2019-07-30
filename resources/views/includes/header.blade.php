@@ -4,7 +4,7 @@
     <nav id="sidebar">
 
 		<div class="sidebar-header">
-        	<a href="/home"><h4>TADAH Tekstiilikierrätyksen Avoimen DAtan Hallintajärjestelmä</h4>Admin</a>
+            <a href="/home"><h4>TADAH Tekstiilikierrätyksen Avoimen DAtan Hallintajärjestelmä</h4><br><h5>Admin</h5></a>
 		</div>
 
 		<ul class="list-unstyled components">

@@ -180,16 +180,18 @@ class issue_controller extends Controller {
 	}
 
 
-    public function query(company $company, Request $request) {
+    public function query(Request $request, company $company, microlocation $microlocation) {
         $microlocation_ids = [];
-        foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $microlocation){
-            array_push($microlocation_ids, $microlocation->microlocation_id);
+        foreach (DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->get() as $ml){
+            array_push($microlocation_ids, $ml->microlocation_id);
         }
-
         return DB::table('inventory_issue')
             ->whereIn('issue_from_microlocation_id', $microlocation_ids)
             ->when(($request->from && $request->to), function($query) use ($request){
                 $query->whereBetween('issue_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
+            })
+            ->when($microlocation->exists, function($query) use ($microlocation){
+                $query->where('issue_from_microlocation_id', $microlocation->microlocation_id);
             })
             ->where(function ($query) use ($request){
                 foreach(explode(' ',$request->search) as $word){
@@ -215,11 +217,11 @@ class issue_controller extends Controller {
     }
 
 
-	public function search(Request $request, company $company){
+	public function search(Request $request, company $company, microlocation $microlocation){
 		if($request->ajax()){
 			$output="";
             $result = app('App\Http\Controllers\issue_controller')
-                ->query($company,$request)
+                ->query($request,$company,$microlocation)
                 ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','issue_id','sumweight')
                 ->get();
 			if($result){

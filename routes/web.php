@@ -8,16 +8,20 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware'=>['auth']],function(){ //all user routes
 
     //Home
-	Route::get('companies/{company}/manage/microlocations/{microlocation}',               'microlocation_controller@show');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}',                     'microlocation_controller@show');
 	//Create and edit microlocations
-	Route::get('companies/{company}/manage/microlocations/{microlocation}/create',               'microlocation_controller@create');
-	Route::get('companies/{company}/manage/microlocations/{microlocation}/edit',               'microlocation_controller@edit');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/create',              'microlocation_controller@create');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/edit',                'microlocation_controller@edit');
 	//Microlocation routes
-	Route::get('companies/{company}/manage/microlocations/{microlocation}/warehouse',               'microlocation_controller@warehouse_index');
-	Route::get('companies/{company}/manage/microlocations/{microlocation}/receipts',               'receipt_controller@index');
-	Route::get('companies/{company}/manage/microlocations/{microlocation}/issues',               'issue_controller@index');
-	Route::get('companies/{company}/manage/microlocations/{microlocation}/pre',               'pre_controller@index');
-	Route::get('companies/{company}/manage/microlocations/{microlocation}/refined',               'refined_controller@index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/warehouse',           'microlocation_controller@warehouse_index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/receipts',            'receipt_controller@index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/receipts/search',     'receipt_controller@search');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/issues',              'issue_controller@index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/issues/search',       'issue_controller@search');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/pre',                 'pre_controller@index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/pre/search',          'pre_controller@search');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/refined',             'refined_controller@index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/refined/search',      'refined_controller@search');
 
 	Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
 

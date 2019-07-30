@@ -63,18 +63,24 @@
                             data.addColumn('number', 'Weight');
 
                             @php
-                                $values = collect([]);
+                                # $$receipt = timevalue of Y-m
+                                # $$receipts[0][0] = Year
+                                # $$receipts[0][1] = Month
+                                # $$receipts[1] = Weight
+
+                                $receipts = collect([]);
                                 foreach(DB::table('inventory_receipt')->orderBy('receipt_date','ASC')->get() as $receipt){
                                     $date = date('Y-m', strtotime($receipt->receipt_date));
-                                    if($values->has(strtotime($date))){
-                                        $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1]+$receipt->receipt_weight]);
+                                    if($receipts->has(strtotime($date))){
+                                        $receipts->put(strtotime($date),[explode('-',$date), $receipts[strtotime($date)][1]+$receipt->receipt_weight]);
                                     }
                                     else{
-                                        $values->put(strtotime($date),[explode('-',$date), $receipt->receipt_weight]);
+                                        $receipts->put(strtotime($date),[explode('-',$date), $receipt->receipt_weight]);
                                     }
                                 }
+                            #dd($values);
                             @endphp
-                            @foreach($values as $v)
+                            @foreach($receipts as $v)
                                 data.addRow([new Date(parseInt('{{$v[0][0]}}'),parseInt('{{$v[0][1]}}')), {{max(0, $v[1])}}]);
                             @endforeach
 

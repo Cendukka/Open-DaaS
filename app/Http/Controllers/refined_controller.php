@@ -165,16 +165,18 @@ class refined_controller extends Controller {
 	}
 
 
-    public function query(company $company, Request $request) {
+    public function query(Request $request, company $company, microlocation $microlocation) {
         $microlocation_ids = [];
-        foreach (DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->get() as $microlocation){
-            array_push($microlocation_ids, $microlocation->microlocation_id);
+        foreach (DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->get() as $ml){
+            array_push($microlocation_ids, $ml->microlocation_id);
         }
-
         return DB::table('refined_sorting')
             ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
             ->when(($request->from && $request->to), function($query) use ($request){
                 $query->whereBetween('refined_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
+            })
+            ->when($microlocation->exists, function($query) use ($microlocation){
+                $query->where('receipt_to_microlocation_id', $microlocation->microlocation_id);
             })
             ->where(function ($query) use ($request){
                 foreach(explode(' ',$request->search) as $word){
@@ -200,11 +202,11 @@ class refined_controller extends Controller {
     }
 
 
-	public function search(Request $request, company $company){
+	public function search(Request $request, company $company, microlocation $microlocation){
 		if($request->ajax()){
 			$output="";
             $result = app('App\Http\Controllers\refined_controller')
-                ->query($company,$request)
+                ->query($request,$company,$microlocation)
                 ->select(['refined_date','microlocation_name','material_name','refined_weight','username','refined_id','refined_receipt_id',])
                 ->get();
 			if($result){

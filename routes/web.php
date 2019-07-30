@@ -1,47 +1,40 @@
 <?php
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('pages.home');
+
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::group(['middleware'=>['auth']],function(){
-	Route::resource('companies/{company}/manage/microlocations',                                    'microlocation_controller', ['only' => ['index', 'show', 'create', 'edit']]);
-	Route::get('companies/{company}/manage/microlocation/{microlocation}/warehouse', 'microlocation_controller@warehouse_index');
+Route::group(['middleware'=>['auth']],function(){ //all user routes
 
+    //Home
+	Route::get('companies/{company}/manage/microlocations/{microlocation}',               'microlocation_controller@show');
+	//Create and edit microlocations
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/create',               'microlocation_controller@create');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/edit',               'microlocation_controller@edit');
+	//Microlocation routes
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/warehouse',               'microlocation_controller@warehouse_index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/receipts',               'receipt_controller@index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/issues',               'issue_controller@index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/pre',               'pre_controller@index');
+	Route::get('companies/{company}/manage/microlocations/{microlocation}/refined',               'refined_controller@index');
 
 	Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
 
+	Route::group(['middleware'=>['manager']],function(){//Admin and manager routes
 
-	Route::group(['middleware'=>['manager']],function(){
-
-
+        Route::get('companies/{company}/manage/microlocations/',               'microlocation_controller@index');
 		Route::get('companies/create', 'company_controller@create')->name('companies.create');
 		Route::get('companies/{company}/edit', 'company_controller@edit')->name('companies.edit');
 		Route::get('companies/{company}', 'company_controller@show')->name('companies.show');
-
-
-		//Route::resource('companies',                        'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
-
 		Route::get('ewc','ewc_controller@index');
 
-			Route::group(['middleware'=>['admin']],function(){
-
-			//	Route::resource('companies',                        'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
-
-
+			Route::group(['middleware'=>['admin']],function(){//Admin routes
 				#Manage Pages
 				Route::get('companies/{company}/manage', 'company_controller@manage_index');
                 Route::get('companies', 'company_controller@index')->name('companies.index');
 
-
 				Route::get('/home', 'HomeController@index')->name('pages.home');
-
-				Route::get('yahoo', function () {
-
-					return view('yahoo');
-				});
-
 			});
 
 	});

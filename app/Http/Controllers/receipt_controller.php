@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\company;
+use App\microlocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\inventory_receipt;
@@ -11,9 +12,8 @@ use Illuminate\Support\Str;
 class receipt_controller extends Controller {
 
 
-	public function index(company $company) {
-		#return view('pages.company.manage.receipts')->with('company', $company);
-        return view('pages.company.receipts')->with('company', $company);
+	public function index(company $company, microlocation $microlocation) {
+        return view('pages.company.receipts')->with(['company' => $company, 'microlocation' => $microlocation]);
 	}
 
 

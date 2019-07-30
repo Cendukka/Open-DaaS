@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\company;
+use App\microlocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\refined_sorting;
@@ -17,8 +18,8 @@ class refined_controller extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index(company $company) {
-        return view('pages.company.refined')->with('company', $company);
+	public function index(company $company, microlocation $microlocation) {
+        return view('pages.company.refined')->with(['company' => $company, 'microlocation' => $microlocation]);
 	}
 
 

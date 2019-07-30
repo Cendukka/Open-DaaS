@@ -18,8 +18,8 @@ class issue_controller extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index(company $company) {
-        return view('pages.company.issues')->with('company', $company);
+	public function index(company $company, microlocation $microlocation) {
+        return view('pages.company.issues')->with(['company' => $company, 'microlocation' => $microlocation]);
 	}
 
 

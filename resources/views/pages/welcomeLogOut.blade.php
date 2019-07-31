@@ -125,7 +125,7 @@
                                     }
                                 }
                             @endphp
-                            @foreach($values as $v)
+                            @foreach($values->sort() as $v)
                                 data.addRow([new Date(parseInt('{{$v[0][0]}}'),parseInt('{{$v[0][1]}}')), {{max(0, $v[1])}}, {{max(0, $v[2])}}, {{max(0, $v[3])}}, {{max(0, $v[4])}}]);
                             @endforeach
 

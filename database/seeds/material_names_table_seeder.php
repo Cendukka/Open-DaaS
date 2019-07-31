@@ -9,25 +9,31 @@ class material_names_table_seeder extends Seeder{
             '1V. Poistotekstiili' => 'raw waste',
 
             # Pre-sorted textile
-            'Raw Textile' => 'refined',
+            '1V. Kierrätyskelpoinen' => 'refined',
+            '1V Uudelleenkäyttökelpoinen' => 'refined',
+
+            # ???
+            # 2V. Selluloosakuidut
+            # 2V. Synteettiset
+            # 2V. Villa
+            # 2V. Sekoitteet
 
     	    # Refine Sorted Textiles
-            'Villa' => 'textile',
-            'Trikoo' => 'textile',
-            'Pellava' => 'textile',
-            'Puuvilla' => 'textile',
-            'Farkku' => 'textile',
-            'Elastiini' => 'textile',
-            'Polyesteri' => 'textile',
-
-            # Material that is being removed from use
-            'Old Textile' => 'retired',
+            '3V. 100% Polyamidi' => 'textile',
+            '3V. 100% Polyesteri' => 'textile',
+            '3V. 100% Puuvilla' => 'textile',
+            '3V. 100% Villa' => 'textile',
+            '3V. 100% Viskoosi' => 'textile',
+            '3V. CO/PES 63' => 'textile',
+            '3V. Villasekoite' => 'textile',
+            '3V. Luonnonkuituseo' => 'textile',
+            '3V. Tekokuituseos' => 'textile',
+            '3V. Tuntematon' => 'textile',
 
             # Pre-sorted waste
-            'Metal' => 'presorted',
-            'Plastic' => 'presorted',
-            'Glass' => 'presorted',
-            'Electronics' => 'presorted',
+            '1V. Pilaantunut tekstiili' => 'presorted',
+            '1V. Keräykseen kuulumaton' => 'presorted',
+            '1V. Kierrätyskelvoton' => 'presorted',ö
         ];
         foreach($mat_names as $mat => $type){
 			DB::table('material_names')->insert([
@@ -35,7 +41,9 @@ class material_names_table_seeder extends Seeder{
 			    'material_type' => $type,
             ]);
 		}
-		
-		
+
+
+
+
     }
 }

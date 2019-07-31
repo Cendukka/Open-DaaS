@@ -19,7 +19,7 @@
                         var inventoryData = new google.visualization.DataTable();
                         inventoryData.addColumn('string', 'Name');
                         inventoryData.addColumn('number', 'Weight');
-                        @foreach(DB::table('material_names')->where('material_type','textile')->get() as $mat)
+                        @foreach(DB::table('material_names')->whereIn('material_type',['refined','raw waste','textile'])->get() as $mat)
 
                         inventoryData.addRow(['{{$mat->material_name}}', {{max(0, DB::table('inventory')
                                                                             ->join('microlocations','microlocation_id','inventory_microlocation_id')

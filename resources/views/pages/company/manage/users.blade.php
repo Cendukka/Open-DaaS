@@ -35,7 +35,7 @@
                             <td>{{title_case($user->user_typename)}}</td>
                             <td>{{title_case($user->last_name)}}</td>
                             <td>{{title_case($user->first_name)}}</td>
-                            <td>{{title_case($user->username)}}</td>
+                            <td>{{$user->username}}</td>
                             <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
                         </tr>
                     @endforeach

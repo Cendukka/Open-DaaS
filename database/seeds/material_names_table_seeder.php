@@ -33,7 +33,7 @@ class material_names_table_seeder extends Seeder{
             # Pre-sorted waste
             '1V. Pilaantunut tekstiili' => 'presorted',
             '1V. Keräykseen kuulumaton' => 'presorted',
-            '1V. Kierrätyskelvoton' => 'presorted',ö
+            '1V. Kierrätyskelvoton' => 'presorted',
         ];
         foreach($mat_names as $mat => $type){
 			DB::table('material_names')->insert([

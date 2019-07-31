@@ -10,8 +10,6 @@
                 <table class="table table-bordeless table-hover">
                     <thead>
                     <tr>
-
-                        <th></th>
                         <th>Tyyppi</th>
                         <th>Nimi</th>
                         <th>Osoite</th>
@@ -29,7 +27,6 @@
                     @endphp
                     @foreach ($microlocations as $ml)
                         <tr class="text-left">
-                            <td class="text-center"><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id)}}" class="btn btn-info">Valitse <span class="glyphicon glyphicon-arrow-right"></span></a></td>
                             <td>{{title_case($ml->microlocation_typename)}}</td>
                             <td>{{title_case($ml->microlocation_name)}}</td>
                             <td>{{title_case($ml->microlocation_street_address)}}</td>

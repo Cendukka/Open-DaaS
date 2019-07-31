@@ -4,14 +4,20 @@ Auth::routes();
 
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/', function () {
+    return view('pages.welcomeLogOut');
+});
+
+#contact person routes
+Route::get('contactLists',function(){
+    return view('pages.contactLists');
+})->name('ContactList');
 
 Route::group(['middleware'=>['auth']],function(){ //all user routes
 
     //Home
 	Route::get('companies/{company}/manage/microlocations/{microlocation}',                     'microlocation_controller@show');
-	//Create and edit microlocations
-	Route::get('companies/{company}/manage/microlocations/{microlocation}/create',              'microlocation_controller@create');
-	Route::get('companies/{company}/manage/microlocations/{microlocation}/edit',                'microlocation_controller@edit');
+
 	//Microlocation routes
 	Route::get('companies/{company}/manage/microlocations/{microlocation}/warehouse',           'microlocation_controller@warehouse_index');
 	Route::get('companies/{company}/manage/microlocations/{microlocation}/receipts',            'receipt_controller@index');
@@ -26,6 +32,9 @@ Route::group(['middleware'=>['auth']],function(){ //all user routes
 	Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
 
 	Route::group(['middleware'=>['manager']],function(){//Admin and manager routes
+        //Create and edit microlocations
+        Route::get('companies/{company}/manage/microlocations/{microlocation}/create',              'microlocation_controller@create');
+        Route::get('companies/{company}/manage/microlocations/{microlocation}/edit',                'microlocation_controller@edit');
 
         Route::get('companies/{company}/manage/microlocations/',               'microlocation_controller@index');
 		Route::get('companies/create', 'company_controller@create')->name('companies.create');
@@ -43,14 +52,6 @@ Route::group(['middleware'=>['auth']],function(){ //all user routes
 
 	});
 });
-Route::get('yahoo', function () {
-
-	return view('yahoo');
-});
-
-Route::get('/', function () {
-	return view('pages.welcomeLogOut');
-});
 
 Route::get('/hallinnoi/lisauusitoimipiste', function () {
 	return view('pages.lisaUusiToimipiste');
@@ -63,46 +64,19 @@ Route::get('/users', 'user_controller@index')->name('users');
 Route::get('ewc/search','ewc_controller@search');
 
 
-#contact person routes
-Route::get('contactLists',function(){
-	return view('pages.contactLists');
-})->name('ContactList');
-/* Route::get('/companies/{company}/contactPerson',function(){
-	return view('pages.contactPerson');
-});
-Route::get('/companies/{company}/manage/microlocations/{ml}/contactPerson',function(){
-	return view('pages.contactPerson');
-}); */
-//Route::get('contactlist/search');
-// Route::get('/manage', function () {
-//     return view('pages.manage');
-// });
 
 
 
 
 
-
-
-
-# Report Pages
-
-
-#Manage Pages
-// Route::get('companies/{company}/manage', 'company_controller@manage_index');
-// Route::get('/manage', function () {
-//     return view('pages.manage');
-// });
-
-
-# EWC Codes
-Route::get('ewc',                           'ewc_controller@index');
-Route::get('ewc/create',                    'ewc_controller@create');
-Route::get('ewc/{ewc_code}/edit',           'ewc_controller@edit');
-Route::post('ewc/ewc-store',                'ewc_controller@store');
-Route::post('ewc/{ewc_code}/ewc-update',    'ewc_controller@update');
-Route::post('ewc/{ewc_code}/ewc-destroy',   'ewc_controller@destroy');
-Route::get('ewc/search',                    'ewc_controller@search');
+//# EWC Codes
+//Route::get('ewc',                           'ewc_controller@index');
+//Route::get('ewc/create',                    'ewc_controller@create');
+//Route::get('ewc/{ewc_code}/edit',           'ewc_controller@edit');
+//Route::post('ewc/ewc-store',                'ewc_controller@store');
+//Route::post('ewc/{ewc_code}/ewc-update',    'ewc_controller@update');
+//Route::post('ewc/{ewc_code}/ewc-destroy',   'ewc_controller@destroy');
+//Route::get('ewc/search',                    'ewc_controller@search');
 
 
 # Materials

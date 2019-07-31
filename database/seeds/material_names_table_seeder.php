@@ -12,13 +12,12 @@ class material_names_table_seeder extends Seeder{
             '1V. Kierrätyskelpoinen' => 'refined',
             '1V Uudelleenkäyttökelpoinen' => 'refined',
 
-            # ???
-            # 2V. Selluloosakuidut
-            # 2V. Synteettiset
-            # 2V. Villa
-            # 2V. Sekoitteet
-
     	    # Refine Sorted Textiles
+            '2V. Selluloosakuidut' => 'textile',
+            '2V. Synteettiset' => 'textile',
+            '2V. Villa' => 'textile',
+            '2V. Sekoitteet' => 'textile',
+
             '3V. 100% Polyamidi' => 'textile',
             '3V. 100% Polyesteri' => 'textile',
             '3V. 100% Puuvilla' => 'textile',
@@ -33,7 +32,7 @@ class material_names_table_seeder extends Seeder{
             # Pre-sorted waste
             '1V. Pilaantunut tekstiili' => 'presorted',
             '1V. Keräykseen kuulumaton' => 'presorted',
-            '1V. Kierrätyskelvoton' => 'presorted',ö
+            '1V. Kierrätyskelvoton' => 'presorted',
         ];
         foreach($mat_names as $mat => $type){
 			DB::table('material_names')->insert([

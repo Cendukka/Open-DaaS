@@ -88,6 +88,24 @@ a, a:hover, a:focus {
 .element-width-auto {
     width: auto !important;
 }
+.element-width-60 {
+    width: 60% !important;
+}
+.element-width-50 {
+    width: 50% !important;
+}
+.element-width-40 {
+    width: 40% !important;
+}
+.element-width-30 {
+    width: 30% !important;
+}
+.element-width-20 {
+    width: 20% !important;
+}
+.element-width-10 {
+    width: 10% !important;
+}
 
 .element-float-left {
     float: left !important;

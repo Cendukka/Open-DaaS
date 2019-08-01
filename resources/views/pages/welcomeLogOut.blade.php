@@ -133,12 +133,12 @@
                                     width: 900,
                                     height: 500,
                                     hAxis: {
-                                        title: 'Time',
+                                        title: 'Aika',
                                         format: 'M/yy',
                                         gridlines: {count: 15}
                                     },
                                     vAxis: {
-                                        title: 'Weight',
+                                        title: 'Paino',
                                         gridlines: {color: 'none'},
                                         minValue: 0
                                     },

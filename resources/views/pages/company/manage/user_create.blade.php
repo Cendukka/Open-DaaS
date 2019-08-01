@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="user_type">Käyttäjä tyyppi:</label>
+                        <label class="col-sm-2 col-form-label" for="user_type">Käyttäjätyyppi:</label>
                         <div class="col-sm-10">
                             <select class="form-control element-width-auto form-field-width" name="user_type" id="user_type">
                                 <option selected="selected" hidden disabled value=""></option>
@@ -74,27 +74,4 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        function source(){
-            $("#username").val($("#first_name").val()+'.'+$("#last_name").val());
-            $("#email").val($("#first_name").val()+'.'+$("#last_name").val()+"@testdomain.fi");
-        };
-        $('#first_name').on('change',source);
-        $('#last_name').on('change',source);
-
-        function microlocation(){
-            var $userType = $("#user_type").val();
-            if($userType >= 3 && $userType != null){
-                $("#microlocation").hide();
-                $("#toimisto").show();
-            }
-            else{
-                $("#microlocation").show();
-                $("#toimisto").hide();
-            }
-        };
-        $(document).ready(microlocation);
-        $('#user_type').on('change',microlocation);
-    </script>
 @endsection

@@ -1,10 +1,10 @@
 @extends('layouts.welcomepage')
 @section('title', 'Login')
 @section('content')
-    <div id="content2" class="row">
+    <div id="content2" class=>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Sign-in</h3>
+                <h3>Kirjaudu sisään</h3>
             </div>
 
             <div class="panel-body">
@@ -12,10 +12,10 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="form-group ">
-                            <label for="username" class="col-sm-3 control-label">{{ __('username') }}</label>
+                        <div class="form-group">
+                            <label for="username" class="col-sm-3 control-label">Käyttäjätunnus</label>
                             <div class="col-sm-9">
-                                <input id="text" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                <input id="text" type="username" class="form-control element-width-40 @error('Käyttäjätunnus') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username" autofocus>
 
                                 @error('username')
                                 <span class="invalid-feedback" role="alert">
@@ -26,9 +26,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="col-sm-3 control-label">{{ __('Password') }}</label>
+                            <label for="password" class="col-sm-3 control-label">Salasana</label>
                             <div class="col-sm-9">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control element-width-40 @error('Salasana') is-invalid @enderror" name="password" autocomplete="current-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -37,17 +37,18 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-sm-9">
+                                <button type="submit" class="btn btn-primary ">
+                                    Kirjaudu sisään
+                                </button>
 
-                        <div class="col-sm-9">
-                            <button type="submit" class="btn btn-primary ">
-                                {{ __('Login') }}
-                            </button>
-
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-primary" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-primary" href="{{ route('password.request') }}">
+                                        Unohditko salasanan?
+                                    </a>
+                                @endif
+                            </div>
                         </div>
                     </form>
                 </div>

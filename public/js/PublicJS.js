@@ -23,6 +23,23 @@ $(document).ready(function () {
         }
     }
 
+    //User create page's functions
+    function microlocation(){
+        var $userType = $("#user_type").val();
+        if($userType === "2" && $userType != null){
+            $("#microlocation").hide();
+            $("#toimisto").show();
+        }
+        else{
+            $("#microlocation").show();
+            $("#toimisto").hide();
+        }
+    }
+
+    $('#first_name').on('change',source);
+    $('#last_name').on('change',source);
+    microlocation();
+    $('#user_type').on('change',microlocation);
 
 
 });
@@ -31,3 +48,11 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+function source(){
+    $("#username").val($("#first_name").val()+'.'+$("#last_name").val());
+    $("#email").val($("#first_name").val()+'.'+$("#last_name").val()+"@testdomain.fi");
+}
+
+
+
+

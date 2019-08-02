@@ -19,7 +19,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="user_type">Käyttäjätyyppi:</label>
                         <div class="col-sm-10">
-                            <select class="form-control element-width-auto form-field-width" name="user_type" id="user_type">
+                            <select class="form-control element-width-auto form-field-width" name="käyttäjätyyppi" id="user_type">
                                 <option selected="selected" hidden disabled value=""></option>
                                 @foreach(DB::table('user_types')->where('user_type_id','>','1')->get() as $type)
                                     <option value="{{$type->user_type_id}}">{{$type->user_typename}}</option>
@@ -30,7 +30,7 @@
                     <div class="form-group row" >
                         <label class="col-sm-2 col-form-label" for="microlocation">Microlokaatio:</label>
                         <div class="col-sm-10">
-                            <select class="form-control element-width-auto form-field-width" name="microlocation" id="microlocation">
+                            <select class="form-control element-width-auto form-field-width" name="toimipiste" id="microlocation">
                                 <option selected="selected" hidden disabled value=""></option>
                                 @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
                                     <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_city).', '.title_case($ml->microlocation_name)}}</option>
@@ -42,34 +42,34 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="first_name">Etunimi:</label>
                         <div class="col-sm-10">
-                            <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="first_name"/>
+                            <input id="first_name" type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="etunimi"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="last_name">Sukunimi:</label>
                         <div class="col-sm-10">
-                            <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="last_name"/>
+                            <input id="last_name" type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="sukunimi"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="username">Käyttäjätunnus:</label>
                         <div class="col-sm-10">
-                            <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="username" disabled/>
+                            <input id="username" type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="username"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="email">Sähköposti:</label>
                         <div class="col-sm-10">
-                            <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="email" disabled/>
+                            <input id="email" type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="email"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="password">Salasana:</label>
                         <div class="col-sm-10">
-                            <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="password" value="qwerty" disabled/>
+                            <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="salasana" value="qwerty" disabled/>
                         </div>
                     </div>
-                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/users')])
+                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/manage/users')])
                 </form>
             </div>
         </div>

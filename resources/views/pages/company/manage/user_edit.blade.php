@@ -63,7 +63,7 @@
                             <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="email" value="{{$user->email}}" disabled/>
                         </div>
                     </div>
-                    @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/companies/'.$company->company_id.'/users')])
+                    @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/companies/'.$company->company_id.'/manage/users')])
                 </form>
             </div>
         </div>

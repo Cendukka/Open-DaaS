@@ -29,18 +29,18 @@ class company_controller extends Controller {
 		# ADD MORE AUTHENTICATION HERE
 
 		$request->validate([
-			'name' => 'required|max:191',
-			'address'=>'required|max:191',
-			'postal_code'=> 'required|min:5|max:5|digits_between:0,9',
-			'city'=> 'required|max:50',
+			'nimi' => 'required|max:191',
+			'katuosoite'=>'required|max:191',
+			'postinumero'=> 'required|min:5|max:5|digits_between:0,9',
+			'kaupunki'=> 'required|max:50',
 		]);
 
 
 		$company = new company([
-			'company_name' => $request->get('name'),
-			'company_street_address' => $request->get('address'),
-			'company_postal_code' => $request->get('postal_code'),
-			'company_city' => $request->get('city'),
+			'company_name' => $request->get('nimi'),
+			'company_street_address' => $request->get('katuosoite'),
+			'company_postal_code' => $request->get('postinumero'),
+			'company_city' => $request->get('kaupunki'),
 		]);
 		$company->save();
 		return redirect()->action('user_controller@create', ['company' => $company]);

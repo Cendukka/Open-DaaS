@@ -30,32 +30,32 @@ class user_controller extends Controller {
 
 	public function store(Request $request, company $company) {
 		$request->validate([
-			'user_type' => 'required|integer',
-            'microlocation' => 'required_if:user_type,3',
-			'first_name'=>'required|max:50',
-			'last_name'=> 'required|max:50',
+			'käyttäjätyyppi' => 'required|integer',
+            'toimipiste' => 'required_if:user_type,==,3',
+			'etunimi'=>'required|max:50',
+			'sukunimi'=> 'required|max:50',
 			'username'=> 'required|unique:users|max:50',
 			'email'=> 'required|unique:users|max:50',
 		]);
-		
+
 		$user = new user([
-			'user_type_id' => $request->get('user_type'),
+			'user_type_id' => $request->get('käyttäjätyyppi'),
 			'user_company_id' => $company->company_id,
-			'user_microlocation_id' => ($request->get('user_type') >= 3 ? $request->get('microlocation') : NULL),
-			'last_name' => $request->get('last_name'),
-			'first_name' => $request->get('first_name'),
+			'user_microlocation_id' => ($request->get('käyttäjätyyppi') >= 3 ? $request->get('toimipiste') : NULL),
+			'last_name' => $request->get('sukunimi'),
+			'first_name' => $request->get('etunimi'),
 			'username' => $request->get('username'),
 			'email' => $request->get('email'),
 			'password' => Hash::make('qwerty'),
 		]);
 		$user->save();
 
-		if(DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->count() == 0){
-            return redirect()->action('microlocation_controller@create', ['company' => $company]);
-        }
-        else{
-            return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['User successfully created.']);
-        }
+//		if(DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->count() == 0){
+//            return redirect()->action('microlocation_controller@create', ['company' => $company]);
+//        }
+//        else{
+            return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['Käyttäjä luotu onnistuneesti']);
+//        }
 	}
 
 

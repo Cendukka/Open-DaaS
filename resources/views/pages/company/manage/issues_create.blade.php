@@ -31,9 +31,13 @@
                             @endforeach
                         </select>
                     </div>
-                    <div id="details" class="form-group">
-                        @include('includes.forms.details')
-                    </div>
+
+
+
+                        <div id="details" class="form-group">
+                            @include('includes.forms.details')
+                        </div>
+
                     <br>
                     <button id="addMat" type="button" class="btn" style="margin-bottom:10px;">Lisää materiaali</button>
                     <button id="removeMat" type="button" class="btn" style="margin-bottom:10px;">Poista materiaali</button>
@@ -74,6 +78,19 @@
                 $("#to_microlocation").hide();
             }
         }
+        function details(){
+            var $detailsType = $('#type').val();
+            if($detailsType == "2"){
+                $('#details').hide();
+                $('#addMat').hide();
+                $('#removeMat').hide();
+            }
+            else{
+                $('#details').show();
+                $('#addMat').show();
+                $('#removeMat').show();
+            }
+        }
         function clearMaterials(){
             var $ml_id = $("#from_microlocation").val();
             $.ajax({
@@ -101,7 +118,9 @@
 
         // Show/hide To Microlocation depending on issue type
         $(document).ready(toMicrolocation);
+        $(document).ready(details);
         $('#type').on('change',toMicrolocation);
+        $('#type').on('change',details);
 
         // Clear all materials if From Microlocation is changed
         $('#from_microlocation').on('change',function(){

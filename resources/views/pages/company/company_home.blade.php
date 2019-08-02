@@ -27,10 +27,10 @@
                                                                             ->where('microlocation_company_id',$company->company_id)
                                                                             ->sum('inventory_weight'))}}]);
                             @endforeach
-                        var wholeOptions = {'title': 'Organisaatio - Kierrätetyt yhteensä: {{DB::table('inventory')
+                        var wholeOptions = {'title': 'Organisaatio - Varaston sisältö yhteensä: {{DB::table('inventory')
                                                                                         ->join('material_names','material_id','inventory_material_id')
                                                                                         ->join('microlocations','microlocation_id','inventory_microlocation_id')
-                                                                                        ->where('material_type','textile')
+                                                                                        ->whereIn('material_type',['textile','refined','raw waste'])
                                                                                         ->where('microlocation_company_id',$company->company_id)
                                                                                         ->sum('inventory_weight')}} Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
                         var wholeChart = new google.visualization.PieChart(document.getElementById('pieChartCompany'));

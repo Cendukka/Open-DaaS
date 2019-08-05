@@ -33,10 +33,10 @@
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/edit'}}">Organisaation yhteystietojen muokkaus </a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations'}}">Toimipisteet</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/communities'}}">Kunnat</a></li>
+                    <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
                 </ul>
                 <a href="#recordSubmenu" data-toggle="collapse" aria-expanded="false">Materiaalikirjaukset</a>
 

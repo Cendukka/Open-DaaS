@@ -14,7 +14,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>Aikaleima</th>
+                        <th>Päivämäärä</th>
                         <th>Microlokaatio</th>
                         <th>Paino (Kg)</th>
                         <th>Materiaali</th>

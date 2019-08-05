@@ -9,7 +9,7 @@
             <div class="panel-body" style="text-align:left;">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 @foreach (DB::table('material_names')->distinct('material_type')->pluck('material_type') as $type)
-                    <table class="table table-bordered table-hover" style="max-width: 300px;">
+                    <table class="table table-borderless table-hover" style="max-width: 500px;">
                         <thead>
                         <tr><th style="text-align: left">{{title_case($type)}}</th></tr>
                         </thead>

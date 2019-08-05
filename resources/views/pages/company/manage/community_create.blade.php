@@ -15,11 +15,11 @@
                                 <label for="city">Kunta:</label>
                             </div>
                             <div class="col-sm-10">
-                                <input type="text" maxlength="50" class="form-control" name="city" value="">
+                                <input type="text" maxlength="50" class="form-control element-width-auto" name="city" value="">
                             </div>
                         </div>
                         <div class="form-group row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/manage/communities')])
                         </div>
                         </div>

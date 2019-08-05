@@ -6,6 +6,7 @@ $(document).ready(function () {
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
         if (!sidebarCollapseBool){
             sidebarCollapseBool = true;
+            $('#sidebar, #content').toggleClass('stay');
         }else{
             sidebarCollapseBool = false;
         }

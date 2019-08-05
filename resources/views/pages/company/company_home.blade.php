@@ -8,6 +8,7 @@
             </div>
             <div class="panel-body">
                 <h4>Mahdollisesti yleisnäkymää organisaation toiminnasta tjms.</h4>
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <div class="row">
                     <div id="pieChartCompany"></div>
                 </div>

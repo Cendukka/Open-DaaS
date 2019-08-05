@@ -2,7 +2,7 @@
 @section ('title', 'Raportit: Varasto')
 @section('content')
     <div id="content2" class="row">
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="margin: 0 !important;">
             <div class="panel-heading">
                 <h3>Varasto</h3>
             </div>

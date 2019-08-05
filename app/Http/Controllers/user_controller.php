@@ -85,7 +85,7 @@ class user_controller extends Controller {
 		$userNew->first_name = $request->get('first_name');
 		$userNew->save();
 
-		return redirect()->action('user_controller@index',['company' => $company])->withErrors(['User successfully updated.']);
+		return redirect()->action('user_controller@index',['company' => $company])->withErrors(['Käyttäjä päivitetty onnistuneesti.']);
 	}
 
 

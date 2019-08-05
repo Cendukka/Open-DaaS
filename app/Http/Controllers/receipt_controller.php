@@ -58,7 +58,7 @@ class receipt_controller extends Controller {
 		$receipt->save();
 
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
-		return redirect()->action('receipt_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
+		return redirect()->action('receipt_controller@index', ['company' => $company])->withErrors(['Saapuneet-kirjaus luotu onnistuneesti.']);
 	}
 
 
@@ -109,7 +109,7 @@ class receipt_controller extends Controller {
 		$receiptNew->save();
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
 
-		return redirect()->action('receipt_controller@index',['company' => $company])->withErrors(['Receipt successfully updated.']);
+		return redirect()->action('receipt_controller@index',['company' => $company])->withErrors(['Saapuneet-kirjaus päivitetty onnistuneesti.']);
 	}
 
 

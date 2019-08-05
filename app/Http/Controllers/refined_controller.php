@@ -76,7 +76,7 @@ class refined_controller extends Controller {
 
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, ($pre_sorting ? $receipt_entity->pre_sorting_material_id : $receipt_entity->receipt_material_id), -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
-        return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Refined-Sorting successfully created.']);
+        return redirect()->action('refined_controller@index', ['company' => $company])->withErrors(['Hienolajittelukirjaus luotu onnistuneesti.']);
 	}
 
 
@@ -156,7 +156,7 @@ class refined_controller extends Controller {
         # Add new weights to the inventory
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, ($receipt ? $receipt_entity_new->receipt_material_id: $receipt_entity_new->pre_sorting_material_id ), -$weight);
         app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
-        return redirect()->action('refined_controller@index',['company' => $company])->withErrors(['Refined-Sorting successfully updated.']);
+        return redirect()->action('refined_controller@index',['company' => $company])->withErrors(['Hienolajittelukirjaus päivitetty onnistuneesti.']);
 	}
 
 

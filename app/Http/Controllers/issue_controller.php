@@ -89,7 +89,7 @@ class issue_controller extends Controller {
         }
 
 
-        return redirect()->action('issue_controller@index', ['company' => $company])->withErrors(['Receipt successfully created.']);
+        return redirect()->action('issue_controller@index', ['company' => $company])->withErrors(['Lähetys-kirjaus luotu onnistuneesti']);
 	}
 
 

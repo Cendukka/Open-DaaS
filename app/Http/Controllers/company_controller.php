@@ -81,7 +81,7 @@ class company_controller extends Controller {
 		$companyNew->company_city = $request->get('city');
 		$companyNew->save();
 
-		return redirect()->action('company_controller@manage_index',['company' => $company])->withErrors(['Company successfully updated.']);
+		return redirect()->action('company_controller@manage_index',['company' => $company])->withErrors(['Organisaatio päivitetty']);
 
 	}
 

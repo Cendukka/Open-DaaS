@@ -56,7 +56,7 @@ class pre_controller extends Controller {
         if(DB::table('material_names')->where('material_type', '=', 'refined')->get()->contains('material_id', $material)){
             app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, $weight);
         }
-        return redirect()->action('pre_controller@index', ['company' => $company])->withErrors(['Pre-sorting successfully created.']);
+        return redirect()->action('pre_controller@index', ['company' => $company])->withErrors(['Esilajittelu kirjaus luotu onnistuneesti.']);
     }
 
 
@@ -108,7 +108,7 @@ class pre_controller extends Controller {
         if(DB::table('material_names')->where('material_type', '=', 'refined')->get()->contains('material_id', $material)){
             app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation_new, $material, $weight);
         }
-        return redirect()->action('pre_controller@index',['company' => $company])->withErrors(['Pre-sorting successfully updated.']);
+        return redirect()->action('pre_controller@index',['company' => $company])->withErrors(['Esilajittelu kirjaus päivitetty onnistuneesti.']);
 	}
 
 

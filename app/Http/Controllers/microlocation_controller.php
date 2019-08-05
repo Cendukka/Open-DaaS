@@ -50,7 +50,7 @@ class microlocation_controller extends Controller {
 
         $ml->save();
 
-        return redirect()->action('microlocation_controller@index', ['company' => $company])->withErrors(['Microlocation successfully created.']);
+        return redirect()->action('microlocation_controller@index', ['company' => $company])->withErrors(['Toimipiste luotu onnistuneesti.']);
     }
 
 
@@ -85,7 +85,7 @@ class microlocation_controller extends Controller {
         $microlocationNew->microlocation_city = $request->get('city');
         $microlocationNew->save();
 
-        return redirect()->action('microlocation_controller@index', ['company' => $company])->withErrors(['Microlocation successfully updated.']);
+        return redirect()->action('microlocation_controller@index', ['company' => $company])->withErrors(['Toimipiste päivitetty onnistuneesti.']);
     }
 
 

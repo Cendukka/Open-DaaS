@@ -26,14 +26,14 @@ class community_controller extends Controller {
 		$request->validate([
 			'city'=> 'required|max:50',
 		]);
-		
-		
+
+
 		$communityNew = new community([
 			'community_company_id' => $company->company_id,
 			'community_city' => $request->get('city'),
 		]);
 		$communityNew->save();
-		return redirect()->action('community_controller@index', ['company' => $company])->withErrors(['Community successfully created.']);
+		return redirect()->action('community_controller@index', ['company' => $company])->withErrors(['Kunta rekisteröity onnistuneesti']);
 	}
 
 
@@ -53,13 +53,13 @@ class community_controller extends Controller {
 		$request->validate([
 			'city'=> 'required|max:50',
 		]);
-		
+
 		$communityNew = community::find($community->community_id);
 
 		$communityNew->community_city = $request->get('city');
 		$communityNew->save();
-		
-		return redirect()->action('community_controller@index',['company' => $company])->withErrors(['Community successfully updated.']);
+
+		return redirect()->action('community_controller@index',['company' => $company])->withErrors(['Kunnan tiedot päivitetty onnistuneesti.']);
 	}
 
 

@@ -33,7 +33,9 @@
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Hallinnoi</a>
 
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="{{'/companies/'.$company->company_id.'/edit'}}">Organisaation yhteystietojen muokkaus </a></li>
+                    @if(Auth::user()->user_type_id <= 2)
+                        <li><a href="{{'/companies/'.$company->company_id.'/edit'}}">Organisaation yhteystietojen muokkaus </a></li>
+                    @endif
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/microlocations'}}">Toimipisteet</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/communities'}}">Kunnat</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/users'}}">Käyttäjät</a></li>
@@ -76,7 +78,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         @if(!(Auth::user()->user_type_id=='1'))
-                            <a href="/companies/{{$company->company_id}}/" class="btn btn-info btn-lg logout">Koordinaattori Etusivu</a>
+                            <a href="/companies/{{$company->company_id}}/" class="btn btn-info btn-lg logout">Organisaatio Etusivu</a>
                         @else
                             <a href="/home" class="btn btn-info btn-lg logout">Admin Etusivu</a>
                         @endif

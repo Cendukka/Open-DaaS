@@ -10,7 +10,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        
+
                         <th>Microlokaatio</th>
                         <th>Tyyppi</th>
                         <th>Sukunimi</th>
@@ -36,13 +36,17 @@
                             <td>{{title_case($user->last_name)}}</td>
                             <td>{{title_case($user->first_name)}}</td>
                             <td>{{$user->username}}</td>
-                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                            @if(Auth::user()->user_type_id <= 2)
+                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                            @endif
                         </tr>
                     @endforeach
                 </table>
-                <form method="get" action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Lisää käyttäjä</button>
-                </form>
+                @if(Auth::user()->user_type_id <= 2)
+                    <form method="get" action="{{url(url()->current().'/create')}}">
+                        <button type="submit" class="btn btn-secondary">+ Lisää käyttäjä</button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

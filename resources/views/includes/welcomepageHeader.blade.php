@@ -61,10 +61,8 @@
                             @if(Auth::user()->user_type_id == 1)
 
                                 <a href="/home" class="btn btn-info btn-lg logout">Hallinta</a>
-                            @elseif(Auth::user()->user_type_id == 2)
+                            @elseif(Auth::user()->user_type_id >= 2)
                                 <a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout">Hallinta</a>
-                            @elseif(Auth::user()->user_type_id == 3)
-                                <a href="/companies/{{Auth::user()->user_company_id}}/manage/microlocations/{{Auth::user()->user_microlocation_id}}" class="btn btn-info btn-lg logout">Hallinta</a>
                             @endif
 
                             <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a>

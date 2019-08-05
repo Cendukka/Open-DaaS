@@ -32,14 +32,18 @@
                             <td>{{title_case($ml->microlocation_street_address)}}</td>
                             <td>{{title_case($ml->microlocation_postal_code)}}</td>
                             <td>{{title_case($ml->microlocation_city)}}</td>
-                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                            @if(Auth::user()->user_type_id <= 2)
+                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                @if(Auth::user()->user_type_id <= 2)
                     <form action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Lisää microlokaatio</button>
-                </form>
+                        <button type="submit" class="btn btn-secondary">+ Lisää microlokaatio</button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

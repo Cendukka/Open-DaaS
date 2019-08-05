@@ -183,7 +183,7 @@ class receipt_controller extends Controller {
                         ($value->from_supplier ? ['Toimittaja',$value->from_supplier] :
                             ['Sisäinen',$value->from_microlocation_name]));
                     $output.='<tr>'.
-                        '<td>'.date("Y-m-d",strtotime($value->receipt_date)).'</td>'.
+                        '<td>'.date("d-m-Y",strtotime($value->receipt_date)).'</td>'.
                         '<td>'.title_case($from[0]).'</td>'.
                         '<td>'.title_case(mb_strimwidth($from[1],0,30,'...')).'</td>'.
                         '<td>'.title_case($value->to_microlocation_name).'</td>'.

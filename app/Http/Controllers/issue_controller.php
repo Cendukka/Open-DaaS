@@ -227,7 +227,7 @@ class issue_controller extends Controller {
 			if($result){
 				foreach ($result as $key => $value){
 					$output.='<tr>'.
-                        '<td>'.date("Y-m-d",strtotime($value->issue_date)).'</td>'.
+                        '<td>'.date("d-m-Y",strtotime($value->issue_date)).'</td>'.
                         '<td>'.title_case($value->from_microlocation).'</td>'.
                         '<td>'.$value->issue_typename.'</td>'.
 						'<td>'.title_case($value->to_microlocation).'</td>'.

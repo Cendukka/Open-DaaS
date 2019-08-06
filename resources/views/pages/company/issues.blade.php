@@ -26,6 +26,7 @@
                 <form action="{{url('companies/'.$company->company_id.'/manage/issues/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Lisää lähetys</button>
                 </form>
+                <br>
                 <button id="export" type="button" class="btn">Export Data</button>
             </div>
         </div>

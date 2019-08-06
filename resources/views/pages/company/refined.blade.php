@@ -27,7 +27,7 @@
                 <form action="{{url('companies/'.$company->company_id.'/manage/refined/create')}}">
                     <button type="submit" class="btn btn-secondary">+ Luo hienolajittelu kirjaus</button>
                 </form>
-
+                <br>
                 <button id="export" type="button" class="btn">Export Data</button>
             </div>
         </div>

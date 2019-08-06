@@ -20,7 +20,7 @@ class CheckAdmin
         //dd($userTypes);
         // DB::table('user_types')->pluck('user_typename');
         if(!$userTypes=='1'){
-            return redirect('/');
+            return redirect(url()->previous());
         }
         return $next($request);
     

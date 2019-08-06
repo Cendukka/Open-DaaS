@@ -9,20 +9,9 @@ use Illuminate\Database\Seeder;
 class users_table_seeder extends Seeder {
     public function run() {
 		$faker = Faker::create('fi_FI');
-		DB::table('users')->insert([
-			'user_type_id' => 1,
-			'user_company_id' => NULL,
-			'user_microlocation_id' => NULL,
-			'last_name' => 'Zitting',
-			'first_name' => 'Jaakko',
-			'username' => 'Admin.Jaakko',
-			'email' => 'jaakko.zitting@lsjh.fi',
-			'password' => Hash::make('qwerty')
-        ]);
-
 		$companies = DB::table('company')->where('company_id','!=',1)->get();
 
-		# Adds Manager to all the companies
+		# Adds a Manager to all the companies
 		foreach($companies as $company) {
             $microlocations = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
 

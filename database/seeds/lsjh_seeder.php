@@ -159,6 +159,19 @@ class lsjh_seeder extends Seeder {
             'company_city' => 'Turku'
         ]);
 
+        # Admin User
+        DB::table('users')->insert([
+            'user_type_id' => 1,
+            'user_company_id' => NULL,
+            'user_microlocation_id' => NULL,
+            'last_name' => 'Zitting',
+            'first_name' => 'Jaakko',
+            'username' => 'Admin.Jaakko',
+            'email' => 'jaakko.zitting@lsjh.fi',
+            'password' => Hash::make('qwerty')
+        ]);
+
+        # Microlocations
         foreach ($LSJH_Locations as $ml) {
             DB::table('microlocations')->insert([
                 'microlocation_company_id' => 1,
@@ -170,6 +183,7 @@ class lsjh_seeder extends Seeder {
             ]);
         }
 
+        # LSJH Users
         foreach ($LSJH_Users as $user) {
             DB::table('users')->insert([
                 'user_type_id' => $user['user_type_id'],

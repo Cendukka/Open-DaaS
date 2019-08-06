@@ -70,8 +70,8 @@
                         <i class="glyphicon glyphicon-menu-hamburger"></i>
                     </button>
                 </div>
-                <div class="col-sm-2">
-                    <h4>Käyttäjä: {{ Auth::user()->first_name }}</h4>
+                <div class="col-sm-3">
+                    <h4>Käyttäjä: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h4>
                 </div>
 
                 <div class="navbar-collapse" id="bs-example-navbar-collapse-1">

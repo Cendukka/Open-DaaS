@@ -97,26 +97,26 @@ class lsjh_seeder extends Seeder {
             [
                 'user_type_id' => 2,
                 'user_microlocation_id' => NULL,
-                'last_name' => 'Kokkonen',
-                'first_name' => 'Marko',
-                'username' => 'marko.kokkonen',
-                'email' => 'marko.kokkonen@lsjh.fi',
-            ],
-            [
-                'user_type_id' => 2,
-                'user_microlocation_id' => NULL,
-                'last_name' => 'Mäkiö',
-                'first_name' => 'Inka',
-                'username' => 'inka.makio',
-                'email' => 'inka.makio@turkuamk.fi',
+                'last_name' => 'Zitting',
+                'first_name' => 'Jaakko',
+                'username' => 'jaakko.zitting',
+                'email' => 'jaakko.zitting@lsjh.fi',
             ],
             [
                 'user_type_id' => 3,
                 'user_microlocation_id' => 1,
-                'last_name' => 'Salmi',
-                'first_name' => 'Sallamari',
-                'username' => 'sallamari.salmi',
-                'email' => 'sallamari.salmi@lsjh.fi',
+                'last_name' => 'Laaksonen',
+                'first_name' => 'Juho',
+                'username' => 'juho.laaksonen',
+                'email' => 'juho.laaksonen@edu.turkuamk.fi',
+            ],
+            [
+                'user_type_id' => 3,
+                'user_microlocation_id' => 2,
+                'last_name' => 'Lappalainen',
+                'first_name' => 'Aku',
+                'username' => 'aku.lappalainen',
+                'email' => 'aku.lappalainen@edu.turkuamk.fi',
             ],
             [
                 'user_type_id' => 3,
@@ -152,11 +152,76 @@ class lsjh_seeder extends Seeder {
             ],
         ];
 
+        $Luode_Locations = [
+            [
+                'type_id' => '3', # Vastaanotto ja lajittelu:
+                'name' => 'Luode Poistotekstiilihalli',
+                'address' => 'Kilpisjärventie 9',
+                'postal' => '99490',
+                'city' => 'Kilpisjärvi',
+            ],
+            [
+                'type_id' => '3',
+                'name' => 'Luodeojan Poistotekstiilihalli',
+                'address' => 'Iitontie 7',
+                'postal' => '99490',
+                'city' => 'Iitto',
+            ],
+            [
+                'type_id' => '1',# Vain vastaanotto:
+                'name' => 'Luodemäen jätekeskus',
+                'address' => 'Ropinsalmentie 541',
+                'postal' => '99490',
+                'city' => 'Ropinsalmi',
+            ],
+
+            [
+                'type_id' => '1',
+                'name' => 'Luodelan jätekeskus',
+                'address' => 'Paraisentie 173',
+                'postal' => '99490',
+                'city' => 'Parainen',
+            ],
+        ];
+
+        $Luode_Users = [
+            [
+                'user_type_id' => 2,
+                'user_microlocation_id' => NULL,
+                'last_name' => 'Kaivonen',
+                'first_name' => 'Susanna',
+                'username' => 'Susanna.Kaivonen',
+                'email' => 'Susanna.Kaivonen@lsjh.fi',
+            ],
+            [
+                'user_type_id' => 3,
+                'user_microlocation_id' => 13,
+                'last_name' => 'Rantanen',
+                'first_name' => 'Sallamari',
+                'username' => 'sallamari.rantanen',
+                'email' => 'sallamari.rantanen@turkuamk.fi',
+            ],
+            [
+                'user_type_id' => 3,
+                'user_microlocation_id' => 14,
+                'last_name' => 'Laine',
+                'first_name' => 'Mika',
+                'username' => 'mika.laine',
+                'email' => 'mika.laine@rauma.fi',
+            ],
+        ];
+
         DB::table('company')->insert([
             'company_name' => 'Lounais-Suomen Jätehuolto Oy',
             'company_street_address' => 'Kuormakatu 17',
             'company_postal_code' => '20380',
             'company_city' => 'Turku'
+        ]);
+        DB::table('company')->insert([
+            'company_name' => 'Luode-Suomen Jätehuolto Oy',
+            'company_street_address' => 'Käsivarrentie 17',
+            'company_postal_code' => '99490',
+            'company_city' => 'Kilpisjärvi'
         ]);
 
         # Admin User
@@ -164,10 +229,10 @@ class lsjh_seeder extends Seeder {
             'user_type_id' => 1,
             'user_company_id' => NULL,
             'user_microlocation_id' => NULL,
-            'last_name' => 'Zitting',
-            'first_name' => 'Jaakko',
+            'last_name' => 'Admin',
+            'first_name' => 'Admin',
             'username' => 'Admin.Jaakko',
-            'email' => 'jaakko.zitting@lsjh.fi',
+            'email' => 'admin.jaakko@lsjh.fi',
             'password' => Hash::make('qwerty')
         ]);
 
@@ -193,6 +258,31 @@ class lsjh_seeder extends Seeder {
                 'first_name' => $user['first_name'],
                 'username' => $user['username'],
                 'email' => $user['email'],
+                'password' => Hash::make('qwerty')
+            ]);
+        }
+        # Luode Microlocations
+        foreach ($Luode_Locations as $lml) {
+            DB::table('microlocations')->insert([
+                'microlocation_company_id' => 2,
+                'microlocation_type_id' => $lml['type_id'],
+                'microlocation_name' => $lml['name'],
+                'microlocation_street_address' => $lml['address'],
+                'microlocation_postal_code' => $lml['postal'],
+                'microlocation_city' => $lml['city']
+            ]);
+        }
+
+        # Luode Users
+        foreach ($Luode_Users as $luser) {
+            DB::table('users')->insert([
+                'user_type_id' => $luser['user_type_id'],
+                'user_company_id' => 2,
+                'user_microlocation_id' => $luser['user_microlocation_id'],
+                'last_name' => $luser['last_name'],
+                'first_name' => $luser['first_name'],
+                'username' => $luser['username'],
+                'email' => $luser['email'],
                 'password' => Hash::make('qwerty')
             ]);
         }

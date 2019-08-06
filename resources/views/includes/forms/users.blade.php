@@ -10,7 +10,7 @@
             </select>
         @else
             @php
-            if($selected_user_id){
+            if(isset($selected_user_id)){
                 $user = DB::table('users')->where('user_id',$selected_user_id)->first();
             }
             else{

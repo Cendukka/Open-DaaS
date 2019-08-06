@@ -13,16 +13,18 @@ class inventory_issue_table_seeder extends Seeder
     public function run()
 	{
 		$faker = Faker::create('fi_FI');
-		$microlocations_amount = DB::table('microlocations')->count();
+		$microlocations = DB::table('microlocations')->get();
 		$type_amount = DB::table('issue_types')->count();
-		$users_amount = DB::table('users')->count();
+		$users = DB::table('users')->get();
 	
-		foreach (range(1,$microlocations_amount*3) as $index) {
+		foreach (range(1,$microlocations->count()*3) as $index) {
+		    $ml = $microlocations->random();
+		    $type = rand(1,$type_amount);
 			DB::table('inventory_issue')->insert([
-				'issue_from_microlocation_id' => rand(1,$microlocations_amount),
-				'issue_to_microlocation_id' => (rand(0,1) ? rand(1,$microlocations_amount) : NULL),
-				'issue_type_id' => rand(1,$type_amount),
-				'issue_user_id' => rand(1,$users_amount),
+				'issue_from_microlocation_id' => $ml->microlocation_id,
+				'issue_to_microlocation_id' => ($type==1 ? $microlocations->filter(function ($value, $key) use ($ml) {return $value->microlocation_company_id == $ml->microlocation_company_id;})->random()->microlocation_id : NULL),
+				'issue_type_id' => $type,
+				'issue_user_id' => $users->filter(function ($value, $key) use ($ml) {return $value->user_company_id == $ml->microlocation_company_id;})->random()->user_id,
 				'issue_date' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = null),
 			]);
 		}

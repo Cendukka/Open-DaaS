@@ -34,9 +34,9 @@ class issue_controller extends Controller {
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'type' => 'required',
-            'from_microlocation' => 'integer|integer',
+            'from_microlocation' => 'required|integer',
             #'to_microlocation' => 'required|integer',
-            'material' => ['required',
+            'material' => ['required_unless:type,2',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
                         if(!is_numeric($v)) {
@@ -45,7 +45,7 @@ class issue_controller extends Controller {
                     }
                 },
             ],
-            'ewc_code' => ['required',
+            'ewc_code' => ['required_unless:type,2',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
                         if(!is_numeric($v)) {
@@ -76,16 +76,19 @@ class issue_controller extends Controller {
         ]);
         $issue->save();
 
-        for ($i = 0; $i <= count($request->ewc_code)-1; $i++) {
+        #dd($request);
+        for ($i = 0; $i <= count($request->weight)-1; $i++) {
             $material = $request->material[$i];
             $weight = $request->weight[$i];
             DB::table('inventory_issue_details')->insert([
                 'detail_issue_id' => $issue->issue_id,
-                'detail_material_id' => $request->material[$i],
-                'detail_ewc_code' => $request->ewc_code[$i],
+                'detail_material_id' => isset($request->material[$i]) ? $request->material[$i] : NULL,
+                'detail_ewc_code' => isset($request->ewc_code[$i]) ? $request->ewc_code[$i] : NULL,
                 'detail_weight' => $request->weight[$i],
             ]);
-            app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, -$weight);
+            if($request->get('type') != 2){
+                app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, -$weight);
+            }
         }
 
 
@@ -110,7 +113,7 @@ class issue_controller extends Controller {
             'user' => 'required|integer',
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'type' => 'required',
-            'from_microlocation' => 'integer|integer',
+            'from_microlocation' => 'required|integer',
             'to_microlocation' => 'required|integer',
             'material' => ['required',
                 function ($attribute, $value, $fail) {

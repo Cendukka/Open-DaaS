@@ -24,13 +24,16 @@
                         </div>
                     </div>
                     @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id'=> $issue->issue_from_microlocation_id,'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:'])
-                    <div id="to_microlocation" class="form-group">
-                        <label for="to_microlocation">Mihin microlokaatioon:</label>
-                        <select class="form-control element-width-auto" name="to_microlocation">
-                            @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $issue->issue_to_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
+                    <div class="form-group row" id="to_microlocation">
+                        <label class="col-sm-2 col-form-label" for="to_microlocation">Mihin microlokaatioon</label>
+                        <div class="col-sm-10">
+                            <select class="form-control element-width-auto form-field-width" name="to_microlocation" id="to_microlocation">
+                                <option selected="selected" hidden disabled value=""></option>
+                                @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
+                                    <option value="{{$ml->microlocation_id}}" {{($ml->microlocation_id == $issue->issue_to_microlocation_id ? 'selected="selected"' : '')}}>{{title_case($ml->microlocation_name)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div id="details" class="form-group">
                         @foreach (DB::table('inventory_issue_details')->where('detail_issue_id','=',$issue->issue_id)->get() as $detail)
@@ -51,69 +54,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript">
-        function addMat(){
-            $.ajax({
-                type: 'GET',
-                url : "/companies/{{$company->company_id}}/manage/issues/new_details",
-                success : function (data) {
-                    $("#details").append(data);
-                }
-            });
-        }
-        $('#removeMat').on('click',(function(){
-            if($("#details").children("div").length > 1){
-                $("#details").children("div:last").remove();
-                $("#details").children("br:last").remove();
-            }
-        }));
-        function toMicrolocation(){
-            var $issueType = $("#type").val();
-            if($issueType == 1){ // Transport
-                $("#to_microlocation").show();
-            }
-            else{
-                $("#to_microlocation").hide();
-            }
-        }
-        function clearMaterials(){
-            var $ml_id = $("#from_microlocation").val();
-            $.ajax({
-                type: "get",
-                url: '{{URL::to('/companies/'.$company->company_id.'/manage/issues/inventory')}}',
-                data: {'ml_id':$ml_id},
-                success:function(data){
-                    selects = $(".material-select").children('option');
-                    selects.each(function(k,v){
-                        if($.inArray($(this).val(),Object.keys(data)) >= 0){
-                            $(this).prop("disabled", false).prop("hidden", false);
-                            $(this).text($(this).text().substring(0,$(this).text().indexOf("["))+' ['+data[$(this).val()]+']');
-                        }
-                        else{
-                            $(this).prop("disabled", true).prop("hidden", true);
-                        }
-                    });
-                }
-            })
-        }
-        $('#addMat').on('click',function(){
-            addMat();
-            clearMaterials();
-        });
-
-        // Show/hide To Microlocation depending on issue type
-        $(document).ready(toMicrolocation);
-        $('#type').on('change',toMicrolocation);
-
-        // Clear all materials if From Microlocation is changed
-        $('#from_microlocation').on('change',function(){
-            if($("#details").children("div").length == 0){
-                addMat();
-            }
-        });
-        $(document).ready(clearMaterials);
-        $('#from_microlocation').on('change',clearMaterials);
-    </script>
+    @include('includes.issue_form_scripts')
     <script type="text/javascript">
         $('.timepicker').datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss'

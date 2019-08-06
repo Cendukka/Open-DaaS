@@ -64,10 +64,10 @@ a, a:hover, a:focus {
     margin: 40px 0;
 }
 
-.col-md-4 {
+/*.col-md-4 {
     padding: 0%;
     margin-bottom: 3%;
-}
+}*/
 
 .panel-body td {
     word-wrap: break-word;
@@ -333,9 +333,9 @@ a.logout:hover {
         display: inline-block;
     }
 
-    .col-md-4 {
+/*    .col-md-4 {
         margin-bottom: 5%
-    }
+    }*/
 }
 
 /* ---------------------------------------------------

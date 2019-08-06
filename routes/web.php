@@ -20,6 +20,45 @@ Route::get('companies/{company}/issues/export',     'excel_controller@issue');
 #Routes for logged in users
 # - Users
 Route::group(['middleware'=>['auth']],function(){
+    //Admin and manager routes
+    Route::group(['middleware'=>['manager']],function(){
+        #Create and edit microlocations
+        Route::get('companies/{company}/manage/microlocations/create',                                  'microlocation_controller@create');
+        Route::get('companies/{company}/manage/microlocations/{microlocation}/edit',                    'microlocation_controller@edit');
+        #Edit company
+        Route::get('companies/{company}/edit',                                                          'company_controller@edit')->name('companies.edit');
+        #Create and edit communities
+        Route::post('companies/{company}/manage/communities/community-store',                           'community_controller@store');
+        Route::post('companies/{company}/manage/communities/{community}/community-update',              'community_controller@update');
+        Route::get('companies/{company}/manage/communities/create',                                     'community_controller@create');
+        Route::get('companies/{company}/manage/communities/{community}/edit',                           'community_controller@edit');
+        #Edit and create users
+        Route::get('companies/{company}/manage/users/create',                                           'user_controller@create');
+        Route::get('companies/{company}/manage/users/{user}/edit',                                      'user_controller@edit');
+        Route::post('companies/{company}/manage/users/users-store',                                     'user_controller@store');
+        Route::post('companies/{company}/manage/users/{user}/users-update',                             'user_controller@update');
+
+        //Admin routes
+        Route::group(['middleware'=>['admin']],function(){
+
+            #Manage Pages
+            Route::get('companies/{company}/manage', 'company_controller@manage_index');
+            #Admin home
+            Route::get('/home', 'HomeController@index')->name('pages.home');
+            #Materials
+            Route::resource('materials',                                                            'materials_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+            Route::post('materials/materials-store',                                                'materials_controller@store');
+            Route::post('materials/{material}/materials-update',                                    'materials_controller@update');
+            Route::post('materials/{material}/materials-destroy',                                   'materials_controller@destroy');
+            # Companies
+//                Route::resource('companies',                                                          'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
+            Route::get('companies',                                                                 'company_controller@index')->name('companies.index');
+            Route::get('companies/create',                                                          'company_controller@create')->name('companies_create');
+            Route::post('companies/company-store',                                                  'company_controller@store');
+            Route::post('companies/{company}/company-update',                                       'company_controller@update');
+        });
+
+    });
     //Home
 //	Route::get('companies/{company}/manage/microlocations/{microlocation}',                     'microlocation_controller@show');
 
@@ -34,7 +73,6 @@ Route::group(['middleware'=>['auth']],function(){
 //	Route::get('companies/{company}/manage/microlocations/{microlocation}/refined',             'refined_controller@index');
 //	Route::get('companies/{company}/manage/microlocations/{microlocation}/refined/search',      'refined_controller@search');
 
-	Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
     //Route::resource('companies/{company}/manage/microlocations',                                  'microlocation_controller', ['only' => ['index', 'show', 'create', 'edit']]);
     Route::post('companies/{company}/manage/microlocations/microlocations-store',                   'microlocation_controller@store');
     Route::post('companies/{company}/manage/microlocations/{microlocation}/microlocations-update',  'microlocation_controller@update');
@@ -100,45 +138,7 @@ Route::group(['middleware'=>['auth']],function(){
         return view('includes.forms.details');
     });
 
-    //Admin and manager routes
-	Route::group(['middleware'=>['manager']],function(){
-        #Create and edit microlocations
-        Route::get('companies/{company}/manage/microlocations/create',                                  'microlocation_controller@create');
-        Route::get('companies/{company}/manage/microlocations/{microlocation}/edit',                    'microlocation_controller@edit');
-        #Edit company
-        Route::get('companies/{company}/edit',                                                          'company_controller@edit')->name('companies.edit');
-        #Create and edit communities
-        Route::post('companies/{company}/manage/communities/community-store',                           'community_controller@store');
-        Route::post('companies/{company}/manage/communities/{community}/community-update',              'community_controller@update');
-        Route::get('companies/{company}/manage/communities/create',                                     'community_controller@create');
-        Route::get('companies/{company}/manage/communities/{community}/edit',                           'community_controller@edit');
-        #Edit and create users
-        Route::get('companies/{company}/manage/users/create',                                           'user_controller@create');
-        Route::get('companies/{company}/manage/users/{user}/edit',                                      'user_controller@edit');
-        Route::post('companies/{company}/manage/users/users-store',                                     'user_controller@store');
-        Route::post('companies/{company}/manage/users/{user}/users-update',                             'user_controller@update');
 
-            //Admin routes
-			Route::group(['middleware'=>['admin']],function(){
-
-				#Manage Pages
-				Route::get('companies/{company}/manage', 'company_controller@manage_index');
-                #Admin home
-				Route::get('/home', 'HomeController@index')->name('pages.home');
-				#Materials
-                Route::resource('materials',                                                            'materials_controller', ['only' => ['index', 'show', 'create', 'edit']]);
-                Route::post('materials/materials-store',                                                'materials_controller@store');
-                Route::post('materials/{material}/materials-update',                                    'materials_controller@update');
-                Route::post('materials/{material}/materials-destroy',                                   'materials_controller@destroy');
-                # Companies
-//                Route::resource('companies',                                                          'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
-                Route::get('companies',                                                                 'company_controller@index')->name('companies.index');
-                Route::get('companies/create',                                                          'company_controller@create')->name('companies_create');
-                Route::post('companies/company-store',                                                  'company_controller@store');
-                Route::post('companies/{company}/company-update',                                       'company_controller@update');
-			});
-
-	});
 });
 // Route::get('ewc','ewc_controller@index');
 //Route::get('ewc/search','ewc_controller@search');

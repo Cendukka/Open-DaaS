@@ -77,7 +77,9 @@ a, a:hover, a:focus {
 
 ::-webkit-scrollbar-track
 {
-    background: rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
 }
 
 ::-webkit-scrollbar-thumb
@@ -157,7 +159,7 @@ a, a:hover, a:focus {
     background: #c5c8cc;
     color: #535353;
     transition: all 0.3s;
-    overflow: scroll;
+    overflow: auto;
 }
 
 #sidebar.active {

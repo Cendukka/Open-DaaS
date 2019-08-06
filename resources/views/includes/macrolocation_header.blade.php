@@ -66,19 +66,19 @@
             <div class="container-fluid">
 
                 <div class="navbar-header">
-
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
-                        <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Piilota tai näytä sivupalkki</span>
+                        <i class="glyphicon glyphicon-menu-hamburger"></i>
                     </button>
-                    <span><h4>Käyttäjä: {{ Auth::user()->first_name }}</h4></span>
+                </div>
+                <div class="col-sm-2">
+                    <h4>Käyttäjä: {{ Auth::user()->first_name }}</h4>
                 </div>
 
                 <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
                         @if(!(Auth::user()->user_type_id=='1'))
-                            <a href="/companies/{{$company->company_id}}/" class="btn btn-info btn-lg logout">Organisaatio Etusivu</a>
+                            <a href="/companies/{{$company->company_id}}/" class="btn btn-info btn-lg logout">Organisaation Etusivu</a>
                         @else
                             <a href="/home" class="btn btn-info btn-lg logout">Admin Etusivu</a>
                         @endif

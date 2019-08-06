@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-    use App\company;
-    use App\microlocation;
-    use Illuminate\Http\Request;
-    use Illuminate\Support\Facades\DB;
-    use App\pre_sorting;
+use App\company;
+use App\microlocation;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\pre_sorting;
+use Auth;
+use Illuminate\Validation\Rule;
 
 class pre_controller extends Controller {
 
@@ -28,7 +30,7 @@ class pre_controller extends Controller {
 
     public function store(Request $request, company $company) {
         $request->validate([
-            'user' => 'required|integer',
+            'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'receipt' => 'required|integer',
             'material' => 'required|integer',
@@ -43,7 +45,7 @@ class pre_controller extends Controller {
         $for_issue = $request->get('for_issue') ? 1 : 0;
 
         $pre = new pre_sorting([
-            'pre_sorting_user_id' => $request->get('user'),
+            'pre_sorting_user_id' => $request->get('user') ?: Auth::user()->user_id,
             'pre_sorting_date' => $request->get('datetime'),
             'pre_sorting_receipt_id' => $receipt,
             'pre_sorting_material_id' => $material,
@@ -72,7 +74,7 @@ class pre_controller extends Controller {
 
     public function update(Request $request, company $company, pre_sorting $pre) {
         $request->validate([
-            'user' => 'required|integer',
+            'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'receipt' => 'required|integer',
             'material' => 'required|integer',
@@ -85,7 +87,7 @@ class pre_controller extends Controller {
         $for_issue = $request->get('for_issue') ? 1 : 0;
 
         $preNew = pre_sorting::find($pre->pre_sorting_id);
-        $preNew->pre_sorting_user_id = $request->get('user');
+        $preNew->pre_sorting_user_id = $request->get('user') ?: Auth::user()->user_id;
         $preNew->pre_sorting_date = $request->get('datetime');
         $preNew->pre_sorting_receipt_id = $receipt;
         $preNew->pre_sorting_material_id = $material;
@@ -155,7 +157,7 @@ class pre_controller extends Controller {
 			$output="";
 			$result = app('App\Http\Controllers\pre_controller')
                 ->query($request,$company,$microlocation)
-                ->select('pre_sorting_date','microlocation_name','material_name','pre_sorting_weight','username','pre_sorting_id','pre_sorting.is_for_issue')
+                ->select('pre_sorting_date','microlocation_name','microlocation_id','material_name','pre_sorting_weight','username','pre_sorting_id','pre_sorting.is_for_issue')
                 ->get();
 			if($result){
 				foreach ($result as $key => $value){
@@ -166,7 +168,7 @@ class pre_controller extends Controller {
 						'<td>'.$value->pre_sorting_weight.'</td>'.
 						'<td>'.$value->username.'</td>'.
                         '<td>'.($value->is_for_issue ? 'Kyllä' : 'Ei').'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>'.
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->microlocation_id ? '<td><a href="'.url('companies/'.$company->company_id.'/manage/pre/'.$value->pre_sorting_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>' : '').
 						'</tr>';
 				}
 				$output.='<tr>'.

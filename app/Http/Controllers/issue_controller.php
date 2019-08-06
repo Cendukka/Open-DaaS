@@ -7,6 +7,8 @@ use App\microlocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\inventory_issue;
+use Auth;
+use Illuminate\Validation\Rule;
 
 class issue_controller extends Controller {
 	public function __construct()
@@ -31,7 +33,7 @@ class issue_controller extends Controller {
 	public function store(Request $request, company $company) {
         # ADD MORE AUTHENTICATION HERE
         $request->validate([
-            'user' => 'required|integer',
+            'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'type' => 'required',
             'from_microlocation' => 'required|integer',
@@ -68,7 +70,7 @@ class issue_controller extends Controller {
         $microlocation = $request->get('from_microlocation');
 
         $issue = new inventory_issue([
-            'issue_user_id' => $request->get('user'),
+            'issue_user_id' => $request->get('user') ?: Auth::user()->user_id,
             'issue_date' => $request->get('datetime'),
             'issue_type_id' => $request->get('type'),
             'issue_from_microlocation_id' => $microlocation,
@@ -110,7 +112,7 @@ class issue_controller extends Controller {
         # ADD MORE AUTHENTICATION HERE
 
         $request->validate([
-            'user' => 'required|integer',
+            'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'type' => 'required',
             'from_microlocation' => 'required|integer',
@@ -147,7 +149,7 @@ class issue_controller extends Controller {
         $microlocation = $request->get('from_microlocation');
 
         $issueNew = inventory_issue::find($issue->issue_id);
-        $issueNew->issue_user_id = $request->get('user');
+        $issueNew->issue_user_id = $request->get('user') ?: Auth::user()->user_id;
         $issueNew->issue_date = $request->get('datetime');
         $issueNew->issue_type_id = $request->get('type');
         $issueNew->issue_from_microlocation_id = $microlocation;
@@ -225,7 +227,7 @@ class issue_controller extends Controller {
 			$output="";
             $result = app('App\Http\Controllers\issue_controller')
                 ->query($request,$company,$microlocation)
-                ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','issue_id','sumweight')
+                ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','from_microlocations.microlocation_id as from_microlocation_id','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','issue_id','sumweight')
                 ->get();
 			if($result){
 				foreach ($result as $key => $value){
@@ -236,7 +238,7 @@ class issue_controller extends Controller {
 						'<td>'.title_case($value->to_microlocation).'</td>'.
 						'<td>'.$value->username.'</td>'.
 						'<td>'.$value->sumweight.'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'"><i class="glyphicon glyphicon-pencil"></i></a></td>'.
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->from_microlocation_id ? '<td><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'"><i class="glyphicon glyphicon-pencil"></i></a></td>' : '').
 						'</tr>';
 				}
                 $output.='<tr>'.

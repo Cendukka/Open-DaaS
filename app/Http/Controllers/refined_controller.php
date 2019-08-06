@@ -7,6 +7,8 @@ use App\microlocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\refined_sorting;
+use Auth;
+use Illuminate\Validation\Rule;
 
 class refined_controller extends Controller {
 	public function __construct()
@@ -32,7 +34,7 @@ class refined_controller extends Controller {
         # ADD MORE AUTHENTICATION HERE
 
         $request->validate([
-            'user' => 'required|integer',
+            'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
@@ -64,7 +66,7 @@ class refined_controller extends Controller {
         $weight = $request->get('weight');
 
         $refined = new refined_sorting([
-            'refined_user_id' => $request->get('user'),
+            'refined_user_id' => $request->get('user') ?: Auth::user()->user_id,
             'refined_date' => $request->get('datetime'),
             'refined_receipt_id' => $receipt,
             'pre_sorting_id' => $pre_sorting,
@@ -95,7 +97,7 @@ class refined_controller extends Controller {
 
 
         $request->validate([
-            'user' => 'required|integer',
+            'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
@@ -115,7 +117,7 @@ class refined_controller extends Controller {
         $weight = $request->get('weight');
 
         $refinedNew = refined_sorting::find($refined->refined_id);
-        $refinedNew->refined_user_id = $request->get('user');
+        $refinedNew->refined_user_id = $request->get('user') ?: Auth::user()->user_id;
         $refinedNew->refined_date = $request->get('datetime');
         $refinedNew->refined_receipt_id = $receipt;
         $refinedNew->pre_sorting_id = $pre_sorting;
@@ -207,7 +209,7 @@ class refined_controller extends Controller {
 			$output="";
             $result = app('App\Http\Controllers\refined_controller')
                 ->query($request,$company,$microlocation)
-                ->select(['refined_date','microlocation_name','material_name','refined_weight','username','refined_id','refined_receipt_id',])
+                ->select(['refined_date','microlocation_name','microlocation_id','material_name','refined_weight','username','refined_id','refined_receipt_id',])
                 ->get();
 			if($result){
 				foreach ($result as $key => $value){
@@ -217,7 +219,7 @@ class refined_controller extends Controller {
 						'<td>'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'"> <span class="glyphicon glyphicon-pencil"></span></a></td>'.
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->microlocation_id ? '<td><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'"> <span class="glyphicon glyphicon-pencil"></span></a></td>' : '').
 						'</tr>';
 				}
 				$output.='<tr>'.

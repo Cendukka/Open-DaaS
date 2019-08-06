@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\inventory_receipt;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Auth;
 
 class receipt_controller extends Controller {
 
@@ -24,7 +26,7 @@ class receipt_controller extends Controller {
 
 	public function store(Request $request, company $company) {
 		$request->validate([
-			'user' => 'required|integer',
+			'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
 			'datetime' => 'required|date_format:Y-m-d',
             'material' => 'required|integer',
 			'source' => 'required',
@@ -43,7 +45,7 @@ class receipt_controller extends Controller {
         $for_issue = $request->get('for_issue') ? 1 : 0;
 
 		$receipt = new inventory_receipt([
-            'receipt_user_id' => $request->get('user'),
+            'receipt_user_id' => $request->get('user') ?: Auth::user()->user_id,
             'receipt_date' => $request->get('datetime'),
 			'receipt_material_id' => $material,
 			'from_community_id' => $request->get('from_community'),
@@ -74,7 +76,7 @@ class receipt_controller extends Controller {
 
 	public function update(Request $request, company $company, inventory_receipt $receipt) {
         $request->validate([
-            'user' => 'required|integer',
+            'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
             'datetime' => 'required|date_format:Y-m-d',
             'material' => 'required|integer',
             'source' => 'required',
@@ -93,7 +95,7 @@ class receipt_controller extends Controller {
         $for_issue = $request->get('for_issue') ? 1 : 0;
 
 		$receiptNew = inventory_receipt::find($receipt->receipt_id);
-		$receiptNew->receipt_user_id = $request->get('user');
+		$receiptNew->receipt_user_id = $request->get('user') ?: Auth::user()->user_id;
 		$receiptNew->receipt_date = $request->get('datetime');
 		$receiptNew->receipt_material_id = $material;
 		$receiptNew->from_community_id = $request->get('from_community');
@@ -175,7 +177,7 @@ class receipt_controller extends Controller {
             $output="";
             $result = app('App\Http\Controllers\receipt_controller')
                 ->query($request,$company,$microlocation)
-                ->select('receipt_date','from_community_id','receipt_weight','distance_km','receipt_ewc_code','receipt_id','material_name','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','from_supplier','community.community_city','is_for_issue')
+                ->select('receipt_date','from_community_id','receipt_weight','distance_km','receipt_ewc_code','receipt_id','material_name','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','to_microlocations.microlocation_id as to_microlocation_id','from_supplier','community.community_city','is_for_issue')
                 ->get();
             if($result){
                 foreach ($result as $key => $value){
@@ -192,7 +194,7 @@ class receipt_controller extends Controller {
                         '<td>'.$value->distance_km.'</td>'.
                         '<td>'.$value->receipt_ewc_code.'</td>'.
                         '<td>'.($value->is_for_issue ? 'Kyllä' : 'Ei').'</td>'.
-                        '<td><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>'.
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->to_microlocation_id ? '<td><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>' : '').
                         '</tr>';
                 }
                 $output.='<tr>'.

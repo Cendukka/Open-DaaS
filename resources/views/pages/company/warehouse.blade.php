@@ -32,8 +32,8 @@
                                     @foreach (DB::table('inventory')->where('inventory_microlocation_id', $ml->microlocation_id)->join('material_names', 'inventory_material_id','=','material_id')->where('material_type', '!=', 'presorted')->orderBy('material_type','ASC')->orderBy('material_name','ASC')->get() as $material)
 {{--                                        @if($material->inventory_weight != 0)--}}
                                             <tr>
-                                                <td>{{$material->material_name}}</td>
-                                                <td>{{$material->inventory_weight}}</td>
+                                                <td style="text-align:left;{{$material->inventory_weight < 0 ? ' color:red;' : ($material->inventory_weight == 0 ? ' color:lightgray;' : '')}}">{{$material->material_name}}</td>
+                                                <td style="text-align:left;{{$material->inventory_weight < 0 ? ' color:red;' : ($material->inventory_weight == 0 ? ' color:lightgray;' : '')}}">{{$material->inventory_weight}}</td>
                                             </tr>
 {{--                                        @endif--}}
                                     @endforeach

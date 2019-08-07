@@ -33,7 +33,7 @@
                                                                                         ->join('microlocations','microlocation_id','inventory_microlocation_id')
                                                                                         ->whereIn('material_type',['textile','refined','raw waste'])
                                                                                         ->where('microlocation_company_id',$company->company_id)
-                                                                                        ->sum('inventory_weight')}} Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
+                                                                                        ->sum('inventory_weight')}} Kg','is3D': true, 'width': 700, 'height': 500, 'backgroundColor': 'transparent'};
                         var wholeChart = new google.visualization.PieChart(document.getElementById('pieChartCompany'));
                         wholeChart.draw(inventoryData, wholeOptions);
                     }

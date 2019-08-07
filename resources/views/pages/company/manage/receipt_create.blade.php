@@ -24,7 +24,7 @@
                     </div>
                     @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:'])
                     <div class="form-group row" id="from_community"></div>
-                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'to_microlocation', 'name' => 'Microlokaatioon:'])
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => Auth::user()->user_microlocation_id, 'tag' => 'to_microlocation', 'name' => 'Microlokaatioon:', 'disabled' => Auth::user()->user_type_id > 2])
                     @include('includes.forms.materials', ['materials' => DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get()])
                     @include('includes.forms.weight')
                     @include('includes.forms.distance')

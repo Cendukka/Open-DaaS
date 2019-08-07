@@ -26,7 +26,7 @@
                             ->first()
                             ->microlocation_id;
                     @endphp
-                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => $selected_microlocation_id, 'tag' => 'microlocation', 'name' => 'Microlokaatio:'])
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => $selected_microlocation_id, 'tag' => 'microlocation', 'name' => 'Microlokaatio:', 'disabled' => Auth::user()->user_type_id > 2])
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="receipt">Saapunut kirjaus:</label>
                         <div class="col-sm-10">

@@ -12,7 +12,7 @@
                     @csrf
                     @include('includes.forms.datetime',     ['time' => date('Y-m-d H:i:s')])
                     @include('includes.forms.users',        ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get()])
-                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'microlocation', 'name' => 'Microlokaatio:'])
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => Auth::user()->user_microlocation_id, 'tag' => 'microlocation', 'name' => 'Microlokaatio:', 'disabled' => Auth::user()->user_type_id > 2])
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="origin">Tekstiilin alkuperä:</label>
                         <div class="col-sm-10">

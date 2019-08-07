@@ -23,7 +23,7 @@
                             </select>
                         </div>
                     </div>
-                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(),'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:'])
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => Auth::user()->user_microlocation_id,'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:', 'disabled' => Auth::user()->user_type_id > 2])
                     <div class="form-group row" id="to_microlocation">
                         <label class="col-sm-2 col-form-label" for="to_microlocation">Mihin microlokaatioon</label>
                         <div class="col-sm-10">

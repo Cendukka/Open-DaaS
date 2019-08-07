@@ -23,6 +23,7 @@
                         ],[
                         'name' => 'Ekokymppi',
                         'phone' => '+358 08 636 611',
+                        'email' => 'info@ekokymppi.fi,',
                         'www' => 'www.ekokymppi.fi',
                         'address' => 'Viestitie 2, 87700',
                         'city' => 'Kajaani',
@@ -39,11 +40,12 @@
                 <div class="col-md-4">
                     <div class="panel panel-default" style="margin: 0 0 20px 0">
                         <div class="panel-heading" style="background: #d1dec2;">{{$company['name']}}</div>
-                        <div class="panel-body" style="background: #EEEEEE; height:110px">
+                        <div class="panel-body" style="background: #EEEEEE; height:130px">
                             Tel: {{$company['phone']}},<br>
                             @if(isset($company['email']) && $company['email'] != '')
-                                {{$company['email']}}<br>
+                                {{$company['email']}}
                             @endif
+                            <br>
                             <a href="{{$company['www']}}" target="_blank" style="color: blue" class="textMark">{{$company['www']}}</a><br>
                             {{$company['address']}},<br>
                             {{$company['city']}}<br>

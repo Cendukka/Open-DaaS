@@ -32,7 +32,7 @@
                     <button type="submit" class="btn btn-secondary">+ Lisää saapunut lähetys</button>
                 </form>
                 <br>
-                <button id="export" type="button" class="btn">Export Data</button>
+                <button id="export" type="button" class="btn">Export exceliin</button>
             </div>
         </div>
     </div>

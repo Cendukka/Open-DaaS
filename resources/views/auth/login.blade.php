@@ -12,30 +12,26 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="form-group">
-                            <label for="username" class="col-sm-3 control-label">Käyttäjätunnus</label>
-                            <div class="col-sm-9">
-                                <input id="text" type="username" class="form-control element-width-40 @error('Käyttäjätunnus') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username" autofocus>
-
-                                @error('username')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <div class="form-group row">
+                                <label for="username" class="col-sm-3 control-label">Käyttäjätunnus</label>
+                            <div class="col-sm-3">
+                                <input id="text" type="username" class="form-control @error('Käyttäjätunnus') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username" autofocus>
                             </div>
+                            @error('username')
+                            <span class="invalid-feedback element-float-left" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="password" class="col-sm-3 control-label">Salasana</label>
-                            <div class="col-sm-9">
-                                <input id="password" type="password" class="form-control element-width-40 @error('Salasana') is-invalid @enderror" name="password" autocomplete="current-password">
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
+                            <div class="col-sm-3">
+                                <input id="password" type="password" class="form-control @error('Salasana') is-invalid @enderror" name="password" autocomplete="current-password">
+                            </div>
+                            @error('password')
+                            <span class="invalid-feedback element-float-left" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <div class="col-sm-9">

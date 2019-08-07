@@ -21,7 +21,9 @@
                 <h4>Open DaaS</h4>
                 <br>
                 <h5>Organisaatio: {{$company->company_name}}</h5>
-                <h6>Mikrolokaatio: {{\App\microlocation::find(Auth::user()->user_microlocation_id)->microlocation_name}}</h6>
+                @if(isset(Auth::user()->user_microlocation_id))
+                    <h6>Mikrolokaatio: {{\App\microlocation::find(Auth::user()->user_microlocation_id)->microlocation_name}}</h6>
+                @endif
             </a>
         </div>
         <ul class="list-unstyled components">

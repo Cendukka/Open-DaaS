@@ -113,10 +113,10 @@ class lsjh_seeder extends Seeder {
             [
                 'user_type_id' => 3,
                 'user_microlocation_id' => 2,
-                'last_name' => 'Lappalainen',
-                'first_name' => 'Aku',
-                'username' => 'aku.lappalainen',
-                'email' => 'aku.lappalainen@edu.turkuamk.fi',
+                'last_name' => 'Wirtanen',
+                'first_name' => 'Miikka',
+                'username' => 'miikka.wirtanen',
+                'email' => 'miikka.wirtanen@edu.turkuamk.fi',
             ],
             [
                 'user_type_id' => 3,

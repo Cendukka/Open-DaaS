@@ -23,7 +23,7 @@ class issue_export implements ShouldAutoSize, FromCollection, WithHeadings {
         $request = $this->request;
 
         $data = app('App\Http\Controllers\issue_controller')
-            ->query($company, $request)
+            ->query($request,$company)
             ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','sumweight')
             ->get();
 

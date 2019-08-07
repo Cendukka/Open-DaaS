@@ -23,7 +23,7 @@ class pre_export implements ShouldAutoSize, FromCollection, WithHeadings {
         $request = $this->request;
 
         $data = app('App\Http\Controllers\pre_controller')
-            ->query($company, $request)
+            ->query($request,$company)
             ->select('pre_sorting_date','microlocation_name','material_name','pre_sorting_weight','username')
             ->get();
 

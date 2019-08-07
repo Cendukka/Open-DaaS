@@ -23,7 +23,7 @@ class refined_export implements ShouldAutoSize, FromCollection, WithHeadings {
         $request = $this->request;
 
         $data = app('App\Http\Controllers\refined_controller')
-            ->query($company, $request)
+            ->query($request,$company)
             ->select('refined_date','microlocation_name','material_name','refined_weight','username')
             ->get();
 

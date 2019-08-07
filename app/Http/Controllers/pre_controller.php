@@ -119,7 +119,7 @@ class pre_controller extends Controller {
 	}
 
 
-    public function query(Request $request, company $company, microlocation $microlocation) {
+    public function query(Request $request, company $company) {
         $microlocation_ids = [];
         foreach (DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->get() as $ml){
             array_push($microlocation_ids, $ml->microlocation_id);
@@ -128,9 +128,6 @@ class pre_controller extends Controller {
             ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
             ->when(($request->from && $request->to), function($query) use ($request){
                 $query->whereBetween('pre_sorting_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
-            })
-            ->when($microlocation->exists, function($query) use ($microlocation){
-                $query->where('receipt_to_microlocation_id', $microlocation->microlocation_id);
             })
             ->where(function ($query) use ($request){
                 foreach(explode(' ',$request->search) as $word){
@@ -156,7 +153,7 @@ class pre_controller extends Controller {
 		if($request->ajax()){
 			$output="";
 			$result = app('App\Http\Controllers\pre_controller')
-                ->query($request,$company,$microlocation)
+                ->query($request,$company)
                 ->select('pre_sorting_date','microlocation_name','microlocation_id','material_name','pre_sorting_weight','username','pre_sorting_id','pre_sorting.is_for_issue')
                 ->get();
 			if($result){

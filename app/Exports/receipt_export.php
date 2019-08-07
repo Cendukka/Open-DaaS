@@ -23,7 +23,7 @@ class receipt_export implements ShouldAutoSize, FromCollection, WithHeadings {
         $request = $this->request;
 
         $data = app('App\Http\Controllers\receipt_controller')
-            ->query($company,$request)
+            ->query($request,$company)
             ->select('receipt_date','to_microlocations.microlocation_name as to_microlocation_name','from_microlocations.microlocation_name as from_microlocation_name','community_city','from_supplier','material_name','receipt_weight','distance_km','receipt_ewc_code')
             ->get();
 

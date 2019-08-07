@@ -120,7 +120,7 @@ class receipt_controller extends Controller {
 	}
 
 
-    public function query(Request $request, company $company, microlocation $microlocation) {
+    public function query(Request $request, company $company) {
         $microlocation_ids = [];
         foreach (DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->get() as $ml){
             array_push($microlocation_ids, $ml->microlocation_id);
@@ -129,9 +129,6 @@ class receipt_controller extends Controller {
             ->whereIn('receipt_to_microlocation_id', $microlocation_ids)
             ->when(($request->from && $request->to), function($query) use ($request){
                 $query->whereBetween('receipt_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
-            })
-            ->when($microlocation->exists, function($query) use ($microlocation){
-                $query->where('receipt_to_microlocation_id', $microlocation->microlocation_id);
             })
             ->where(function ($query) use ($request){
                 foreach(explode(' ',$request->search) as $word){
@@ -176,7 +173,7 @@ class receipt_controller extends Controller {
         if($request->ajax()){
             $output="";
             $result = app('App\Http\Controllers\receipt_controller')
-                ->query($request,$company,$microlocation)
+                ->query($request,$company)
                 ->select('receipt_date','from_community_id','receipt_weight','distance_km','receipt_ewc_code','receipt_id','material_name','from_microlocations.microlocation_name as from_microlocation_name','to_microlocations.microlocation_name as to_microlocation_name','to_microlocations.microlocation_id as to_microlocation_id','from_supplier','community.community_city','is_for_issue')
                 ->get();
             if($result){

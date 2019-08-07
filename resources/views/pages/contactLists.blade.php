@@ -12,36 +12,45 @@
             <br>
             <div class="container-flex">
                 @php
-                    # Stuff here # TODO
+                    $companies = collect([
+                        [
+                        'name' => 'Botniarosk',
+                        'phone' => '+358 40 594 5121',
+                        'email' => '',
+                        'www' => 'www.botniarosk.fi',
+                        'address' => 'Raatihuoneenkatu 1, 64101',
+                        'city' => 'Kristiinankaupunki',
+                        ],[
+                        'name' => 'Ekokymppi',
+                        'phone' => '+358 08 636 611',
+                        'www' => 'www.ekokymppi.fi',
+                        'address' => 'Viestitie 2, 87700',
+                        'city' => 'Kajaani',
+                        ],[
+                        'name' => 'Ab Ekorosk Oy',
+                        'phone' => '(06) 781 4500',
+                        'www' => 'www.ekorosk.fi',
+                        'address' => 'Launisaarentie 90, 68600,',
+                        'city' => 'Pietasaari',
+                        ],
+                    ]);
                 @endphp
+                @foreach($companies->all() as $company)
                 <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Botniarosk</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: +358 40 594 5121,
-                            <a href="https://www.botniarosk.fi/" target="_blank" style="color: blue" class="textMark">www.botniarosk.fi,</a>
-                            Raatihuoneenkatu 164101 Kristiinankaupunki
+                    <div class="panel panel-default" style="margin: 0 0 20px 0">
+                        <div class="panel-heading" style="background: #d1dec2;">{{$company['name']}}</div>
+                        <div class="panel-body" style="background: #EEEEEE; height:110px">
+                            Tel: {{$company['phone']}},<br>
+                            @if(isset($company['email']) && $company['email'] != '')
+                                {{$company['email']}}<br>
+                            @endif
+                            <a href="{{$company['www']}}" target="_blank" style="color: blue" class="textMark">{{$company['www']}}</a><br>
+                            {{$company['address']}},<br>
+                            {{$company['city']}}<br>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background:#d1dec2">Ekokymppi</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: +358 08 636 611,
-                            info@ekokymppi.fi,
-                            <a href="https://www.ekokymppi.fi/" target="_blank" style="color: blue" class="textMark">www.ekokymppi.fi,</a>
-                            Viestitie 2, 87700 Kajaani
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Ab Ekorosk Oy</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: (06) 781 4500,
-                            <a href="https://www.ekorosk.fi/" target="_blank" style="color:blue" class="textMark">www.ekorosk.fi,</a>
-                            Launisaarentie 9068600 PIETARSAARI
-                        </div>
-                    </div>
-                </div>
+                @endforeach
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="background: #d1dec2 ">Etelä-Karjalan Jätehuolto Oy</div>

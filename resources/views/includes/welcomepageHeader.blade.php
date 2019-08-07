@@ -116,8 +116,7 @@
 
                 <div class="navbar-header">
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
-                        <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Piilota ja näytä sivupalkki</span>
+                        <i class="glyphicon glyphicon-menu-hamburger"></i>
                     </button>
                 </div>
 

@@ -70,7 +70,7 @@ a, a:hover, a:focus {
 }*/
 
 ::-webkit-scrollbar {
-    width: 10px;    /* for vertical scrollbars */
+    width: 12px;    /* for vertical scrollbars */
     height: 0px;    /* for horizontal scrollbars */
 }
 
@@ -388,7 +388,7 @@ table {
 
 a.textMark:hover, a.textMark:active {
     color: #2373F6;
-    font-size: 140%;
+    font-size: 110%;
     text-decoration: underline;
 }
 
@@ -397,8 +397,6 @@ a.textMark:hover, a.textMark:active {
     border-top: 0px;
     border-left: 0px;
     margin: 0 15px 0 15px;
-
-
 }
 
 .center {

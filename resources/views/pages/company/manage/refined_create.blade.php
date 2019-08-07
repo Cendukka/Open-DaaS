@@ -8,7 +8,7 @@
             </div>
             <div class="panel-body">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
-                <form method="post" action="refined-store" class="form-text-align-padd">
+                <form method="post" action="refined-store" class="form-text-align-padd" onsubmit="return confirm('Hienolajittelu-kirjaus luodaan. Haluatko jatkaa?');">
                     @csrf
                     @include('includes.forms.datetime',     ['time' => date('Y-m-d H:i:s')])
                     @include('includes.forms.users',        ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get()])

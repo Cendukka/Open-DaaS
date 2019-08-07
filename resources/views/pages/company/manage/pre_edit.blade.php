@@ -8,7 +8,7 @@
             </div>
             <div class="panel-body">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
-                <form method="post" action="pre-update" class="form-text-align-padd">
+                <form method="post" action="pre-update" class="form-text-align-padd" onsubmit="return confirm('Esilajittelu-kirjausta muokataan. Haluatko jatkaa?');">
                     @csrf
                     @include('includes.forms.created_modified', ['created_at' => $pre->created_at, 'updated_at' => $pre->updated_at])
                     @include('includes.forms.datetime',     ['time' => $pre->pre_sorting_date])

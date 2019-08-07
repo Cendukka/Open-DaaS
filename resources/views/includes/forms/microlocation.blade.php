@@ -1,6 +1,6 @@
 <div class="form-group row" id="from">
     <label class="col-sm-2 col-form-label" for="{{$tag}}">{{$name}}</label>
-    <div class="col-sm-10" {{isset($disabled) ? 'disabled hidden' : ''}}>
+    <div class="col-sm-10" {{isset($disabled) && $disabled ? 'disabled hidden' : ''}}>
         <select class="form-control element-width-auto form-field-width" name="{{$tag}}" id="{{$tag}}">
             <option selected="selected" hidden disabled value=""></option>
             @foreach ($microlocations as $ml)

@@ -7,30 +7,31 @@
             </div>
             <div class="panel-body">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
-
-
                     @php
                         $communities = DB::table('community')
                             ->where('community_company_id','=',$company->company_id)
                             ->select('community_id','community_city')
                             ->get();
                     @endphp
-                    @foreach ($communities as $com)
-                    <div class="form-group row ">
-                        <div class="col-sm-4"></div>
-                        <div class="col-sm-3 text-left">
-                            <label >{{title_case($com->community_city)}}</label>
+                    @if(strlen($communities) <= 2)
+                        <div class="form-group row">
+                            <label>No communities found</label>
                         </div>
-                        @if(Auth::user()->user_type_id <= 2)
-                            <div class="col-sm-1 text-left">
-                                <a href="{{url('/companies/'.$company->company_id.'/manage/communities/'.$com->community_id.'/edit')}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                    @else
+                        @foreach ($communities as $com)
+                        <div class="form-group row ">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-3 text-left">
+                                <h3>{{title_case($com->community_city)}}</h3>
                             </div>
-                        @endif
-                    </div>
-
-
-
-                    @endforeach
+                            @if(Auth::user()->user_type_id <= 2)
+                                <div class="col-sm-1 text-left">
+                                    <a href="{{url('/companies/'.$company->company_id.'/manage/communities/'.$com->community_id.'/edit')}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                </div>
+                            @endif
+                        </div>
+                        @endforeach
+                    @endif
 
                 @if(Auth::user()->user_type_id <= 2)
                     <form action="{{url(url()->current().'/create')}}">

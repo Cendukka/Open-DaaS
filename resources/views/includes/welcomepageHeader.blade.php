@@ -4,7 +4,8 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/"><h4>TEHA TEkstiilikierrätyksen HAllintajärjestelmä</h4></a>
+{{--            <a href="/"><h4>TEHA TEkstiilikierrätyksen HAllintajärjestelmä</h4></a>--}}
+            <a href="/"><h4>Open DaaS</h4></a>
         </div>
 
         <div class="finland-map">

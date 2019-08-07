@@ -4,26 +4,26 @@
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron">
-                <p>Lorem ipsum olen jotain, koitan ainakin. Täyttöä diviin, sekä turhanpäiväistä tekstiä käyttäen</p>
+                <p></p>
             </div>
 
 
-                    <div class="calender">
-                        @php
-                        //Set default dates
-                        $tdyDate = date("Y-m");
+{{--                    <div class="calender">--}}
+{{--                        @php--}}
+{{--                        //Set default dates--}}
+{{--                        $tdyDate = date("Y-m");--}}
 
-                        //Set max and min for the date input
-                        $maxDateFrom = date("Y-m");
-                        $minDate = date("Y-m", strtotime(date("Y")."-01"));
+{{--                        //Set max and min for the date input--}}
+{{--                        $maxDateFrom = date("Y-m");--}}
+{{--                        $minDate = date("Y-m", strtotime(date("Y")."-01"));--}}
 
 
-                        @endphp
-                        <p>From: <input type="month" name="" value="{{$tdyDate}}" min="{{$minDate}}" max="{{$tdyDate}}">
-                            To: <input type="month" name="" value="{{$tdyDate}}" min="{{$minDate}}" max="{{$tdyDate}}">
-                        </p>
+{{--                        @endphp--}}
+{{--                        <p>From: <input type="month" name="" value="{{$tdyDate}}" min="{{$minDate}}" max="{{$tdyDate}}">--}}
+{{--                            To: <input type="month" name="" value="{{$tdyDate}}" min="{{$minDate}}" max="{{$tdyDate}}">--}}
+{{--                        </p>--}}
 
-                    </div>
+{{--                    </div>--}}
                     <br>
                     <div class="row">
                         <div id="piechartWhole" class="col-md-4"></div>

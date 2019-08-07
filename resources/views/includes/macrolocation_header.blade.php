@@ -17,7 +17,8 @@
 
         <div class="sidebar-header">
             <a href="/companies/{{$company->company_id}}">
-                <h4>TEKIHA TEkstiiliKIerrätyksen  HAllintajärjestelmä</h4>
+{{--                <h4>TEKIHA TEkstiiliKIerrätyksen  HAllintajärjestelmä</h4>--}}
+                <h4>Open DaaS</h4>
                 <br>
                 <h5>Organisaatio: {{$company->company_name}}</h5>
             </a>

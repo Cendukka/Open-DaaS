@@ -8,7 +8,7 @@
             @endforeach
         </select>
     </div>
-    @if(isset($dissabled))
+    @if(isset($disabled) && $disabled)
         <div class="col-sm-10">
             {{DB::table('microlocations')->where('microlocation_id',Auth::user()->user_microlocation_id)->first()->microlocation_name}}
         </div>

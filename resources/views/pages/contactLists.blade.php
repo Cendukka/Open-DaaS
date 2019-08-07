@@ -5,9 +5,6 @@
         <div class="col-md-12">
             <div class="panel-heading">
                 <h3>contact lists</h3>
-                <div class="form-group">
-                    <input type="text" class="form-controller" id="search" name="search">
-                </div>
             </div>
             <br>
             <div class="container-flex">
@@ -30,165 +27,192 @@
                         ],[
                         'name' => 'Ab Ekorosk Oy',
                         'phone' => '(06) 781 4500',
+                        'email' => '',
                         'www' => 'www.ekorosk.fi',
                         'address' => 'Launisaarentie 90, 68600,',
                         'city' => 'Pietasaari',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Etelä-Karjalan Jätehuolto Oy',
+                        'phone' => '+358 10 841 1818,',
+                        'email' => '',
+                        'www' => 'www.ekjh.fi',
+                        'address' => 'Hulkonmäentie 130, 54190',
+                        'city' => 'Konnunsuo',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'HSY',
+                        'phone' => '+358 09 1561 2110',
+                        'email' => '',
+                        'www' => 'www.hsy.fi',
+                        'address' => 'Ilmalantori 1, 00240',
+                        'city' => 'Helsinki',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Jätekukko',
+                        'phone' => '+358 17 368 0152',
+                        'email' => 'asiakaspalvelu@jatekukko.fi',
+                        'www' => 'www.jatekukko.fi',
+                        'address' => 'Microkatu 1, 70150',
+                        'city' => 'Kuopio',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Kiertokaari',
+                        'phone' => '(08) 5584 0010',
+                        'email' => 'jatehuolto@kiertokaari.fi',
+                        'www' => 'kiertokaari.fi',
+                        'address' => 'Ruskonniityntie 10, 90620',
+                        'city' => 'Oulu',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Kiertokapula',
+                        'phone' => '+358 075 753 0000',
+                        'email' => '',
+                        'www' => 'www.kiertokapula.fi',
+                        'address' => 'Vankanlähde 7, 13100',
+                        'city' => 'Hämeenlinna',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Kymenlaakson Jäte Oy',
+                        'phone' => '(05) 744 3400',
+                        'email' => 'asiakaspalvelu@kymenlaaksonjate.fi',
+                        'www' => 'www.kymenlaaksonjate.fi',
+                        'address' => 'Ekokaari 50, 46860',
+                        'city' => 'Keltakangas',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Lakeuden Etappi',
+                        'phone' => '(06) 421 4900',
+                        'email' => '',
+                        'www' => 'www.etappi.com',
+                        'address' => 'Laskunmäentie 15, 60760',
+                        'city' => 'Pojanluoma',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Lapin jätehuolto kuntayhtymä',
+                        'phone' => '040 3511 771',
+                        'email' => 'asiakaspalvelu@lapeco.fi',
+                        'www' => 'www.lapeco.fi',
+                        'address' => 'Piiskuntie 5 A, 99800',
+                        'city' => 'Inari',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Loimi-Hämeen Jätehuolto',
+                        'phone' => '03 424 2600',
+                        'email' => 'neuvonta@lhj.fi',
+                        'www' => 'www.lhj.fi',
+                        'address' => 'Kiimassuontie 127, 30420',
+                        'city' => 'Forssa',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Lounais-Suomen Jätehuolto Oy',
+                        'phone' => '0200 47470',
+                        'email' => 'asiakaspalvelu@lsjh.fi',
+                        'www' => 'www.lsjh.fi',
+                        'address' => 'Kuormakatu 17, 20380',
+                        'city' => 'Turku',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Metsäsairila Oy',
+                        'phone' => '044 722 2300',
+                        'email' => 'jatehuolto@metsasairila.fi',
+                        'www' => 'www.metsasairila.fi',
+                        'address' => 'Metsä-Sairilantie 18, 50800',
+                        'city' => 'Mikkeli',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Millespakka Oy',
+                        'phone' => '(06) 557 8400',
+                        'email' => 'toimisto@millespakka.fi',
+                        'www' => 'www.millespakka.fi',
+                        'address' => 'Kyyjärventie 1054, 62900',
+                        'city' => 'Alajärvi',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Mustankorkea',
+                        'phone' => '010 325 3900',
+                        'email' => 'asiakaspalvelu@mustankorkea.fi',
+                        'www' => 'www.mustankorkea.fi',
+                        'address' => 'Ronsuntaipaleentie 204, 40500 ',
+                        'city' => 'Jyväskylä',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Napapiirin residuum',
+                        'phone' => '+358 207 120 230',
+                        'email' => 'asiakaspalvelu@residuum.fi',
+                        'www' => 'www.residuum.fi',
+                        'address' => 'Betonitie 3, 96320',
+                        'city' => 'Rovaniemi',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Päijät-Häme Jätehuolto',
+                        'phone' => '03 871 1710',
+                        'email' => 'etunimi.sukunimi@phj.fi',
+                        'www' => 'www.phj.fi',
+                        'address' => 'Sapelikatu 7, 15160',
+                        'city' => 'Lahti',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Perämeren Jätehuolto',
+                        'phone' => '040 710 7373',
+                        'email' => 'asiakaspalvelu@pmjh.fi',
+                        'www' => 'www.jakala.fi',
+                        'address' => 'Kalkkimaantie 614, 95460',
+                        'city' => 'Tornio',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Pirkanmaan jätehuolto',
+                        'phone' => '(03) 240 5110',
+                        'email' => '',
+                        'www' => 'http://www.pjhoy.fi/',
+                        'address' => 'Kelloportinkatu 1, 33100',
+                        'city' => 'Tampere',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
+                        'name' => 'Porin jätehuolto',
+                        'phone' => '02 621 1100',
+                        'email' => '',
+                        'www' => 'www.pori.fi/jateneuvonta',
                         'address' => '',
-                        'city' => '',
+                        'city' => 'Pori',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Puhas',
+                        'phone' => '013 318 198',
+                        'email' => '',
+                        'www' => 'www.puhas.fi',
+                        'address' => 'Linnunlahdentie 2, building 4 A, first floor (Science Park) 80110',
+                        'city' => 'Joensuu',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Rauman Seudun Ympäristöhuolto Oy',
+                        'phone' => '02 823 2761',
+                        'email' => '',
+                        'www' => 'www.rsyh.fi',
+                        'address' => 'Teljänkatu 10, 28130',
+                        'city' => 'Pori',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => "Rosk'n Roll Oy Ab",
+                        'phone' => '020 637 7000',
+                        'email' => 'asiakaspalvelu@rosknroll.fi',
+                        'www' => 'www.rosknroll.fi',
+                        'address' => 'Teollisuustie 4, 06150',
+                        'city' => 'Porvoo',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Sammakkokangas',
+                        'phone' => '044 4685 502',
+                        'email' => 'info@sammakkokangas.fi',
+                        'www' => 'www.sammakkokangas.fi',
+                        'address' => 'Kannonkoskentie 1134, 43100',
+                        'city' => 'Saarijärvi',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Savonlinnan Seudun Jätehuolto Oy',
+                        'phone' => '040 714 3350',
+                        'email' => '',
+                        'www' => 'www.savonlinna.fi/jatehuolto',
+                        'address' => 'Nousialantie 11, 57230',
+                        'city' => 'Savonlinna',
                         ],[
-                        'name' => '',
+                        'name' => 'Stormossen',
                         'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'email' => 'info@stormossen.fi',
+                        'www' => 'www.stormossen.fi',
+                        'address' => 'Stormossenintie 56 66 530',
+                        'city' => 'Koivulahti',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Vestia',
+                        'phone' => '044 726 2993',
+                        'email' => 'asiakaspalvelu@vestia.fi',
+                        'www' => 'www.vestia.fi',
+                        'address' => 'Vestianväylä 80, 84100',
+                        'city' => 'Ylivieska',
                         ],[
-                        'name' => '',
-                        'phone' => '',
-                        'www' => '',
-                        'address' => '',
-                        'city' => '',
+                        'name' => 'Yläsavon Jätehuolto',
+                        'phone' => '+358 17 743 379',
+                        'email' => '',
+                        'www' => 'www.ylasavonjatehuolto.fi',
+                        'address' => 'Kierrätyskatu 15, 74140',
+                        'city' => 'Iisalmi',
                         ],
                     ]);
                 @endphp
@@ -209,154 +233,6 @@
                     </div>
                 </div>
                 @endforeach
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Etelä-Karjalan Jätehuolto Oy</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: +358 10 841 1818,
-                            <a href="https://www.ekjh.fi/" target="_blank" style="color: blue" class="textMark">www.ekjh.fi,</a>
-                            Hulkonmäentie 130, 54190 Konnunsuo
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">HSY</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: +358 09 1561 2110,
-                            <a href="https://www.hsy.fi/" target="_blank" style="color: blue" class="textMark">www.hsy.fi</a> <br>
-                            Ilmalantori 1, 00240 Helsinki
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Jätekukko</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: +358 17 368 0152,
-                            asiakaspalvelu@jatekukko.fi
-                            <a href="https://www.jatekukko.fi/" target="_blank" style="color: blue" class="textMark">www.jatekukko.fi</a></td>
-                            Microkatu 1, Kuopio
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Kiertokaari</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: (08) 5584 0010,
-                            jatehuolto@kiertokaari.fi
-                            <a href="https://kiertokaari.fi/" target="_blank" style="color: blue" class="textMark">kiertokaari.fi</a>,
-                            Ruskonniityntie 1090620 Oulu
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Kiertokapula</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: +358 075 753 0000,
-                            <a href="https://www.kiertokapula.fi/" target="_blank" style="color: blue" class="textMark">www.kiertokapula.fi</a>,
-                            Vankanlähde 7, 13100 Hämeenlinna
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Kymenlaakson Jäte Oy</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: (05) 744 3400,
-                            asiakaspalvelu@kymenlaaksonjate.fi
-                            <a href="https://www.kymenlaaksonjate.fi/" target="_blank" style="color: blue" class="textMark">www.kymenlaaksonjate.fi</a>,
-                            Ekokaari 5046860 Keltakangas
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Lakeuden Etappi</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: (06) 421 4900,
-                            <a href="https://www.etappi.com/fi" target="_blank" style="color: blue" class="textMark">www.etappi.com</a>,
-                            Laskunmäentie 15 FI-60760 Pojanluoma
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Lapin jätehuolto kuntayhtymä</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: 040 3511 771,
-                            asiakaspalvelu@lapeco.fi
-                            <a href="https://lapeco.fi/" target="_blank" style="color: blue" class="textMark">www.lapeco.fi</a>,
-                            Inari
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Loimi-Hämeen Jätehuolto</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: 03 424 2622,
-                            laskutus@lhj.fi
-                            <a href="http://www.lhj.fi/" target="_blank" style="color: blue" class="textMark">www.lhj.fi</a>,
-                            Kiimassuontie 127, 30420 Forssa
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Lounais-Suomen Jätehuolto Oy </div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: 0200 47470,
-                            asiakaspalvelu@lsjh.fi
-                            <a href="https://www.lsjh.fi" target="_blank" style="color: blue" class="textMark">www.lsjh.fi</a>,
-                            Laskunmäentie 15 FI-60760 Pojanluoma
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Metsäsairila Oy</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: 044 722 2300,
-                            jatehuolto@metsasairila.fi
-                            <a href="https://www.metsasairila.fi/" target="_blank" style="color: blue" class="textMark">www.metsasairila.fi</a>,
-                            Metsä-Sairilantie 18, 50800 Mikkeli
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Millespakka Oy</div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: (06) 557 8400,
-                            toimisto@millespakka.fi
-                            <a href="https://www.millespakka.fi/" target="_blank" style="color: blue" class="textMark">www.millespakka.fi</a>,
-                            Kyyjärventie 1054 62900 Alajärvi
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Mustankorkea </div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: 010 325 3900,
-                            asiakaspalvelu@mustankorkea.fi
-                            <a href="https://mustankorkea.fi/" target="_blank" style="color: blue" class="textMark">www.mustankorkea.fi</a>,
-                            Ronsuntaipaleentie 204
-                            40500 Jyväskylä
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Napapiirin residuum </div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: +358 207 120 230,
-                            asiakaspalvelu@residuum.fi
-                            <a href="https://residuum.fi/" target="_blank" style="color: blue" class="textMark">www.residuum.fi</a>,
-                            Betonitie 3
-                            96320 ROVANIEMI
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background: #d1dec2 ">Perämeren Jätehuolto </div>
-                        <div class="panel-body" style="background: #EEEEEE ">Tel: 040 710 7373,
-                            asiakaspalvelu@pmjh.fi
-                            <a href="https://www.jakala.fi/" target="_blank" style="color: blue" class="textMark">www.jakala.fi</a>,
-                            Kalkkimaantie 614, 95460 Tornio
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

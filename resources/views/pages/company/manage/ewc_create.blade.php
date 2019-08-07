@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'Hallinnoi: EWC Koodin luominen')
 @section('content')
     <div id="content" class="row">
         <div class="panel panel-default">

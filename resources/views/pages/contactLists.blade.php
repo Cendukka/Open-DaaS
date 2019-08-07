@@ -1,5 +1,5 @@
 @extends('layouts.welcomepage')
-@section('title', 'Contact lists')
+@section('title', 'Yhteystiedot')
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -46,7 +46,7 @@
                                 {{$company['email']}}
                             @endif
                             <br>
-                            <a href="{{$company['www']}}" target="_blank" style="color: blue" class="textMark">{{$company['www']}}</a><br>
+                            <a href="https://{{$company['www']}}" target="_blank" style="color: blue" class="textMark">{{$company['www']}}</a><br>
                             {{$company['address']}},<br>
                             {{$company['city']}}<br>
                         </div>

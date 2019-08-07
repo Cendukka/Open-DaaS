@@ -1,5 +1,5 @@
 @extends( 'layouts.macrolocation')
-@section ('title', 'Raportit: Lähteneet')
+@section ('title', 'Raportit: Lähetykset')
 @section('content')
 
     <div id="content2" class="row">

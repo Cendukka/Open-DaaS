@@ -1,4 +1,5 @@
 @extends('layouts.microlocation')
+@section('title', $microlocation->microlocation_name)
 @section ('title')
 @section('content')
     <div id="content2" class="row">

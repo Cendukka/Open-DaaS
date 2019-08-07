@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title', 'Organisaation rekisteröinti')
+@section('title', 'Hallinnoi: Organisaation luominen')
 @section('content')
 <div id="content2" class="row">
     <div class="panel panel-default">

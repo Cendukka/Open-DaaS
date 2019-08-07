@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'Hallinnoi: Materiaalit')
 @section('title', 'Materiaalit')
 @section('content')
     <div id="content2" class="row">

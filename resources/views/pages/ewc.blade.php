@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'EWC Koodit')
 @section('content')
     <div class="row">
         <div class="col-md-12">

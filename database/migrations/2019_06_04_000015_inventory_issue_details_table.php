@@ -15,8 +15,8 @@ class InventoryIssueDetailsTable extends Migration
     {
         Schema::create('inventory_issue_details', function (Blueprint $table) {
             $table->increments('issue_detail_id')->unsigned();
-			$table->integer('detail_issue_id')->unsigned()->nullable();
-			$table->integer('detail_material_id')->unsigned();
+			$table->integer('detail_issue_id')->unsigned();
+			$table->integer('detail_material_id')->unsigned()->nullable();
 			$table->char('detail_ewc_code',6)->nullable();
 			$table->integer('detail_weight');
 

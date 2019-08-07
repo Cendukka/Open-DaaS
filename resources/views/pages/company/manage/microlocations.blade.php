@@ -1,4 +1,5 @@
 @extends('layouts.macrolocation')
+@section('title', 'Hallinnoi: Mikrolokaatiot')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
@@ -6,19 +7,10 @@
                 <h3>Hallitse microlokaatioita </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <table class="table table-bordered table-hover">
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
+                <table class="table table-bordeless table-hover">
                     <thead>
                     <tr>
-                        
                         <th>Tyyppi</th>
                         <th>Nimi</th>
                         <th>Osoite</th>
@@ -35,22 +27,24 @@
 
                     @endphp
                     @foreach ($microlocations as $ml)
-                        <tr>
-                            <td>{{title_case($ml->microlocation_id)}}</td>
+                        <tr class="text-left">
                             <td>{{title_case($ml->microlocation_typename)}}</td>
                             <td>{{title_case($ml->microlocation_name)}}</td>
-{{--                            <td style = "color: #00C2E5 "><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id)}}">{{title_case($ml->microlocation_street_address)}}</a></td>--}}
                             <td>{{title_case($ml->microlocation_street_address)}}</td>
                             <td>{{title_case($ml->microlocation_postal_code)}}</td>
                             <td>{{title_case($ml->microlocation_city)}}</td>
-                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                            @if(Auth::user()->user_type_id <= 2)
+                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                @if(Auth::user()->user_type_id <= 2)
                     <form action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Lisää microlokaatio</button>
-                </form>
+                        <button type="submit" class="btn btn-secondary">+ Lisää microlokaatio</button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

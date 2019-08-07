@@ -64,35 +64,78 @@ a, a:hover, a:focus {
     margin: 40px 0;
 }
 
-.panel-body td{
-    word-wrap:break-word;
+/*.col-md-4 {
+    padding: 0%;
+    margin-bottom: 3%;
+}*/
+
+::-webkit-scrollbar {
+    width: 12px;    /* for vertical scrollbars */
+    height: 0px;    /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.panel-body td {
+    word-wrap: break-word;
     overflow: auto;
 
 }
-.panel-body th{
-    word-wrap:break-word;
+
+.panel-body th {
+    word-wrap: break-word;
     overflow: auto;
 
 }
 
-.panel-body table{
+.panel-body table {
     table-layout: fixed !important;
 }
 
-.element-width-auto{
+.element-width-auto {
     width: auto !important;
 }
-.element-float-left{
-    float: left!important;
+.element-width-60 {
+    width: 60% !important;
 }
-.element-float-right{
-    float: right!important;
+.element-width-50 {
+    width: 50% !important;
 }
-.form-text-align-padd{
+.element-width-40 {
+    width: 40% !important;
+}
+.element-width-30 {
+    width: 30% !important;
+}
+.element-width-20 {
+    width: 20% !important;
+}
+.element-width-10 {
+    width: 10% !important;
+}
+
+.element-float-left {
+    float: left !important;
+}
+
+.element-float-right {
+    float: right !important;
+}
+
+.form-text-align-padd {
     text-align: left;
     padding: 2% 2% 2% 2%;
 }
-.margin-bottom-4-percent{
+
+.margin-bottom-4-percent {
     margin-bottom: 4%;
 }
 
@@ -113,10 +156,11 @@ a, a:hover, a:focus {
     background: #c5c8cc;
     color: #535353;
     transition: all 0.3s;
+    overflow: auto;
 }
 
 #sidebar.active {
-    margin-left: -300px;
+    margin-left: -250px;
 }
 
 #sidebar .sidebar-header {
@@ -140,6 +184,7 @@ a, a:hover, a:focus {
     font-size: 1.1em;
     display: block;
 }
+
 #sidebar ul li a:hover {
     color: #535353;
     background: #fff;
@@ -163,6 +208,7 @@ a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
     font-family: 'Glyphicons Halflings';
     font-size: 0.6em;
 }
+
 a[aria-expanded="true"]::before {
     content: '\e260';
 }
@@ -235,83 +281,95 @@ a.logout:hover {
     top: 0;
     right: 0;
 }
+
 #content.active {
     width: 100%;
 }
 
 #toTop {
-  display: none;
-  position: fixed;
-  bottom: 5px;
-  right: 5px;
-  z-index: 99;
-  border: none;
-  outline: none;
-  color: #686868;
-  font-size: 18px;
-  background-color: #efe111;
-  opacity: 0.5;
-  cursor: pointer;
-  padding: 7px;
-  border-radius: 6px;
+    display: none;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    color: #686868;
+    font-size: 18px;
+    background-color: #efe111;
+    opacity: 0.5;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 6px;
 }
 
 #toTop:hover {
-  background-color: #dee0e2;
+    background-color: #dee0e2;
 }
 
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
-@media (max-width: 768px) {
+@media screen and (max-width: 920px) {
     #sidebar {
         margin-left: -250px;
     }
-    #sidebar.active {
-        margin-left: 0;
-    }
+
     #content {
         width: 100%;
     }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+
+    #sidebar.unactive {
+        margin-left: 0;
+    }
+
+    #content {
+        width: 100%;
+    }
+
     #content.active {
         width: calc(100% - 250px);
     }
+
+    #content.unactive {
+        width: calc(100% - 250px);
+    }
+
     #sidebarCollapse span {
         display: none;
     }
-    .form-control{
-      
+
+    .form-control {
+
         display: inline-block;
     }
 
-   
-
-  
+/*    .col-md-4 {
+        margin-bottom: 5%
+    }*/
 }
 
 /* ---------------------------------------------------
-    Company ergistration form
+    Company registration form
 ----------------------------------------------------- */
-.panel-heading{
+.panel-heading {
     background-color: #EEEEEE;
     padding: 1%;
-    text-align: center;   
+    text-align: center;
+    font-size: 111%;
 }
 
 .form-horizontal {
     background-color: #E8E8E8;
     padding: 3%;
-   
+
 }
 
-.form-control{
-    width:60%;
-  
-   
-   
-}
-
-.panel-body{
+.panel-body {
     background-color: #E8E8E8;
     text-align: center;
 }
@@ -322,27 +380,38 @@ a.logout:hover {
 ----------------------------------------------------- */
 
 
-  table {
+table {
     display: inline-table;
-   
-  }
 
-   
-  a.textMark:hover, a.textMark:active{
-      color: #2373F6;
-      font-size: 140%;
-      text-decoration: underline;
-  }
+}
 
-  .panel {
-    box-shadow: 1px 2px 5px  #424242;
+
+a.textMark:hover, a.textMark:active {
+    color: #2373F6;
+    font-size: 110%;
+    text-decoration: underline;
+}
+
+.panel {
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
     border-top: 0px;
     border-left: 0px;
-    margin: 0 10% 0 10%;
-    
-  }
+    margin: 0 15px 0 15px;
+}
 
-  .center{
-      display: inline-block;
-      width: 30%;
-  }
+.center {
+    display: inline-block;
+    width: 30%;
+}
+
+.form-field-width {
+    min-width: 50%;
+}
+
+
+/* -----------------------------------------
+          Some general css
+ -------------------------------------------*/
+.no-borders {
+    border: none !important;
+}

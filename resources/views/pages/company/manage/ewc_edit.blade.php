@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'Hallinnoi: EWC Koodin muokkaus')
 @section('content')
     <div id="content" class="row">
         <div class="panel panel-default">
@@ -6,15 +7,7 @@
                 <h3>Edit EWC Code </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="ewc-update">
                     @csrf
                     <div class="form-group">
@@ -25,7 +18,8 @@
                         <label for="description">Description:&nbsp</label>
                         <textarea type="text" class="form-control" rows="8" maxlength="191" name="description">{{$ewc_code->description}}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+
+                    @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/ewc')])
                 </form>
                 <br>
                 <form method="post" action="ewc-destroy">

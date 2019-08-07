@@ -4,19 +4,108 @@
     <nav id="sidebar">
 
         <div class="sidebar-header">
-            <a href="/"><h4>TEHA TEkstiilikierrätyksen HAllintajärjestelmä</h4></a>
+{{--            <a href="/"><h4>TEHA TEkstiilikierrätyksen HAllintajärjestelmä</h4></a>--}}
+            <a href="/"><h4>Open DaaS</h4></a>
         </div>
 
         <div class="finland-map">
             <h4 class="form-text-align-padd">Suomen jätelaitokset ja niiden sijainnit</h4>
             <img class="Responsive"
-                 src="https://trello-attachments.s3.amazonaws.com/5cf4b117381b0a775d886f47/1000x2251/97da9a74ec1fd74650c8955ab34c0e1c/fi.png"
-                 width="250" height="563" class="img-fluid" alt="Responsive image">
+                 src="https://trello-attachments.s3.amazonaws.com/5c73a56e238a60379ca8ebe5/5cf4b117381b0a775d886f47/a05a54bfae188e35e60714f300e40978/map_of_Finland.png"
+                 width="250" height="480" class="img-fluid" alt="Finland map" usemap="#location"/>
         </div>
 
-                {{--<ul class="list-unstyled CTAs">
-                    <li><a href="/" class="back">Back</a></li>
-                </ul>--}}
+        <map name="location" id="location">
+
+            <area   shape="circle"
+                    coords="115,455, 7"
+                    title="HELSINKI" />
+            <area   shape="circle"
+                    coords="98,454, 7"
+                    title="LOHJA" />
+            <area   shape="circle"
+                    coords="61,443, 7"
+                    title="TURKU" />
+            <area   shape="circle"
+                    coords="75,424, 7"
+                    title="LOIMAA" />
+            <area   shape="circle"
+                    coords="111,436, 7"
+                    title="HYVINKÄÄ" />
+            <area   shape="circle"
+                    coords="133,419, 7"
+                    title="LAHTI" />
+            <area   shape="circle"
+                    coords="158,430, 7"
+                    title="KOUVOLA" />
+            <area   shape="circle"
+                    coords="104,418, 7"
+                    title="HÄMEELINNA" />
+            <area   shape="circle"
+                    coords="91,396, 7"
+                    title="TAMPERE" />
+            <area   shape="circle"
+                    coords="45,409, 7"
+                    title="RAUMA" />
+            <area   shape="circle"
+                    coords="51,395, 7"
+                    title="PORI" />
+            <area   shape="circle"
+                    coords="190,417, 7"
+                    title="LAPPEENRANTA" />
+            <area   shape="circle"
+                    coords="165,386, 7"
+                    title="MIKKELI" />
+            <area   shape="circle"
+                    coords="200,378, 7"
+                    title="SAVOLINNA" />
+            <area   shape="circle"
+                    coords="210,342, 7"
+                    title="JOENSUU" />
+            <area   shape="circle"
+                    coords="130,358, 7"
+                    title="JYVÄSKYLÄ" />
+            <area   shape="circle"
+                    coords="47,356, 7"
+                    title="KRISTIINAKKAUPUNKI" />
+            <area   shape="circle"
+                    coords="80,332, 7"
+                    title="SEINÄJOKI" />
+            <area   shape="circle"
+                    coords="76,295, 7"
+                    title="PIETARSAARI" />
+            <area   shape="circle"
+                    coords="97,316, 7"
+                    title="ALAJÄRVI" />
+            <area   shape="circle"
+                    coords="124,333, 7"
+                    title="SAARIJÄRVI" />
+            <area   shape="circle"
+                    coords="174,328, 7"
+                    title="KUOPIO" />
+            <area   shape="circle"
+                    coords="164,293, 7"
+                    title="IISALMI" />
+            <area   shape="circle"
+                    coords="175,265, 7"
+                    title="KAJAANI" />
+            <area   shape="circle"
+                    coords="112,254, 7"
+                    title="YLIVISKA" />
+            <area   shape="circle"
+                    coords="129,228, 7"
+                    title="OULU" />
+            <area   shape="circle"
+                    coords="109,188, 7"
+                    title="KEMI" />
+            <area   shape="circle"
+                    coords="133,157, 7"
+                    title="ROVANIEMI" />
+            <area   shape="circle"
+                    coords="170,55, 7"
+                    title="INARI" />
+        </map>
+
 
     </nav>
 
@@ -28,56 +117,50 @@
 
                 <div class="navbar-header">
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
-                        <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Piilota ja näytä sivupalkki</span>
+                        <i class="glyphicon glyphicon-menu-hamburger"></i>
                     </button>
                 </div>
 
-                
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                         
-                        <li>
-                            <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout" style="margin-right: 5%;">Yhteystiedot</a>
-                            <a id="home"    href="/" class="btn btn-info btn-lg logout" style="margin-right: 5%; display: none">back</a>
+
+
+                            <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout" >Yhteystiedot</a>
+                            <a id="home"    href="/" class="btn btn-info btn-lg logout" style="display: none">Etusivu</a>
                                 <script type="text/javascript">
                                     {
                                         if (window.location.href === "http://127.0.0.1:8000/contactLists") {
                                         document.getElementById("contact").style.display = "none";
-                                        document.getElementById("home").style.display = "block";
+                                        document.getElementById("home").style.display = "";
                                         }
-                                        
+
                                      }
-                                </script> 
-                        </li> 
+                                </script>
+
+
 
                         @guest
-                            <li><a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a></li>
+                            <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
 
                         <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
 
 
                         @else
-                        
-                            <li><a href="/home" class="btn btn-info btn-lg logout" style="margin-right: 5%;">Hallinta</a></li>
+                            @if(Auth::user()->user_type_id == 1)
 
-                            <li><a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
+                                <a href="/home" class="btn btn-info btn-lg logout">Hallinta</a>
+                            @elseif(Auth::user()->user_type_id >= 2)
+                                <a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout">Hallinta</a>
+                            @endif
 
-                        <!-- <li><a href="{{route('logout') }}">Logout</a></li> -->
-
+                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a>
                         @csrf
-                    @endguest
-
-
-                    <!-- <a href="#" class="btn btn-info btn-lg logout">KIRJAUDU ULOS</a></li>
-                                <li><a href="#" class="btn btn-info btn-lg logout">KIRJAUDU SISÄÄN</a></li> -->
+                        @endguest
 
                     </ul>
                 </div>
             </div>
-
         </nav>
-
         <!-- Main Page Content Holder -->
         <div id="main" class="column">
             @yield('content')
@@ -89,53 +172,3 @@
     </div>
 
 </div>
-
-<!-- jQuery CDN for LeftSide Menu-->
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<!-- Bootstrap Js CDN -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- jQuery Custom Scroller CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#sidebar").mCustomScrollbar({
-            theme: "minimal"
-        });
-
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar, #content').toggleClass('active');
-            $('.collapse.in').toggleClass('in');
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
-    });
-</script>
-
-<!-- Script for Back To The Top Button -->
-<script>
-
-    //When the user scrolls down 30px from the top of the document, show the button
-    window.onscroll = function() {scrollFunction()};
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-            document.getElementById("toTop").style.display = "block";
-        } else {
-            document.getElementById("toTop").style.display = "none";
-        }
-    }
-
-    <!-- When the user clicks on the button, scroll to the top of the document -->
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
-</script>
-
-<!-- <div class="navbar">
-    <div class="navbar-inner">
-        <a id="logo" href="/">BigData Pilot</a>
-        <ul class="nav">
-            <li><a href="/companies">Yritykset</a></li>
-            <li><a href="/materials">Materials</a></li>
-            <li><a href="/ewc">EWC Codes</a></li>-->

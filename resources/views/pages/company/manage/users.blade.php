@@ -1,4 +1,5 @@
 @extends('layouts.macrolocation')
+@section('title', 'Hallinnoi: Käyttäjät')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
@@ -6,19 +7,11 @@
                 <h3>Hallitse käyttäjätilejä </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        
+
                         <th>Microlokaatio</th>
                         <th>Tyyppi</th>
                         <th>Sukunimi</th>
@@ -35,37 +28,27 @@
                                     ->orderBy('users.user_type_id')
                                     ->orderBy('user_microlocation_id')
                                     ->get();
-
                     @endphp
 
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{title_case($user->microlocation_name)}}</td>
+                            <td>{{title_case($user->microlocation_name ?: 'Toimisto')}}</td>
                             <td>{{title_case($user->user_typename)}}</td>
                             <td>{{title_case($user->last_name)}}</td>
                             <td>{{title_case($user->first_name)}}</td>
-                            <td>{{title_case($user->username)}}</td>
-                            <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                            <td>{{$user->username}}</td>
+                            @if(Auth::user()->user_type_id <= 2)
+                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                            @endif
                         </tr>
                     @endforeach
                 </table>
-                    <form action="{{url(url()->current().'/import_csv') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="file" accept=".csv">
-                        <br>
-                        <button class="btn btn-secondary">Import user data</button>
-                        <a class="btn btn-warning" href="{{url(url()->current().'/export_csv')}}">Export user data
-                        </a>
+                @if(Auth::user()->user_type_id <= 2)
+                    <form method="get" action="{{url(url()->current().'/create')}}">
+                        <button type="submit" class="btn btn-secondary">+ Lisää käyttäjä</button>
                     </form>
-
-                <form method="get" action="{{url(url()->current().'/create')}}">
-                <br>
-                    <button type="submit" class="btn btn-secondary">+ Lisää käyttäjä</button>
-                </form>
+                @endif
             </div>
         </div>
     </div>
 @endsection
-<!--<form action="{{url(url()->current().'/create')}}">
-                    <button type="submit" class="btn btn-secondary">+ Add user</button>
-                </form>-->

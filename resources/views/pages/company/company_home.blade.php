@@ -4,10 +4,11 @@
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Yhtiön hallinnan kotisivut: {{$company->company_name}}</h3>
+                <h3>Organisaation hallinnan kotisivut: {{$company->company_name}}</h3>
             </div>
             <div class="panel-body">
-                    <h4>Mahdollisesti yleisnäkymää yhtiön toiminnasta tjms.</h4>
+                <h4>Mahdollisesti yleisnäkymää organisaation toiminnasta tjms.</h4>
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <div class="row">
                     <div id="pieChartCompany"></div>
                 </div>
@@ -19,7 +20,7 @@
                         var inventoryData = new google.visualization.DataTable();
                         inventoryData.addColumn('string', 'Name');
                         inventoryData.addColumn('number', 'Weight');
-                        @foreach(DB::table('material_names')->where('material_type','textile')->get() as $mat)
+                        @foreach(DB::table('material_names')->whereIn('material_type',['refined','raw waste','textile'])->get() as $mat)
 
                         inventoryData.addRow(['{{$mat->material_name}}', {{max(0, DB::table('inventory')
                                                                             ->join('microlocations','microlocation_id','inventory_microlocation_id')
@@ -27,12 +28,12 @@
                                                                             ->where('microlocation_company_id',$company->company_id)
                                                                             ->sum('inventory_weight'))}}]);
                             @endforeach
-                        var wholeOptions = {'title': 'Yhtiö - Kierrätetyt yhteensä: {{DB::table('inventory')
+                        var wholeOptions = {'title': 'Organisaatio - Varaston sisältö yhteensä: {{DB::table('inventory')
                                                                                         ->join('material_names','material_id','inventory_material_id')
                                                                                         ->join('microlocations','microlocation_id','inventory_microlocation_id')
-                                                                                        ->where('material_type','textile')
+                                                                                        ->whereIn('material_type',['textile','refined','raw waste'])
                                                                                         ->where('microlocation_company_id',$company->company_id)
-                                                                                        ->sum('inventory_weight')}} Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};
+                                                                                        ->sum('inventory_weight')}} Kg','is3D': true, 'width': 700, 'height': 500, 'backgroundColor': 'transparent'};
                         var wholeChart = new google.visualization.PieChart(document.getElementById('pieChartCompany'));
                         wholeChart.draw(inventoryData, wholeOptions);
                     }
@@ -74,7 +75,7 @@
 {{--                            </tr>--}}
 {{--                        @endforeach--}}
 {{--                    </table>--}}
-                
+
             </div>
         </div>
     </div>

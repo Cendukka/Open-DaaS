@@ -17,7 +17,7 @@ class InventoryReceiptTable extends Migration
             $table->increments('receipt_id')->unsigned();
 			$table->integer('receipt_material_id')->unsigned()->nullable();
 			$table->integer('from_community_id')->unsigned()->nullable();
-			$table->integer('from_supplier_id')->unsigned()->nullable();
+            $table->string('from_supplier')->nullable();
 			$table->integer('receipt_from_microlocation_id')->unsigned()->nullable();
 			$table->integer('receipt_to_microlocation_id')->unsigned();
 			$table->integer('receipt_user_id')->unsigned();
@@ -25,13 +25,13 @@ class InventoryReceiptTable extends Migration
 			$table->integer('receipt_weight');
 			$table->dateTime('receipt_date');
 			$table->char('receipt_ewc_code',6);
+			$table->boolean('is_for_issue')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 	
 			$table->foreign('receipt_material_id')->references('material_id')->on('material_names');
 			$table->foreign('receipt_from_microlocation_id')->references('microlocation_id')->on('microlocations');
 			$table->foreign('from_community_id')->references('community_id')->on('community');
-			$table->foreign('from_supplier_id')->references('supplier_id')->on('supplier');
 			$table->foreign('receipt_to_microlocation_id')->references('microlocation_id')->on('microlocations');
 			$table->foreign('receipt_user_id')->references('user_id')->on('users');
 			$table->foreign('receipt_ewc_code')->references('ewc_code')->on('ewc_codes');

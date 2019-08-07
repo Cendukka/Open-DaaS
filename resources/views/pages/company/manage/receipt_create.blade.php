@@ -1,4 +1,5 @@
 @extends('layouts.macrolocation')
+@section('title', 'Hallinnoi: Saapuneiden luominen')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
@@ -6,84 +7,30 @@
                 <h3>Materiaalin vastaanotto</h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="receipts-store" class="form-text-align-padd">
                     @csrf
-                    <div class="form-group">
-                        <label for="datetime">Aikaleima:</label>
-                        <div style="position: relative">
-                            <input type="text" class="form-control timepicker element-width-auto" name="datetime" value="{{date('Y-m-d')}}"/>
+                    @include('includes.forms.datetime', ['time' => date('Y-m-d')])
+                    @include('includes.forms.users', ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get()])
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="source">Lähde:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control element-width-auto form-field-width" id="source" name="source">
+                                <option value="internal">Sisäinen</option>
+                                <option value="external">Ulkoinen</option>
+                                <option value="supplier">Toimittaja</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="user">Käyttäjä:</label>
-                        <select class="form-control element-width-auto" name="user">
-                            @foreach (DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get() as $user)
-                                <option value="{{$user->user_id}}">{{title_case($user->last_name.' '.$user->first_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="material">Materiaali:</label>
-                        <select class="form-control element-width-auto" name="material">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get() as $material)
-                                <option value="{{$material->material_id}}">{{title_case($material->material_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="source">Lähde:</label>
-                        <select class="form-control element-width-auto" id="source" name="source">
-                            <option value="internal">Sisäinen</option>
-                            <option value="external">Ulkoinen</option>
-                            <option value="supplier">Toimittaja</option>
-                        </select>
-                    </div>
-                    <div id="from" class="form-group">
-                        <label for="from_microlocation">Mikrolokaatiosta:</label>
-                        <select class="form-control element-width-auto" name="from_microlocation">
-                            <option value="" selected="selected" hidden disabled></option>
-                            @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="to_microlocation">Microlokaatioon:</label>
-                        <select class="form-control element-width-auto" name="to_microlocation">
-                            <option selected="selected" disabled hidden value=""></option>
-                            @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
-                                <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="distance">Matka (Km):</label>
-                        <input type="text" class="form-control element-width-auto" name="distance"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="weight">Paino (Kg):</label>
-                        <input type="text" class="form-control element-width-auto" name="weight"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="ewc">EWC-Koodi:</label>
-                        <select class="form-control element-width-auto" name="ewc">
-                            @foreach (DB::table('ewc_codes')->get() as $ewc)
-                                <option value="{{$ewc->ewc_code}}">{{title_case($ewc->ewc_code)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Lisää</button>
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:'])
+                    <div class="form-group row" id="from_community"></div>
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => Auth::user()->user_microlocation_id, 'tag' => 'to_microlocation', 'name' => 'Microlokaatioon:', 'disabled' => Auth::user()->user_type_id > 2])
+                    @include('includes.forms.materials', ['materials' => DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get()])
+                    @include('includes.forms.weight')
+                    @include('includes.forms.distance')
+                    @include('includes.forms.ewc_code')
+                    @include('includes.forms.for_issue')
+                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/receipts')])
                 </form>
             </div>
         </div>
@@ -107,9 +54,14 @@
                 success:function(data){
                     $("#from").empty().html(data);
                 }
-            })
+            });
+            if($source != 'external'){
+                $("#from_community").hide()
+            }
+            else{
+                $("#from_community").show()
+            }
         });
-
         $(document).on("change", '#from_company', function(e) {
             $from_company = $("#from_company").val();
             $.ajax({
@@ -120,11 +72,6 @@
                     $("#from_community").empty().html(data);
                 }
             })
-        });
-    </script>
-    <script type="text/javascript">
-        $('.timepicker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss'
         });
     </script>
 @endsection

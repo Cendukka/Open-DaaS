@@ -6,30 +6,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 
 
-class users_table_seeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
+class users_table_seeder extends Seeder {
+    public function run() {
 		$faker = Faker::create('fi_FI');
-		DB::table('users')->insert([
-			'user_type_id' => 1,
-			'user_company_id' => '1',
-			'user_microlocation_id' => '1',
-			'last_name' => 'ADMIN',
-			'first_name' => 'LSJH',
-			'username' => 'admin',
-			'email' => 'admin@test.com',
-			'password' => Hash::make('qwerty')
-			]);
-	
-		$companies = DB::table('company')->get();
-		
-		# Adds Admins to all the companies
+		$companies = DB::table('company')->where('company_id','!=',1)->get();
+
+		# Adds a Manager to all the companies
 		foreach($companies as $company) {
             $microlocations = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
 
@@ -38,17 +20,15 @@ class users_table_seeder extends Seeder
 			DB::table('users')->insert([
 				'user_type_id' => 2,
 				'user_company_id' => $company->company_id,
-                'user_microlocation_id' => $microlocations->random()->microlocation_id,
-				'last_name' => $fn,
-				'first_name' => $ln,
+                'user_microlocation_id' => NULL,
+				'last_name' => $ln,
+				'first_name' => $fn,
 				'username' => $ln.'.'.$fn,
 				'email' => $ln.'.'.$fn.'@test.com',
 				'password' => Hash::make('qwerty')
 			]);
 
-
-
-            # Adds managers to all the microlocations
+            # Adds users to all the microlocations
 			foreach ($microlocations as $ml) {
                 $fn =$faker->firstName;
                 $ln = $faker->lastName;
@@ -56,8 +36,8 @@ class users_table_seeder extends Seeder
 					'user_type_id' => 3,
 					'user_company_id' => $company->company_id,
 					'user_microlocation_id' => $ml->microlocation_id,
-                    'last_name' => $fn,
-                    'first_name' => $ln,
+                    'last_name' => $ln,
+                    'first_name' => $fn,
                     'username' => $ln.'.'.$fn,
                     'email' => $ln.'.'.$fn.'@test.com',
 					'password' => Hash::make('qwerty')

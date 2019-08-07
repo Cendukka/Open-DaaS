@@ -1,5 +1,5 @@
 @extends('layouts.macrolocation')
-@section('title', 'Create user')
+@section('title', 'Hallinnoi: Luo käyttäjä')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
@@ -7,85 +7,71 @@
                 <h3>Lisää käyttäjä </h3>
             </div>
             <div class="panel-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <form method="post" action="users-store" class="form-text-align-padd">
+                @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
+                <form method="post" action="users-store" class="form-text-align-padd" onsubmit="return confirm('Uusi käyttäjä lisätään organisaatioon. Haluatko jatkaa?');">
                     @csrf
-                    <div class="form-group">
-                        <label for="user_type">Käyttäjätyyppi:</label>
-                        <select class="form-control element-width-auto" name="user_type">
-                            <option value="2">Yhtiön bosse</option>
-                            <option value="3">Microlokaationin työntekijä</option>
-
-                        </select>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Organisaatio:</label></label>
+                        <div class="col-sm-10">
+                            <label class="col-form-label">{{title_case($company->company_name)}}</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="microlocation">Microlokaatio:</label>
-                        <select class="form-control element-width-auto" name="microlocation">
-                            <option selected="selected" value=""></option>
-                            @php
-                                $microlocations = DB::table('microlocations')
-                                            ->where('microlocation_company_id','=',$company->company_id)
-                                            ->get();
-                            @endphp
-                            @foreach ($microlocations as $ml)
-                                <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_city).', '.title_case($ml->microlocation_name)}}</option>
-                            @endforeach
-                        </select>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="user_type">Käyttäjätyyppi:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control element-width-auto form-field-width" name="käyttäjätyyppi" id="user_type">
+                                <option selected="selected" hidden disabled value=""></option>
+                                @foreach(DB::table('user_types')->where('user_type_id','>','1')->get() as $type)
+                                    <option value="{{$type->user_type_id}}">{{$type->user_typename}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="first_name">Etunimi:</label>
-                        <input id="first_name" maxlength="50" type="text" class="form-control element-width-auto" name="first_name"/>
+                    <div class="form-group row" >
+                        <label class="col-sm-2 col-form-label" for="microlocation">Microlokaatio:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control element-width-auto form-field-width" name="toimipiste" id="microlocation">
+                                <option selected="selected" hidden disabled value=""></option>
+                                @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
+                                    <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_city).', '.title_case($ml->microlocation_name)}}</option>
+                                @endforeach
+                            </select>
+                            <label id="toimisto" class="col-form-label">Toimisto</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="last_name">Sukunimi:</label>
-                        <input id="last_name" maxlength="50" type="text" class="form-control element-width-auto" name="last_name"/>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="first_name">Etunimi:</label>
+                        <div class="col-sm-10">
+                            <input id="first_name" type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="etunimi"/>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="username">Käyttäjänimi:</label>
-                        <input id="username" maxlength="50" type="text" class="form-control element-width-auto" name="username"/>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="last_name">Sukunimi:</label>
+                        <div class="col-sm-10">
+                            <input id="last_name" type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="sukunimi"/>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Sähköposti:</label>
-                        <input id="email" maxlength="50" type="text" class="form-control text-lowercase element-width-auto" name="email"/>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="username">Käyttäjätunnus:</label>
+                        <div class="col-sm-10">
+                            <input id="username" type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="username"/>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Salasana:</label>
-                        <input type="text" maxlength="50"class="form-control element-width-auto" name="password" value="qwerty" disabled>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="email">Sähköposti:</label>
+                        <div class="col-sm-10">
+                            <input id="email" type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="email"/>
+                        </div>
                     </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Lisää</button>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="password">Salasana:</label>
+                        <div class="col-sm-10">
+                            <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="salasana" value="qwerty" disabled/>
+                        </div>
+                    </div>
+                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/manage/users')])
                 </form>
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        function source(){
-            $("#username").val($("#first_name").val()+'.'+$("#last_name").val());
-            $("#email").val($("#first_name").val()+'.'+$("#last_name").val()+"@testdomain.fi");
-        };
-        $('#first_name').on('change',source);
-        $('#last_name').on('change',source);
-
-        function microlocation(){
-            var $userType = $("#user_type").val();
-            if($userType > 2){ // Transport
-                $("#microlocation").show();
-            }
-            else{
-                $("#microlocation").hide();
-            }
-        };
-        $(document).ready(microlocation);
-        $('#user_type').on('change',microlocation);
-    </script>
 @endsection

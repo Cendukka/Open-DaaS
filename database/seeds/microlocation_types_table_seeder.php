@@ -11,9 +11,9 @@ class microlocation_types_table_seeder extends Seeder
      */
     public function run()
     {
-		DB::table('microlocation_types')->insert(['microlocation_typename' => 'Collection Point']);
-		DB::table('microlocation_types')->insert(['microlocation_typename' => 'Sorting Station']);
-		DB::table('microlocation_types')->insert(['microlocation_typename' => 'Collection and Sorting']);
-		DB::table('microlocation_types')->insert(['microlocation_typename' => 'Warehouse']);
+		DB::table('microlocation_types')->insert(['microlocation_typename' => 'Vastaanotto']);
+		DB::table('microlocation_types')->insert(['microlocation_typename' => 'Lajittelu']);
+		DB::table('microlocation_types')->insert(['microlocation_typename' => 'Vastaanotto ja Lajittelu']);
+		DB::table('microlocation_types')->insert(['microlocation_typename' => 'Varasto']);
     }
 }

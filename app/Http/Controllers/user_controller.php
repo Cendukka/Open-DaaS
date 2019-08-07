@@ -29,35 +29,33 @@ class user_controller extends Controller {
 
 
 	public function store(Request $request, company $company) {
-		# ADD MORE AUTHENTICATION HERE
-		
 		$request->validate([
-			'user_type' => 'required|integer',
-            'microlocation' => 'required_if:user_type,3',
-			'first_name'=>'required|max:50',
-			'last_name'=> 'required|max:50',
+			'käyttäjätyyppi' => 'required|integer',
+            'toimipiste' => 'required_if:user_type,==,3',
+			'etunimi'=>'required|max:50',
+			'sukunimi'=> 'required|max:50',
 			'username'=> 'required|unique:users|max:50',
 			'email'=> 'required|unique:users|max:50',
 		]);
-		
+
 		$user = new user([
-			'user_type_id' => $request->get('user_type'),
+			'user_type_id' => $request->get('käyttäjätyyppi'),
 			'user_company_id' => $company->company_id,
-			'user_microlocation_id' => ($request->get('user_type') > 2 ? $request->get('microlocation') : NULL),
-			'last_name' => $request->get('last_name'),
-			'first_name' => $request->get('first_name'),
+			'user_microlocation_id' => ($request->get('käyttäjätyyppi') >= 3 ? $request->get('toimipiste') : NULL),
+			'last_name' => $request->get('sukunimi'),
+			'first_name' => $request->get('etunimi'),
 			'username' => $request->get('username'),
 			'email' => $request->get('email'),
 			'password' => Hash::make('qwerty'),
 		]);
 		$user->save();
 
-		if(DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->count() == 0){
-            return redirect()->action('microlocation_controller@create', ['company' => $company]);
-        }
-        else{
-            return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['User successfully created.']);
-        }
+//		if(DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->count() == 0){
+//            return redirect()->action('microlocation_controller@create', ['company' => $company]);
+//        }
+//        else{
+            return redirect()->action('user_controller@index', ['company' => $company])->withErrors(['Käyttäjä luotu onnistuneesti']);
+//        }
 	}
 
 
@@ -72,30 +70,22 @@ class user_controller extends Controller {
 
 
 	public function update(Request $request, company $company, user $user) {
-		# ADD MORE AUTHENTICATION HERE
-
-        # TODO Passowrd saving needs more work
-
 		$request->validate([
 			'user_type' => 'required|integer',
 			'microlocation' => 'required_if:user_type,3',
 			'first_name'=>'required|max:50',
 			'last_name'=> 'required|max:50',
 		]);
-		
-		
+
 		$userNew = user::find($user->user_id);
 
 		$userNew->user_type_id = $request->get('user_type');
-		$userNew->user_microlocation_id = ($request->get('user_type') > 2 ? $request->get('microlocation') : NULL);
+		$userNew->user_microlocation_id = ($request->get('user_type') >= 3 ? $request->get('microlocation') : NULL);
 		$userNew->last_name = $request->get('last_name');
 		$userNew->first_name = $request->get('first_name');
-		#$userNew->password = Hash::make($request->get('password'));
 		$userNew->save();
-		
-		
-		
-		return redirect()->action('user_controller@index',['company' => $company])->withErrors(['User successfully updated.']);
+
+		return redirect()->action('user_controller@index',['company' => $company])->withErrors(['Käyttäjä päivitetty onnistuneesti.']);
 	}
 
 

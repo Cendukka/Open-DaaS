@@ -29,7 +29,7 @@ class materials_controller extends Controller {
 
 	public function store(Request $request) {
 		# ADD MORE AUTHENTICATION HERE
-		
+
 		$request->validate([
 			'name' => 'required|max:50',
 			'type' => 'required','in:["textile","retired","raw waste","refined","presorted"]',
@@ -41,7 +41,7 @@ class materials_controller extends Controller {
 		]);
 
 		$material->save();
-		return redirect()->action('materials_controller@index')->withErrors(['Material successfully created.']);
+		return redirect()->action('materials_controller@index')->withErrors(['Materiaali lisätty onnistuneesti.']);
 	}
 
 
@@ -62,21 +62,21 @@ class materials_controller extends Controller {
             'name' => 'required|max:50',
             'type' => 'required','in:["textile","retired","raw waste","refined","presorted"]',
         ]);
-		
+
 		$materialNew = material::find($material->material_id);
-		
+
 		$materialNew->material_name = $request->get('name');
 		$materialNew->material_type = $request->get('type');
 		$materialNew->save();
-		
-		return redirect()->action('materials_controller@index')->withErrors(['Material successfully updated.']);
+
+		return redirect()->action('materials_controller@index')->withErrors(['Materiaali päivitetty onnistuneesti.']);
 	}
 
 
 	public function destroy(material $material) {
 		$mat = material::find($material->material_id);
 		$mat->delete();
-		
-		return redirect()->action('materials_controller@index')->withErrors(['Material successfully deleted.']);
+
+		return redirect()->action('materials_controller@index')->withErrors(['Materiaali poistettu onnistuneesti.']);
 	}
 }

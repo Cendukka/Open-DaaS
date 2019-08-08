@@ -35,6 +35,12 @@ class pre_controller extends Controller {
             'receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0|max:1000000',
+        ],[],[
+            'user' => 'Käyttäjä',
+            'datetime' => 'Aika',
+            'receipt' => 'Saapunut kirjaus',
+            'material' => 'Materiaali',
+            'weight' => 'Paino',
         ]);
 
         $receipt = $request->get('receipt');
@@ -79,6 +85,12 @@ class pre_controller extends Controller {
             'receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0|max:1000000',
+        ],[],[
+            'user' => 'Käyttäjä',
+            'datetime' => 'Aika',
+            'receipt' => 'Saapunut kirjaus',
+            'material' => 'Materiaali',
+            'weight' => 'Paino',
         ]);
 
         $receipt = $request->get('receipt');

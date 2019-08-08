@@ -33,11 +33,23 @@ class receipt_controller extends Controller {
 			'from_community' => 'integer|required_without_all:from_supplier,from_microlocation',
 			'from_supplier' => 'required_without_all:from_community,from_microlocation|max:191',
             'from_microlocation' => 'integer|required_without_all:from_supplier,from_community',
-			'to_microlocation' =>'required|integer',
+			'to_microlocation' => 'required|integer',
 			'distance' => 'required|integer',
 			'weight' => 'required|integer|min:0|max:1000000',
 			'ewc' => 'required|max:6|digits_between:0,9',
-		]);
+		],[],[
+            'user' => 'Käyttäjä',
+            'datetime' => 'Aika',
+            'material' => 'Materiaali',
+            'source' => 'Lähde',
+            'from_community' => 'Kunnasta',
+            'from_supplier' => 'Toimittajalta',
+            'from_microlocation' => 'Toimipisteestä',
+            'to_microlocation' => 'Toimipisteeseen',
+            'distance' => 'Matka',
+            'weight' => 'Paino',
+            'ewc' => 'EWC Koodi',
+        ]);
 
         $microlocation = $request->get('to_microlocation');
         $material = $request->get('material');
@@ -87,6 +99,18 @@ class receipt_controller extends Controller {
             'distance' => 'required|integer',
             'weight' => 'required|integer|min:0|max:1000000',
             'ewc' => 'required|max:6|digits_between:0,9',
+        ],[],[
+            'user' => 'Käyttäjä',
+            'datetime' => 'Aika',
+            'material' => 'Materiaali',
+            'source' => 'Lähde',
+            'from_community' => 'Kunnasta',
+            'from_supplier' => 'Toimittajalta',
+            'from_microlocation' => 'Toimipisteestä',
+            'to_microlocation' => 'Toimipisteeseen',
+            'distance' => 'Matka',
+            'weight' => 'Paino',
+            'ewc' => 'EWC Koodi',
         ]);
 
         $microlocation = $request->get('to_microlocation');

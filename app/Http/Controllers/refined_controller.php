@@ -41,11 +41,11 @@ class refined_controller extends Controller {
             'weight' => 'required|integer|min:0|max:1000000',
             'description' => 'max:191',
         ],[],[
-            'user' => 'User',
-            'datetime' => 'Date & Time',
-            'pre_receipt' => 'Pre-Sorting or Receipt',
-            'material' => 'Material',
-            'weight' => 'Weight',
+            'user' => 'Käyttäjä',
+            'datetime' => 'Aika',
+            'pre_receipt' => 'Esilajittelu tai Vastaanotto',
+            'material' => 'Materiaali',
+            'weight' => 'Paino',
         ]);
 
         $receipt = ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL);
@@ -104,11 +104,11 @@ class refined_controller extends Controller {
             'weight' => 'required|integer|min:0|max:1000000',
             'description' => 'max:191',
         ],[],[
-            'user' => 'User',
-            'datetime' => 'Date & Time',
-            'pre_receipt' => 'Pre-Sorting or Receipt',
-            'material' => 'Material',
-            'weight' => 'Weight',
+            'user' => 'Käyttäjä',
+            'datetime' => 'Aika',
+            'pre_receipt' => 'Esilajittelu tai Vastaanotto',
+            'material' => 'Materiaali',
+            'weight' => 'Paino',
         ]);
 
         $receipt = ($request->get('origin') == 'receipt' ? $request->get('pre_receipt') : NULL);

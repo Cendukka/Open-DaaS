@@ -42,7 +42,7 @@ class issue_controller extends Controller {
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
                         if(!is_numeric($v)) {
-                            $fail($attribute.' is invalid.');
+                            $fail('Materiaali ei kelpaa.');
                         }
                     }
                 },
@@ -51,7 +51,7 @@ class issue_controller extends Controller {
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
                         if(!is_numeric($v)) {
-                            $fail($attribute.' is invalid.');
+                            $fail('EWC koodi ei kelpaa.');
                         }
                     }
                 },
@@ -60,11 +60,20 @@ class issue_controller extends Controller {
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
                         if(!is_numeric($v) || $v<0 || $v>1000000) {
-                            $fail($attribute.' is invalid.');
+                            $fail('Paino ei kelpaa.');
                         }
                     }
                 },
             ],
+        ],[],[
+            'user' => 'Käyttäjä',
+            'datetime' => 'Aika',
+            'type' => 'Lähetyksen tyyppi',
+            'from_microlocation' => 'Toimipisteestä',
+            'to_microlocation' => 'Toimipisteeseen',
+            'material' => 'Materiaali',
+            'ewc_code' => 'EWC Koodi',
+            'weight' => 'Paino',
         ]);
 
         $microlocation = $request->get('from_microlocation');

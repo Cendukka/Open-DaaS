@@ -142,13 +142,18 @@ class pre_controller extends Controller {
                 $query->whereBetween('pre_sorting_date', [date("Y-m-d",strtotime($request->from)), date("Y-m-d H:i:s",strtotime($request->to.' 23:59:59'))]);
             })
             ->where(function ($query) use ($request){
-                foreach(explode(' ',$request->search) as $word){
-                    $query->where(function ($query) use ($word) {
-                        $query
-                            ->where('microlocation_name','LIKE','%'.$word."%")
-                            ->orWhere('material_name','LIKE','%'.$word."%")
-                            ->orWhere('pre_sorting_weight','LIKE','%'.$word."%")
-                            ->orWhere('username','LIKE','%'.$word."%");
+                foreach(explode(',',$request->search) as $or){
+                    $query->orWhere(function ($query) use ($or) {
+                        foreach(explode(' ',$or) as $word){
+                            $query->where(function ($query) use ($word) {
+                                $query
+                                    ->where('microlocation_name','LIKE','%'.$word."%")
+                                    ->orWhere('material_name','LIKE','%'.$word."%")
+                                    ->orWhere('material_type','LIKE','%'.$word."%")
+                                    ->orWhere('pre_sorting_weight','LIKE','%'.$word."%")
+                                    ->orWhere('username','LIKE','%'.$word."%");
+                            });
+                        }
                     });
                 }
             })

@@ -11,7 +11,6 @@ class issue_types_table_seeder extends Seeder
      */
     public function run(){
         DB::table('issue_types')->insert(['issue_typename' => 'Transport']);
-		DB::table('issue_types')->insert(['issue_typename' => 'Incineration']);
 		DB::table('issue_types')->insert(['issue_typename' => 'Charity']);
 		DB::table('issue_types')->insert(['issue_typename' => 'For sale']);
     }

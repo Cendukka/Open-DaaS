@@ -24,28 +24,6 @@
             $("#to_microlocation").hide();
         }
     }
-    function details(){
-        var $detailsType = $('#type').val();
-        if($detailsType == "2"){ // Incineration
-            $("#details").children().remove();
-            $.ajax({
-                type: 'GET',
-                url : "/companies/{{$company->company_id}}/manage/issues/incineration",
-                success : function (data) {
-                    $("#details").append(data);
-                }
-            });
-            $('#addMat').hide();
-            $('#removeMat').hide();
-        }
-        else{
-            $("#details").children().remove();
-            addMat();
-            clearMaterials();
-            $('#addMat').show();
-            $('#removeMat').show();
-        }
-    }
     function clearMaterials(){
         var $ml_id = $("#from_microlocation").val();
         $.ajax({

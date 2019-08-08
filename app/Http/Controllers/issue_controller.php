@@ -38,7 +38,7 @@ class issue_controller extends Controller {
             'type' => 'required',
             'from_microlocation' => 'required|integer',
             'to_microlocation' => 'required_if:type,1|integer',
-            'material' => ['required_unless:type,2',
+            'material' => ['required',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
                         if(!is_numeric($v)) {
@@ -47,7 +47,7 @@ class issue_controller extends Controller {
                     }
                 },
             ],
-            'ewc_code' => ['required_unless:type,2',
+            'ewc_code' => ['required',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
                         if(!is_numeric($v)) {

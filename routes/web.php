@@ -137,9 +137,6 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('companies/{company}/manage/issues/new_details', function(){
         return view('includes.forms.details');
     });
-    Route::get('companies/{company}/manage/issues/incineration', function(){
-        return view('includes.forms.issue_incineration');
-    });
 
 
 });

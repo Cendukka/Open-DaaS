@@ -72,7 +72,7 @@
     <script type="text/javascript">
         function microlocation(){
             var $userType = $("#user_type").val();
-            if($userType >= 3 && $userType != null){
+            if($userType < 3 && $userType != null){
                 $("#microlocation").hide();
                 $("#toimisto").show();
             }

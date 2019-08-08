@@ -23,31 +23,6 @@ $(document).ready(function () {
             document.getElementById("toTop").style.display = "none";
         }
     }
-
-    //User create page's functions
-    function microlocation(){
-        var $userType = $("#user_type").val();
-        if($userType === "2" && $userType != null){
-            $("#microlocation").hide();
-            $("#toimisto").show();
-        }
-        else{
-            $("#microlocation").show();
-            $("#toimisto").hide();
-        }
-    }
-    function source(){
-        $("#username").val($("#first_name").val()+'.'+$("#last_name").val());
-        $("#email").val($("#first_name").val()+'.'+$("#last_name").val()+"@testdomain.fi");
-    }
-
-    microlocation();
-    source();
-    $('#user_type').on('change',microlocation);
-    $('#first_name').on('change',source);
-    $('#last_name').on('change',source);
-
-
 });
 <!-- When the user clicks on the button, scroll to the top of the document -->
 function topFunction() {

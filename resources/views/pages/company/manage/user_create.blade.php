@@ -74,4 +74,27 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        //User create page's functions
+        function microlocation(){
+            var $userType = $("#user_type").val();
+            if($userType < 3 && $userType != null){
+                $("#microlocation").hide();
+                $("#toimisto").show();
+            }
+            else{
+                $("#microlocation").show();
+                $("#toimisto").hide();
+            }
+        }
+        function username(){
+            $("#username").val($("#first_name").val()+'.'+$("#last_name").val());
+        }
+
+        microlocation();
+        username();
+        $('#user_type').on('change',microlocation);
+        $('#first_name').on('change',username);
+        $('#last_name').on('change',username);
+    </script>
 @endsection

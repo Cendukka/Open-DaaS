@@ -32,7 +32,7 @@
 
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{title_case($user->microlocation_name ?: 'Toimisto')}}</td>
+                            <td>{!!title_case($user->microlocation_name ?: '<i>Toimisto<i>')!!}</td>
                             <td>{{title_case($user->user_typename)}}</td>
                             <td>{{title_case($user->last_name)}}</td>
                             <td>{{title_case($user->first_name)}}</td>

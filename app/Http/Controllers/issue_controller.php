@@ -59,7 +59,7 @@ class issue_controller extends Controller {
             'weight' => ['required',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
-                        if(!is_numeric($v) || $v<0) {
+                        if(!is_numeric($v) || $v<0 || $v>1000000) {
                             $fail($attribute.' is invalid.');
                         }
                     }

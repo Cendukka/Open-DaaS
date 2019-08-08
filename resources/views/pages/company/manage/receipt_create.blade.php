@@ -28,7 +28,7 @@
                     @include('includes.forms.materials', ['materials' => DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get()])
                     @include('includes.forms.weight')
                     @include('includes.forms.distance')
-                    @include('includes.forms.ewc_code')
+                    @include('includes.forms.ewc_code', ['code' => '200111'])
                     @include('includes.forms.for_issue')
                     @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/receipts')])
                 </form>

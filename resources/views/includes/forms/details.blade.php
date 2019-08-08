@@ -18,7 +18,7 @@
                 <select class="form-control" name="ewc_code[]">
                     <option selected="selected" disabled hidden value=""></option>
                     @foreach (DB::table('ewc_codes')->get() as $ewc)
-                        <option value="{{$ewc->ewc_code}}" {{isset($detail) ? ($ewc->ewc_code== $detail->detail_ewc_code ? 'selected="selected"' : '') : ''}}>{{title_case($ewc->ewc_code)}}</option>
+                        <option value="{{$ewc->ewc_code}}" {{isset($detail) ? ($ewc->ewc_code== $detail->detail_ewc_code ? 'selected="selected"' : '') : ($ewc->ewc_code == '200111' ? 'selected="selected"' : '')}}>{{title_case($ewc->ewc_code.' - '.$ewc->description)}}</option>
                     @endforeach
                 </select>
             </div>

@@ -16,7 +16,7 @@
                     @endphp
                     @if(strlen($communities) <= 2)
                         <div class="form-group row">
-                            <label>No communities found</label>
+                            <label>Ei kuntia löydetty.</label>
                         </div>
                     @else
                         @foreach ($communities as $com)

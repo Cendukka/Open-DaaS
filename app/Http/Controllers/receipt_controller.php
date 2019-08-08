@@ -27,7 +27,7 @@ class receipt_controller extends Controller {
 	public function store(Request $request, company $company) {
 		$request->validate([
 			'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-			'datetime' => 'required|date_format:Y-m-d',
+			'datetime' => 'required|date_format:Y-m-d|after:-12 months|before:12 months',
             'material' => 'required|integer',
 			'source' => 'required',
 			'from_community' => 'integer|required_without_all:from_supplier,from_microlocation',
@@ -77,7 +77,7 @@ class receipt_controller extends Controller {
 	public function update(Request $request, company $company, inventory_receipt $receipt) {
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d',
+            'datetime' => 'required|date_format:Y-m-d|after:-12 months|before:12 months',
             'material' => 'required|integer',
             'source' => 'required',
             'from_community' => 'integer|required_with:from_company',

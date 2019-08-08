@@ -35,7 +35,7 @@ class refined_controller extends Controller {
 
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0',
@@ -98,7 +98,7 @@ class refined_controller extends Controller {
 
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0',

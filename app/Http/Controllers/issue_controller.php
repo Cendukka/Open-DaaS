@@ -34,7 +34,7 @@ class issue_controller extends Controller {
         # ADD MORE AUTHENTICATION HERE
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
             'type' => 'required',
             'from_microlocation' => 'required|integer',
             'to_microlocation' => 'required_if:type,1|integer',
@@ -113,7 +113,7 @@ class issue_controller extends Controller {
 
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
             'type' => 'required',
             'from_microlocation' => 'required|integer',
             'to_microlocation' => 'required_if:type,1|integer',

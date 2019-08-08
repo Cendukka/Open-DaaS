@@ -31,7 +31,7 @@ class pre_controller extends Controller {
     public function store(Request $request, company $company) {
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
             'receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0',
@@ -75,7 +75,7 @@ class pre_controller extends Controller {
     public function update(Request $request, company $company, pre_sorting $pre) {
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s',
+            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
             'receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0',

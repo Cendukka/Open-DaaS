@@ -13,7 +13,7 @@
                     @include('includes.forms.created_modified', ['created_at' => $pre->created_at, 'updated_at' => $pre->updated_at])
                     @include('includes.forms.datetime',     ['time' => $pre->pre_sorting_date])
                     @include('includes.forms.users',        ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get(), 'selected_user_id' => $pre->pre_sorting_user_id])
-                    @include('includes.forms.materials',    ['materials' => DB::table('material_names')->whereIn('material_type',['refined'])->get(), 'selected_material_id' => $pre->pre_sorting_material_id])
+                    @include('includes.forms.materials',    ['materials' => DB::table('material_names')->whereIn('material_type',['presorted','refined'])->get(), 'selected_material_id' => $pre->pre_sorting_material_id])
                     @php
                         // Find the microlocation from receipt_id
                         $selected_microlocation_id = DB::table('microlocations')

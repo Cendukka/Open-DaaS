@@ -34,7 +34,7 @@ class receipt_export implements ShouldAutoSize, FromCollection, WithHeadings {
         return [
             'Päivämäärä',
             'Vastaanottaja',
-            'Lähettävä Mikrolokaatio',
+            'Lähettävä Toimipiste',
             'Lähettävä Community',
             'Lähettävä Toimittaja',
             'Materiaali',

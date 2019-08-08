@@ -12,7 +12,7 @@
                     <thead>
                     <tr>
 
-                        <th>Microlokaatio</th>
+                        <th>Toimipiste</th>
                         <th>Tyyppi</th>
                         <th>Sukunimi</th>
                         <th>Etunimi</th>

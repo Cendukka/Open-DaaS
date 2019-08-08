@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="form-group row" >
-                        <label class="col-sm-2 col-form-label" for="microlocation">Microlokaatio:</label>
+                        <label class="col-sm-2 col-form-label" for="microlocation">Toimipiste:</label>
                         <div class="col-sm-10">
                             <select class="form-control element-width-auto form-field-width" name="microlocation" id="microlocation">
                                 <option selected="selected" hidden disabled value=""></option>

@@ -37,7 +37,7 @@ class issue_controller extends Controller {
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'type' => 'required',
             'from_microlocation' => 'required|integer',
-            #'to_microlocation' => 'required|integer',
+            'to_microlocation' => 'required_if:type,1|integer',
             'material' => ['required_unless:type,2',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
@@ -116,7 +116,7 @@ class issue_controller extends Controller {
             'datetime' => 'required|date_format:Y-m-d H:i:s',
             'type' => 'required',
             'from_microlocation' => 'required|integer',
-            'to_microlocation' => 'required|integer',
+            'to_microlocation' => 'required_if:type,1|integer',
             'material' => ['required',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {

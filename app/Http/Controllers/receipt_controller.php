@@ -224,7 +224,7 @@ class receipt_controller extends Controller {
                 $result = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
                 if($result->count()>0) {
                     $output .= '<div id="from_microlocation" class="form-group">';
-                        $output .= '<label class="col-sm-2 col-form-label" for="from_microlocation">Mikrolokaatiosta:</label>';
+                        $output .= '<label class="col-sm-2 col-form-label" for="from_microlocation">Toimipisteestä:</label>';
                         $output .= '<div class="col-sm-10">';
                             $output .= '<select class="form-control element-width-auto form-field-width" name="from_microlocation">';
                             $output .= '<option selected="selected" disabled hidden value=""></option>';

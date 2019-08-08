@@ -22,7 +22,7 @@
                 <br>
                 <h5>Organisaatio: {{$company->company_name}}</h5>
                 @if(isset(Auth::user()->user_microlocation_id))
-                    <h6>Mikrolokaatio: {{\App\microlocation::find(Auth::user()->user_microlocation_id)->microlocation_name}}</h6>
+                    <h6>Toimipiste: {{\App\microlocation::find(Auth::user()->user_microlocation_id)->microlocation_name}}</h6>
                 @endif
             </a>
         </div>

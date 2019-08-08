@@ -12,7 +12,7 @@
                     <thead>
                     <tr>
                         <th>Päivämäärä</th>
-                        <th>Microlokaatio</th>
+                        <th>Toimipiste</th>
                         <th>Materiaali</th>
                         <th>Paino (Kg)</th>
                         <th>Käyttäjä</th>

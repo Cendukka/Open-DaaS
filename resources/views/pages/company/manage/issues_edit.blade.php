@@ -24,9 +24,9 @@
                             </select>
                         </div>
                     </div>
-                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id'=> $issue->issue_from_microlocation_id,'tag' => 'from_microlocation', 'name' => 'Mikrolokaatiosta:', 'disabled' => Auth::user()->user_type_id > 2])
+                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id'=> $issue->issue_from_microlocation_id,'tag' => 'from_microlocation', 'name' => 'Toimipisteestä:', 'disabled' => Auth::user()->user_type_id > 2])
                     <div class="form-group row" id="to_microlocation">
-                        <label class="col-sm-2 col-form-label" for="to_microlocation">Mihin microlokaatioon</label>
+                        <label class="col-sm-2 col-form-label" for="to_microlocation">Mihin toimipisteeseen:</label>
                         <div class="col-sm-10">
                             <select class="form-control element-width-auto form-field-width" name="to_microlocation" id="to_microlocation">
                                 <option selected="selected" hidden disabled value=""></option>

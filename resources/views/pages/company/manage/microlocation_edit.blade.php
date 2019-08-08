@@ -1,10 +1,10 @@
 @extends('layouts.macrolocation')
-@section('title', 'Hallinnoi: Mikrolokaationin muokkaus')
+@section('title', 'Hallinnoi: Toimipisteen muokkaus')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Muokkaa microlokaatiota </h3>
+                <h3>Muokkaa toimipistettä </h3>
             </div>
             <div class="panel-body">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="type">Microlokaation tyyppi:</label>
+                            <label class="col-sm-2 col-form-label" for="type">Toimipisteen tyyppi:</label>
                             <div class="col-sm-10">
                                 <select class="form-control element-width-auto form-field-width" name="type">
                                     <option selected="selected" hidden disabled value=""></option>
@@ -28,11 +28,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="name">Microlokaation nimi</label>
+                            <label class="col-sm-2 col-form-label" for="name">Toimipisteen nimi</label>
                             <div class="col-sm-10">
                                 <input type="text" maxlength="191" class="form-control element-width-auto form-field-width" name="name" value="{{title_case($microlocation->microlocation_name)}}"/>
                                 <small class="form-text text-muted">
-                                    Valitse, mikrolokaatiolle joku kuvaava nimi, mistä sen tunnistaa helposti.
+                                    Valitse, toimipisteelle joku kuvaava nimi, mistä sen tunnistaa helposti.
                                 </small>
                             </div>
                         </div>

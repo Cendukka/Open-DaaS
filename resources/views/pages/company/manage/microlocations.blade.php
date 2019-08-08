@@ -1,10 +1,10 @@
 @extends('layouts.macrolocation')
-@section('title', 'Hallinnoi: Mikrolokaatiot')
+@section('title', 'Hallinnoi: Toimipisteet')
 @section('content')
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Hallitse microlokaatioita </h3>
+                <h3>Hallitse toimipisteitä </h3>
             </div>
             <div class="panel-body">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
@@ -42,7 +42,7 @@
                 </table>
                 @if(Auth::user()->user_type_id <= 2)
                     <form action="{{url(url()->current().'/create')}}">
-                        <button type="submit" class="btn btn-secondary">+ Lisää microlokaatio</button>
+                        <button type="submit" class="btn btn-secondary">+ Lisää toimipiste</button>
                     </form>
                 @endif
             </div>

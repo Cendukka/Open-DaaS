@@ -23,7 +23,7 @@
                         <div class="form-group row ">
                             <div class="col-sm-4"></div>
                             <div class="col-sm-3 text-left">
-                                <h3>{{title_case($com->community_city)}}</h3>
+                                <a>{{title_case($com->community_city)}}</a>
                             </div>
                             @if(Auth::user()->user_type_id <= 2)
                                 <div class="col-sm-1 text-left">

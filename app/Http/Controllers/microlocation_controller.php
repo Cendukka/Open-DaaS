@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\community;
 use App\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,6 +50,14 @@ class microlocation_controller extends Controller {
         ]);
 
         $ml->save();
+
+        if(DB::table('community')->where('community_company_id','=',$company->company_id)->where('community_city','=',$request->get('city'))->get()->count() == 0){
+            $communityNew = new community([
+                'community_company_id' => $company->company_id,
+                'community_city' => $request->get('city'),
+            ]);
+            $communityNew->save();
+        }
 
         return redirect()->action('microlocation_controller@index', ['company' => $company])->withErrors(['Toimipiste luotu onnistuneesti.']);
     }

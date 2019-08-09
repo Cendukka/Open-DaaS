@@ -129,9 +129,16 @@
                             <a id="home"    href="/" class="btn btn-info btn-lg logout" style="display: none">Etusivu</a>
                                 <script type="text/javascript">
                                     {
-                                        if (window.location.href === "http://127.0.0.1:8000/contactLists") {
+                                        var contactRootUrl = "http://"+window.location.host+"/contactLists";
+                                        var loginRootUrl = "http://"+window.location.host+"/login";
+                                        console.log(contactRootUrl);
+                                        console.log(loginRootUrl);
+                                        if (window.location.href === contactRootUrl) {
                                         document.getElementById("contact").style.display = "none";
                                         document.getElementById("home").style.display = "";
+                                        }
+                                        else if(window.location.href === loginRootUrl){
+                                            document.getElementById("home").style.display = "";
                                         }
 
                                      }

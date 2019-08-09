@@ -5,7 +5,9 @@
 <title>Open Daas - @yield('title') </title>
 
 <!-- Bootstrap CSS CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!-- Our Custom CSS -->
 <link rel="stylesheet" href="{{asset('css/sidebar.css')}}" type="text/css">

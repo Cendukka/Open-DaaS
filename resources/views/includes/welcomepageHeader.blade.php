@@ -116,9 +116,9 @@
             <div class="container-fluid">
 
                 <div class="navbar-header">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
-                        <i class="glyphicon glyphicon-menu-hamburger"></i>
-                    </button>
+
+                        <i type="button" id="sidebarCollapse" class="material-icons">toggle_on</i>
+
                 </div>
 
                 <div class="navbar-collapse" id="bs-example-navbar-collapse-1">

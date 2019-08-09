@@ -259,14 +259,14 @@ class issue_controller extends Controller {
                 ->get();
 			if($result){
 				foreach ($result as $key => $value){
-					$output.='<tr>'.
-                        '<td>'.date("d-m-Y",strtotime($value->issue_date)).'</td>'.
+                    $output.='<tr class="text-left">'.
+                        '<td class="text-center">'.date("d-m-Y",strtotime($value->issue_date)).'</td>'.
                         '<td>'.title_case($value->from_microlocation).'</td>'.
                         '<td>'.$value->issue_typename.'</td>'.
 						'<td>'.title_case(($value->to_microlocation ?: $value->company_name)).'</td>'.
 						'<td>'.$value->username.'</td>'.
-						'<td>'.$value->sumweight.'</td>'.
-                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->from_microlocation_id ? '<td><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'"><i class="glyphicon glyphicon-pencil"></i></a></td>' : '').
+						'<td class="text-right">'.$value->sumweight.'</td>'.
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->from_microlocation_id ? '<td class="text-center"><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'"><i class="glyphicon glyphicon-pencil"></i></a></td>' : '').
 						'</tr>';
 				}
                 $output.='<tr>'.

@@ -215,13 +215,13 @@ class refined_controller extends Controller {
                 ->get();
 			if($result){
 				foreach ($result as $key => $value){
-					$output.='<tr>'.
-                        '<td>'.date("d-m-Y",strtotime($value->refined_date)).'</td>'.
+                    $output.='<tr class="text-left">'.
+                        '<td class="text-center">'.date("d-m-Y",strtotime($value->refined_date)).'</td>'.
                         '<td>'.title_case($value->microlocation_name).'</td>'.
-						'<td>'.$value->refined_weight.'</td>'.
+						'<td class="text-right">'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.
-                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->microlocation_id ? '<td><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'"> <span class="glyphicon glyphicon-pencil"></span></a></td>' : '').
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->microlocation_id ? '<td class="text-center"><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'"> <span class="glyphicon glyphicon-pencil"></span></a></td>' : '').
 						'</tr>';
 				}
 				$output.='<tr>'.

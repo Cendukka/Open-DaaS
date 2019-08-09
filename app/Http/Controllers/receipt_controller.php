@@ -209,17 +209,17 @@ class receipt_controller extends Controller {
                     $from =  ($value->from_community_id ? ['Ulkoinen',DB::table('community')->join('company','community_company_id','company_id')->where('community_id',$value->from_community_id)->first()->company_name.', ('.DB::table('community')->where('community_id',$value->from_community_id)->first()->community_city.')'] :
                         ($value->from_supplier ? ['Toimittaja',$value->from_supplier] :
                             ['Sisäinen',$value->from_microlocation_name]));
-                    $output.='<tr>'.
-                        '<td>'.date("d-m-Y",strtotime($value->receipt_date)).'</td>'.
+                    $output.='<tr class="text-left">'.
+                        '<td class="text-center">'.date("d-m-Y",strtotime($value->receipt_date)).'</td>'.
                         '<td>'.title_case($from[0]).'</td>'.
                         '<td>'.title_case(mb_strimwidth($from[1],0,35,'...')).'</td>'.
                         '<td>'.title_case($value->to_microlocation_name).'</td>'.
                         '<td>'.$value->material_name.'</td>'.
-                        '<td>'.$value->receipt_weight.'</td>'.
-                        '<td>'.$value->distance_km.'</td>'.
-                        '<td>'.$value->receipt_ewc_code.'</td>'.
-                        '<td>'.($value->is_for_issue ? 'Kyllä' : 'Ei').'</td>'.
-                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->to_microlocation_id ? '<td><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>' : '').
+                        '<td class="text-right">'.$value->receipt_weight.'</td>'.
+                        '<td class="text-right">'.$value->distance_km.'</td>'.
+                        '<td class="text-right">'.$value->receipt_ewc_code.'</td>'.
+                        '<td class="text-center"><span style="color:'.($value->is_for_issue ? 'green' : 'red').'" class="glyphicon glyphicon-'.($value->is_for_issue ? 'ok' : 'remove').'-circle"></span></td>'.
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->to_microlocation_id ? '<td class="text-center"><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>' : '').
                         '</tr>';
                 }
                 $output.='<tr>'.

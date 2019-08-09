@@ -33,7 +33,7 @@
 {{--                                        @if($material->inventory_weight != 0)--}}
                                             <tr>
                                                 <td style="text-align:left;{{$material->inventory_weight < 0 ? ' color:red;' : ($material->inventory_weight == 0 ? ' color:lightgray;' : '')}}">{{$material->material_name}}</td>
-                                                <td style="text-align:left;{{$material->inventory_weight < 0 ? ' color:red;' : ($material->inventory_weight == 0 ? ' color:lightgray;' : '')}}">{{$material->inventory_weight}}</td>
+                                                <td style="text-align:right;{{$material->inventory_weight < 0 ? ' color:red;' : ($material->inventory_weight == 0 ? ' color:lightgray;' : '')}}">{{$material->inventory_weight}}</td>
                                             </tr>
 {{--                                        @endif--}}
                                     @endforeach

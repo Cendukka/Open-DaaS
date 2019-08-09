@@ -74,9 +74,7 @@
             <div class="container-fluid">
 
                 <div class="navbar-header">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
-                        <i class="glyphicon glyphicon-menu-hamburger"></i>
-                    </button>
+                    <i href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</i>
                 </div>
                 <div class="col-sm-3">
                     <h4>Käyttäjä: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h4>

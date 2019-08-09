@@ -30,9 +30,7 @@
                     <div class="container-fluid">
 
                         <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn toggle">
-                                <i class="glyphicon glyphicon-menu-hamburger"></i>
-                            </button>
+                            <a href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</a>
                             <span><h4>Käyttäjä: {{ Auth::user()->first_name }}</h4></span>
                         </div>
 

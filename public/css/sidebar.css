@@ -244,6 +244,8 @@ a.logout {
     background: #686868 !important;
     color: #fff !important;
     border-color: transparent !important;
+    max-width: 20rem !important;
+    font-size: 18px;
 }
 
 a.logout:hover {

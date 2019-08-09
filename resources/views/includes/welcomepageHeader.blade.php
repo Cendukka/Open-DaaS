@@ -111,71 +111,63 @@
 
     <!-- Page Content Holder -->
     <div id="content">
-
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-
-                <div class="navbar-header">
-
-                        <i type="button" id="sidebarCollapse" class="material-icons">toggle_on</i>
-
-                </div>
-
-                <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-
-
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</a>
+                <div class="collapse navbar-collapse " id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item p-1">
                             <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout" >Yhteystiedot</a>
-                            <a id="home"    href="/" class="btn btn-info btn-lg logout" style="display: none">Etusivu</a>
-                                <script type="text/javascript">
-                                    {
-                                        var contactRootUrl = "http://"+window.location.host+"/contactLists";
-                                        var loginRootUrl = "http://"+window.location.host+"/login";
-                                        console.log(contactRootUrl);
-                                        console.log(loginRootUrl);
-                                        if (window.location.href === contactRootUrl) {
+                        </li>
+                        <li class="nav-item p-1">
+                            <a id="home" href="/" class="btn btn-info btn-lg logout" style="display: none">Etusivu</a>
+                            <script type="text/javascript">
+                                {
+                                    var contactRootUrl = "http://"+window.location.host+"/contactLists";
+                                    var loginRootUrl = "http://"+window.location.host+"/login";
+                                    console.log(contactRootUrl);
+                                    console.log(loginRootUrl);
+                                    if (window.location.href === contactRootUrl) {
                                         document.getElementById("contact").style.display = "none";
                                         document.getElementById("home").style.display = "";
-                                        }
-                                        else if(window.location.href === loginRootUrl){
-                                            document.getElementById("home").style.display = "";
-                                        }
-
-                                     }
-                                </script>
-
-
-
-                        @guest
-                            <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
-
-                        <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+                                    }
+                                    else if(window.location.href === loginRootUrl){
+                                        document.getElementById("home").style.display = "";
+                                    }
+                                }
+                            </script>
+                        </li>
+                            @guest
+                            <li class="nav-item p-1">
+                                <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
+                            </li>
+                            <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
 
 
-                        @else
-                            @if(Auth::user()->user_type_id == 1)
-
-                                <a href="/home" class="btn btn-info btn-lg logout">Hallinta</a>
-                            @elseif(Auth::user()->user_type_id >= 2)
-                                <a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout">Hallinta</a>
-                            @endif
-
-                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a>
-                        @csrf
-                        @endguest
-
+                            @else
+                                @if(Auth::user()->user_type_id == 1)
+                                <li class="nav-item p-1">
+                                    <a href="/home" class="btn btn-info btn-lg logout">Hallinta</a>
+                                </li>
+                                @elseif(Auth::user()->user_type_id >= 1)
+                                <li class="nav-item p-1">
+                                    <a href="/companies/{{Auth::user()->user_company_id}}" class="btn btn-info btn-lg logout">Hallinta</a>
+                                </li>
+                                @endif
+                                    <li class="nav-item p-1">
+                                <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a>
+                                    </li>
+                                @csrf
+                            @endguest
                     </ul>
                 </div>
-            </div>
         </nav>
-        <!-- Main Page Content Holder -->
         <div id="main" class="column">
             @yield('content')
         </div>
 
         <!-- Back To The Top Button -->
         <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span> UP</button>
-
     </div>
+        <!-- Main Page Content Holder -->
 
 </div>

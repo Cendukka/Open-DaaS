@@ -1,15 +1,10 @@
 @extends('layouts.default')
 @section('title', 'Menu')
 @section('content')
-    <div id="content2" class="row">
+    <div class="form-group row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                @guest
-                @else
-                    <h2>Welcome  {{ Auth::user()->first_name }}</h2>
-                    <br>
-
-                @endguest
+                <h3>Tervetuloa  {{ Auth::user()->first_name }}</h3>
             </div>
             <div class="panel-body">
                 <h4>Tämä on etusivu</h4>
@@ -17,4 +12,4 @@
             </div>
         </div>
     </div>
-@stop
+@endsection

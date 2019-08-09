@@ -8,7 +8,7 @@
             <a href="/home"><h4>Open DaaS</h4><br><h5>Admin</h5></a>
 		</div>
 
-		<ul class="list-unstyled components">
+		<ul class="list-group components">
 			<li>
 				<a href="/home">Etusivu</a>
 				<a href="/companies/">Organisaatiot</a>
@@ -25,35 +25,32 @@
 
     <!-- Page Content Holder -->
     <div id="content">
-
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-
-                        <div class="navbar-header">
-                            <a href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</a>
-                            <span><h4>Käyttäjä: {{ Auth::user()->first_name }}</h4></span>
-                        </div>
-
-                        <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav navbar-right">
-                                <a href="/home" class="btn btn-info btn-lg logout">Admin Etusivu</a>
-
-
-                                <!-- <a href="/home" class="btn btn-info btn-lg logout">Etusivu</a> -->
-
-                                <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
-                                @guest
-                                    <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
-                                @else
-
-
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="navbar-header">
+                    <a href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</a>
+                    <span><h5>Käyttäjä: {{ Auth::user()->first_name }}</h5></span>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item p-1">
+                            <a href="/home" class="btn btn-info btn-lg logout">Admin Etusivu</a>
+                        </li>
+                        <li class="nav-item p-1">
+                            <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
+                        </li>
+                        @guest
+                            <li class="nav-item p-1">
+                                <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
+                            </li>
+                        @else
+                            <li class="nav-item p-1">
                                 <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a>
-                                @csrf
-                                @endguest
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                            </li>
+                        @csrf
+                        @endguest
+                    </ul>
+                </div>
+            </nav>
 
 		<!-- Main Page Content Holder -->
 		<div id="main" class="column">

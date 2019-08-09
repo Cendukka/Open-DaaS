@@ -69,38 +69,37 @@
 
     <!-- Page Content Holder -->
     <div id="content">
-
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-
-                <div class="navbar-header">
-                    <i href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</i>
-                </div>
-                <div class="col-sm-3">
-                    <h4>Käyttäjä: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h4>
-                </div>
-
-                <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                    <ul class="nav navbar-nav navbar-right">
-                        @if(!(Auth::user()->user_type_id=='1'))
-                            <a href="/companies/{{$company->company_id}}/" class="btn btn-info btn-lg logout">Organisaation Etusivu</a>
-                        @else
-                            <a href="/home" class="btn btn-info btn-lg logout">Admin Etusivu</a>
-                        @endif
-                            <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
-                            @guest
-                                <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
-                        @else
-                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
-                            @csrf
-                        @endguest
-                    </ul>
-
-                </div>
-
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-header">
+                <i href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</i>
+                <h4>Käyttäjä: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h4>
             </div>
-
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="navbar-nav ml-auto">
+                    @if(!(Auth::user()->user_type_id=='1'))
+                        <li class="nav-item p-1">
+                            <a href="/companies/{{$company->company_id}}/" class="btn btn-info btn-lg logout">Organisaation Etusivu</a>
+                        </li>
+                    @else
+                        <li class="nav-item p-1">
+                            <a href="/home" class="btn btn-info btn-lg logout">Admin Etusivu</a>
+                        </li>
+                    @endif
+                        <li class="nav-item p-1">
+                            <a href="/" class="btn btn-info btn-lg logout">Julkinen sivu</a>
+                        </li>
+                        @guest
+                            <li class="nav-item p-1">
+                                <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
+                            </li>
+                    @else
+                        <li class="nav-item p-1">
+                            <a href="{{route('logout') }}" class="btn btn-info btn-lg logout">Kirjaudu ulos</a></li>
+                        </li>
+                        @csrf
+                    @endguest
+                </ul>
+            </div>
         </nav>
 
         <!-- Main Page Content Holder -->

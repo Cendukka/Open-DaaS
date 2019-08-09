@@ -38,6 +38,7 @@ class issue_controller extends Controller {
             'type' => 'required',
             'from_microlocation' => 'required|integer',
             'to_microlocation' => 'required_if:type,1|integer',
+            'to_company' => 'required_if:type,2|integer',
             'material' => ['required',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
@@ -71,19 +72,22 @@ class issue_controller extends Controller {
             'type' => 'Lähetyksen tyyppi',
             'from_microlocation' => 'Toimipisteestä',
             'to_microlocation' => 'Toimipisteeseen',
+            'to_company' => 'Organisaatioon',
             'material' => 'Materiaali',
             'ewc_code' => 'EWC Koodi',
             'weight' => 'Paino',
         ]);
 
         $microlocation = $request->get('from_microlocation');
+        $type = $request->get('type');
 
         $issue = new inventory_issue([
             'issue_user_id' => $request->get('user') ?: Auth::user()->user_id,
             'issue_date' => $request->get('datetime'),
-            'issue_type_id' => $request->get('type'),
+            'issue_type_id' => $type,
             'issue_from_microlocation_id' => $microlocation,
-            'issue_to_microlocation_id' => $request->get('to_microlocation'),
+            'issue_to_microlocation_id' => ($type == 1 ? $request->get('to_microlocation') : NULL),
+            'issue_to_company_id' => ($type == 2 ? $request->get('to_company') : NULL),
         ]);
         $issue->save();
 
@@ -126,6 +130,7 @@ class issue_controller extends Controller {
             'type' => 'required',
             'from_microlocation' => 'required|integer',
             'to_microlocation' => 'required_if:type,1|integer',
+            'to_company' => 'required_if:type,2|integer',
             'material' => ['required',
                 function ($attribute, $value, $fail) {
                     foreach($value as $v) {
@@ -153,16 +158,28 @@ class issue_controller extends Controller {
                     }
                 },
             ],
+        ],[],[
+            'user' => 'Käyttäjä',
+            'datetime' => 'Aika',
+            'type' => 'Lähetyksen tyyppi',
+            'from_microlocation' => 'Toimipisteestä',
+            'to_microlocation' => 'Toimipisteeseen',
+            'to_company' => 'Organisaatioon',
+            'material' => 'Materiaali',
+            'ewc_code' => 'EWC Koodi',
+            'weight' => 'Paino',
         ]);
 
         $microlocation = $request->get('from_microlocation');
+        $type = $request->get('type');
 
         $issueNew = inventory_issue::find($issue->issue_id);
         $issueNew->issue_user_id = $request->get('user') ?: Auth::user()->user_id;
         $issueNew->issue_date = $request->get('datetime');
         $issueNew->issue_type_id = $request->get('type');
         $issueNew->issue_from_microlocation_id = $microlocation;
-        $issueNew->issue_to_microlocation_id = $request->get('to_microlocation');
+        $issueNew->issue_to_microlocation_id = ($type == 1 ? $request->get('to_microlocation') : NULL);
+        $issueNew->issue_to_microlocation_id = ($type == 2 ? $request->get('to_company') : NULL);
 
 
         # Remove old data
@@ -222,6 +239,7 @@ class issue_controller extends Controller {
             ->join('issue_types','inventory_issue.issue_type_id','=','issue_types.issue_type_id')
             ->join('microlocations as from_microlocations','issue_from_microlocation_id','=','from_microlocations.microlocation_id')
             ->leftJoin('microlocations as to_microlocations','issue_to_microlocation_id','=','to_microlocations.microlocation_id')
+            ->leftJoin('company','issue_to_company_id','=','company_id')
             ->join('users','users.user_id','=','issue_user_id')
             ->joinSub(DB::table('inventory_issue_details')
                 ->select('detail_issue_id',DB::raw('SUM(detail_weight) as sumweight'))
@@ -237,7 +255,7 @@ class issue_controller extends Controller {
 			$output="";
             $result = app('App\Http\Controllers\issue_controller')
                 ->query($request,$company)
-                ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','from_microlocations.microlocation_id as from_microlocation_id','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','issue_id','sumweight')
+                ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','from_microlocations.microlocation_id as from_microlocation_id','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','issue_id','sumweight','company_name')
                 ->get();
 			if($result){
 				foreach ($result as $key => $value){
@@ -245,7 +263,7 @@ class issue_controller extends Controller {
                         '<td>'.date("d-m-Y",strtotime($value->issue_date)).'</td>'.
                         '<td>'.title_case($value->from_microlocation).'</td>'.
                         '<td>'.$value->issue_typename.'</td>'.
-						'<td>'.title_case($value->to_microlocation).'</td>'.
+						'<td>'.title_case(($value->to_microlocation ?: $value->company_name)).'</td>'.
 						'<td>'.$value->username.'</td>'.
 						'<td>'.$value->sumweight.'</td>'.
                         (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->from_microlocation_id ? '<td><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'"><i class="glyphicon glyphicon-pencil"></i></a></td>' : '').

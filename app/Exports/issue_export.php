@@ -24,7 +24,7 @@ class issue_export implements ShouldAutoSize, FromCollection, WithHeadings {
 
         $data = app('App\Http\Controllers\issue_controller')
             ->query($request,$company)
-            ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','issue_typename','to_microlocations.microlocation_name as to_microlocation','users.username','sumweight')
+            ->select('issue_date','from_microlocations.microlocation_name as from_microlocation','issue_typename','to_microlocations.microlocation_name as to_microlocation','company_name','users.username','sumweight')
             ->get();
 
         return $data;
@@ -35,6 +35,7 @@ class issue_export implements ShouldAutoSize, FromCollection, WithHeadings {
             'Päivämäärä',
             'Lähetyksen lähde',
             'Lähetyksen tyyppi',
+            'Lähetyksen kohde',
             'Lähetyksen kohde',
             'Kirjauksen tekijä',
             'Määrä (Kg)'

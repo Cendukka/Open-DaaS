@@ -10,8 +10,9 @@ class issue_types_table_seeder extends Seeder
      * @return void
      */
     public function run(){
-        DB::table('issue_types')->insert(['issue_typename' => 'Transport']);
-		DB::table('issue_types')->insert(['issue_typename' => 'Charity']);
-		DB::table('issue_types')->insert(['issue_typename' => 'For sale']);
+        DB::table('issue_types')->insert(['issue_typename' => 'Sisäinen siirto']);
+		DB::table('issue_types')->insert(['issue_typename' => 'Ulkoinen siirto']);
+		DB::table('issue_types')->insert(['issue_typename' => 'Hyväntekeväisyys']);
+		DB::table('issue_types')->insert(['issue_typename' => 'Myynti']);
     }
 }

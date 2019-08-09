@@ -15,13 +15,19 @@
             $("#details").children("p:last").remove();
         }
     }));
-    function toMicrolocation(){
+    function toDestination(){
         var $issueType = $("#type").val();
-        if($issueType == 1){ // Transport
+        if($issueType == 1){ // Sisäinen siirto
             $("#to_microlocation").show();
+            $("#to_company").hide();
+        }
+        else if($issueType == 2){ // Ulkoinen siirto
+            $("#to_microlocation").hide();
+            $("#to_company").show();
         }
         else{
             $("#to_microlocation").hide();
+            $("#to_company").hide();
         }
     }
     function clearMaterials(){
@@ -51,9 +57,9 @@
     });
 
     // Show/hide To Microlocation depending on issue type
-    $(document).ready(toMicrolocation);
+    $(document).ready(toDestination);
     // $(document).ready(details);
-    $('#type').on('change',toMicrolocation);
+    $('#type').on('change',toDestination);
     $('#type').on('change',details);
 
 

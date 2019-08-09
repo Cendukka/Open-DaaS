@@ -17,6 +17,7 @@ class InventoryIssueTable extends Migration
             $table->increments('issue_id')->unsigned();
 			$table->integer('issue_from_microlocation_id')->unsigned();
 			$table->integer('issue_to_microlocation_id')->unsigned()->nullable();
+			$table->integer('issue_to_company_id')->unsigned()->nullable();
 			$table->integer('issue_type_id')->unsigned();
             $table->dateTime('issue_date');
 			$table->integer('issue_user_id')->unsigned();
@@ -26,6 +27,7 @@ class InventoryIssueTable extends Migration
 
 			$table->foreign('issue_from_microlocation_id')->references('microlocation_id')->on('microlocations');
 			$table->foreign('issue_to_microlocation_id')->references('microlocation_id')->on('microlocations');
+			$table->foreign('issue_to_company_id')->references('company_id')->on('company');
 			$table->foreign('issue_type_id')->references('issue_type_id')->on('issue_types');
 			$table->foreign('issue_user_id')->references('user_id')->on('users');
         });

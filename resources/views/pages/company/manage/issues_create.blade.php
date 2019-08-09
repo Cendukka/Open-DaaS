@@ -35,6 +35,17 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group row" id="to_company">
+                        <label class="col-sm-2 col-form-label" for="to_microlocation">Mihin organisaatioon:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control element-width-auto form-field-width" name="to_company" id="to_company">
+                                <option selected="selected" hidden disabled value=""></option>
+                                @foreach (DB::table('company')->where('company_id','!=',$company->company_id)->get() as $c)
+                                    <option value="{{$c->company_id}}">{{title_case($c->company_name)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div id="details" class="form-group">
                         @include('includes.forms.details')
                     </div>

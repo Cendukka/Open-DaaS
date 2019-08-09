@@ -27,7 +27,6 @@
                     <br>
                     <div class="row">
                         <div id="piechartWhole" class="col-md-4"></div>
-                        <div id="piechartFraction" class="col-md-6"></div>
                         <div id="chart_div" class="col-md-6" style="width: 900px; height: 500px"></div>
                     </div>
 
@@ -134,6 +133,7 @@
                             var options = {
                                     width: 900,
                                     height: 500,
+                                    backgroundColor: 'transparent',
                                     hAxis: {
                                         title: 'Aika',
                                         format: 'M/yy',

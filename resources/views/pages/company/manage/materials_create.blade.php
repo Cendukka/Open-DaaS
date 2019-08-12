@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('title', 'Hallinnoi: Materiaalin luominen')
 @section('content')
-    <div id="content2" class="row">
+    <div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Lisää uusi materiaali </h3>
@@ -34,7 +34,11 @@
                                 </select>
                             </div>
                         </div>
-                            @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/materials')])
+                        <div class="form-group row">
+                            <div class="col-sm-5">
+                                @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/materials')])
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

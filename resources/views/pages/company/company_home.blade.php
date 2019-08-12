@@ -1,7 +1,7 @@
 @extends('layouts.macrolocation')
 @section ('title', $company->company_name)
 @section('content')
-    <div id="content2" class="row">
+    <div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Organisaation hallinnan kotisivut: {{$company->company_name}}</h3>

@@ -1,7 +1,7 @@
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Toimipisteen luominen')
 @section('content')
-    <div id="content2" class="row">
+    <div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Lisää toimipiste </h3>

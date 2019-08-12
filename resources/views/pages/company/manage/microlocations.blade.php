@@ -6,7 +6,7 @@
             <div class="panel-heading">
                 <h3>Hallitse toimipisteitä </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body p-4">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <table class="table table-bordeless table-hover">
                     <thead>
@@ -34,7 +34,7 @@
                             <td>{{title_case($ml->microlocation_postal_code)}}</td>
                             <td>{{title_case($ml->microlocation_city)}}</td>
                             @if(Auth::user()->user_type_id <= 2)
-                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/microlocations/'.$ml->microlocation_id.'/edit')}}"> <i class="material-icons">edit</i></a></td>
                             @endif
                         </tr>
                     @endforeach

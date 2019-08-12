@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('title', 'Hallinnoi: Organisaation luominen')
 @section('content')
-<div id="content2" class="row">
+<div>
     <div class="panel panel-default">
         <div class="panel-heading" >
             <h2>Organisaation rekisteröinti lomake</h2>
@@ -39,7 +39,11 @@
                             <input type="text" name="kaupunki" placeholder="Kaupunki" class="form-control">
                         </div>
                     </div>
-                    @include('includes.forms.buttons', ['submit' => 'Rekisteröi', 'cancel' => url('/home')])
+                    <div class="form-group row">
+                        <div class="col-sm-5">
+                            @include('includes.forms.buttons', ['submit' => 'Rekisteröi', 'cancel' => url('/home')])
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

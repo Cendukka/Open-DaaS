@@ -2,12 +2,12 @@
 @section('title', 'Hallinnoi: Materiaalit')
 @section('title', 'Materiaalit')
 @section('content')
-    <div id="content2" class="row">
+    <div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Materiaalit </h3>
             </div>
-            <div class="panel-body" style="text-align:left;">
+            <div class="panel-body p-4" style="text-align:left;">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 @foreach (DB::table('material_names')->distinct('material_type')->pluck('material_type') as $type)
                     <table class="table table-borderless table-hover" style="max-width: 500px;">
@@ -21,7 +21,7 @@
                                     <a>{{title_case($material->material_name)}}</a>
                                 </td>
                                 <td style="text-align:center;">
-                                    <a href="{{url('/materials/'.$material->material_id.'/edit')}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="{{url('/materials/'.$material->material_id.'/edit')}}"><i class="material-icons">edit</i></a>
                                 </td>
                             </tr>
                         @endforeach

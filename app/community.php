@@ -9,7 +9,7 @@ class community extends Model {
 	public $timestamps = false;
 	protected $table = "community";
 	protected $primaryKey = "community_id";
-	protected $fillable = ['community_company_id','community_city'];
+	protected $fillable = ['community_company_id','community_city','is_disabled'];
 	
 	public function company() {
 		return $this->belongsTo(company::class,'company_id');

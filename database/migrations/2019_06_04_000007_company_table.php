@@ -19,7 +19,7 @@ class CompanyTable extends Migration
 			$table->string('company_street_address',191);
 			$table->char('company_postal_code',5);
 			$table->string('company_city',50);
-            $table->integer('disabled')->unsigned()->default(0);
+            $table->integer('is_disabled')->unsigned()->default(0);
         });
     }
 

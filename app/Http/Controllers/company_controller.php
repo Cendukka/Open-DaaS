@@ -41,6 +41,7 @@ class company_controller extends Controller {
 			'company_street_address' => $request->get('katuosoite'),
 			'company_postal_code' => $request->get('postinumero'),
 			'company_city' => $request->get('kaupunki'),
+            'is_disabled' => ($request->get('is_disabled') == 'on' ? 1 : 0),
 		]);
 		$company->save();
 		return redirect()->action('user_controller@create', ['company' => $company]);
@@ -79,6 +80,7 @@ class company_controller extends Controller {
 		$companyNew->company_street_address = $request->get('address');
 		$companyNew->company_postal_code = $request->get('postal_code');
 		$companyNew->company_city = $request->get('city');
+        $companyNew->is_disabled = ($request->get('is_disabled') == 'on' ? 1 : 0);
 		$companyNew->save();
 
 		return redirect()->action('company_controller@manage_index',['company' => $company])->withErrors(['Organisaatio päivitetty']);

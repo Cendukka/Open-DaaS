@@ -23,7 +23,7 @@ class UsersTable extends Migration
             $table->string('email',50)->unique();
 			$table->string('username',50)->unique();
             $table->string('password',191);
-            $table->integer('disabled')->unsigned()->default(0);
+            $table->integer('is_disabled')->unsigned()->default(0);
             $table->rememberToken();
 	
 			$table->foreign('user_type_id')->references('user_type_id')->on('user_types');

@@ -21,6 +21,7 @@ class MicrolocationsTable extends Migration
 			$table->string('microlocation_street_address',191);
 			$table->char('microlocation_postal_code',5);
 			$table->string('microlocation_city',50);
+            $table->integer('disabled')->unsigned()->default(0);
 	
 			$table->foreign('microlocation_company_id')->references('company_id')->on('company');
 			$table->foreign('microlocation_type_id')->references('microlocation_type_id')->on('microlocation_types');

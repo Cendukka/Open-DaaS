@@ -7,9 +7,11 @@ $(document).ready(function () {
         if (!sidebarCollapseBool){
             sidebarCollapseBool = true;
             $('#sidebar, #content').toggleClass('stay');
+            $('#sidebarCollapse').html('toggle_off')
         }else{
             sidebarCollapseBool = false;
             $('#sidebar, #content').toggleClass('stay');
+            $('#sidebarCollapse').html('toggle_on')
         }
     });
 

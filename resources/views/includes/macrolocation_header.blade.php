@@ -1,20 +1,5 @@
-<!--<div class="navbar">
-    <div class="navbar-inner">
-        <a id="logo" href="/">{{$company->company_name}}</a>
-        <ul class="nav">
-            <li><a href="/companies/{{$company->company_id}}">Oma Toimipiste</a></li>
-            <li><a href="/companies/{{$company->company_id}}/warehouse">Raportit</a></li>
-            <li><a href="/companies/{{$company->company_id}}/manage">Hallinnoi</a></li>
-            <li><a href="/ewc">EWC Codes</a></li>
-        </ul>
-    </div>
-</div>
-<br>-->
 <div class="wrapper">
-
-    <!-- Sidebar Holder -->
     <nav id="sidebar">
-
         <div class="sidebar-header">
             <a href="/companies/{{$company->company_id}}">
 {{--                <h4>TEKIHA TEkstiiliKIerrätyksen  HAllintajärjestelmä</h4>--}}
@@ -55,23 +40,15 @@
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/issues/create'}}">Lisää lähetys</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/pre/create'}}">Lisää esilajittelu</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/refined/create'}}">Lisää hienolajittelu</a></li>
-
-
-
                 </ul>
                {{-- <a href="/ewc">EWC Codes</a>--}}
             </li>
-
         </ul>
-
-
     </nav>
-
-    <!-- Page Content Holder -->
     <div id="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="navbar-header">
-                <i href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</i>
+                <i href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">menu</i>
                 <h4>Käyttäjä: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h4>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -101,14 +78,10 @@
                 </ul>
             </div>
         </nav>
-
-        <!-- Main Page Content Holder -->
         <div id="main" class="column">
             @yield('content')
         </div>
-
-        <!-- Back To The Top Button -->
-        <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span> Ylös</button>
+        <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><i class="material-icons">arrow_upward</i>Ylös</button>
 
     </div>
 

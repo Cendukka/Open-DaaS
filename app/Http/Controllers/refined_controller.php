@@ -221,7 +221,7 @@ class refined_controller extends Controller {
 						'<td class="text-right">'.$value->refined_weight.'</td>'.
 						'<td>'.$value->material_name.'</td>'.
 						'<td>'.$value->username.'</td>'.
-                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->microlocation_id ? '<td class="text-center"><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'"> <span class="glyphicon glyphicon-pencil"></span></a></td>' : '').
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->microlocation_id ? '<td class="text-center"><a href="'.url('companies/'.$company->company_id.'/manage/refined/'.$value->refined_id.'/edit').'"><i class="material-icons">edit</i></a></td>' : '').
 						'</tr>';
 				}
 				$output.='<tr>'.

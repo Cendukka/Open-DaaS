@@ -27,7 +27,7 @@
                             </div>
                             @if(Auth::user()->user_type_id <= 2)
                                 <div class="col-sm-1 text-left">
-                                    <a href="{{url('/companies/'.$company->company_id.'/manage/communities/'.$com->community_id.'/edit')}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="{{url('/companies/'.$company->company_id.'/manage/communities/'.$com->community_id.'/edit')}}"><i class="material-icons">edit</i></a>
                                 </div>
                             @endif
                         </div>

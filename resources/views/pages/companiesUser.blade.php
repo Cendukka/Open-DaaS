@@ -12,7 +12,7 @@
                         <tbody>
                             @foreach (DB::table('company')->get() as $company)
                                 <tr>
-                                    <td class="text-right" style="padding-right: 5em;"><a href="{{url('/companies/'.$company->company_id.'/manage/users')}}" class="btn btn-info">Valitse <span class="glyphicon glyphicon-arrow-right"></span></a></td>
+                                    <td class="text-right" style="padding-right: 5em;"><a href="{{url('/companies/'.$company->company_id.'/manage/users')}}" class="btn btn-info">Valitse <i class="material-icons">chevron_right</i></a></td>
                                     <td class="text-left">{{title_case($company->company_name)}}</td>
                                 </tr>
                             @endforeach

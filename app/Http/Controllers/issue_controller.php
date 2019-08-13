@@ -266,7 +266,7 @@ class issue_controller extends Controller {
 						'<td>'.title_case(($value->to_microlocation ?: $value->company_name)).'</td>'.
 						'<td>'.$value->username.'</td>'.
 						'<td class="text-right">'.$value->sumweight.'</td>'.
-                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->from_microlocation_id ? '<td class="text-center"><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'"><i class="glyphicon glyphicon-pencil"></i></a></td>' : '').
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->from_microlocation_id ? '<td class="text-center"><a href="'.url('companies/'.$company->company_id.'/manage/issues/'.$value->issue_id.'/edit').'"><i class="material-icons">edit</i></a></td>' : '').
 						'</tr>';
 				}
                 $output.='<tr>'.

@@ -218,8 +218,8 @@ class receipt_controller extends Controller {
                         '<td class="text-right">'.$value->receipt_weight.'</td>'.
                         '<td class="text-right">'.$value->distance_km.'</td>'.
                         '<td class="text-right">'.$value->receipt_ewc_code.'</td>'.
-                        '<td class="text-center"><span style="color:'.($value->is_for_issue ? 'green' : 'red').'" class="glyphicon glyphicon-'.($value->is_for_issue ? 'ok' : 'remove').'-circle"></span></td>'.
-                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->to_microlocation_id ? '<td class="text-center"><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'"><span class="glyphicon glyphicon-pencil"></span></a></td>' : '').
+                        '<td class="text-center"><i style="color:'.($value->is_for_issue ? 'green' : 'red').'" class="material-icons">'.($value->is_for_issue ? 'check_circle_outline' : 'highlight_off').'</i></td>'.
+                        (Auth::user()->user_type_id < 3 || Auth::user()->user_microlocation_id == $value->to_microlocation_id ? '<td class="text-center"><a href="'.url('companies/'.$company->company_id.'/manage/receipts/'.$value->receipt_id.'/edit').'"><i class="material-icons">edit</i></a></td>' : '').
                         '</tr>';
                 }
                 $output.='<tr>'.

@@ -38,7 +38,7 @@
                             <td>{{title_case($user->first_name)}}</td>
                             <td>{{$user->username}}</td>
                             @if(Auth::user()->user_type_id <= 2)
-                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td><a href="{{url('/companies/'.$company->company_id.'/manage/users/'.$user->user_id.'/edit')}}"><i class="material-icons">edit</i></a></td>
                             @endif
                         </tr>
                     @endforeach

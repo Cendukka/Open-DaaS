@@ -1,7 +1,6 @@
 @extends('layouts.welcomepage')
 @section('title', 'Yhteystiedot')
 @section('content')
-    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default" style="margin: 0 0 20px 0">
@@ -238,5 +237,4 @@
             </div>
             @endforeach
         </div>
-    </div>
 @stop

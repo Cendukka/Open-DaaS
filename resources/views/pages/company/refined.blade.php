@@ -9,7 +9,7 @@
             <div class="panel-heading">
                 <h3>Hienolajittelu </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body p-4">
                 @include('includes.forms.search')
                 <table class="table table-bordered table-hover">
                     <thead>

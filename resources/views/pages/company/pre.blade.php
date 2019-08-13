@@ -1,12 +1,11 @@
 @extends( 'layouts.macrolocation')
 @section ('title', 'Raportit: Esilajiteltu')
 @section('content')
-    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Esilajittelu </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body p-4">
                 @include('includes.forms.search')
                 <table class="table table-bordered table-hover">
                     <thead>
@@ -29,7 +28,6 @@
                 <button id="export" type="button" class="btn">Export exceliin</button>
             </div>
         </div>
-    </div>
     @include('includes.search_script')
     @include('includes.export_script')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>

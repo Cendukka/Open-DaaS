@@ -7,7 +7,7 @@
             <div class="panel-heading">
                 <h3>Lähteneet lähetykset</h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body pb-4">
                 @include('includes.forms.search')
                 <table class="table table-bordered table-hover">
                     <thead>

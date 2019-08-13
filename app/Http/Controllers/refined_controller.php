@@ -227,7 +227,7 @@ class refined_controller extends Controller {
 				$output.='<tr>'.
 					'<td></td>'.
 					'<td></td>'.
-					'<td>'.$result->sum('refined_weight').' Total</td>'.
+					'<td class="text-right">'.$result->sum('refined_weight').' Total</td>'.
 					'<td></td>'.
 					'<td></td>'.
 					'</tr>';

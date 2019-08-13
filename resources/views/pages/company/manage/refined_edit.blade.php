@@ -1,7 +1,6 @@
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Hienolajittelun muokkaus')
 @section('content')
-    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Muokkaa hienolajittelu kirjausta </h3>
@@ -51,7 +50,6 @@
                 </form>
             </div>
         </div>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">

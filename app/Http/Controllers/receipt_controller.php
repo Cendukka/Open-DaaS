@@ -251,7 +251,7 @@ class receipt_controller extends Controller {
             if($source == 'internal'){
                 $result = DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get();
                 if($result->count()>0) {
-                    $output .= '<div id="from_microlocation" class="form-group">';
+
                         $output .= '<label class="col-sm-2 col-form-label" for="from_microlocation">Toimipisteestä:</label>';
                         $output .= '<div class="col-sm-10">';
                             $output .= '<select class="form-control element-width-auto form-field-width" name="from_microlocation">';
@@ -259,7 +259,7 @@ class receipt_controller extends Controller {
                             foreach ($result as $key => $value) {
                                 $output .= '<option value="'.$value->microlocation_id.'" '.($ml_id== $value->microlocation_id? 'selected="selected"' : '').'>'.title_case($value->microlocation_name).'</option>';
                             }
-                    $output .= '</select></div></div>';
+                    $output .= '</select></div>';
                 }
                 else{
                     $output .= '<option>ei sopivia kirjauksia</option>';
@@ -268,7 +268,7 @@ class receipt_controller extends Controller {
             elseif($source == 'external'){
                 $result = DB::table('company')->where('company_id','!=',$company->company_id)->get();
                 if($result->count()>0) {
-                    $output .= '<div class="form-group">';
+
                     $output .= '<label class="col-sm-2 col-form-label" for="from_company">Organisaatiosta:</label>';
                     $output .= '<div class="col-sm-10">';
                     $output .= '<select class="form-control element-width-auto form-field-width" id="from_company" name="from_company">';
@@ -276,17 +276,16 @@ class receipt_controller extends Controller {
                     foreach ($result as $key => $value) {
                         $output .= '<option value="'.$value->company_id.'" '.($company_id == $value->company_id ? 'selected="selected"' : '').'>'.title_case($value->company_name).'</option>';
                     }
-                    $output .= '</select></div></div>';
+                    $output .= '</select></div>';
                 }
                 else{
                     $output .= '<option>ei sopivia kirjauksia</option>';
                 }
             }
             elseif($source == 'supplier'){
-                $output .= '<div class="form-group">';
                 $output .= '<label class="col-sm-2 col-form-label" for="from_supplier">Toimittajalta:</label>';
                 $output .= '<div class="col-sm-10"><input type="text" class="form-control element-width-auto form-field-width" name="from_supplier" value="'.$supplier.'"/>';
-                $output .= '</div></div>';
+                $output .= '</div>';
             }
             return Response($output);
         }

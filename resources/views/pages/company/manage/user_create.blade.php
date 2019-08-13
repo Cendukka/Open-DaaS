@@ -1,7 +1,6 @@
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Luo käyttäjä')
 @section('content')
-    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Lisää käyttäjä </h3>
@@ -73,7 +72,6 @@
                 </form>
             </div>
         </div>
-    </div>
     <script type="text/javascript">
         //User create page's functions
         function microlocation(){

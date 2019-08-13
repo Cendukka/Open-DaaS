@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group row p-4">
     <div class="col-sm-4">
         <div class="form-group row">
             <label for="search" class="col-sm-2 col-form-label form-text-align-padd">Haku:</label>

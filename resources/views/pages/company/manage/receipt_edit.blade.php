@@ -1,7 +1,6 @@
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Saapuneiden muokkaus')
 @section('content')
-    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Muokkaa saapuneet-kirjausta </h3>
@@ -35,7 +34,6 @@
                 </form>
             </div>
         </div>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">

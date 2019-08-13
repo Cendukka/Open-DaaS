@@ -1,10 +1,9 @@
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Esilajiteltun muokkaus')
 @section('content')
-    <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Edit Pre-Sorting </h3>
+                <h3>Muokkaa esilajittelukirjauksia </h3>
             </div>
             <div class="panel-body">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
@@ -40,7 +39,6 @@
                 </form>
             </div>
         </div>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">

@@ -1,12 +1,11 @@
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Kunnat')
 @section('content')
-    <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Kunnat </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body pb-4 pt-3">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                     @php
                         $communities = DB::table('community')
@@ -41,5 +40,4 @@
                 @endif
             </div>
         </div>
-    </div>
 @endsection

@@ -6,7 +6,7 @@
             <div class="panel-heading">
                 <h3>Hallitse käyttäjätilejä </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body pb-4">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <table class="table table-bordered table-hover">
                     <thead>

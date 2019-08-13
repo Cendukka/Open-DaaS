@@ -55,6 +55,15 @@
                             <input type="text" maxlength="50" class="form-control element-width-auto form-field-width" name="city"/>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                <input type="checkbox" class="custom-control-input" id="is_disabled" name="is_disabled">
+                                <label class="custom-control-label" for="is_disabled">Poistettu käytöstä</label>
+                            </div>
+                        </div>
+                    </div>
                     @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/manage/microlocations')])
                 </form>
             </div>

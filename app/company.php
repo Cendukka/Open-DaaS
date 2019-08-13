@@ -9,7 +9,7 @@ class company extends Model {
 	public $timestamps = false;
 	protected $table = "company";
 	protected $primaryKey = "company_id";
-	protected $fillable = ['company_name', 'company_street_address', 'company_postal_code', 'company_city'];
+	protected $fillable = ['company_name', 'company_street_address', 'company_postal_code', 'company_city','is_disabled'];
 	
 	public function microlocations() {
 		return $this->hasMany(microlocations::class, 'company_id');

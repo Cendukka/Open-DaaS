@@ -17,8 +17,8 @@ class CommunityTable extends Migration
             $table->increments('community_id')->unsigned();
 			$table->integer('community_company_id')->unsigned();
 			$table->string('community_city',50);
-	
 			$table->foreign('community_company_id')->references('company_id')->on('company');
+            $table->integer('is_disabled')->unsigned()->default(0);
         });
     }
 

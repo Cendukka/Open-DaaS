@@ -47,6 +47,7 @@ class microlocation_controller extends Controller {
             'microlocation_street_address' => $request->get('address'),
             'microlocation_postal_code' => $request->get('postal_code'),
             'microlocation_city' => $request->get('city'),
+            'is_disabled' => ($request->get('is_disabled') == 'on' ? 1 : 0),
         ]);
 
         $ml->save();
@@ -92,6 +93,7 @@ class microlocation_controller extends Controller {
         $microlocationNew->microlocation_street_address = $request->get('address');
         $microlocationNew->microlocation_postal_code = $request->get('postal_code');
         $microlocationNew->microlocation_city = $request->get('city');
+        $microlocationNew->is_disabled = ($request->get('is_disabled') == 'on' ? 1 : 0);
         $microlocationNew->save();
 
         return redirect()->action('microlocation_controller@index', ['company' => $company])->withErrors(['Toimipiste päivitetty onnistuneesti.']);

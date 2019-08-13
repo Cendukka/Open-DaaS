@@ -47,6 +47,7 @@ class user_controller extends Controller {
 			'username' => $request->get('username'),
 			'email' => $request->get('email'),
 			'password' => Hash::make('qwerty'),
+            'is_disabled' => ($request->get('is_disabled') == 'on' ? 1 : 0),
 		]);
 		$user->save();
 
@@ -83,6 +84,7 @@ class user_controller extends Controller {
 		$userNew->user_microlocation_id = ($request->get('user_type') >= 3 ? $request->get('microlocation') : NULL);
 		$userNew->last_name = $request->get('last_name');
 		$userNew->first_name = $request->get('first_name');
+        $userNew->is_disabled = ($request->get('is_disabled') == 'on' ? 1 : 0);
 		$userNew->save();
 
 		return redirect()->action('user_controller@index',['company' => $company])->withErrors(['Käyttäjä päivitetty onnistuneesti.']);

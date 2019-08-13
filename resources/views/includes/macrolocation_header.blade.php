@@ -5,9 +5,9 @@
         <div class="sidebar-header">
             <a href="/companies/{{$company->company_id}}">
 {{--                <h4>TEKIHA TEkstiiliKIerrätyksen  HAllintajärjestelmä</h4>--}}
-                <h4>Open DaaS</h4>
+                <h5>Open DaaS</h5>
                 <br>
-                <h5>Organisaatio: {{$company->company_name}}</h5>
+                <h6>Organisaatio: {{$company->company_name}}</h6>
                 @if(isset(Auth::user()->user_microlocation_id))
                     <h6>Toimipiste: {{\App\microlocation::find(Auth::user()->user_microlocation_id)->microlocation_name}}</h6>
                 @endif

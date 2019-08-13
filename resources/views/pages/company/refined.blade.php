@@ -1,9 +1,6 @@
 @extends( 'layouts.macrolocation')
 @section ('title', 'Raportit: Hienolajiteltu')
 @section('content')
-    <!--<div id="macrolocation_name" class="row">
-        @include('includes.macrolocation_name')
-        </div>-->
     <div id="content2" class="row">
         <div class="panel panel-default">
             <div class="panel-heading">

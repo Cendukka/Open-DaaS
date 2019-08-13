@@ -85,6 +85,9 @@ class company_controller extends Controller {
 
 	}
 
+	public function instructions(company $company){
+        return view('pages.instructions')->with('company', $company);
+    }
 
 	public function destroy(company $company) {
 		if ($company->delete()) {

@@ -43,7 +43,7 @@
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/pre/create'}}">Lisää esilajittelu</a></li>
                     <li><a href="{{'/companies/'.$company->company_id.'/manage/refined/create'}}">Lisää hienolajittelu</a></li>
                 </ul>
-               {{-- <a href="/ewc">EWC Codes</a>--}}
+                <a href="{{'/companies/'.$company->company_id.'/instructions'}}">Ohjeet</a>
             </li>
         </ul>
     </nav>

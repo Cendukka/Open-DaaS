@@ -19,7 +19,10 @@ Route::get('companies/{company}/issues/export',     'excel_controller@issue');
 
 #Routes for logged in users
 # - Users
-Route::group(['middleware'=>['auth']],function(){
+Route::group(['middleware'=>['auth', 'company']],function(){
+    #Instructions
+    Route::get('companies/{company}/instructions',                                                                          'company_controller@instructions');
+    Route::get('/instructions',                                                                                             'company_controller@instructions');
     //Admin and manager routes
     Route::group(['middleware'=>['manager']],function(){
         #Create and edit microlocations

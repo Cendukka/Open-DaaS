@@ -15,6 +15,7 @@
                     <li><a href="/materials">Materiaalit</a></li>
                     <li><a href="{{route('companies_create')}}">Rekisteröi uusi organisaatio</a></li>
                 </ul>
+                <a href="{{'/instructions'}}">Ohjeet</a>
 			</li>
 		</ul>
 	</nav>

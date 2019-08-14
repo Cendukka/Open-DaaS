@@ -10,7 +10,7 @@
                     @php
                         $communities = DB::table('community')
                             ->where('community_company_id','=',$company->company_id)
-                            ->select('community_id','community_city')
+                            ->select('community_id','community_city','is_disabled')
                             ->get();
                     @endphp
                     @if(strlen($communities) <= 2)
@@ -22,7 +22,7 @@
                         <div class="form-group row ">
                             <div class="col-sm-4"></div>
                             <div class="col-sm-3 text-left">
-                                <a>{{title_case($com->community_city)}}</a>
+                                <a style="{{$com->is_disabled ? 'color:lightgray;' : ''}}">{{title_case($com->community_city)}}</a>
                             </div>
                             @if(Auth::user()->user_type_id <= 2)
                                 <div class="col-sm-1 text-left">

@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
                     @foreach (DB::table('company')->get() as $company)
-                        <tr class="text-left">
+                        <tr class="text-left" style="{{$company->is_disabled ? 'color:lightgray;' : ''}}">
                             <td class="text-center"><a href="{{url('/companies/'.$company->company_id)}}" class="btn btn-info">Valitse</a></td>
                             <td>{{title_case($company->company_name)}}</td>
                             <td>{{title_case($company->company_street_address)}}</td>

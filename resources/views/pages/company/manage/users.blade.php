@@ -27,11 +27,12 @@
                                     ->leftJoin('microlocations', 'users.user_microlocation_id', '=','microlocations.microlocation_id')
                                     ->orderBy('users.user_type_id')
                                     ->orderBy('user_microlocation_id')
+                                    ->select('user_id','user_typename','last_name','first_name','username','microlocation_name','users.is_disabled as is_disabled')
                                     ->get();
                     @endphp
 
                     @foreach ($users as $user)
-                        <tr>
+                        <tr style="{{$user->is_disabled ? 'color:lightgray;' : ''}}">
                             <td>{!!title_case($user->microlocation_name ?: '<i>Toimisto<i>')!!}</td>
                             <td>{{title_case($user->user_typename)}}</td>
                             <td>{{title_case($user->last_name)}}</td>

@@ -9,8 +9,8 @@
             </div>
             <div class="panel-body pb-4">
                 @include('includes.forms.search')
-                <table class="table table-bordered table-hover">
-                    <thead>
+                <table class="table table-light table-striped table-hover table-bordered">
+                    <thead class="thead-dark">
                     <tr>
                         <th>Päivämäärä</th>
                         <th>Lähetyksen lähde</th>
@@ -18,6 +18,7 @@
                         <th>Lähetyksen kohde</th>
                         <th>Kirjauksen tekijä</th>
                         <th>Määrä (Kg)</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody id="searchtable">

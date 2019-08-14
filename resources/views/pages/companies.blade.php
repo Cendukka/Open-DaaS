@@ -6,9 +6,9 @@
             <div class="panel-heading">
                 <h3>Organisaatiot </h3>
             </div>
-            <div class="panel-body table-responsive-lg">
-                <table class="table table-bordered table-hover" style="table-layout: fixed">
-                    <thead>
+            <div class="panel-body">
+                <table class="table table-light table-striped table-hover table-bordered">
+                    <thead class="thead-dark">
                     <tr>
                         <th scope="col"></th>
                         <th scope="col">Nimi</th>

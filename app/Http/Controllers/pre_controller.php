@@ -189,9 +189,10 @@ class pre_controller extends Controller {
 					'<td></td>'.
 					'<td></td>'.
 					'<td></td>'.
-					'<td>'.$result->sum('pre_sorting_weight').' Total</td>'.
+					'<td class="text-right">'.$result->sum('pre_sorting_weight').' Total</td>'.
 					'<td></td>'.
 					'<td></td>'.
+                    '<td></td>'.
 					'</tr>';
 				return Response($output);
 			}

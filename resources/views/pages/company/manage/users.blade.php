@@ -8,16 +8,15 @@
             </div>
             <div class="panel-body pb-4">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
-                <table class="table table-bordered table-hover">
-                    <thead>
+                <table class="table table-light table-striped table-hover table-bordered">
+                    <thead class="thead-dark">
                     <tr>
-
                         <th>Toimipiste</th>
                         <th>Tyyppi</th>
                         <th>Sukunimi</th>
                         <th>Etunimi</th>
                         <th>Käyttäjätunnus</th>
-
+                        <th></th>
                     </tr>
                     </thead>
                     @php

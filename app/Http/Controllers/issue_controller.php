@@ -275,7 +275,8 @@ class issue_controller extends Controller {
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.
-                    '<td>'.$result->sum('sumweight').' Total</td>'.
+                    '<td class="text-right">'.$result->sum('sumweight').' Total</td>'.
+                    '<td></td>'.
                     '</tr>';
 				return Response($output);
 			}

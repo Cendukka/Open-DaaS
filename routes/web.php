@@ -19,7 +19,7 @@ Route::get('companies/{company}/issues/export',     'excel_controller@issue');
 
 #Routes for logged in users
 # - Users
-Route::group(['middleware'=>['auth']],function(){
+Route::group(['middleware'=>['auth', 'company']],function(){
     //Admin and manager routes
     Route::group(['middleware'=>['manager']],function(){
         #Create and edit microlocations
@@ -137,8 +137,6 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('companies/{company}/manage/issues/new_details', function(){
         return view('includes.forms.details');
     });
-
-
 });
 // Route::get('ewc','ewc_controller@index');
 //Route::get('ewc/search','ewc_controller@search');

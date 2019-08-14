@@ -228,7 +228,7 @@ class receipt_controller extends Controller {
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.
-                    '<td>'.$result->sum('receipt_weight').' Total</td>'.
+                    '<td class="text-right">'.$result->sum('receipt_weight').' Total</td>'.
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.

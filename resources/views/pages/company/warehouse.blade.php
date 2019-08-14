@@ -21,10 +21,9 @@
                 @if (count($microlocation_ids)>0)
                         @foreach ($microlocations as $ml)
                             <div class="col-md-4">
-
-                                <table class="table table-bordered table-hover" style="margin-bottom: 0px;"><th style="text-align: center;">{{$ml->microlocation_name}}</th></table>
-                                <table class="table table-bordered table-hover">
-                                    <thead>
+                                <table class="table table-bordered" style="margin-bottom: 0px;"><thead class="thead-dark"><th  style="text-align: center;">{{$ml->microlocation_name}}</th></thead></table>
+                                <table class="table table-light table-striped table-hover table-bordered">
+                                    <thead class="thead-dark">
                                     <tr>
                                         <th>Materiaali</th>
                                         <th>Paino (kg)</th>

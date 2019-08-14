@@ -10,8 +10,8 @@
             <div class="panel-body pb-3">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 @include('includes.forms.search')
-                <table class="table table-bordered table-hover">
-                    <thead>
+                <table class="table table-light table-striped table-hover table-bordered">
+                    <thead class="thead-dark">
                     <tr>
                         <th>Päivämäärä</th>
                         <th>Lähteen tyyppi</th>
@@ -22,6 +22,7 @@
                         <th>Matka (Km)</th>
                         <th>EWC-Koodi</th>
                         <th>Lähetykseen</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody id="searchtable">

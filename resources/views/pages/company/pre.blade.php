@@ -7,8 +7,8 @@
             </div>
             <div class="panel-body p-4">
                 @include('includes.forms.search')
-                <table class="table table-bordered table-hover">
-                    <thead>
+                <table class="table table-light table-striped table-hover table-bordered">
+                    <thead class="thead-dark">
                     <tr>
                         <th>Päivämäärä</th>
                         <th>Toimipiste</th>
@@ -16,6 +16,7 @@
                         <th>Paino (Kg)</th>
                         <th>Käyttäjä</th>
                         <th>Lähetykseen</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody id="searchtable">

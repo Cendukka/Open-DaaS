@@ -28,7 +28,7 @@
 
                     @endphp
                     @foreach ($microlocations as $ml)
-                        <tr class="text-left">
+                        <tr class="text-left" style="{{$ml->is_disabled ? 'color:lightgray;' : ''}}">
                             <td>{{title_case($ml->microlocation_typename)}}</td>
                             <td>{{title_case($ml->microlocation_name)}}</td>
                             <td>{{title_case($ml->microlocation_street_address)}}</td>

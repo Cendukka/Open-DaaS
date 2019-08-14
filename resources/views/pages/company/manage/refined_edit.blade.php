@@ -9,8 +9,8 @@
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="refined-update" class="form-text-align-padd" onsubmit="return confirm('Hienolajittelu-kirjausta muokataan. Haluatko jatkaa?');">
                     @csrf
-                    @include('includes.forms.created_modified', ['created_at' => $refined->created_at, 'updated_at' => $refined->updated_at])
-                    @include('includes.forms.datetime',     ['time' => $refined->refined_date])
+                    @include('includes.forms.created_modified',     ['created_at' => $refined->created_at, 'updated_at' => $refined->updated_at])
+                    @include('includes.forms.datetime',             ['time' => $refined->refined_date])
                     @php
                         $origin = ($refined->pre_sorting_id ? 'presorted' : ($refined->refined_receipt_id ? 'receipt' : 'error'));
                         if($origin == 'presorted'){
@@ -28,8 +28,8 @@
                             $ml_id = 0;
                         }
                     @endphp
-                    @include('includes.forms.users',        ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get(), 'selected_user_id' => $refined->refined_user_id])
-                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => $ml_id, 'tag' => 'microlocation', 'name' => 'Toimipiste:', 'disabled' => Auth::user()->user_type_id > 2])
+                    @include('includes.forms.users',                ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->where('is_disabled','!=',1)->orderBy('last_name')->get(), 'selected_user_id' => $refined->refined_user_id])
+                    @include('includes.forms.microlocation',        ['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->where('is_disabled','!=',1)->get(), 'selected_microlocation_id' => $ml_id, 'tag' => 'microlocation', 'name' => 'Toimipiste:', 'disabled' => Auth::user()->user_type_id > 2])
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="origin">Tekstiilin alkuperä:</label>
                         <div class="col-sm-10">
@@ -43,10 +43,10 @@
                     <div id="originSelect" class="form-group row">
 
                     </div>
-                    @include('includes.forms.materials',    ['materials' => DB::table('material_names')->where('material_type','=','textile')->get(), 'selected_material_id' => $refined->refined_material_id])
-                    @include('includes.forms.weight', ['weight' => $refined->refined_weight])
-                    @include('includes.forms.description', ['description' => $refined->description])
-                    @include('includes.forms.buttons', ['submit' => 'Tallenna', 'cancel' => url('/companies/'.$company->company_id.'/refined')])
+                    @include('includes.forms.materials',            ['materials' => DB::table('material_names')->where('material_type','=','textile')->get(), 'selected_material_id' => $refined->refined_material_id])
+                    @include('includes.forms.weight',               ['weight' => $refined->refined_weight])
+                    @include('includes.forms.description',          ['description' => $refined->description])
+                    @include('includes.forms.buttons',              ['submit' => 'Tallenna', 'cancel' => url('/companies/'.$company->company_id.'/refined')])
                 </form>
             </div>
         </div>

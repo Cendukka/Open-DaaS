@@ -11,6 +11,7 @@
                 @php
                     $microlocations = DB::table('microlocations')
                                         ->where('microlocation_company_id','=',$company->company_id)
+                                        ->where('is_disabled','!=',1)
                                         ->get();
                     $microlocation_ids = [];
                     foreach ($microlocations as $eachMicrolocation){

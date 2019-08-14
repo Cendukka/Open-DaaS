@@ -10,8 +10,8 @@
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="receipts-store" class="form-text-align-padd" onsubmit="return confirm('Saapunut-kirjaus luodaan. Haluatko jatkaa?');">
                     @csrf
-                    @include('includes.forms.datetime', ['time' => date('Y-m-d')])
-                    @include('includes.forms.users', ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get()])
+                    @include('includes.forms.datetime',             ['time' => date('Y-m-d')])
+                    @include('includes.forms.users',                ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->where('is_disabled','!=',1)->orderBy('last_name')->get()])
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="source">Lähde:</label>
                         <div class="col-sm-10">
@@ -22,15 +22,15 @@
                             </select>
                         </div>
                     </div>
-                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'tag' => 'from_microlocation', 'name' => 'Toimipisteestä:'])
+                    @include('includes.forms.microlocation',        ['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->where('is_disabled','!=',1)->get(), 'tag' => 'from_microlocation', 'name' => 'Toimipisteestä:'])
                     <div class="form-group row" id="from_community"></div>
-                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => Auth::user()->user_microlocation_id, 'tag' => 'to_microlocation', 'name' => 'Toimipisteeseen:', 'disabled' => Auth::user()->user_type_id > 2])
-                    @include('includes.forms.materials', ['materials' => DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get()])
+                    @include('includes.forms.microlocation',        ['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->where('is_disabled','!=',1)->get(), 'selected_microlocation_id' => Auth::user()->user_microlocation_id, 'tag' => 'to_microlocation', 'name' => 'Toimipisteeseen:', 'disabled' => Auth::user()->user_type_id > 2])
+                    @include('includes.forms.materials',            ['materials' => DB::table('material_names')->whereIn('material_type',['textile','raw waste','refined'])->get()])
                     @include('includes.forms.weight')
                     @include('includes.forms.distance')
-                    @include('includes.forms.ewc_code', ['code' => '200111'])
+                    @include('includes.forms.ewc_code',             ['code' => '200111'])
                     @include('includes.forms.for_issue')
-                    @include('includes.forms.buttons', ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/receipts')])
+                    @include('includes.forms.buttons',              ['submit' => 'Lisää', 'cancel' => url('/companies/'.$company->company_id.'/receipts')])
                 </form>
             </div>
         </div>

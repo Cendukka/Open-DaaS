@@ -10,8 +10,8 @@
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])
                 <form method="post" action="issues-store" class="form-text-align-padd" onsubmit="return confirm('Lähetys-kirjaus luodaan. Haluatko jatkaa?');">
                     @csrf
-                    @include('includes.forms.datetime', ['time' => date('Y-m-d H:i:s')])
-                    @include('includes.forms.users', ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->orderBy('last_name')->get()])
+                    @include('includes.forms.datetime',             ['time' => date('Y-m-d H:i:s')])
+                    @include('includes.forms.users',                ['users' => DB::table('users')->where('user_company_id','=',$company->company_id)->where('is_disabled','!=',1)->orderBy('last_name')->get()])
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="type">Lähetyksen tyyppi:</label>
                         <div class="col-sm-10">
@@ -23,13 +23,13 @@
                             </select>
                         </div>
                     </div>
-                    @include('includes.forms.microlocation',['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get(), 'selected_microlocation_id' => Auth::user()->user_microlocation_id,'tag' => 'from_microlocation', 'name' => 'Toimipisteestä:', 'disabled' => Auth::user()->user_type_id > 2])
+                    @include('includes.forms.microlocation',        ['microlocations' => DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->where('is_disabled','!=',1)->get(), 'selected_microlocation_id' => Auth::user()->user_microlocation_id,'tag' => 'from_microlocation', 'name' => 'Toimipisteestä:', 'disabled' => Auth::user()->user_type_id > 2])
                     <div class="form-group row" id="to_microlocation">
                         <label class="col-sm-2 col-form-label" for="to_microlocation">Mihin toimipisteeseen:</label>
                         <div class="col-sm-10">
                             <select class="form-control element-width-auto form-field-width" name="to_microlocation" id="to_microlocation">
                                 <option selected="selected" hidden disabled value=""></option>
-                                @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->get() as $ml)
+                                @foreach (DB::table('microlocations')->where('microlocation_company_id','=',$company->company_id)->where('is_disabled','!=',1)->get() as $ml)
                                     <option value="{{$ml->microlocation_id}}">{{title_case($ml->microlocation_name)}}</option>
                                 @endforeach
                             </select>
@@ -40,7 +40,7 @@
                         <div class="col-sm-10">
                             <select class="form-control element-width-auto form-field-width" name="to_company" id="to_company">
                                 <option selected="selected" hidden disabled value=""></option>
-                                @foreach (DB::table('company')->where('company_id','!=',$company->company_id)->get() as $c)
+                                @foreach (DB::table('company')->where('company_id','!=',$company->company_id)->where('is_disabled','!=',1)->get() as $c)
                                     <option value="{{$c->company_id}}">{{title_case($c->company_name)}}</option>
                                 @endforeach
                             </select>

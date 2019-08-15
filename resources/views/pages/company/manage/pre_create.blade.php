@@ -34,7 +34,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         $('.timepicker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss'
+            format: 'YYYY-MM-DD'
         });
     </script>
     <script type="text/javascript">

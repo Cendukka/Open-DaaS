@@ -2,7 +2,7 @@
 <div class="col-md panel panel-default panel-body element-width-auto form-field-width p-4" style="max-width:500px;">
     <div class="form-group detail-info">
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="material">Material:&nbsp</label>
+            <label class="col-sm-2 col-form-label" for="material">Tekstiili:</label>
             <div class="col-sm-10">
                 <select class="form-control material-select" name="material[]" id="material[]">
                     <option selected="selected" disabled hidden value=""></option>

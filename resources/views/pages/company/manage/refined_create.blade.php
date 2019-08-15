@@ -3,7 +3,7 @@
 @section('content')
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Luo hienolajittelu kirjaus </h3>
+                <h3>Luo hienolajittelukirjaus </h3>
             </div>
             <div class="panel-body">
                 @includeWhen($errors->any(),'includes.forms.errors', ['errors' => $errors])

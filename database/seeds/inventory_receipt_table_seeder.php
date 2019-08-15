@@ -35,7 +35,7 @@ class inventory_receipt_table_seeder extends Seeder
                     'receipt_to_microlocation_id' => $ml,
                     'receipt_user_id' => $user->random()->user_id,
                     'distance_km' => rand(10, 500),
-                    'receipt_weight' => rand(100, 1000) * ($mat->material_type == 'raw waste' || $mat->material_type == 'refined' ? rand(8, 14) : 1),
+                    'receipt_weight' => rand(100, 1000) * ($mat->material_type == 'raw waste' || $mat->material_type == 'refined' ? rand(4, 8) : 1),
                     'receipt_date' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = null),
                     'receipt_ewc_code' => $ewc_codes->random()->ewc_code,
                 ]);

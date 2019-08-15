@@ -60,9 +60,9 @@
                             var data = new google.visualization.DataTable();
                             data.addColumn('date', 'Time');
                             data.addColumn('number', 'Receipts');
-                            data.addColumn('number', 'Incineration');
-                            data.addColumn('number', 'For sale');
-                            data.addColumn('number', 'Charity');
+                            data.addColumn('number', 'Myynti');
+                            data.addColumn('number', 'Hyväntekeväisyys');
+                            // data.addColumn('number', 'Poltto');
 
                             @php
                                 # value = timevalue of Y-m
@@ -75,7 +75,7 @@
 
                                 $values = collect([]);
                                 foreach(DB::table('inventory_receipt')->orderBy('receipt_date','ASC')->select('receipt_date','receipt_weight')
-                                    ->whereBetween('receipt_date', [date("d-m-Y",strtotime('-36 months')), date("d-m-Y H:i:s",strtotime('tomorrow'))])->get() as $receipt){
+                                    ->whereBetween('receipt_date', [date("Y-m-d",strtotime('-36 months')), date("Y-m-d H:i:s",strtotime('tomorrow'))])->get() as $receipt){
                                     $date = date('Y-m', strtotime($receipt->receipt_date));
                                     if($values->has(strtotime($date))){
                                         $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1]+$receipt->receipt_weight, 0, 0, 0]);
@@ -93,10 +93,10 @@
                                     ->groupBy('detail_issue_id'),'details', function ($join) {
                                         $join->on('detail_issue_id', '=', 'issue_id');
                                     })
-                                    ->whereBetween('issue_date', [date("d-m-Y",strtotime('-36 months')), date("d-m-Y H:i:s",strtotime('tomorrow'))])
+                                    ->whereBetween('issue_date', [date("Y-m-d",strtotime('-36 months')), date("Y-m-d H:i:s",strtotime('tomorrow'))])
                                     ->select('issue_date','sumweight','issue_typename');
 
-                                foreach((clone $issueQuery)->where('issue_typename','Incineration')->get() as $issue){
+                                foreach((clone $issueQuery)->where('issue_typename','Myynti')->get() as $issue){
                                     $date = date('Y-m', strtotime($issue->issue_date));
                                     if($values->has(strtotime($date))){
                                         $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2]+$issue->sumweight, 0, 0]);
@@ -106,7 +106,7 @@
                                     }
                                 }
 
-                                foreach((clone $issueQuery)->where('issue_typename','For sale')->get() as $issue){
+                                foreach((clone $issueQuery)->where('issue_typename','Hyväntekeväisyys')->get() as $issue){
                                     $date = date('Y-m', strtotime($issue->issue_date));
                                     if($values->has(strtotime($date))){
                                         $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2], $values[strtotime($date)][2]+$issue->sumweight, 0]);
@@ -116,7 +116,7 @@
                                     }
                                 }
 
-                                foreach((clone $issueQuery)->where('issue_typename','Charity')->get() as $issue){
+/*                                foreach((clone $issueQuery)->where('issue_typename','Charity')->get() as $issue){
                                     $date = date('Y-m', strtotime($issue->issue_date));
                                     if($values->has(strtotime($date))){
                                         $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2], $values[strtotime($date)][3], $values[strtotime($date)][2]+$issue->sumweight]);
@@ -124,10 +124,10 @@
                                     else{
                                         $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2], $values[strtotime($date)][3], $issue->sumweight]);
                                     }
-                                }
+                                }*/
                             @endphp
                             @foreach($values->sort() as $v)
-                                data.addRow([new Date(parseInt('{{$v[0][0]}}'),parseInt('{{$v[0][1]}}')), {{max(0, $v[1])}}, {{max(0, $v[2])}}, {{max(0, $v[3])}}, {{max(0, $v[4])}}]);
+                                data.addRow([new Date(parseInt('{{$v[0][0]}}'),parseInt('{{$v[0][1]}}')), {{max(0, $v[1])}}, {{max(0, $v[2])}}, {{max(0, $v[3])}}]);
                             @endforeach
 
                             var options = {

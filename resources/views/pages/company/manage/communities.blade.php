@@ -14,7 +14,7 @@
                             ->get();
                     @endphp
                     @if(strlen($communities) <= 2)
-                        <div class="form-group row">
+                        <div class="form-group row center">
                             <label>Ei kuntia löydetty.</label>
                         </div>
                     @else

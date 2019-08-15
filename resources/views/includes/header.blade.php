@@ -52,6 +52,6 @@
       		@yield('content')
    		</div>
         <!-- Back To The Top Button -->
-        <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span> Ylös</button>
+        <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><i class="material-icons">arrow_upward</i>Ylös</button>
 	</div>
 </div>

@@ -85,7 +85,6 @@
         <div id="main" class="column pb-4">
             @yield('content')
         </div>
-
         <!-- Back To The Top Button -->
         <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><i class="material-icons">arrow_upward</i>Ylös</button>
 

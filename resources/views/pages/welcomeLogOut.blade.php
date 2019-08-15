@@ -75,7 +75,7 @@
 
                                 $values = collect([]);
                                 foreach(DB::table('inventory_receipt')->orderBy('receipt_date','ASC')->select('receipt_date','receipt_weight')
-                                    ->whereBetween('receipt_date', [date("Y-m-d",strtotime('-36 months')), date("Y-m-d H:i:s",strtotime('tomorrow'))])->get() as $receipt){
+                                    ->whereBetween('receipt_date', [date("d-m-Y",strtotime('-36 months')), date("d-m-Y H:i:s",strtotime('tomorrow'))])->get() as $receipt){
                                     $date = date('Y-m', strtotime($receipt->receipt_date));
                                     if($values->has(strtotime($date))){
                                         $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1]+$receipt->receipt_weight, 0, 0, 0]);
@@ -93,7 +93,7 @@
                                     ->groupBy('detail_issue_id'),'details', function ($join) {
                                         $join->on('detail_issue_id', '=', 'issue_id');
                                     })
-                                    ->whereBetween('issue_date', [date("Y-m-d",strtotime('-36 months')), date("Y-m-d H:i:s",strtotime('tomorrow'))])
+                                    ->whereBetween('issue_date', [date("d-m-Y",strtotime('-36 months')), date("d-m-Y H:i:s",strtotime('tomorrow'))])
                                     ->select('issue_date','sumweight','issue_typename');
 
                                 foreach((clone $issueQuery)->where('issue_typename','Incineration')->get() as $issue){

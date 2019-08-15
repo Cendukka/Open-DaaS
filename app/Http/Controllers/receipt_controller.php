@@ -27,7 +27,7 @@ class receipt_controller extends Controller {
 	public function store(Request $request, company $company) {
 		$request->validate([
 			'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-			'datetime' => 'required|date_format:Y-m-d|after:-12 months|before:12 months',
+			'datetime' => 'required|date_format:d-m-Y|after:-12 months|before:12 months',
             'material' => 'required|integer',
 			'source' => 'required',
 			'from_community' => 'integer|required_without_all:from_supplier,from_microlocation',
@@ -58,7 +58,7 @@ class receipt_controller extends Controller {
 
 		$receipt = new inventory_receipt([
             'receipt_user_id' => $request->get('user') ?: Auth::user()->user_id,
-            'receipt_date' => $request->get('datetime'),
+            'receipt_date' => date("Y-m-d",strtotime($request->get('datetime'))),
 			'receipt_material_id' => $material,
 			'from_community_id' => $request->get('from_community'),
 			'from_supplier' => $request->get('from_supplier'),
@@ -89,7 +89,7 @@ class receipt_controller extends Controller {
 	public function update(Request $request, company $company, inventory_receipt $receipt) {
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d|after:-12 months|before:12 months',
+            'datetime' => 'required|date_format:d-m-Y|after:-12 months|before:12 months',
             'material' => 'required|integer',
             'source' => 'required',
             'from_community' => 'integer|required_with:from_company',
@@ -120,7 +120,7 @@ class receipt_controller extends Controller {
 
 		$receiptNew = inventory_receipt::find($receipt->receipt_id);
 		$receiptNew->receipt_user_id = $request->get('user') ?: Auth::user()->user_id;
-		$receiptNew->receipt_date = $request->get('datetime');
+		$receiptNew->receipt_date = date("Y-m-d",strtotime($request->get('datetime')));
 		$receiptNew->receipt_material_id = $material;
 		$receiptNew->from_community_id = $request->get('from_community');
 		$receiptNew->from_supplier = $request->get('from_supplier');
@@ -229,7 +229,7 @@ class receipt_controller extends Controller {
                     '<td></td>'.
                     '<td></td>'.
                     '<td class="text-right">'.$result->sum('receipt_weight').' Total</td>'.
-                    '<td></td>'.
+                    '<td class="text-right">'.$result->sum('distance_km').' Total</td>'.
                     '<td></td>'.
                     '<td></td>'.
                     '<td></td>'.

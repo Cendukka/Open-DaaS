@@ -21,8 +21,6 @@ class community_controller extends Controller {
 
 
 	public function store(Request $request, company $company) {
-		# ADD MORE AUTHENTICATION HERE
-
 		$request->validate([
 			'city'=> 'required|max:50',
 		]);
@@ -49,8 +47,6 @@ class community_controller extends Controller {
 
 
 	public function update(Request $request, company $company, community $community) {
-		# ADD MORE AUTHENTICATION HERE
-
 		$request->validate([
 			'city'=> 'required|max:50',
 		]);

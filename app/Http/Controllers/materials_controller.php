@@ -28,8 +28,6 @@ class materials_controller extends Controller {
 
 
 	public function store(Request $request) {
-		# ADD MORE AUTHENTICATION HERE
-
 		$request->validate([
 			'name' => 'required|max:50',
 			'type' => 'required','in:["textile","retired","raw waste","refined","presorted"]',
@@ -56,8 +54,6 @@ class materials_controller extends Controller {
 
 
 	public function update(Request $request, material $material) {
-		# ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             'name' => 'required|max:50',
             'type' => 'required','in:["textile","retired","raw waste","refined","presorted"]',

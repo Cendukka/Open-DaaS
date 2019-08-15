@@ -26,8 +26,6 @@ class company_controller extends Controller {
 
 
 	public function store(Request $request) {
-		# ADD MORE AUTHENTICATION HERE
-
 		$request->validate([
 			'nimi' => 'required|max:191',
 			'katuosoite'=>'required|max:191',
@@ -66,8 +64,6 @@ class company_controller extends Controller {
 
 
 	public function update(Request $request, company $company) {
-		# ADD MORE AUTHENTICATION HERE
-
 		$request->validate([
 			'name' => 'required|max:191',
 			'address'=>'required|max:191',

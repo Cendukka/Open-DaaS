@@ -32,11 +32,9 @@ class refined_controller extends Controller {
 
 
 	public function store(Request $request, company $company) {
-        # ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
+            'datetime' => 'required|date_format:d-m-Y|after:-12 months|before:12 months',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0|max:1000000',
@@ -68,7 +66,7 @@ class refined_controller extends Controller {
 
         $refined = new refined_sorting([
             'refined_user_id' => $request->get('user') ?: Auth::user()->user_id,
-            'refined_date' => $request->get('datetime'),
+            'refined_date' => date("Y-m-d",strtotime($request->get('datetime'))),
             'refined_receipt_id' => $receipt,
             'pre_sorting_id' => $pre_sorting,
             'refined_material_id' => $material,
@@ -94,12 +92,9 @@ class refined_controller extends Controller {
 
 
 	public function update(Request $request, company $company, refined_sorting $refined) {
-        # ADD MORE AUTHENTICATION HERE
-
-
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
+            'datetime' => 'required|date_format:d-m-Y H:i:s|after:-12 months|before:12 months',
             'pre_receipt' => 'required|integer',
             'material' => 'required|integer',
             'weight' => 'required|integer|min:0|max:1000000',
@@ -119,7 +114,7 @@ class refined_controller extends Controller {
 
         $refinedNew = refined_sorting::find($refined->refined_id);
         $refinedNew->refined_user_id = $request->get('user') ?: Auth::user()->user_id;
-        $refinedNew->refined_date = $request->get('datetime');
+        $refinedNew->refined_date = date("Y-m-d",strtotime($request->get('datetime')));
         $refinedNew->refined_receipt_id = $receipt;
         $refinedNew->pre_sorting_id = $pre_sorting;
         $refinedNew->refined_material_id = $material;

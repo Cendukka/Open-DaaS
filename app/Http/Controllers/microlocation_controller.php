@@ -29,8 +29,6 @@ class microlocation_controller extends Controller {
 
 
     public function store(Request $request, company $company) {
-        # ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             #'company' => 'required|integer',
             'type' => 'required|integer',

@@ -31,10 +31,9 @@ class issue_controller extends Controller {
 
 
 	public function store(Request $request, company $company) {
-        # ADD MORE AUTHENTICATION HERE
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
+            'datetime' => 'required|date_format:d-m-Y|after:-12 months|before:12 months',
             'type' => 'required',
             'from_microlocation' => 'required|integer',
             'to_microlocation' => 'required_if:type,1|integer',
@@ -83,7 +82,7 @@ class issue_controller extends Controller {
 
         $issue = new inventory_issue([
             'issue_user_id' => $request->get('user') ?: Auth::user()->user_id,
-            'issue_date' => $request->get('datetime'),
+            'issue_date' => date("Y-m-d",strtotime($request->get('datetime'))),
             'issue_type_id' => $type,
             'issue_from_microlocation_id' => $microlocation,
             'issue_to_microlocation_id' => ($type == 1 ? $request->get('to_microlocation') : NULL),
@@ -122,11 +121,9 @@ class issue_controller extends Controller {
 
 
 	public function update(Request $request, company $company, inventory_issue $issue) {
-        # ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             'user' => ['integer', Rule::requiredIf(Auth::user()->user_type_id > 3)],
-            'datetime' => 'required|date_format:Y-m-d H:i:s|after:-12 months|before:12 months',
+            'datetime' => 'required|date_format:d-m-Y|after:-12 months|before:12 months',
             'type' => 'required',
             'from_microlocation' => 'required|integer',
             'to_microlocation' => 'required_if:type,1|integer',
@@ -175,7 +172,7 @@ class issue_controller extends Controller {
 
         $issueNew = inventory_issue::find($issue->issue_id);
         $issueNew->issue_user_id = $request->get('user') ?: Auth::user()->user_id;
-        $issueNew->issue_date = $request->get('datetime');
+        $issueNew->issue_date = date("Y-m-d",strtotime($request->get('datetime')));
         $issueNew->issue_type_id = $request->get('type');
         $issueNew->issue_from_microlocation_id = $microlocation;
         $issueNew->issue_to_microlocation_id = ($type == 1 ? $request->get('to_microlocation') : NULL);

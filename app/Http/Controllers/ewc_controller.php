@@ -29,8 +29,6 @@ class ewc_controller extends Controller
 
 
     public function store(Request $request){
-        # ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             'ewc_code' => 'required|max:6|min:6|unique:ewc_codes|digits_between:0,9',
             'description' => 'required|max:191',
@@ -56,8 +54,6 @@ class ewc_controller extends Controller
 
 
     public function update(Request $request, ewc_codes $ewc_code) {
-        # ADD MORE AUTHENTICATION HERE
-
         $request->validate([
             #'ewc_code' => 'required|max:6|digits_between:0,9',
             'description' => 'required|max:191',

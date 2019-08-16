@@ -221,19 +221,21 @@
             @endphp
             @foreach($companies->all() as $company)
             <div class="col-md-4">
-                <div class="panel panel-default" style="margin: 0 0 20px 0">
-                    <div class="panel-heading" style="background: #d1dec2;">{{$company['name']}}</div>
-                    <div class="panel-body" style="background: #EEEEEE; height:130px">
-                        Tel: {{$company['phone']}},<br>
-                        @if(isset($company['email']) && $company['email'] != '')
-                            {{$company['email']}}
-                        @endif
-                        <br>
-                        <a href="https://{{$company['www']}}" target="_blank" style="color: blue" class="textMark">{{$company['www']}}</a><br>
-                        {{$company['address']}},<br>
-                        {{$company['city']}}<br>
+                <a id="{{$company['city']}}" >
+                    <div class="panel panel-default" style="margin: 0 0 20px 0">
+                        <div class="panel-heading" style="background: #d1dec2;">{{$company['name']}}</div>
+                        <div class="panel-body" style="background: #EEEEEE; height:130px">
+                            Tel: {{$company['phone']}},<br>
+                            @if(isset($company['email']) && $company['email'] != '')
+                                {{$company['email']}}
+                            @endif
+                            <br>
+                            <a href="https://{{$company['www']}}" target="_blank" style="color: blue" class="textMark">{{$company['www']}}</a><br>
+                            {{$company['address']}},<br>
+                            {{$company['city']}}<br>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             @endforeach
         </div>

@@ -25,7 +25,7 @@
                         <div class="form-group row">
                             <label for="password" class="col-sm-3 control-label">Salasana</label>
                             <div class="col-sm-3">
-                                <input id="password" type="password" class="form-control @error('Salasana') is-invalid @enderror" name="password" autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('Salasana') is-invalid @enderror" name="password">
                             </div>
                             @error('password')
                             <span class="invalid-feedback element-float-left" role="alert">

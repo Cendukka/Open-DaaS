@@ -39,11 +39,11 @@
                                     Kirjaudu sisään
                                 </button>
 
-{{--                                @if (Route::has('password.request'))--}}
-{{--                                    <a class="btn btn-primary" href="{{ route('password.request') }}">--}}
-{{--                                        Unohditko salasanan?--}}
-{{--                                    </a>--}}
-{{--                                @endif--}}
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-primary" href="{{ route('password.request') }}">
+                                        Unohditko salasanan?
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </form>

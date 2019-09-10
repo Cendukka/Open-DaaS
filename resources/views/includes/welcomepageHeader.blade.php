@@ -8,7 +8,10 @@
             <a href="/"><h5>Open DaaS</h5></a>
         </div>
 
-
+        <!----------------------------------------------------------------------------------------------
+                Finland image map, takes the city name as id from contactList page, links and changes 
+                the title background when clicked and hover over the city in contactList. 
+        ----------------------------------------------------------------------------------------------->
         <script type = "text/javascript">
         
                         function Change(name) {

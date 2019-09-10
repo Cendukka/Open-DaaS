@@ -221,9 +221,8 @@
             @endphp
             @foreach($companies->all() as $company)
             <div class="col-md-4">
-                <a id="{{$company['city']}}" >
                     <div class="panel panel-default" style="margin: 0 0 20px 0">
-                        <div class="panel-heading" style="background: #d1dec2;">{{$company['name']}}</div>
+                        <div class="panel-heading" style="background: #d1dec2;" id="{{$company['city']}}">{{$company['name']}}</div>
                         <div class="panel-body" style="background: #EEEEEE; height:130px">
                             Tel: {{$company['phone']}},<br>
                             @if(isset($company['email']) && $company['email'] != '')
@@ -235,7 +234,6 @@
                             {{$company['city']}}<br>
                         </div>
                     </div>
-                </a>
             </div>
             @endforeach
         </div>

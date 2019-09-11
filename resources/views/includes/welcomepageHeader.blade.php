@@ -10,7 +10,7 @@
 
         <!----------------------------------------------------------------------------------------------
                 Finland image map, takes the city name as id from contactList page, links and changes 
-                the title background when clicked and hover over the city in contactList. 
+                the title background in contactList when clicked and hover over the city. 
         ----------------------------------------------------------------------------------------------->
         <script type = "text/javascript">
         

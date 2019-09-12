@@ -6,7 +6,7 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', function () {
     return view('pages.welcomeLogOut');
 });
-#contact person routes
+#contact list routes
 Route::get('contactLists',function(){
     return view('pages.contactLists');
 })->name('ContactList');
@@ -54,8 +54,6 @@ Route::group(['middleware'=>['auth', 'company']],function(){
             Route::post('materials/materials-store',                                                'materials_controller@store');
             Route::post('materials/{material}/materials-update',                                    'materials_controller@update');
             Route::post('materials/{material}/materials-destroy',                                   'materials_controller@destroy');
-            # Companies
-//                Route::resource('companies',                                                          'company_controller', ['only' => ['index', 'show', 'create', 'edit']]);
             Route::get('companies',                                                                 'company_controller@index')->name('companies.index');
             Route::get('companies/create',                                                          'company_controller@create')->name('companies_create');
             Route::post('companies/company-store',                                                  'company_controller@store');
@@ -63,21 +61,7 @@ Route::group(['middleware'=>['auth', 'company']],function(){
         });
 
     });
-    //Home
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}',                     'microlocation_controller@show');
 
-//	//Microlocation routes
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}/warehouse',           'microlocation_controller@warehouse_index');
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}/receipts',            'receipt_controller@index');
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}/receipts/search',     'receipt_controller@search');
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}/issues',              'issue_controller@index');
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}/issues/search',       'issue_controller@search');
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}/pre',                 'pre_controller@index');
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}/pre/search',          'pre_controller@search');
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}/refined',             'refined_controller@index');
-//	Route::get('companies/{company}/manage/microlocations/{microlocation}/refined/search',      'refined_controller@search');
-
-    //Route::resource('companies/{company}/manage/microlocations',                                  'microlocation_controller', ['only' => ['index', 'show', 'create', 'edit']]);
     Route::post('companies/{company}/manage/microlocations/microlocations-store',                   'microlocation_controller@store');
     Route::post('companies/{company}/manage/microlocations/{microlocation}/microlocations-update',  'microlocation_controller@update');
     #Microlocations
@@ -91,7 +75,6 @@ Route::group(['middleware'=>['auth', 'company']],function(){
 
     # Communities
     Route::get('companies/{company}/manage/communities',                                            'community_controller@index');
-//    Route::resource('companies/{company}/manage/communities',                                     'community_controller', ['only' => ['index', 'show', 'create', 'edit']]);
 
     #Reports
     Route::get('companies/{company}/warehouse', 'company_controller@warehouse_index');
@@ -109,7 +92,6 @@ Route::group(['middleware'=>['auth', 'company']],function(){
 
     # Refine Sorting
     Route::get('companies/{company}/refined',                                                       'refined_controller@index');
-//        Route::resource('companies/{company}/manage/refined',                                     'refined_controller', ['only' => ['show', 'create', 'edit']]);
     Route::get('companies/{company}/manage/refined/create',                                         'refined_controller@create');
     Route::get('companies/{company}/manage/refined/{refined}/edit',                                 'refined_controller@edit');
     Route::get('companies/{company}/refined/search',                                                'refined_controller@search');
@@ -120,7 +102,6 @@ Route::group(['middleware'=>['auth', 'company']],function(){
 
     # Pre Sorting
     Route::get('companies/{company}/pre',                                                           'pre_controller@index');
-//        Route::resource('companies/{company}/manage/pre',                                         'pre_controller', ['only' => ['show', 'create', 'edit']]);
     Route::get('companies/{company}/manage/pre/create',                                             'pre_controller@create');
     Route::get('companies/{company}/manage/pre/{pre}/edit',                                         'pre_controller@edit');
     Route::get('companies/{company}/pre/search',                                                    'pre_controller@search');
@@ -142,14 +123,3 @@ Route::group(['middleware'=>['auth', 'company']],function(){
         return view('includes.forms.details');
     });
 });
-// Route::get('ewc','ewc_controller@index');
-//Route::get('ewc/search','ewc_controller@search');
-
-//# EWC Codes
-//Route::get('ewc',                           'ewc_controller@index');
-//Route::get('ewc/create',                    'ewc_controller@create');
-//Route::get('ewc/{ewc_code}/edit',           'ewc_controller@edit');
-//Route::post('ewc/ewc-store',                'ewc_controller@store');
-//Route::post('ewc/{ewc_code}/ewc-update',    'ewc_controller@update');
-//Route::post('ewc/{ewc_code}/ewc-destroy',   'ewc_controller@destroy');
-//Route::get('ewc/search',                    'ewc_controller@search');

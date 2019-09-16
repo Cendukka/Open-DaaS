@@ -158,6 +158,11 @@ a, a:hover, a:focus {
     color: #535353;
     transition: all 0.3s;
     overflow: auto;
+
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+    border-top: 0px;
+    border-left: 0px;
+    margin: 0 15px 0 0;
 }
 
 #sidebar.active {

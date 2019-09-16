@@ -7,7 +7,6 @@
                     <div class="panel-heading" style="background: #d1dec2;">
                         <h3>Yhteystiedot</h3>
                     </div>
-
                 </div>
             </div>
             <br>

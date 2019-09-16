@@ -3,28 +3,15 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
+            <!-- public page's infoparagraph -->
             <div class="jumbotron">
                 <p></p>
             </div>
-
-
-{{--                    <div class="calender">--}}
-{{--                        @php--}}
-{{--                        //Set default dates--}}
-{{--                        $tdyDate = date("Y-m");--}}
-
-{{--                        //Set max and min for the date input--}}
-{{--                        $maxDateFrom = date("Y-m");--}}
-{{--                        $minDate = date("Y-m", strtotime(date("Y")."-01"));--}}
-
-
-{{--                        @endphp--}}
-{{--                        <p>From: <input type="month" name="" value="{{$tdyDate}}" min="{{$minDate}}" max="{{$tdyDate}}">--}}
-{{--                            To: <input type="month" name="" value="{{$tdyDate}}" min="{{$minDate}}" max="{{$tdyDate}}">--}}
-{{--                        </p>--}}
-
-{{--                    </div>--}}
                     <br>
+                    <!--
+                        piechartWhole: Chart to represent recycled sorted textiles
+                        chart_div: Chart to visualize received receipts and issues
+                     -->
                     <div class="row">
                         <div id="piechartWhole" class="col-md-12"></div>
                     </div>
@@ -45,15 +32,6 @@
                         google.charts.setOnLoadCallback(drawCurveTypes);
                         google.charts.setOnLoadCallback(drawChart);
                         function drawChart() {
-                            {{--var inventoryData = new google.visualization.DataTable();--}}
-                            {{--inventoryData.addColumn('string', 'Name');--}}
-                            {{--inventoryData.addColumn('number', 'Weight');--}}
-                            {{--@foreach(DB::table('issue_types')->where('issue_typename','!=','transport')->get() as $type)--}}
-                            {{--    inventoryData.addRow(['{{$type->issue_typename}}', {{DB::table('inventory_issue')->where('issue_type_id',$type->issue_type_id)->join('inventory_issue_details','detail_issue_id','issue_id')->sum('detail_weight')}}]);--}}
-                            {{--@endforeach--}}
-                            {{--var wholeOptions = {'title': 'Koko Suomi - Lähteneet yhteensä: {{DB::table('inventory_issue')->join('issue_types','issue_types.issue_type_id','inventory_issue.issue_type_id')->join('inventory_issue_details','detail_issue_id','issue_id')->where('issue_typename','!=','transport')->sum('detail_weight')}} Kg', 'width': 600, 'height': 500, 'backgroundColor': 'transparent'};--}}
-                            {{--var wholeChart = new google.visualization.ColumnChart(document.getElementById('piechartFraction'));--}}
-                            {{--wholeChart.draw(inventoryData, wholeOptions);--}}
 
                             var inventoryData = new google.visualization.DataTable();
                             inventoryData.addColumn('string', 'Name');

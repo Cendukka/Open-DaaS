@@ -1,3 +1,7 @@
+<!----------------------------------------------------------------------------------------------------------------------
+        This produces a list of organizations to pick for modifying users of the selected organization
+ ---------------------------------------------------------------------------------------------------------------------->
+
 @extends('layouts.default')
 @section ('title', 'Toimipisteet')
 @section('content')

@@ -20,11 +20,13 @@ Route::get('exportOpenDataMaterials',               'excel_controller@materials'
 
 #Routes for logged in users
 # - Users
+//company middleware:registered in kernel.php(checks the company id of user)
 Route::group(['middleware'=>['auth', 'company']],function(){
     #Instructions
     Route::get('companies/{company}/instructions',                                                                          'company_controller@instructions');
     Route::get('/instructions',                                                                                             'company_controller@instructions');
     //Admin and manager routes
+    //manager middleware:registered in kernel.php(checks user_type_id is 1 or 2)
     Route::group(['middleware'=>['manager']],function(){
         #Create and edit microlocations
         Route::get('companies/{company}/manage/microlocations/create',                                  'microlocation_controller@create');
@@ -43,6 +45,7 @@ Route::group(['middleware'=>['auth', 'company']],function(){
         Route::post('companies/{company}/manage/users/{user}/users-update',                             'user_controller@update');
 
         //Admin routes
+        //admin middleware:registered in kernel.php(checks if user_type_id is 1)
         Route::group(['middleware'=>['admin']],function(){
 
             #Manage Pages

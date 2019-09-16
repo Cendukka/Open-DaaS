@@ -60,9 +60,13 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        //admin takes CheckAdmin middleware from middleware folder
         'admin' => \App\Http\Middleware\CheckAdmin::class,
+        //manager takes CheckManager middleware from middleware folder
         'manager' => \App\Http\Middleware\CheckManager::class,
+        //company takes CheckCompany middleware from middleware folder
         'company' => \App\Http\Middleware\CheckCompany::class,
+        //user takes CheckUser middleware from middleware folder
         'user' => \App\Http\Middleware\CheckUser::class,
 
 

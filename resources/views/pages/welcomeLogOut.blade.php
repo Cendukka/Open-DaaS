@@ -16,11 +16,7 @@
                         <div id="piechartWhole" class="col-md-12"></div>
                     </div>
                     <div class="row">
-                        <div id="piechartWholeExport" class="col-md-12">
-                            <form action="{{url('exportOpenDataMaterials')}}">
-                                <button id="export" type="button" class="btn">Export open data</button>
-                            </form>
-                        </div>
+                        <a href="exportOpenDataMaterials" class="btn btn-info btn-sm">Export open data</a>
                     </div>
                     <div class="row">
                         <div id="chart_div" class="col-md-12" style="width: 900px; height: 500px"></div>

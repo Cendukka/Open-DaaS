@@ -29,6 +29,8 @@
     <script type="text/javascript">
         $('.timepicker').datepicker({
             format: 'dd-mm-yyyy'
+        }).on('changeDate', function() {
+            search();
         });
     </script>
 </div>

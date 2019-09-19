@@ -1,6 +1,4 @@
-<!----------------------------------------------------------------------------------------------------------------------
-       Prints the current contents of each microlocation's inventory
- ---------------------------------------------------------------------------------------------------------------------->
+{{--Prints the current contents of each microlocation's inventory--}}
 
 @extends( 'layouts.macrolocation')
 @section ('title', 'Raportit: Varasto')
@@ -23,9 +21,7 @@
                         array_push($microlocation_ids, $eachMicrolocation->microlocation_id);
                     }
                 @endphp
-                    <!-------------------------------------------------------------------------------------------------
-                            Loops through the microlocations ID array and prints the content of the inventory
-                    -------------------------------------------------------------------------------------------------->
+{{--Loops through the microlocations ID array and prints the content of the inventory--}}
                 @if (count($microlocation_ids)>0)
                         @foreach ($microlocations as $ml)
                             <div class="col-md-4">

@@ -1,4 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+{{-- Script runs the query whenever text or date filters change, then outputs the found reports--}}
 <script type="text/javascript">
     function search(){
         $search = $('#search').val();
@@ -13,10 +14,12 @@
             }
         });
     }
+
     $(document).ready(search);
     $('#search').on('keyup',search);
     $('#search').on('change',search);
     $('#from-date').on('change',search);
     $('#to-date').on('change',search);
+
     $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 </script>

@@ -162,7 +162,7 @@ class refined_controller extends Controller {
 		//
 	}
 
-
+    # The SQL query to find events, as its own function so it can be used from multiple places
     public function query(Request $request, company $company) {
         $microlocation_ids = [];
         foreach (DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->get() as $ml){
@@ -200,7 +200,7 @@ class refined_controller extends Controller {
             ->orderBy('receipt_to_microlocation_id');
     }
 
-
+    # This outputs a list of found events nicely formatted
 	public function search(Request $request, company $company, microlocation $microlocation){
 		if($request->ajax()){
 			$output="";
@@ -232,7 +232,7 @@ class refined_controller extends Controller {
 		}
 	}
 
-
+	# This is used for the edit/create pages
     public function origin(Request $request, company $company){
         if($request->ajax()){
             $output="";

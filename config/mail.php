@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'stormrider6225@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Yooooo!!!'),
+        'name' => env('MAIL_FROM_NAME', 'Password Reset Email'),
     ],
 
     /*

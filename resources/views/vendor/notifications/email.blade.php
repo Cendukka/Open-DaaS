@@ -6,15 +6,19 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+# @lang('Terve!')
 @endif
 @endif
 
 {{-- Intro Lines --}}
-@foreach ($introLines as $line)
-{{ $line }}
+@lang(
+    "Sait tämän sähköpostin, koska saimme pyynnön salasanan nollaukseen"
 
-@endforeach
+)
+{{--@foreach ($introLines as $line)--}}
+{{--{{ $line }}--}}
+
+{{--@endforeach--}}
 
 {{-- Action Button --}}
 @isset($actionText)
@@ -34,24 +38,31 @@
 @endisset
 
 {{-- Outro Lines --}}
-@foreach ($outroLines as $line)
-{{ $line }}
+@lang(
+        "Tämä palautuslinkki toimii 60 min ajan. \n".
+        "Jos et pyytänyt salasanan palautusta, voit poistaa tämän sähköpostin."
+)
+{{--@foreach ($outroLines as $line)--}}
+{{--{{ $line }}--}}
 
-@endforeach
+{{--@endforeach--}}
 
 {{-- Salutation --}}
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Regards, Open DaaS Fast WoW! such speed wow!'),<br>{{ config('app.name') }}
+@lang(
+        "Terveisin,\n".
+        'IT-Tiimi, LSJH'
+)
 @endif
 
 {{-- Subcopy --}}
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser: [:actionURL](:actionURL)',
+    "Jos sinulla on ongelmia \":actionText\" nappulan kanssa, voit painaa alla olevaa linkkiä tai \n".
+    'kopioida ja liittää sen selaimen osoitekenttään: [:actionURL](:actionURL)',
     [
         'actionText' => $actionText,
         'actionURL' => $actionUrl,

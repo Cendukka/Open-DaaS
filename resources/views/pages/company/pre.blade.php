@@ -1,3 +1,7 @@
+<!----------------------------------------------------------------------------------------------------------------------
+        Shows certain information of made records of presorting processes
+ ---------------------------------------------------------------------------------------------------------------------->
+
 @extends( 'layouts.macrolocation')
 @section ('title', 'Raportit: Esilajiteltu')
 @section('content')
@@ -26,7 +30,7 @@
                     <button type="submit" class="btn btn-secondary">+ Lisää esilajiteltu</button>
                 </form>
                 <br>
-                <button id="export" type="button" class="btn">Export exceliin</button>
+                <button id="export" type="button" class="btn">Lataa ja tallenna CSV-muotoon</button>
             </div>
         </div>
     @include('includes.search_script')

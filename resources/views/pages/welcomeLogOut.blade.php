@@ -16,7 +16,7 @@
                         <div id="piechartWhole" class="col-md-12"></div>
                     </div>
                     <div class="row">
-                        <a href="exportOpenDataMaterials" class="btn btn-info btn-sm">Export open data</a>
+                        <a href="exportOpenDataMaterials" class="btn btn-info btn-sm">Lataa ja tallenna CSV-muotoon</a>
                     </div>
                     <div class="row">
                         <div id="chart_div" class="col-md-12" style="width: 900px; height: 500px"></div>

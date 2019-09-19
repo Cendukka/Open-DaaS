@@ -1,3 +1,7 @@
+<!----------------------------------------------------------------------------------------------------------------------
+        Shows certain information of made records of received textiles
+ ---------------------------------------------------------------------------------------------------------------------->
+
 @extends( 'layouts.macrolocation')
 @section ('title', 'Raportit: Saapuneet')
 @section('content')
@@ -33,7 +37,7 @@
                     <button type="submit" class="btn btn-secondary">+ Lisää saapunut lähetys</button>
                 </form>
                 <br>
-                <button id="export" type="button" class="btn">Export exceliin</button>
+                <button id="export" type="button" class="btn">Lataa ja tallenna CSV-muotoon</button>
             </div>
         </div>
     </div>

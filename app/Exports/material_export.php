@@ -11,7 +11,9 @@ use phpDocumentor\Reflection\Types\Array_;
 
 class material_export implements ShouldAutoSize, FromCollection, WithHeadings {
     use Exportable;
-
+/*----------------------------------------------------------------------------------------------------------------------
+        Fetches each textiles from inventory and sums their total amounts of every company
+----------------------------------------------------------------------------------------------------------------------*/
     public function collection() {
         $data = DB::table('inventory')
             ->join('material_names','inventory_material_id','=','material_names.material_id')

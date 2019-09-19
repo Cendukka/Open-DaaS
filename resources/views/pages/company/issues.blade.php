@@ -28,7 +28,7 @@
                     <button type="submit" class="btn btn-secondary">+ Lisää lähetys</button>
                 </form>
                 <br>
-                <button id="export" type="button" class="btn">Export exceliin</button>
+                <button id="export" type="button" class="btn">Lataa ja tallenna CSV-muotoon</button>
             </div>
         </div>
     </div>

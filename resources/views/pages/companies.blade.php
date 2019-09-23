@@ -1,6 +1,6 @@
-<!----------------------------------------------------------------------------------------------------------------------
-        Here is a list of organizations that are saved on database
- ---------------------------------------------------------------------------------------------------------------------->
+
+{{--        Here is a list of organizations that are saved on database--}}
+
 
 @extends('layouts.default')
 @section ('title', 'Toimipisteet')

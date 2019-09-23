@@ -1,3 +1,6 @@
+
+{{--From to list users of the selected company--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Käyttäjät')
 @section('content')

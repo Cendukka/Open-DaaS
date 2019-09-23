@@ -1,3 +1,6 @@
+
+{{--Form for creating new issue record--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Lähetyksen luominen')
 @section('content')

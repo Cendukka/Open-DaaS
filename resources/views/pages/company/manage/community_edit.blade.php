@@ -1,3 +1,6 @@
+
+{{--Form for editing community record --}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Kunnan muokkaus')
 @section('content')

@@ -220,9 +220,9 @@
             @endphp
             @foreach($companies->all() as $company)
 
-<!----------------------------------------------------------------------------------------------------------------------------------------------
-            Takes the Company details from above array and linked to image map of finland in welcomepageHeader.blade
------------------------------------------------------------------------------------------------------------------------------------------------>
+
+{{--            Takes the Company details from above array and linked to image map of finland in welcomepageHeader.blade--}}
+
             <div class="col-md-4">
                     <div class="panel panel-default" style="margin: 0 0 20px 0">
                         <div class="panel-heading" style="background: #d1dec2;" id="{{$company['city']}}">{{$company['name']}}</div>

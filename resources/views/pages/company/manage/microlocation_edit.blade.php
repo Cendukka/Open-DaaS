@@ -1,3 +1,6 @@
+
+{{--Form for editing microlocation record--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Toimipisteen muokkaus')
 @section('content')

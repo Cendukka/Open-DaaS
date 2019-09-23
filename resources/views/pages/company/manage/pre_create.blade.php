@@ -1,3 +1,6 @@
+
+{{--Form for creating new presortting record--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Esilajiteltun luominen')
 @section('content')

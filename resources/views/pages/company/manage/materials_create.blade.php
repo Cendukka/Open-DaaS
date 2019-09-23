@@ -1,3 +1,6 @@
+
+{{--Form for creating new material record--}}
+
 @extends('layouts.default')
 @section('title', 'Hallinnoi: Materiaalin luominen')
 @section('content')

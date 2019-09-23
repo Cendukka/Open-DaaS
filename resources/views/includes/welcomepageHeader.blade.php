@@ -1,6 +1,6 @@
 <div class="wrapper">
 
-    <!-- Sidebar Holder -->
+{{--    <!-- Sidebar Holder -->--}}
     <nav id="sidebar">
 
         <div class="sidebar-header">
@@ -8,20 +8,20 @@
             <a href="/"><h5>Open DaaS</h5></a>
         </div>
 
-        <!----------------------------------------------------------------------------------------------
-                Finland image map, takes the city name as id from contactList page, links and changes 
-                the title background in contactList when clicked and hover over the city. 
-        ----------------------------------------------------------------------------------------------->
+
+{{--                Finland image map, takes the city name as id from contactList page, links and changes --}}
+{{--                the title background in contactList when clicked and hover over the city. --}}
+
         <script type = "text/javascript">
-        
+
                         function Change(name) {
                             document.getElementById(name).style.background= "#FA9632"
                         }
                         function noChange(name) {
                             document.getElementById(name).style.background= "#d1dec2"
                         }
-        
-     
+
+
         </script>
 
 
@@ -37,19 +37,19 @@
             <area   shape="circle"
                     coords="115,455, 7"
                     href="/contactLists#Helsinki"
-                    title="HELSINKI" 
+                    title="HELSINKI"
                     onMouseOver="Change('Helsinki')"
                     onMouseOut="noChange('Helsinki')"/>
             <area   shape="circle"
                     coords="98,454, 7"
                     href="/contactLists#Lohja"
-                    title="LOHJA" 
+                    title="LOHJA"
                     onMouseOver="Change('Lohja')"
                     onMouseOut="noChange('Lohja')"/>
             <area   shape="circle"
                     coords="61,443, 7"
                     href="/contactLists#Turku"
-                    title="TURKU" 
+                    title="TURKU"
                     onMouseOver="Change('Turku')"
                     onMouseOut="noChange('Turku')"/>
             <area   shape="circle"
@@ -79,43 +79,43 @@
             <area   shape="circle"
                     coords="104,418, 7"
                     href="/contactLists#Hämeenlinna"
-                    title="HÄMEELINNA" 
+                    title="HÄMEELINNA"
                     onMouseOver="Change('Hämeenlinna')"
                     onMouseOut="noChange('Hämeenlinna')" />
             <area   shape="circle"
                     coords="91,396, 7"
                     href="/contactLists#Tampere"
-                    title="TAMPERE" 
+                    title="TAMPERE"
                     onMouseOver="Change('Tampere')"
                     onMouseOut="noChange('Tampere')" />
             <area   shape="circle"
                     coords="45,409, 7"
                     href="/contactLists#Rauma"
-                    title="RAUMA" 
+                    title="RAUMA"
                     onMouseOver="Change('Rauma')"
                     onMouseOut="noChange('Rauma')" />
             <area   shape="circle"
                     coords="51,395, 7"
                     href="/contactLists#Pori"
-                    title="PORI" 
+                    title="PORI"
                     onMouseOver="Change('Pori')"
                     onMouseOut="noChange('Pori')" />
             <area   shape="circle"
                     coords="190,417, 7"
                     href="/contactLists#Lappeenranta"
-                    title="LAPPEENRANTA" 
+                    title="LAPPEENRANTA"
                     onMouseOver="Change('Lappeenranta')"
                     onMouseOut="noChange('Lappeenranta')" />
             <area   shape="circle"
                     coords="165,386, 7"
                     href="/contactLists#Mikkeli"
-                    title="MIKKELI" 
+                    title="MIKKELI"
                     onMouseOver="Change('Mikkeli')"
                     onMouseOut="noChange('Mikkeli')" />
             <area   shape="circle"
                     coords="200,378, 7"
                     href="/contactLists#Savonlinna"
-                    title="SAVOLINNA" 
+                    title="SAVOLINNA"
                     onMouseOver="Change('Savonlinna')"
                     onMouseOut="noChange('Savonlinna')" />
             <area   shape="circle"
@@ -133,13 +133,13 @@
             <area   shape="circle"
                     coords="47,356, 7"
                     href="/contactLists#Kristiinankaupunki"
-                    title="KRISTIINANKAUPUNKI" 
+                    title="KRISTIINANKAUPUNKI"
                     onMouseOver="Change('Kristiinankaupunki')"
                     onMouseOut="noChange('Kristiinankaupunki')" />
             <area   shape="circle"
                     coords="80,332, 7"
                     href="/contactLists#Seinäjoki"
-                    title="SEINÄJOKI" 
+                    title="SEINÄJOKI"
                     onMouseOver="Change('Seinäjoki')"
                     onMouseOut="noChange('Seinäjoki')" />
             <area   shape="circle"
@@ -157,31 +157,31 @@
             <area   shape="circle"
                     coords="124,333, 7"
                     href="/contactLists#Saarijärvi"
-                    title="SAARIJÄRVI" 
+                    title="SAARIJÄRVI"
                     onMouseOver="Change('Saarijärvi')"
                     onMouseOut="noChange('Saarijärvi')" />
             <area   shape="circle"
                     coords="174,328, 7"
                     href="/contactLists#Kuopio"
-                    title="KUOPIO" 
+                    title="KUOPIO"
                     onMouseOver="Change('Kuopio')"
                     onMouseOut="noChange('Kuopio')" />
             <area   shape="circle"
                     coords="164,293, 7"
                     href="/contactLists#Iisalmi"
-                    title="IISALMI" 
+                    title="IISALMI"
                     onMouseOver="Change('Iisalmi')"
                     onMouseOut="noChange('Iisalmi')" />
             <area   shape="circle"
                     coords="175,265, 7"
                     href="/contactLists#Kajaani"
-                    title="KAJAANI" 
+                    title="KAJAANI"
                     onMouseOver="Change('Kajaani')"
                     onMouseOut="noChange('Kajaani')" />
             <area   shape="circle"
                     coords="112,254, 7"
                     href="/contactLists#Ylivieska"
-                    title="YLIVIESKA" 
+                    title="YLIVIESKA"
                     onMouseOver="Change('Ylivieska')"
                     onMouseOut="noChange('Ylivieska')" />
             <area   shape="circle"
@@ -193,7 +193,7 @@
             <area   shape="circle"
                     coords="109,188, 7"
                     href="/contactLists#Kemi"
-                    title="KEMI" 
+                    title="KEMI"
                     onMouseOver="Change('Kemi')"
                     onMouseOut="noChange('Kemi')" />
             <area   shape="circle"
@@ -205,7 +205,7 @@
             <area   shape="circle"
                     coords="170,55, 7"
                     href="/contactLists#Inari"
-                    title="INARI" 
+                    title="INARI"
                     onMouseOver="Change('Inari')"
                     onMouseOut="noChange('Inari')" />
         </map>

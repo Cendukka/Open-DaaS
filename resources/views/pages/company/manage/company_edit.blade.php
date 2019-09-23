@@ -1,3 +1,6 @@
+
+{{--Form for editing company record--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Organisaation muokkaus')
 @section('content')

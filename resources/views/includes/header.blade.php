@@ -1,3 +1,6 @@
+
+
+
 <div class="wrapper">
     <!-- Sidebar Holder -->
     <nav id="sidebar">

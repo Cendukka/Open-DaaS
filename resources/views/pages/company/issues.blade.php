@@ -1,3 +1,6 @@
+
+{{--        Shows certain information of made records of issues--}}
+
 @extends( 'layouts.macrolocation')
 @section ('title', 'Raportit: Lähetykset')
 @section('content')

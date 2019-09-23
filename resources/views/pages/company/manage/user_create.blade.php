@@ -1,3 +1,6 @@
+
+{{--form for creating new users--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Luo käyttäjä')
 @section('content')

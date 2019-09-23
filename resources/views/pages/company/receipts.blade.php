@@ -1,6 +1,6 @@
-<!----------------------------------------------------------------------------------------------------------------------
-        Shows certain information of made records of received textiles
- ---------------------------------------------------------------------------------------------------------------------->
+
+{{--        Shows certain information of made records of received textiles--}}
+
 
 @extends( 'layouts.macrolocation')
 @section ('title', 'Raportit: Saapuneet')

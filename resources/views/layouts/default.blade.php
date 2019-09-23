@@ -1,3 +1,6 @@
+
+{{--Web page Structure for admin --}}
+
 <!doctype html>
 <html>
     <head>

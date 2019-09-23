@@ -1,3 +1,6 @@
+
+{{--Form for creating receipt record--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Saapuneiden luominen')
 @section('content')

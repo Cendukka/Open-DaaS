@@ -1,3 +1,6 @@
+
+{{--Form for creating new community in the system --}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Kunnan luominen')
 @section('content')

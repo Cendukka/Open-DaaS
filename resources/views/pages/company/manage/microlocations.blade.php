@@ -1,3 +1,6 @@
+
+{{--Page for listing all microlocations of the company the user has logged in--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Toimipisteet')
 @section('content')

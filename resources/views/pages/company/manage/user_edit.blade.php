@@ -1,3 +1,6 @@
+
+{{--form for editing user informations--}}
+
 @extends('layouts.macrolocation')
 @section ('title', 'Hallinnoi: Muokkaa käyttäjää')
 @section('content')

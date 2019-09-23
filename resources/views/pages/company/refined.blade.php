@@ -1,6 +1,6 @@
-<!----------------------------------------------------------------------------------------------------------------------
-        Shows certain information of made records of refinesorting processes
- ---------------------------------------------------------------------------------------------------------------------->
+
+{{--        Shows certain information of made records of refinesorting processes--}}
+
 
 @extends( 'layouts.macrolocation')
 @section ('title', 'Raportit: Hienolajiteltu')

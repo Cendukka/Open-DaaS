@@ -1,3 +1,6 @@
+
+{{--Web page Structure for Public sites --}}
+
 <!doctype html>
 <html>
     <head>

@@ -5,7 +5,7 @@
         <div class="panel-heading">
             <h4>Ohjeet</h4>
         </div>
-        <!-- including instruction forms -->
+{{--        including instruction forms--}}
         <div class="panel-body row p-4" style="margin-right: 0; margin-left: 0;">
             @include('includes.instructionForms.createCompany')
             @include('includes.instructionForms.createReceipt')

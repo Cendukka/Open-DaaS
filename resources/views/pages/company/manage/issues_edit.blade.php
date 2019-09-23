@@ -1,3 +1,6 @@
+
+{{--Form for editing issue record--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Lähetyksen muokkaus')
 @section('content')

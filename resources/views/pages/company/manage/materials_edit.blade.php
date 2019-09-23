@@ -1,3 +1,6 @@
+
+{{--Form for editing material record--}}
+
 @extends('layouts.default')
 @section('title', 'Hallinnoi: Materiaalin muokkaus')
 @section('content')

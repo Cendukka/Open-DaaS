@@ -1,3 +1,6 @@
+
+{{--Web page Structure for logged in users --}}
+
 <!doctype html>
 <html>
     <head>

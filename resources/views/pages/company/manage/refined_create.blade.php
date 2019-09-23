@@ -1,3 +1,6 @@
+
+{{--Form for creating refine sorting record--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Hienolajittelun luominen')
 @section('content')

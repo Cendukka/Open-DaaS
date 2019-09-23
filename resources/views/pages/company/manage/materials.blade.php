@@ -1,3 +1,6 @@
+
+{{--Form for listing materials saved in the system--}}
+
 @extends('layouts.default')
 @section('title', 'Hallinnoi: Materiaalit')
 @section('title', 'Materiaalit')

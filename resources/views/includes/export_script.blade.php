@@ -1,3 +1,6 @@
+
+{{--Script for exporting into CSV-file with specific time and data depending on properties, This file is included when needed--}}
+
 <script type="text/javascript">
     function exporter(){
         $search = $('#search').val();

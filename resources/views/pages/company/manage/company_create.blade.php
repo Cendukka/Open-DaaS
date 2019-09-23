@@ -1,3 +1,6 @@
+
+{{--Form for creating new comppany in the system--}}
+
 @extends('layouts.default')
 @section('title', 'Hallinnoi: Organisaation luominen')
 @section('content')

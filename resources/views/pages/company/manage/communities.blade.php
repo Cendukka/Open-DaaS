@@ -1,3 +1,6 @@
+
+{{--The page to show all communities of the selected company--}}
+
 @extends('layouts.macrolocation')
 @section('title', 'Hallinnoi: Kunnat')
 @section('content')

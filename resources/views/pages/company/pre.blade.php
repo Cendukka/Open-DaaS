@@ -1,6 +1,6 @@
-<!----------------------------------------------------------------------------------------------------------------------
-        Shows certain information of made records of presorting processes
- ---------------------------------------------------------------------------------------------------------------------->
+
+{{--        Shows certain information of made records of presorting processes--}}
+
 
 @extends( 'layouts.macrolocation')
 @section ('title', 'Raportit: Esilajiteltu')

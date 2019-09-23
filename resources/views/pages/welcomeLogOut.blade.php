@@ -3,15 +3,15 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <!-- public page's infoparagraph -->
+{{--            public page's infoparagraph--}}
             <div class="jumbotron">
                 <p></p>
             </div>
                     <br>
-                    <!--
-                        piechartWhole: Chart to represent recycled sorted textiles
-                        chart_div: Chart to visualize received receipts and issues
-                     -->
+
+{{--                        piechartWhole: Chart to represent recycled sorted textiles--}}
+{{--                        chart_div: Chart to visualize received receipts and issues--}}
+
                     <div class="row">
                         <div id="piechartWhole" class="col-md-12"></div>
                     </div>
@@ -45,7 +45,7 @@
                             data.addColumn('number', 'Receipts');
                             data.addColumn('number', 'Myynti');
                             data.addColumn('number', 'Hyväntekeväisyys');
-                            // data.addColumn('number', 'Poltto');
+                             // data.addColumn('number', 'Poltto');
 
                             @php
                                 # value = timevalue of Y-m
@@ -99,7 +99,7 @@
                                     }
                                 }
 
-/*                                foreach((clone $issueQuery)->where('issue_typename','Charity')->get() as $issue){
+                                /*foreach((clone $issueQuery)->where('issue_typename','Charity')->get() as $issue){
                                     $date = date('Y-m', strtotime($issue->issue_date));
                                     if($values->has(strtotime($date))){
                                         $values->put(strtotime($date),[explode('-',$date), $values[strtotime($date)][1], $values[strtotime($date)][2], $values[strtotime($date)][3], $values[strtotime($date)][2]+$issue->sumweight]);

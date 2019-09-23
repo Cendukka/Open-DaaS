@@ -1,5 +1,8 @@
 <?php
 
+// This file is for exporting issue events.
+// In this we select which columns we want and give them custom names
+
 namespace App\Exports;
 
 use App\company;

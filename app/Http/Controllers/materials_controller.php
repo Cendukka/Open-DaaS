@@ -1,5 +1,7 @@
 <?php
 
+// This file contains functions for controlling material names
+
 namespace App\Http\Controllers;
 
 use App\company;

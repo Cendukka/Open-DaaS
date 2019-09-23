@@ -1,5 +1,7 @@
 <?php
 
+// This file contains functions for controlling receipt events
+
 namespace App\Http\Controllers;
 
 use App\company;
@@ -239,6 +241,7 @@ class receipt_controller extends Controller {
     }
 
 
+    // Used when selecting the source that the material for this receipt originated from
     public function source(Request $request, company $company) {
         if ($request->ajax()) {
             $ml_id = $request->ml_id ? $request->ml_id : 0;
@@ -287,6 +290,7 @@ class receipt_controller extends Controller {
     }
 
 
+    // Used when selecting the source that the material for this receipt originated from
     public function communities(Request $request, company $company) {
         if ($request->ajax()) {
             $output = "";

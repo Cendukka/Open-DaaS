@@ -1,5 +1,7 @@
 <?php
 
+// This file contains functions for controlling users
+
 namespace App\Http\Controllers;
 
 use App\company;
@@ -47,6 +49,7 @@ class user_controller extends Controller {
         ]);
         $user->save();
 
+        // When creating a user, if there is no microlocations in the company, redirect to creating a microlocation instead
 //		if(DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->count() == 0){
 //            return redirect()->action('microlocation_controller@create', ['company' => $company]);
 //        }

@@ -1,5 +1,7 @@
 <?php
 
+// This file contains functions for controlling EWC Codes
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,17 +9,17 @@ use Illuminate\Support\Facades\DB;
 use App\ewc_codes;
 
 class ewc_controller extends Controller {
-    public function index(){
-		return view('pages.ewc');
+    public function index() {
+        return view('pages.ewc');
     }
 
 
-    public function create(){
+    public function create() {
         return view('pages.company.manage.ewc_create');
     }
 
 
-    public function store(Request $request){
+    public function store(Request $request) {
         $request->validate([
             'ewc_code' => 'required|max:6|min:6|unique:ewc_codes|digits_between:0,9',
             'description' => 'required|max:191',
@@ -33,12 +35,12 @@ class ewc_controller extends Controller {
     }
 
 
-    public function show($id){
+    public function show($id) {
         return redirect()->action('ewc_controller@index');
     }
 
 
-    public function edit(ewc_codes $ewc_code){
+    public function edit(ewc_codes $ewc_code) {
         return view('pages.company.manage.ewc_edit')->with(['ewc_code' => $ewc_code]);
     }
 
@@ -67,23 +69,23 @@ class ewc_controller extends Controller {
     }
 
 
-	public function search(Request $request){
-		if($request->ajax()){
-			$output="";
-			$result = DB::table('ewc_codes')
-                ->where('ewc_code','LIKE','%'.$request->search."%")
-                ->orWhere('description','LIKE','%'.$request->search."%")
+    public function search(Request $request) {
+        if ($request->ajax()) {
+            $output = "";
+            $result = DB::table('ewc_codes')
+                ->where('ewc_code', 'LIKE', '%' . $request->search . "%")
+                ->orWhere('description', 'LIKE', '%' . $request->search . "%")
                 ->get();
-			if($result){
+            if ($result) {
 
-				foreach ($result as $key => $value){
-					$output.='<tr>'.
-						'<td><a href="'.url('/ewc/'.$value->ewc_code.'/edit').'">'.$value->ewc_code.'</a></td>'.
-						'<td>'.$value->description.'</td>'.
-						'</tr>';
-				}
-				return Response($output);
-			}
-		}
-	}
+                foreach ($result as $key => $value) {
+                    $output .= '<tr>' .
+                        '<td><a href="' . url('/ewc/' . $value->ewc_code . '/edit') . '">' . $value->ewc_code . '</a></td>' .
+                        '<td>' . $value->description . '</td>' .
+                        '</tr>';
+                }
+                return Response($output);
+            }
+        }
+    }
 }

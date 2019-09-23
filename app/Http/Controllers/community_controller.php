@@ -1,5 +1,7 @@
 <?php
 
+// This file contains functions for controlling communities
+
 namespace App\Http\Controllers;
 
 use App\company;

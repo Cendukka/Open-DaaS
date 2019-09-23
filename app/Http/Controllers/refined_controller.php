@@ -1,5 +1,7 @@
 <?php
 
+// This file contains functions for controlling refined events
+
 namespace App\Http\Controllers;
 
 use App\company;

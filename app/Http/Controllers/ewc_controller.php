@@ -6,18 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\ewc_codes;
 
-class ewc_controller extends Controller
-
-{
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+class ewc_controller extends Controller {
     public function index(){
 		return view('pages.ewc');
     }
@@ -39,6 +28,7 @@ class ewc_controller extends Controller
             'description' => $request->get('description'),
         ]);
         $ewc_code->save();
+
         return redirect()->action('ewc_controller@index')->withErrors(['EWC Code successfully created.']);
     }
 
@@ -55,7 +45,7 @@ class ewc_controller extends Controller
 
     public function update(Request $request, ewc_codes $ewc_code) {
         $request->validate([
-            #'ewc_code' => 'required|max:6|digits_between:0,9',
+            #'ewc_code' => 'required|max:6|digits_between:0,9', // Miksi kommentoituna?
             'description' => 'required|max:191',
         ]);
 

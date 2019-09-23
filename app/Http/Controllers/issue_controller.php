@@ -11,15 +11,11 @@ use Auth;
 use Illuminate\Validation\Rule;
 
 class issue_controller extends Controller {
-	public function __construct()
-    {
+	public function __construct(){
         $this->middleware('auth');
     }
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
+
 	public function index(company $company, microlocation $microlocation) {
         return view('pages.company.issues')->with(['company' => $company, 'microlocation' => $microlocation]);
 	}
@@ -90,7 +86,6 @@ class issue_controller extends Controller {
         ]);
         $issue->save();
 
-        #dd($request);
         for ($i = 0; $i <= count($request->weight)-1; $i++) {
             $material = $request->material[$i];
             $weight = $request->weight[$i];
@@ -104,7 +99,6 @@ class issue_controller extends Controller {
                 app('App\Http\Controllers\microlocation_controller')->add_inventory($microlocation, $material, -$weight);
             }
         }
-
 
         return redirect()->action('issue_controller@index', ['company' => $company])->withErrors(['Lähetys-kirjaus luotu onnistuneesti']);
 	}
@@ -207,7 +201,7 @@ class issue_controller extends Controller {
 		//
 	}
 
-
+    # The query to find events, as its own function so it can be used from multiple places
     public function query(Request $request, company $company) {
         $microlocation_ids = [];
         foreach (DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->get() as $ml){
@@ -247,6 +241,7 @@ class issue_controller extends Controller {
     }
 
 
+    # This outputs a  nicely formatted list of found events
 	public function search(Request $request, company $company, microlocation $microlocation){
 		if($request->ajax()){
 			$output="";

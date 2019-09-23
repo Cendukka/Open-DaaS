@@ -10,7 +10,7 @@ use App\Exports\receipt_export;
 use App\Exports\issue_export;
 
 
-
+// Controller to make exporting documents possible
 class excel_controller extends Controller {
     public function pre(company $company){
         $exporter = app()->makeWith(pre_export::class, compact('company'));
@@ -35,9 +35,9 @@ class excel_controller extends Controller {
         return $exporter ->download('issue.csv');
     }
 
+
     public function materials(){
         $exporter = app()->makeWith(material_export::class);
         return $exporter ->download('materialsOpenData.csv');
-
     }
 }

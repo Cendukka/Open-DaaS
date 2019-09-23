@@ -2,14 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
-{
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
+class DatabaseSeeder extends Seeder {
     public function run() {
+        // Set this variable to 1 if you dont want to seed the database with test data
         $production = 0;
         if($production) {
             $this->call([

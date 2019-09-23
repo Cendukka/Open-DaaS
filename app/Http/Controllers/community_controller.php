@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\community;
 
 class community_controller extends Controller {
-
-
 	public function index(company $company) {
 		return view('pages.company.manage.communities')->with('company', $company);
 	}
@@ -24,7 +22,6 @@ class community_controller extends Controller {
 		$request->validate([
 			'city'=> 'required|max:50',
 		]);
-
 
 		$communityNew = new community([
 			'community_company_id' => $company->company_id,

@@ -13,11 +13,7 @@ class microlocation_controller extends Controller {
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(company $company) {
         return view('pages.company.manage.microlocations')->with('company', $company);
     }
@@ -50,7 +46,7 @@ class microlocation_controller extends Controller {
 
         $ml->save();
 
-        if(DB::table('community')->where('community_company_id','=',$company->company_id)->where('community_city','=',$request->get('city'))->get()->count() == 0){
+        if (DB::table('community')->where('community_company_id', '=', $company->company_id)->where('community_city', '=', $request->get('city'))->get()->count() == 0) {
             $communityNew = new community([
                 'community_company_id' => $company->company_id,
                 'community_city' => $request->get('city'),
@@ -62,10 +58,8 @@ class microlocation_controller extends Controller {
     }
 
 
-    public function show(company $company, microlocation $microlocation) {  /* ,user $user) {
-		return redirect()->action('microlocation_controller@index', ['company' => $company]); */
+    public function show(company $company, microlocation $microlocation) {
         return view('pages.company.manage.microlocation_home')->with('company', $company)->with('microlocation', $microlocation);
-
     }
 
 
@@ -102,7 +96,7 @@ class microlocation_controller extends Controller {
         //
     }
 
-
+    # For making adding and removing weight from the inventory table
     public function add_inventory($microlocation, $material, $weight) {
         DB::table('inventory')
             ->updateOrInsert(

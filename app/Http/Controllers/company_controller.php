@@ -12,13 +12,18 @@ class company_controller extends Controller {
     {
         $this->middleware('auth');
     }
+
+
 	public function index() {
 		return view('pages.companies');
 	}
+
+
 	public function companyinfo(company $company) {
 		$company=DB::table('company')->get();
 	return view('includes.welcomepageHeader')->with('company', $company);
 	}
+
 
 	public function create() {
 		return view('pages.company.manage.company_create');
@@ -32,7 +37,6 @@ class company_controller extends Controller {
 			'postinumero'=> 'required|min:5|max:5|digits_between:0,9',
 			'kaupunki'=> 'required|max:50',
 		]);
-
 
 		$company = new company([
 			'company_name' => $request->get('nimi'),
@@ -48,12 +52,6 @@ class company_controller extends Controller {
 
 
 	public function show(company $company) {
-		//$company=Auth::user()->user_company_id;
-		//dd($company);
-		// $company=company::findorfail($company)->first();
-		// if($company->company_id=== Auth::user()->user_company_id);
-		// 		// dd($company);
-
 		return view('pages.company.company_home')->with('company', $company);
 	}
 
@@ -80,12 +78,13 @@ class company_controller extends Controller {
 		$companyNew->save();
 
 		return redirect()->action('company_controller@manage_index',['company' => $company])->withErrors(['Organisaatio päivitetty']);
-
 	}
+
 
 	public function instructions(company $company){
         return view('pages.instructions')->with('company', $company);
     }
+
 
 	public function destroy(company $company) {
 		if ($company->delete()) {
@@ -95,12 +94,11 @@ class company_controller extends Controller {
 
 
 	public function manage_index(company $company) {
-
 		return view('pages.company.company_home')->with('company', $company);
 	}
 
 
 	public function warehouse_index(company $company) {
-	    		return view('pages.company.warehouse')->with('company', $company);
+        return view('pages.company.warehouse')->with('company', $company);
 	}
 }

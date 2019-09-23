@@ -11,9 +11,7 @@ use Auth;
 use Illuminate\Validation\Rule;
 
 class pre_controller extends Controller {
-
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
@@ -100,7 +98,7 @@ class pre_controller extends Controller {
 
         $preNew = pre_sorting::find($pre->pre_sorting_id);
         $preNew->pre_sorting_user_id = $request->get('user') ?: Auth::user()->user_id;
-        $preNew->pre_sorting_date = date("Y-m-d",strtotime($request->get('datetime')));
+        $preNew->pre_sorting_date = date("Y-m-d", strtotime($request->get('datetime')));
         $preNew->pre_sorting_receipt_id = $receipt;
         $preNew->pre_sorting_material_id = $material;
         $preNew->pre_sorting_weight = $weight;
@@ -130,7 +128,7 @@ class pre_controller extends Controller {
 		//
 	}
 
-
+    # The query to find events, as its own function so it can be used from multiple places
     public function query(Request $request, company $company) {
         $microlocation_ids = [];
         foreach (DB::table('microlocations')->where('microlocation_company_id',$company->company_id)->get() as $ml){
@@ -166,6 +164,7 @@ class pre_controller extends Controller {
     }
 
 
+    # This outputs a  nicely formatted list of found events
 	public function search(Request $request, company $company, microlocation $microlocation){
 		if($request->ajax()){
 			$output="";

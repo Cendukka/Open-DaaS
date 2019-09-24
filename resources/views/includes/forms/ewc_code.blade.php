@@ -1,3 +1,4 @@
+{{-- EWC form field --}}
 <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="ewc">EWC-Koodi:</label>
     <div class="col-sm-10">

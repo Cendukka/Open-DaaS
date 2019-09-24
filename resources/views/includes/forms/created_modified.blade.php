@@ -1,3 +1,4 @@
+{{-- Created and modified dates for edit pages --}}
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Kirjattu:</label>
     <div class="col-sm-10">

@@ -1,3 +1,4 @@
+{{-- Weight form field --}}
 <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="weight">Paino (Kg):</label>
     <div class="col-sm-10">

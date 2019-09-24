@@ -1,3 +1,4 @@
+{{-- Displays errors if the page had any --}}
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)

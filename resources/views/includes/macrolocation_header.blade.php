@@ -1,12 +1,9 @@
-<!---------------------------------------------------------------------------------------------------------
-            This is the navigation page with the privilege button at the top
------------------------------------------------------------------------------------------------------------>
+{{--This is the navigation page with the privilege button at the top--}}
 <div class="wrapper">
-    <!-- Sidebar Holder -->
+{{--    Sidebar Holder--}}
     <nav id="sidebar">
         <div class="sidebar-header">
             <a href="/companies/{{$company->company_id}}">
-{{--                <h4>TEKIHA TEkstiiliKIerrätyksen  HAllintajärjestelmä</h4>--}}
                 <h5>Open DaaS</h5>
                 <br>
                 <h6>Organisaatio: {{$company->company_name}}</h6>
@@ -49,7 +46,7 @@
             </li>
         </ul>
     </nav>
-    <!-- Page Content Holder -->
+{{--    Page Content Holder--}}
     <div id="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="navbar-header">
@@ -83,11 +80,11 @@
                 </ul>
             </div>
         </nav>
-        <!-- Main Page Content Holder -->
+{{--        Main Page Content Holder--}}
         <div id="main" class="column pb-4">
             @yield('content')
         </div>
-        <!-- Back To The Top Button -->
+{{--        Back To The Top Button--}}
         <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><i class="material-icons">arrow_upward</i>Ylös</button>
 
     </div>

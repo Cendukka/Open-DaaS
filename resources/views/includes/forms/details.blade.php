@@ -1,3 +1,4 @@
+{{-- Issue Details for creating and editing --}}
 <br>
 <div class="col-md panel panel-default panel-body element-width-auto form-field-width p-4" style="max-width:500px;">
     <div class="form-group detail-info">

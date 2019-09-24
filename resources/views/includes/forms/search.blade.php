@@ -1,10 +1,13 @@
+{{--The search fields that are found in report pages--}}
 <div class="form-group row p-4">
     <div class="col-sm-4">
         <div class="form-group row">
             <label for="search" class="col-sm-2 col-form-label form-text-align-padd">Haku:</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="search" name="search" placeholder="Hae...">
+                <small class="form-text text-muted">Voit käyttää välilyöniä tarkentaaksesi hakua, ja pilkkua jos haluat hakea useita hakutuloksia</small>
             </div>
+
         </div>
     </div>
     <div class="col-sm-4">

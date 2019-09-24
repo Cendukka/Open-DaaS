@@ -1,3 +1,4 @@
+{{-- Checkbox form field, if the issue is going stright out of the microlocation --}}
 <div class="form-group row">
     <div class="col-sm-2"></div>
     <div class="col-sm-10">

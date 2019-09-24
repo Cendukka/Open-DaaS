@@ -1,3 +1,4 @@
+{{-- Checkbox form field, to disable and enable the entity --}}
 <div class="form-group row">
     <div class="col-sm-2"></div>
     <div class="col-sm-10">

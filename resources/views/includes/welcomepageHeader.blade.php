@@ -209,11 +209,9 @@
                     onMouseOver="Change('Inari')"
                     onMouseOut="noChange('Inari')" />
         </map>
-
-
     </nav>
 
-    <!-- Page Content Holder -->
+{{--    Page Content Holder--}}
     <div id="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</a>
@@ -244,7 +242,7 @@
                             <li class="nav-item p-1">
                                 <a href="{{ route('login') }}" class="btn btn-info btn-lg logout">Kirjaudu sisään</a>
                             </li>
-                            <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+{{--                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
 
 
                             @else
@@ -268,7 +266,7 @@
         <div id="main" class="column">
             @yield('content')
         </div>
-        <!-- Back To The Top Button -->
+{{--        Back To The Top Button--}}
         <button onclick="topFunction()" class="btn btn-default btn-sm" id="toTop" title="Go to top"><i class="material-icons">arrow_upward</i>Ylös</button>
     </div>
 </div>

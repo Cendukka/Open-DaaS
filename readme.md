@@ -1,3 +1,15 @@
+#Open DaaS - Open Data as a Service
+
+This project was to develop a textile recycling open data platform where you can efficiently and easily 
+to generate and handle the data of recycled textiles.
+
+##About the system
+
+The main purpose of the system is to make it possible to manage large scale textile recycling in Finland at a fraction level, 
+collect and keep the data of it and show part of it as open data. 
+The main users of the TRM system are the employees of the Finnish waste companies.
+Open data will be shown to everyone and is publicly available to download.
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

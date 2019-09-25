@@ -1,3 +1,6 @@
+
+{{--Instructions for creating new presorting record--}}
+
 <div class="col-lg-3">
     <h6>Esilajittelukirjauksen kirjaaminen</h6>
     <br>

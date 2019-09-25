@@ -1,3 +1,6 @@
+
+{{--Instructions for creating new company--}}
+
 <div class="col-lg-3">
     <h6>Uuden organisaation luominen</h6>
     <br>

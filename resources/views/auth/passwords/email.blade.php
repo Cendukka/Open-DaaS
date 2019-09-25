@@ -1,3 +1,4 @@
+{{--Form to change forgotten password--}}
 @extends('layouts.welcomepage')
 @section('title', 'Password reset')
 @section('content')

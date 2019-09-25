@@ -1,10 +1,10 @@
 <div class="wrapper">
 
-{{--    <!-- Sidebar Holder -->--}}
+{{--     Sidebar Holder --}}
     <nav id="sidebar">
 
         <div class="sidebar-header">
-{{--            <a href="/"><h4>TEHA TEkstiilikierrätyksen HAllintajärjestelmä</h4></a>--}}
+
             <a href="/"><h5>Open DaaS</h5></a>
         </div>
 

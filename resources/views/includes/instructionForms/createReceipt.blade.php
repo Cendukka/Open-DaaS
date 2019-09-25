@@ -1,3 +1,6 @@
+
+{{--Instructions for creating new receipt record--}}
+
 <div class="col-lg-3">
     <h6>Saapuneen lähetyksen kirjaaminen</h6>
     <br>

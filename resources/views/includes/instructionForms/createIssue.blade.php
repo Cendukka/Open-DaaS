@@ -1,3 +1,6 @@
+
+{{--Instructions for creating new issue record--}}
+
 <div class="col-lg-3">
     <h6>Lähetyksen kirjaaminen</h6>
     <br>

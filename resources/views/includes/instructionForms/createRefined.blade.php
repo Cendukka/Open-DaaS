@@ -1,3 +1,6 @@
+
+{{--Instructions for creating new refine sorting record--}}
+
 <div class="col-lg-3">
     <h6>Hienolajittelukirjauksen kirjaaminen</h6>
     <br>

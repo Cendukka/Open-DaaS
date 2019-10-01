@@ -53,7 +53,7 @@
                 <a href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</a><br><br>
                 <h5>Käyttäjä: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="navbar-nav ml-auto">
                     @if(!(Auth::user()->user_type_id=='1'))
                         <li class="nav-item p-1">

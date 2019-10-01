@@ -215,7 +215,7 @@
     <div id="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</a>
-                <div class="collapse navbar-collapse " id="navbarNav">
+                <div class="navbar-collapse " id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item p-1">
                             <a id="contact" href="/contactLists"  class="btn btn-info btn-lg logout" >Yhteystiedot</a>

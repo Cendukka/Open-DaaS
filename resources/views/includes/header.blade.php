@@ -28,7 +28,7 @@
                     <a href="#" id="sidebarCollapse" class="material-icons btn btn-info btn-lg logout">toggle_on</a><br><br>
                     <span><h5>Käyttäjä: {{ Auth::user()->first_name }}</h5></span>
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item p-1">
                             <a href="/home" class="btn btn-info btn-lg logout">Admin Etusivu</a>

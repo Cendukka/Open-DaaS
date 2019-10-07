@@ -7,11 +7,13 @@
         </div>
 {{--        including instruction forms--}}
         <div class="panel-body row p-4" style="margin-right: 0; margin-left: 0;">
-            @include('includes.instructionForms.createCompany')
             @include('includes.instructionForms.createReceipt')
             @include('includes.instructionForms.createIssue')
             @include('includes.instructionForms.createPre')
             @include('includes.instructionForms.createRefined')
+            @include('includes.instructionForms.createCompany')
+            @include('includes.instructionForms.createMicro')
+            @include('includes.instructionForms.createUser')
         </div>
     </div>
 

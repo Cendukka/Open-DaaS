@@ -5,7 +5,16 @@
         <div class="col-md-12">
 {{--            public page's infoparagraph--}}
             <div class="jumbotron">
-                <p></p>
+                <h6 style="color: black;">Tältä sivulta löydät koko suomen kattavan tilaston lajitelluista tekstiileistä. Tekstiilit ovat lähtöisin
+                    kierrätyspisteistä, joihin yksityishenkilöt tai yritykset tuovat tarpeettomat ja kierrätyskelpoiset tekstiilit. Tekstiilit lajitellaan
+                    tekstiililatyypin mukaan ja määritellään jatkokäsittely. Osa tekstiileistä menee uudelleenmyyntiin tai hyväntekeväisyyteen ja osa
+                    lajitellaan vielä tarkemmin omiin osa-alueisiin.</h6>
+                <h6 style="color: black;">Tämän sivun ympyräkaaviosta näet tämän hetkisen tilanteen eri tekstiililuokkien määrästä koko suomessa.
+                    Linjakaaviosta löydät kokonaismäärät kaikista saapuneista tekstiileistä koko suomessa ja kuinka paljon saapuneista on mennyt
+                    uudelleen käyttöön tai hyväntekeväisyyteen.</h6>
+                <h6 style="color: black;">Alla olevat datat ovat avointa dataa ja voit halutessasi tallentaa ympyräkaavion datan csv-tiedostoon ja käyttää
+                    sitä mielesi mukaan ja vapaasti mihin vain. Tiedostoon tulostuu kaksi saraketta, joiden otsikot ovat: tekstiilin nimi ja määrä kilogrammoina.
+                    Itse data tulostuu otsikoiden alle rivi kerrallaan ja data on erotettu keskenään pilkuilla.</h6>
             </div>
                     <br>
 

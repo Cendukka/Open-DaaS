@@ -1,11 +1,10 @@
 
 ##Open DaaS - Open Data as a Service
 
-This project was to develop a textile recycling open data platform where you can efficiently and easily 
-to generate and handle the data of recycled textiles.
-
 ##About the Project
-This project was my first real customer project where I was contributing and where I was the project manager. The project was made inside the learning environment called TheFirma. The project was made with a group of developers, 4-6 members.
+
+This project was to develop a textile recycling open data platform where you can efficiently and easily to generate and handle the data of recycled textiles.
+The project was made inside the learning environment called TheFirma. The project was made with a group of developers, 4-6 members.
 
 ##About the system
 
